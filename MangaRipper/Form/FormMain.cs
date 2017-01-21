@@ -371,5 +371,29 @@ namespace MangaRipper
             timer1.Enabled = false;
             DownloadChapter();
         }
+
+        private void btnPasteUrl_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Clipboard.ContainsText())
+                {
+                    string pastedUrl = Clipboard.GetData(DataFormats.StringFormat).ToString();
+                    
+                    if (!string.IsNullOrWhiteSpace(pastedUrl))
+                    {
+                        pastedUrl = pastedUrl.Trim();
+                        cbTitleUrl.Text = pastedUrl;
+                    }
+                    
+                }
+            }
+            catch (Exception)
+            {
+                string error = String.Format("{0} - Clipboard operation failed, please try again.", DateTime.Now.ToLongTimeString());
+                txtMessage.Text = error;
+            }
+
+        }
     }
 }

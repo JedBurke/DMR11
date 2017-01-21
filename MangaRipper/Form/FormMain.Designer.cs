@@ -67,6 +67,7 @@
             this.txtMessage = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnAddNew = new System.Windows.Forms.Button();
+            this.btnPasteUrl = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQueueChapter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSupportedSites)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChapter)).BeginInit();
@@ -81,7 +82,7 @@
             this.btnGetChapter.Size = new System.Drawing.Size(116, 23);
             this.btnGetChapter.TabIndex = 5;
             this.btnGetChapter.Text = "Get Chapters";
-            this.toolTip1.SetToolTip(this.btnGetChapter, "Get Chapters from Inputed Url");
+            this.toolTip1.SetToolTip(this.btnGetChapter, "Retrieve chapters from the current URL");
             this.btnGetChapter.UseVisualStyleBackColor = true;
             this.btnGetChapter.Click += new System.EventHandler(this.btnGetChapter_Click);
             // 
@@ -89,7 +90,7 @@
             // 
             this.btnDownload.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDownload.Location = new System.Drawing.Point(719, 551);
+            this.btnDownload.Location = new System.Drawing.Point(719, 563);
             this.btnDownload.Name = "btnDownload";
             this.btnDownload.Size = new System.Drawing.Size(162, 23);
             this.btnDownload.TabIndex = 18;
@@ -100,7 +101,7 @@
             // btnAdd
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAdd.Location = new System.Drawing.Point(143, 338);
+            this.btnAdd.Location = new System.Drawing.Point(143, 361);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(94, 23);
             this.btnAdd.TabIndex = 8;
@@ -111,7 +112,7 @@
             // btnAddAll
             // 
             this.btnAddAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddAll.Location = new System.Drawing.Point(243, 338);
+            this.btnAddAll.Location = new System.Drawing.Point(243, 361);
             this.btnAddAll.Name = "btnAddAll";
             this.btnAddAll.Size = new System.Drawing.Size(94, 23);
             this.btnAddAll.TabIndex = 9;
@@ -122,7 +123,7 @@
             // btnRemove
             // 
             this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRemove.Location = new System.Drawing.Point(443, 551);
+            this.btnRemove.Location = new System.Drawing.Point(443, 563);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(105, 23);
             this.btnRemove.TabIndex = 16;
@@ -133,7 +134,7 @@
             // btnRemoveAll
             // 
             this.btnRemoveAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRemoveAll.Location = new System.Drawing.Point(554, 551);
+            this.btnRemoveAll.Location = new System.Drawing.Point(554, 563);
             this.btnRemoveAll.Name = "btnRemoveAll";
             this.btnRemoveAll.Size = new System.Drawing.Size(105, 23);
             this.btnRemoveAll.TabIndex = 17;
@@ -161,7 +162,7 @@
             this.dgvQueueChapter.ReadOnly = true;
             this.dgvQueueChapter.RowHeadersVisible = false;
             this.dgvQueueChapter.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvQueueChapter.Size = new System.Drawing.Size(549, 507);
+            this.dgvQueueChapter.Size = new System.Drawing.Size(549, 519);
             this.dgvQueueChapter.TabIndex = 10;
             // 
             // ColChapterName
@@ -195,7 +196,7 @@
             // btnStop
             // 
             this.btnStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStop.Location = new System.Drawing.Point(887, 551);
+            this.btnStop.Location = new System.Drawing.Point(887, 563);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(105, 23);
             this.btnStop.TabIndex = 19;
@@ -206,7 +207,7 @@
             // btnChangeSaveTo
             // 
             this.btnChangeSaveTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnChangeSaveTo.Location = new System.Drawing.Point(312, 367);
+            this.btnChangeSaveTo.Location = new System.Drawing.Point(312, 390);
             this.btnChangeSaveTo.Name = "btnChangeSaveTo";
             this.btnChangeSaveTo.Size = new System.Drawing.Size(30, 23);
             this.btnChangeSaveTo.TabIndex = 13;
@@ -218,7 +219,7 @@
             // btnOpenFolder
             // 
             this.btnOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnOpenFolder.Location = new System.Drawing.Point(348, 367);
+            this.btnOpenFolder.Location = new System.Drawing.Point(348, 390);
             this.btnOpenFolder.Name = "btnOpenFolder";
             this.btnOpenFolder.Size = new System.Drawing.Size(89, 23);
             this.btnOpenFolder.TabIndex = 14;
@@ -230,20 +231,20 @@
             // 
             this.lbSaveTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbSaveTo.AutoSize = true;
-            this.lbSaveTo.Location = new System.Drawing.Point(12, 371);
+            this.lbSaveTo.Location = new System.Drawing.Point(12, 394);
             this.lbSaveTo.Name = "lbSaveTo";
-            this.lbSaveTo.Size = new System.Drawing.Size(45, 13);
+            this.lbSaveTo.Size = new System.Drawing.Size(47, 13);
             this.lbSaveTo.TabIndex = 11;
-            this.lbSaveTo.Text = "Save To";
+            this.lbSaveTo.Text = "Save to:";
             // 
             // lblUrl
             // 
             this.lblUrl.AutoSize = true;
             this.lblUrl.Location = new System.Drawing.Point(12, 14);
             this.lblUrl.Name = "lblUrl";
-            this.lblUrl.Size = new System.Drawing.Size(22, 13);
+            this.lblUrl.Size = new System.Drawing.Size(27, 13);
             this.lblUrl.TabIndex = 0;
-            this.lblUrl.Text = "Url";
+            this.lblUrl.Text = "URL";
             // 
             // txtPercent
             // 
@@ -276,13 +277,13 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvSupportedSites.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvSupportedSites.Location = new System.Drawing.Point(12, 396);
+            this.dgvSupportedSites.Location = new System.Drawing.Point(12, 419);
             this.dgvSupportedSites.MultiSelect = false;
             this.dgvSupportedSites.Name = "dgvSupportedSites";
             this.dgvSupportedSites.ReadOnly = true;
             this.dgvSupportedSites.RowHeadersVisible = false;
             this.dgvSupportedSites.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSupportedSites.Size = new System.Drawing.Size(425, 149);
+            this.dgvSupportedSites.Size = new System.Drawing.Size(425, 138);
             this.dgvSupportedSites.TabIndex = 15;
             this.dgvSupportedSites.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSupportedSites_CellContentClick);
             // 
@@ -317,7 +318,7 @@
             // btnHowToUse
             // 
             this.btnHowToUse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnHowToUse.Location = new System.Drawing.Point(123, 551);
+            this.btnHowToUse.Location = new System.Drawing.Point(123, 563);
             this.btnHowToUse.Name = "btnHowToUse";
             this.btnHowToUse.Size = new System.Drawing.Size(203, 23);
             this.btnHowToUse.TabIndex = 21;
@@ -328,7 +329,7 @@
             // btnOptions
             // 
             this.btnOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnOptions.Location = new System.Drawing.Point(12, 551);
+            this.btnOptions.Location = new System.Drawing.Point(12, 563);
             this.btnOptions.Name = "btnOptions";
             this.btnOptions.Size = new System.Drawing.Size(105, 23);
             this.btnOptions.TabIndex = 20;
@@ -339,7 +340,7 @@
             // btnAbout
             // 
             this.btnAbout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAbout.Location = new System.Drawing.Point(332, 551);
+            this.btnAbout.Location = new System.Drawing.Point(332, 563);
             this.btnAbout.Name = "btnAbout";
             this.btnAbout.Size = new System.Drawing.Size(105, 23);
             this.btnAbout.TabIndex = 22;
@@ -364,7 +365,7 @@
             this.dgvChapter.ReadOnly = true;
             this.dgvChapter.RowHeadersVisible = false;
             this.dgvChapter.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvChapter.Size = new System.Drawing.Size(425, 294);
+            this.dgvChapter.Size = new System.Drawing.Size(425, 317);
             this.dgvChapter.TabIndex = 6;
             // 
             // dataGridViewTextBoxColumn4
@@ -386,38 +387,38 @@
             this.cbTitleUrl.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::MangaRipper.Properties.Settings.Default, "Url", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cbTitleUrl.Location = new System.Drawing.Point(40, 11);
             this.cbTitleUrl.Name = "cbTitleUrl";
-            this.cbTitleUrl.Size = new System.Drawing.Size(729, 21);
+            this.cbTitleUrl.Size = new System.Drawing.Size(703, 21);
             this.cbTitleUrl.TabIndex = 1;
             this.cbTitleUrl.Text = global::MangaRipper.Properties.Settings.Default.Url;
             // 
             // btnAddBookmark
             // 
             this.btnAddBookmark.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddBookmark.Location = new System.Drawing.Point(775, 10);
+            this.btnAddBookmark.Location = new System.Drawing.Point(775, 9);
             this.btnAddBookmark.Name = "btnAddBookmark";
             this.btnAddBookmark.Size = new System.Drawing.Size(24, 23);
             this.btnAddBookmark.TabIndex = 2;
             this.btnAddBookmark.Text = "B";
-            this.toolTip1.SetToolTip(this.btnAddBookmark, "Bookmark This Url");
+            this.toolTip1.SetToolTip(this.btnAddBookmark, "Bookmark this URL");
             this.btnAddBookmark.UseVisualStyleBackColor = true;
             this.btnAddBookmark.Click += new System.EventHandler(this.btnAddBookmark_Click);
             // 
             // btnRemoveBookmark
             // 
             this.btnRemoveBookmark.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRemoveBookmark.Location = new System.Drawing.Point(805, 10);
+            this.btnRemoveBookmark.Location = new System.Drawing.Point(805, 9);
             this.btnRemoveBookmark.Name = "btnRemoveBookmark";
             this.btnRemoveBookmark.Size = new System.Drawing.Size(24, 23);
             this.btnRemoveBookmark.TabIndex = 3;
             this.btnRemoveBookmark.Text = "R";
-            this.toolTip1.SetToolTip(this.btnRemoveBookmark, "Remove This Url From Bookmark");
+            this.toolTip1.SetToolTip(this.btnRemoveBookmark, "Remove this bookmarked URL");
             this.btnRemoveBookmark.UseVisualStyleBackColor = true;
             this.btnRemoveBookmark.Click += new System.EventHandler(this.btnRemoveBookmark_Click);
             // 
             // btnAddPrefixCounter
             // 
             this.btnAddPrefixCounter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddPrefixCounter.Location = new System.Drawing.Point(12, 338);
+            this.btnAddPrefixCounter.Location = new System.Drawing.Point(12, 361);
             this.btnAddPrefixCounter.Name = "btnAddPrefixCounter";
             this.btnAddPrefixCounter.Size = new System.Drawing.Size(120, 23);
             this.btnAddPrefixCounter.TabIndex = 7;
@@ -429,7 +430,7 @@
             // nudThread
             // 
             this.nudThread.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudThread.Location = new System.Drawing.Point(666, 552);
+            this.nudThread.Location = new System.Drawing.Point(666, 564);
             this.nudThread.Maximum = new decimal(new int[] {
             5,
             0,
@@ -456,7 +457,7 @@
             // 
             this.txtSaveTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txtSaveTo.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::MangaRipper.Properties.Settings.Default, "SaveTo", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txtSaveTo.Location = new System.Drawing.Point(66, 368);
+            this.txtSaveTo.Location = new System.Drawing.Point(66, 391);
             this.txtSaveTo.Name = "txtSaveTo";
             this.txtSaveTo.ReadOnly = true;
             this.txtSaveTo.Size = new System.Drawing.Size(240, 22);
@@ -480,7 +481,7 @@
             // btnAddNew
             // 
             this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddNew.Location = new System.Drawing.Point(343, 338);
+            this.btnAddNew.Location = new System.Drawing.Point(343, 361);
             this.btnAddNew.Name = "btnAddNew";
             this.btnAddNew.Size = new System.Drawing.Size(94, 23);
             this.btnAddNew.TabIndex = 10;
@@ -488,11 +489,24 @@
             this.btnAddNew.UseVisualStyleBackColor = true;
             this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
             // 
+            // btnPasteUrl
+            // 
+            this.btnPasteUrl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPasteUrl.Location = new System.Drawing.Point(749, 9);
+            this.btnPasteUrl.Name = "btnPasteUrl";
+            this.btnPasteUrl.Size = new System.Drawing.Size(24, 23);
+            this.btnPasteUrl.TabIndex = 25;
+            this.btnPasteUrl.Text = "P";
+            this.toolTip1.SetToolTip(this.btnPasteUrl, "Paste URL from clipboard");
+            this.btnPasteUrl.UseVisualStyleBackColor = true;
+            this.btnPasteUrl.Click += new System.EventHandler(this.btnPasteUrl_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1012, 614);
+            this.Controls.Add(this.btnPasteUrl);
             this.Controls.Add(this.btnAddNew);
             this.Controls.Add(this.nudThread);
             this.Controls.Add(this.txtMessage);
@@ -572,5 +586,6 @@
         private System.Windows.Forms.NumericUpDown nudThread;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button btnAddNew;
+        private System.Windows.Forms.Button btnPasteUrl;
     }
 }

@@ -374,6 +374,8 @@ namespace MangaRipper
 
         private void btnPasteUrl_Click(object sender, EventArgs e)
         {
+            bool clipboardCopied = false;
+
             try
             {
                 if (Clipboard.ContainsText())
@@ -384,6 +386,7 @@ namespace MangaRipper
                     {
                         pastedUrl = pastedUrl.Trim();
                         cbTitleUrl.Text = pastedUrl;
+                        clipboardCopied = true;
                     }
                     
                 }
@@ -392,6 +395,12 @@ namespace MangaRipper
             {
                 string error = String.Format("{0} - Clipboard operation failed, please try again.", DateTime.Now.ToLongTimeString());
                 txtMessage.Text = error;
+            }
+
+
+            if (clipboardCopied)
+            {
+                btnGetChapter_Click(null, EventArgs.Empty);
             }
 
         }

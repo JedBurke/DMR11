@@ -497,7 +497,7 @@
             this.btnPasteUrl.Size = new System.Drawing.Size(24, 23);
             this.btnPasteUrl.TabIndex = 25;
             this.btnPasteUrl.Text = "P";
-            this.toolTip1.SetToolTip(this.btnPasteUrl, "Paste URL from clipboard");
+            this.toolTip1.SetToolTip(this.btnPasteUrl, "Paste URL from clipboard and get chapters");
             this.btnPasteUrl.UseVisualStyleBackColor = true;
             this.btnPasteUrl.Click += new System.EventHandler(this.btnPasteUrl_Click);
             // 

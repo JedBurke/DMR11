@@ -93,6 +93,46 @@ namespace MangaRipper
             }
         }
 
+        private void btnAddNew_Click(object sender, EventArgs e)
+        {
+            var items = new List<IChapter>();
+
+            foreach (DataGridViewRow row in dgvChapter.Rows)
+            {
+                var item = (IChapter)row.DataBoundItem;
+                string destinationDirectory = txtSaveTo.Text;
+
+                string testPath = Path.Combine(destinationDirectory, item.Name);
+                bool chapterExists = Directory.Exists(testPath);
+
+                if (chapterExists)
+                {
+                    // Check if the directory has any files (pages).
+                    int pageCount = Directory.GetFiles(testPath).Length;
+
+                    // If the page count is zero, treat it as the user hasn't downloaded
+                    // that chapter yet.
+                    if (pageCount == 0)
+                        chapterExists = false;
+
+                }
+
+                if (!chapterExists)
+                    items.Add((IChapter)row.DataBoundItem);                
+            }
+
+            items.Reverse();
+
+            foreach (IChapter item in items)
+            {
+                if (DownloadQueue.IndexOf(item) < 0)
+                {
+                    DownloadQueue.Add(item);
+                }
+            }
+
+        }
+
         private void btnRemove_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow item in dgvQueueChapter.SelectedRows)

@@ -57,8 +57,6 @@ namespace MangaRipper.Core
             lst.Add(new string[] { "MangaHere", "http://www.mangahere.com/", "English" });
             lst.Add(new string[] { "MangaReader", "http://www.mangareader.net/", "English" });
             lst.Add(new string[] { "MangaShare", "http://read.mangashare.com/", "English" });
-            lst.Add(new string[] { "MangaToshokan", "http://www.mangatoshokan.com/", "English" });
-            lst.Add(new string[] { "Otakuworks", "http://www.otakuworks.com/", "English" });
             return lst;
         }
     }

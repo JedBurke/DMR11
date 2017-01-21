@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.btnGetChapter = new System.Windows.Forms.Button();
             this.btnDownload = new System.Windows.Forms.Button();
@@ -66,6 +66,7 @@
             this.txtSaveTo = new System.Windows.Forms.TextBox();
             this.txtMessage = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.btnAddNew = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQueueChapter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSupportedSites)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChapter)).BeginInit();
@@ -99,22 +100,22 @@
             // btnAdd
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAdd.Location = new System.Drawing.Point(153, 288);
+            this.btnAdd.Location = new System.Drawing.Point(143, 338);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(143, 23);
+            this.btnAdd.Size = new System.Drawing.Size(94, 23);
             this.btnAdd.TabIndex = 8;
-            this.btnAdd.Text = "Add Selected To Queue";
+            this.btnAdd.Text = "Add Selected";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnAddAll
             // 
             this.btnAddAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddAll.Location = new System.Drawing.Point(302, 288);
+            this.btnAddAll.Location = new System.Drawing.Point(243, 338);
             this.btnAddAll.Name = "btnAddAll";
-            this.btnAddAll.Size = new System.Drawing.Size(135, 23);
+            this.btnAddAll.Size = new System.Drawing.Size(94, 23);
             this.btnAddAll.TabIndex = 9;
-            this.btnAddAll.Text = "Add All To Queue";
+            this.btnAddAll.Text = "Add All";
             this.btnAddAll.UseVisualStyleBackColor = true;
             this.btnAddAll.Click += new System.EventHandler(this.btnAddAll_Click);
             // 
@@ -205,7 +206,7 @@
             // btnChangeSaveTo
             // 
             this.btnChangeSaveTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnChangeSaveTo.Location = new System.Drawing.Point(312, 317);
+            this.btnChangeSaveTo.Location = new System.Drawing.Point(312, 367);
             this.btnChangeSaveTo.Name = "btnChangeSaveTo";
             this.btnChangeSaveTo.Size = new System.Drawing.Size(30, 23);
             this.btnChangeSaveTo.TabIndex = 13;
@@ -217,7 +218,7 @@
             // btnOpenFolder
             // 
             this.btnOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnOpenFolder.Location = new System.Drawing.Point(348, 317);
+            this.btnOpenFolder.Location = new System.Drawing.Point(348, 367);
             this.btnOpenFolder.Name = "btnOpenFolder";
             this.btnOpenFolder.Size = new System.Drawing.Size(89, 23);
             this.btnOpenFolder.TabIndex = 14;
@@ -229,7 +230,7 @@
             // 
             this.lbSaveTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbSaveTo.AutoSize = true;
-            this.lbSaveTo.Location = new System.Drawing.Point(12, 321);
+            this.lbSaveTo.Location = new System.Drawing.Point(12, 371);
             this.lbSaveTo.Name = "lbSaveTo";
             this.lbSaveTo.Size = new System.Drawing.Size(45, 13);
             this.lbSaveTo.TabIndex = 11;
@@ -267,21 +268,21 @@
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn3,
             this.Column1});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvSupportedSites.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvSupportedSites.Location = new System.Drawing.Point(12, 346);
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvSupportedSites.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvSupportedSites.Location = new System.Drawing.Point(12, 396);
             this.dgvSupportedSites.MultiSelect = false;
             this.dgvSupportedSites.Name = "dgvSupportedSites";
             this.dgvSupportedSites.ReadOnly = true;
             this.dgvSupportedSites.RowHeadersVisible = false;
             this.dgvSupportedSites.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSupportedSites.Size = new System.Drawing.Size(425, 199);
+            this.dgvSupportedSites.Size = new System.Drawing.Size(425, 149);
             this.dgvSupportedSites.TabIndex = 15;
             this.dgvSupportedSites.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSupportedSites_CellContentClick);
             // 
@@ -363,7 +364,7 @@
             this.dgvChapter.ReadOnly = true;
             this.dgvChapter.RowHeadersVisible = false;
             this.dgvChapter.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvChapter.Size = new System.Drawing.Size(425, 244);
+            this.dgvChapter.Size = new System.Drawing.Size(425, 294);
             this.dgvChapter.TabIndex = 6;
             // 
             // dataGridViewTextBoxColumn4
@@ -416,9 +417,9 @@
             // btnAddPrefixCounter
             // 
             this.btnAddPrefixCounter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddPrefixCounter.Location = new System.Drawing.Point(12, 288);
+            this.btnAddPrefixCounter.Location = new System.Drawing.Point(12, 338);
             this.btnAddPrefixCounter.Name = "btnAddPrefixCounter";
-            this.btnAddPrefixCounter.Size = new System.Drawing.Size(135, 23);
+            this.btnAddPrefixCounter.Size = new System.Drawing.Size(120, 23);
             this.btnAddPrefixCounter.TabIndex = 7;
             this.btnAddPrefixCounter.Text = "Add Prefix Counter";
             this.toolTip1.SetToolTip(this.btnAddPrefixCounter, "Add Prefix Counter to Chapter Name");
@@ -455,7 +456,7 @@
             // 
             this.txtSaveTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txtSaveTo.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::MangaRipper.Properties.Settings.Default, "SaveTo", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txtSaveTo.Location = new System.Drawing.Point(66, 318);
+            this.txtSaveTo.Location = new System.Drawing.Point(66, 368);
             this.txtSaveTo.Name = "txtSaveTo";
             this.txtSaveTo.ReadOnly = true;
             this.txtSaveTo.Size = new System.Drawing.Size(240, 22);
@@ -465,10 +466,10 @@
             // txtMessage
             // 
             this.txtMessage.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.txtMessage.Location = new System.Drawing.Point(0, 584);
+            this.txtMessage.Location = new System.Drawing.Point(0, 592);
             this.txtMessage.Name = "txtMessage";
             this.txtMessage.ReadOnly = true;
-            this.txtMessage.Size = new System.Drawing.Size(1004, 22);
+            this.txtMessage.Size = new System.Drawing.Size(1012, 22);
             this.txtMessage.TabIndex = 23;
             // 
             // timer1
@@ -476,11 +477,23 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // btnAddNew
+            // 
+            this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAddNew.Location = new System.Drawing.Point(343, 338);
+            this.btnAddNew.Name = "btnAddNew";
+            this.btnAddNew.Size = new System.Drawing.Size(94, 23);
+            this.btnAddNew.TabIndex = 10;
+            this.btnAddNew.Text = "Add new";
+            this.btnAddNew.UseVisualStyleBackColor = true;
+            this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1004, 606);
+            this.ClientSize = new System.Drawing.Size(1012, 614);
+            this.Controls.Add(this.btnAddNew);
             this.Controls.Add(this.nudThread);
             this.Controls.Add(this.txtMessage);
             this.Controls.Add(this.btnAddPrefixCounter);
@@ -558,5 +571,6 @@
         private System.Windows.Forms.TextBox txtMessage;
         private System.Windows.Forms.NumericUpDown nudThread;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button btnAddNew;
     }
 }

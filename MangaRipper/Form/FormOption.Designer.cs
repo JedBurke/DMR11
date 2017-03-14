@@ -38,8 +38,12 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.grpSaveDestination = new System.Windows.Forms.GroupBox();
+            this.txtSaveDestination = new System.Windows.Forms.TextBox();
+            this.btnSaveBrowse = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.grpSaveDestination.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -124,7 +128,7 @@
             this.checkBox1.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MangaRipper.Properties.Settings.Default, "ProxyEnable", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBox1.Location = new System.Drawing.Point(92, 19);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(88, 17);
+            this.checkBox1.Size = new System.Drawing.Size(91, 17);
             this.checkBox1.TabIndex = 0;
             this.checkBox1.Text = "Enable Proxy";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -163,11 +167,43 @@
             this.textBox1.TabIndex = 2;
             this.textBox1.Text = global::MangaRipper.Properties.Settings.Default.ProxyHost;
             // 
+            // grpSaveDestination
+            // 
+            this.grpSaveDestination.Controls.Add(this.btnSaveBrowse);
+            this.grpSaveDestination.Controls.Add(this.txtSaveDestination);
+            this.grpSaveDestination.Location = new System.Drawing.Point(12, 188);
+            this.grpSaveDestination.Name = "grpSaveDestination";
+            this.grpSaveDestination.Size = new System.Drawing.Size(251, 88);
+            this.grpSaveDestination.TabIndex = 1;
+            this.grpSaveDestination.TabStop = false;
+            this.grpSaveDestination.Text = "Save Destination";
+            // 
+            // txtSaveDestination
+            // 
+            this.txtSaveDestination.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::MangaRipper.Properties.Settings.Default, "DefaultSaveDestination", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.txtSaveDestination.Location = new System.Drawing.Point(6, 21);
+            this.txtSaveDestination.Name = "txtSaveDestination";
+            this.txtSaveDestination.ReadOnly = true;
+            this.txtSaveDestination.Size = new System.Drawing.Size(239, 22);
+            this.txtSaveDestination.TabIndex = 0;
+            this.txtSaveDestination.Text = global::MangaRipper.Properties.Settings.Default.DefaultSaveDestination;
+            // 
+            // btnSaveBrowse
+            // 
+            this.btnSaveBrowse.Location = new System.Drawing.Point(170, 49);
+            this.btnSaveBrowse.Name = "btnSaveBrowse";
+            this.btnSaveBrowse.Size = new System.Drawing.Size(75, 23);
+            this.btnSaveBrowse.TabIndex = 1;
+            this.btnSaveBrowse.Text = "Browse";
+            this.btnSaveBrowse.UseVisualStyleBackColor = true;
+            this.btnSaveBrowse.Click += new System.EventHandler(this.btnSaveBrowse_Click);
+            // 
             // FormOption
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(277, 198);
+            this.ClientSize = new System.Drawing.Size(277, 311);
+            this.Controls.Add(this.grpSaveDestination);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -178,6 +214,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.grpSaveDestination.ResumeLayout(false);
+            this.grpSaveDestination.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -194,5 +232,8 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.GroupBox grpSaveDestination;
+        private System.Windows.Forms.Button btnSaveBrowse;
+        private System.Windows.Forms.TextBox txtSaveDestination;
     }
 }

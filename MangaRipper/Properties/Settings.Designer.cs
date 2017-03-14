@@ -153,5 +153,17 @@ namespace MangaRipper.Properties {
                 this["WindowState"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DefaultSaveDestination {
+            get {
+                return ((string)(this["DefaultSaveDestination"]));
+            }
+            set {
+                this["DefaultSaveDestination"] = value;
+            }
+        }
     }
 }

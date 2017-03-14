@@ -25,6 +25,27 @@ namespace MangaRipper
 
         private CancellationTokenSource _cts;
 
+        private string SaveDestination
+        {
+            get
+            {
+                if (rdSeriesDestination.Checked)
+                {
+                    return lbSeriesDestination.Text;
+                }
+                else
+                    return lbDefaultDestination.Text;
+            }
+            set
+            {
+                if (rdSeriesDestination.Checked)
+                    lbSeriesDestination.Text = value;
+
+                else
+                    lbDefaultDestination.Text = value;
+            }
+        }
+
         public FormMain()
         {
             InitializeComponent();
@@ -57,10 +78,13 @@ namespace MangaRipper
                     btnGetChapter.Enabled = true;
                     dgvChapter.DataSource = title.Chapters;
 
+                    PrepareSeriesDirectory();
+
                     if (t.Exception != null && t.Exception.InnerException != null)
                     {
                         txtMessage.Text = t.Exception.InnerException.Message;
                     }
+
                 }, TaskScheduler.FromCurrentSynchronizationContext());
             }
             catch (Exception ex)
@@ -115,39 +139,12 @@ namespace MangaRipper
             if (Helper.KeyState.IsShiftKeyPressed())
                 limit = 5;
 
-            //foreach (DataGridViewRow row in dgvChapter.Rows)
-            //{
-            //    var item = (IChapter)row.DataBoundItem;
-            //    string destinationDirectory = txtSaveTo.Text;
-
-            //    string testPath = Path.Combine(destinationDirectory, item.Name);
-            //    bool chapterExists = Directory.Exists(testPath);
-
-            //    if (chapterExists)
-            //    {
-            //        // Check if the directory has any files (pages).
-            //        int pageCount = Directory.GetFiles(testPath).Length;
-
-            //        // If the page count is zero, treat it as the user hasn't downloaded
-            //        // that chapter yet.
-            //        if (pageCount == 0)
-            //            chapterExists = false;
-
-            //    }
-
-            //    if (!chapterExists)
-            //    {
-            //        items.Add((IChapter)row.DataBoundItem);
-
-            //        if (limit > 0 && (++chaptersAdded == limit))
-            //            break;
-            //    }
-            //}
-
             for (int i = dgvChapter.RowCount; i-- > 0; )
             {
                 var item = (IChapter)dgvChapter.Rows[i].DataBoundItem;
-                string destinationDirectory = txtSaveTo.Text;
+
+                // Todo: Check the default AND the series directory for the chapters.
+                string destinationDirectory = lbDefaultDestination.Text; //txtSaveTo.Text;
 
                 string testPath = Path.Combine(destinationDirectory, item.Name);
                 bool chapterExists = Directory.Exists(testPath);
@@ -208,7 +205,6 @@ namespace MangaRipper
             DownloadChapter();
         }
 
-
         private void DownloadChapter(int millisecond)
         {
             timer1.Interval = millisecond;
@@ -228,7 +224,7 @@ namespace MangaRipper
                 {
                     chapter.Proxy = Option.GetProxy();
                     btnDownload.Enabled = false;
-                    var task = chapter.DownloadImageAsync(txtSaveTo.Text, _cts.Token, new MangaRipper.Core.Progress<ChapterProgress>(c =>
+                    var task = chapter.DownloadImageAsync(SaveDestination, _cts.Token, new MangaRipper.Core.Progress<ChapterProgress>(c =>
                         {
                             foreach (DataGridViewRow item in dgvQueueChapter.Rows)
                             {
@@ -274,25 +270,20 @@ namespace MangaRipper
 
         private void btnChangeSaveTo_Click(object sender, EventArgs e)
         {
-            folderBrowserDialog1.SelectedPath = txtSaveTo.Text;
+            folderBrowserDialog1.SelectedPath = SaveDestination;
+
             DialogResult dr = folderBrowserDialog1.ShowDialog(this);
             if (dr == DialogResult.OK)
             {
-                txtSaveTo.Text = folderBrowserDialog1.SelectedPath;
+                SaveDestination = folderBrowserDialog1.SelectedPath;
             }
+
         }
 
         private void btnOpenFolder_Click(object sender, EventArgs e)
         {
-            Process.Start(txtSaveTo.Text);
-        }
-
-        private void dgvSupportedSites_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == 1 && e.RowIndex >= 0)
-            {
-                Process.Start(dgvSupportedSites.Rows[e.RowIndex].Cells[1].Value.ToString());
-            }
+            if (Directory.Exists(SaveDestination))
+                Process.Start(SaveDestination);
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -306,14 +297,14 @@ namespace MangaRipper
 
             this.Text = String.Format("{0} {1}", Application.ProductName, AppInfo.DeploymentVersion);
 
-            foreach (string[] item in TitleFactory.GetSupportedSites())
-            {
-                dgvSupportedSites.Rows.Add(item);
-            }
+            //foreach (string[] item in TitleFactory.GetSupportedSites())
+            //{
+            //    dgvSupportedSites.Rows.Add(item);
+            //}
 
-            if (String.IsNullOrEmpty(txtSaveTo.Text))
+            if (String.IsNullOrEmpty(lbDefaultDestination.Text))
             {
-                txtSaveTo.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                lbDefaultDestination.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             }
 
             DownloadQueue = Common.LoadIChapterCollection(FILENAME_ICHAPTER_COLLECTION);
@@ -449,6 +440,37 @@ namespace MangaRipper
             {
                 btnGetChapter_Click(null, EventArgs.Empty);
             }
+
+        }
+
+        private void lbDefaultDestination_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+                rdDefaultDestination.Checked = true;
+        }
+
+        private void lbSeriesDestination_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+                rdSeriesDestination.Checked = true;
+        }
+        
+        void PrepareSeriesDirectory()
+        {
+            string
+                defaultSeriesDestination = Properties.Settings.Default.DefaultSaveDestination,
+                series = cbTitleUrl.Items[cbTitleUrl.SelectedIndex].ToString();
+
+            if (string.IsNullOrEmpty(defaultSeriesDestination))
+                defaultSeriesDestination = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+            series = series.TrimEnd('/');
+            series = series.Substring(series.LastIndexOf('/') + 1);
+
+            var item = (IChapter)dgvChapter.Rows[0].DataBoundItem;
+            series = item.Name.Substring(0, item.Name.LastIndexOf(" ")).Trim();
+
+            lbSeriesDestination.Text = Path.Combine(defaultSeriesDestination, series);
 
         }
 

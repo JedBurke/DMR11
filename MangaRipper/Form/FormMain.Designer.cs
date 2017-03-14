@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.btnGetChapter = new System.Windows.Forms.Button();
             this.btnDownload = new System.Windows.Forms.Button();
@@ -44,13 +43,8 @@
             this.btnStop = new System.Windows.Forms.Button();
             this.btnChangeSaveTo = new System.Windows.Forms.Button();
             this.btnOpenFolder = new System.Windows.Forms.Button();
-            this.lbSaveTo = new System.Windows.Forms.Label();
             this.lblUrl = new System.Windows.Forms.Label();
             this.txtPercent = new System.Windows.Forms.TextBox();
-            this.dgvSupportedSites = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnHowToUse = new System.Windows.Forms.Button();
             this.btnOptions = new System.Windows.Forms.Button();
             this.btnAbout = new System.Windows.Forms.Button();
@@ -64,12 +58,15 @@
             this.btnAddPrefixCounter = new System.Windows.Forms.Button();
             this.nudThread = new System.Windows.Forms.NumericUpDown();
             this.btnPasteUrl = new System.Windows.Forms.Button();
-            this.txtSaveTo = new System.Windows.Forms.TextBox();
+            this.btnAddNew = new System.Windows.Forms.Button();
+            this.lbSeriesDestination = new System.Windows.Forms.Label();
+            this.lbDefaultDestination = new System.Windows.Forms.Label();
             this.txtMessage = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnAddNew = new System.Windows.Forms.Button();
+            this.lbDestination = new System.Windows.Forms.Label();
+            this.rdDefaultDestination = new System.Windows.Forms.RadioButton();
+            this.rdSeriesDestination = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQueueChapter)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSupportedSites)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChapter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudThread)).BeginInit();
             this.SuspendLayout();
@@ -101,7 +98,7 @@
             // btnAdd
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAdd.Location = new System.Drawing.Point(143, 361);
+            this.btnAdd.Location = new System.Drawing.Point(143, 391);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(163, 23);
             this.btnAdd.TabIndex = 8;
@@ -113,7 +110,7 @@
             // btnAddAll
             // 
             this.btnAddAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddAll.Location = new System.Drawing.Point(311, 361);
+            this.btnAddAll.Location = new System.Drawing.Point(311, 391);
             this.btnAddAll.Name = "btnAddAll";
             this.btnAddAll.Size = new System.Drawing.Size(60, 23);
             this.btnAddAll.TabIndex = 9;
@@ -211,9 +208,9 @@
             // btnChangeSaveTo
             // 
             this.btnChangeSaveTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnChangeSaveTo.Location = new System.Drawing.Point(341, 390);
+            this.btnChangeSaveTo.Location = new System.Drawing.Point(341, 436);
             this.btnChangeSaveTo.Name = "btnChangeSaveTo";
-            this.btnChangeSaveTo.Size = new System.Drawing.Size(30, 23);
+            this.btnChangeSaveTo.Size = new System.Drawing.Size(30, 22);
             this.btnChangeSaveTo.TabIndex = 13;
             this.btnChangeSaveTo.Text = "...";
             this.toolTip1.SetToolTip(this.btnChangeSaveTo, "Change folder");
@@ -223,24 +220,14 @@
             // btnOpenFolder
             // 
             this.btnOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnOpenFolder.Location = new System.Drawing.Point(377, 390);
+            this.btnOpenFolder.Location = new System.Drawing.Point(377, 436);
             this.btnOpenFolder.Name = "btnOpenFolder";
-            this.btnOpenFolder.Size = new System.Drawing.Size(60, 23);
+            this.btnOpenFolder.Size = new System.Drawing.Size(60, 22);
             this.btnOpenFolder.TabIndex = 14;
             this.btnOpenFolder.Text = "Open";
             this.toolTip1.SetToolTip(this.btnOpenFolder, "Open destination folder");
             this.btnOpenFolder.UseVisualStyleBackColor = true;
             this.btnOpenFolder.Click += new System.EventHandler(this.btnOpenFolder_Click);
-            // 
-            // lbSaveTo
-            // 
-            this.lbSaveTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lbSaveTo.AutoSize = true;
-            this.lbSaveTo.Location = new System.Drawing.Point(12, 394);
-            this.lbSaveTo.Name = "lbSaveTo";
-            this.lbSaveTo.Size = new System.Drawing.Size(47, 13);
-            this.lbSaveTo.TabIndex = 11;
-            this.lbSaveTo.Text = "Save to:";
             // 
             // lblUrl
             // 
@@ -260,65 +247,6 @@
             this.txtPercent.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.txtPercent.Size = new System.Drawing.Size(35, 22);
             this.txtPercent.TabIndex = 4;
-            // 
-            // dgvSupportedSites
-            // 
-            this.dgvSupportedSites.AllowUserToAddRows = false;
-            this.dgvSupportedSites.AllowUserToDeleteRows = false;
-            this.dgvSupportedSites.AllowUserToResizeRows = false;
-            this.dgvSupportedSites.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.dgvSupportedSites.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dgvSupportedSites.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dgvSupportedSites.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSupportedSites.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn3,
-            this.Column1});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvSupportedSites.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvSupportedSites.Location = new System.Drawing.Point(12, 419);
-            this.dgvSupportedSites.MultiSelect = false;
-            this.dgvSupportedSites.Name = "dgvSupportedSites";
-            this.dgvSupportedSites.ReadOnly = true;
-            this.dgvSupportedSites.RowHeadersVisible = false;
-            this.dgvSupportedSites.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSupportedSites.Size = new System.Drawing.Size(425, 138);
-            this.dgvSupportedSites.TabIndex = 15;
-            this.dgvSupportedSites.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSupportedSites_CellContentClick);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Name";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTextBoxColumn1.Width = 120;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "Url";
-            this.dataGridViewTextBoxColumn3.HeaderText = "Address";
-            this.dataGridViewTextBoxColumn3.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-            this.dataGridViewTextBoxColumn3.LinkColor = System.Drawing.Color.Blue;
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.dataGridViewTextBoxColumn3.VisitedLinkColor = System.Drawing.Color.Blue;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Language";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Width = 90;
             // 
             // btnHowToUse
             // 
@@ -370,7 +298,7 @@
             this.dgvChapter.ReadOnly = true;
             this.dgvChapter.RowHeadersVisible = false;
             this.dgvChapter.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvChapter.Size = new System.Drawing.Size(425, 317);
+            this.dgvChapter.Size = new System.Drawing.Size(425, 347);
             this.dgvChapter.TabIndex = 6;
             // 
             // dataGridViewTextBoxColumn4
@@ -423,7 +351,7 @@
             // btnAddPrefixCounter
             // 
             this.btnAddPrefixCounter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddPrefixCounter.Location = new System.Drawing.Point(12, 361);
+            this.btnAddPrefixCounter.Location = new System.Drawing.Point(12, 391);
             this.btnAddPrefixCounter.Name = "btnAddPrefixCounter";
             this.btnAddPrefixCounter.Size = new System.Drawing.Size(120, 23);
             this.btnAddPrefixCounter.TabIndex = 7;
@@ -470,16 +398,48 @@
             this.btnPasteUrl.UseVisualStyleBackColor = true;
             this.btnPasteUrl.Click += new System.EventHandler(this.btnPasteUrl_Click);
             // 
-            // txtSaveTo
+            // btnAddNew
             // 
-            this.txtSaveTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtSaveTo.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::MangaRipper.Properties.Settings.Default, "SaveTo", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txtSaveTo.Location = new System.Drawing.Point(66, 391);
-            this.txtSaveTo.Name = "txtSaveTo";
-            this.txtSaveTo.ReadOnly = true;
-            this.txtSaveTo.Size = new System.Drawing.Size(269, 22);
-            this.txtSaveTo.TabIndex = 12;
-            this.txtSaveTo.Text = global::MangaRipper.Properties.Settings.Default.SaveTo;
+            this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAddNew.Location = new System.Drawing.Point(377, 391);
+            this.btnAddNew.Name = "btnAddNew";
+            this.btnAddNew.Size = new System.Drawing.Size(60, 23);
+            this.btnAddNew.TabIndex = 10;
+            this.btnAddNew.Text = "New";
+            this.toolTip1.SetToolTip(this.btnAddNew, "Add latest chapters to queue\r\nHold SHIFT to only add the 5 latest chapters");
+            this.btnAddNew.UseVisualStyleBackColor = true;
+            this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
+            // 
+            // lbSeriesDestination
+            // 
+            this.lbSeriesDestination.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbSeriesDestination.AutoSize = true;
+            this.lbSeriesDestination.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbSeriesDestination.Location = new System.Drawing.Point(57, 514);
+            this.lbSeriesDestination.MaximumSize = new System.Drawing.Size(380, 17);
+            this.lbSeriesDestination.MinimumSize = new System.Drawing.Size(380, 17);
+            this.lbSeriesDestination.Name = "lbSeriesDestination";
+            this.lbSeriesDestination.Size = new System.Drawing.Size(380, 17);
+            this.lbSeriesDestination.TabIndex = 29;
+            this.lbSeriesDestination.Text = "Series-Specific Destination";
+            this.toolTip1.SetToolTip(this.lbSeriesDestination, "Saves the chapter to the series\' folder");
+            this.lbSeriesDestination.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lbSeriesDestination_MouseClick);
+            // 
+            // lbDefaultDestination
+            // 
+            this.lbDefaultDestination.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbDefaultDestination.AutoSize = true;
+            this.lbDefaultDestination.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::MangaRipper.Properties.Settings.Default, "SaveTo", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.lbDefaultDestination.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbDefaultDestination.Location = new System.Drawing.Point(57, 471);
+            this.lbDefaultDestination.MaximumSize = new System.Drawing.Size(385, 17);
+            this.lbDefaultDestination.MinimumSize = new System.Drawing.Size(380, 17);
+            this.lbDefaultDestination.Name = "lbDefaultDestination";
+            this.lbDefaultDestination.Size = new System.Drawing.Size(380, 17);
+            this.lbDefaultDestination.TabIndex = 30;
+            this.lbDefaultDestination.Text = global::MangaRipper.Properties.Settings.Default.SaveTo;
+            this.toolTip1.SetToolTip(this.lbDefaultDestination, "Saves the chapter to the default manga folder");
+            this.lbDefaultDestination.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lbDefaultDestination_MouseClick);
             // 
             // txtMessage
             // 
@@ -495,23 +455,49 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // btnAddNew
+            // lbDestination
             // 
-            this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddNew.Location = new System.Drawing.Point(377, 361);
-            this.btnAddNew.Name = "btnAddNew";
-            this.btnAddNew.Size = new System.Drawing.Size(60, 23);
-            this.btnAddNew.TabIndex = 10;
-            this.btnAddNew.Text = "New";
-            this.toolTip1.SetToolTip(this.btnAddNew, "Add latest chapters to queue\r\nHold SHIFT to only add the 5 latest chapters");
-            this.btnAddNew.UseVisualStyleBackColor = true;
-            this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
+            this.lbDestination.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbDestination.AutoSize = true;
+            this.lbDestination.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbDestination.Location = new System.Drawing.Point(12, 436);
+            this.lbDestination.Name = "lbDestination";
+            this.lbDestination.Size = new System.Drawing.Size(123, 20);
+            this.lbDestination.TabIndex = 26;
+            this.lbDestination.Text = "Save Destination";
+            // 
+            // rdDefaultDestination
+            // 
+            this.rdDefaultDestination.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.rdDefaultDestination.AutoSize = true;
+            this.rdDefaultDestination.Checked = true;
+            this.rdDefaultDestination.Location = new System.Drawing.Point(37, 474);
+            this.rdDefaultDestination.Name = "rdDefaultDestination";
+            this.rdDefaultDestination.Size = new System.Drawing.Size(14, 13);
+            this.rdDefaultDestination.TabIndex = 27;
+            this.rdDefaultDestination.TabStop = true;
+            this.rdDefaultDestination.UseVisualStyleBackColor = true;
+            // 
+            // rdSeriesDestination
+            // 
+            this.rdSeriesDestination.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.rdSeriesDestination.AutoSize = true;
+            this.rdSeriesDestination.Location = new System.Drawing.Point(37, 517);
+            this.rdSeriesDestination.Name = "rdSeriesDestination";
+            this.rdSeriesDestination.Size = new System.Drawing.Size(14, 13);
+            this.rdSeriesDestination.TabIndex = 28;
+            this.rdSeriesDestination.UseVisualStyleBackColor = true;
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1012, 614);
+            this.Controls.Add(this.lbDefaultDestination);
+            this.Controls.Add(this.lbSeriesDestination);
+            this.Controls.Add(this.rdSeriesDestination);
+            this.Controls.Add(this.rdDefaultDestination);
+            this.Controls.Add(this.lbDestination);
             this.Controls.Add(this.btnPasteUrl);
             this.Controls.Add(this.btnAddNew);
             this.Controls.Add(this.nudThread);
@@ -524,11 +510,8 @@
             this.Controls.Add(this.btnAbout);
             this.Controls.Add(this.btnOptions);
             this.Controls.Add(this.btnHowToUse);
-            this.Controls.Add(this.dgvSupportedSites);
             this.Controls.Add(this.txtPercent);
             this.Controls.Add(this.lblUrl);
-            this.Controls.Add(this.txtSaveTo);
-            this.Controls.Add(this.lbSaveTo);
             this.Controls.Add(this.btnChangeSaveTo);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnOpenFolder);
@@ -546,7 +529,6 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvQueueChapter)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSupportedSites)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChapter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudThread)).EndInit();
             this.ResumeLayout(false);
@@ -563,14 +545,11 @@
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Button btnRemoveAll;
         private System.Windows.Forms.DataGridView dgvQueueChapter;
-        private System.Windows.Forms.TextBox txtSaveTo;
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnChangeSaveTo;
         private System.Windows.Forms.Button btnOpenFolder;
-        private System.Windows.Forms.Label lbSaveTo;
         private System.Windows.Forms.Label lblUrl;
         private System.Windows.Forms.TextBox txtPercent;
-        private System.Windows.Forms.DataGridView dgvSupportedSites;
         private System.Windows.Forms.Button btnHowToUse;
         private System.Windows.Forms.Button btnOptions;
         private System.Windows.Forms.Button btnAbout;
@@ -580,9 +559,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColChapterName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColChapterStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColChapterUrl;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewLinkColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.ComboBox cbTitleUrl;
         private System.Windows.Forms.Button btnAddBookmark;
         private System.Windows.Forms.Button btnRemoveBookmark;
@@ -593,5 +569,10 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button btnAddNew;
         private System.Windows.Forms.Button btnPasteUrl;
+        private System.Windows.Forms.Label lbDestination;
+        private System.Windows.Forms.RadioButton rdDefaultDestination;
+        private System.Windows.Forms.RadioButton rdSeriesDestination;
+        private System.Windows.Forms.Label lbSeriesDestination;
+        private System.Windows.Forms.Label lbDefaultDestination;
     }
 }

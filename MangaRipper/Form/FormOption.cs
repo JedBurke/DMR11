@@ -15,5 +15,16 @@ namespace MangaRipper
         {
             InitializeComponent();
         }
+
+        private void btnSaveBrowse_Click(object sender, EventArgs e)
+        {
+            using (FolderBrowserDialog fbd = new FolderBrowserDialog())
+            {
+                if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    txtSaveDestination.Text = fbd.SelectedPath;
+                }
+            }
+        }
     }
 }

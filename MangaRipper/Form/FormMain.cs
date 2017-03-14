@@ -77,7 +77,7 @@ namespace MangaRipper
                 {
                     btnGetChapter.Enabled = true;
                     dgvChapter.DataSource = title.Chapters;
-
+                    
                     PrepareSeriesDirectory();
 
                     if (t.Exception != null && t.Exception.InnerException != null)
@@ -163,8 +163,19 @@ namespace MangaRipper
                 else
                 {
                     testPath = Path.Combine(lbSeriesDestination.Text, item.Name);
-
                     chapterExists = Directory.Exists(testPath);
+
+                    if (!chapterExists)
+                    {
+                        foreach (var sub in Directory.GetDirectories(lbSeriesDestination.Text))
+                        {
+                            testPath = Path.Combine(sub, item.Name);
+                            chapterExists = Directory.Exists(testPath);
+
+                            Console.WriteLine("Path: {0} | Exists: {1}", testPath, chapterExists);
+                        }
+                    }
+
 
                     if (chapterExists)
                     {
@@ -475,10 +486,33 @@ namespace MangaRipper
         
         void PrepareSeriesDirectory()
         {
+            
             string
                 defaultSeriesDestination = Properties.Settings.Default.DefaultSaveDestination,
-                series = cbTitleUrl.Items[cbTitleUrl.SelectedIndex].ToString(),
+                series = string.Empty,
                 path = string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(cbTitleUrl.Text))
+            {
+                Uri seriesUri = null;
+
+                if (Uri.TryCreate(cbTitleUrl.Text, UriKind.Absolute, out seriesUri))
+                    series = seriesUri.ToString();
+
+                else
+                    series = cbTitleUrl.SelectedItem.ToString();
+            }
+            else
+            {
+                series = cbTitleUrl.Text;
+            }
+
+
+            if (string.IsNullOrWhiteSpace(series))
+            {
+                // Todo: Set series-specific directory path to default.
+                return;
+            }
 
             if (string.IsNullOrEmpty(defaultSeriesDestination))
                 defaultSeriesDestination = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);

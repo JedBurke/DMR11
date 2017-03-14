@@ -423,6 +423,7 @@
             this.lbSeriesDestination.TabIndex = 29;
             this.lbSeriesDestination.Text = "Series-Specific Destination";
             this.toolTip1.SetToolTip(this.lbSeriesDestination, "Saves the chapter to the series\' folder");
+            this.lbSeriesDestination.UseMnemonic = false;
             this.lbSeriesDestination.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lbSeriesDestination_MouseClick);
             // 
             // lbDefaultDestination
@@ -439,6 +440,7 @@
             this.lbDefaultDestination.TabIndex = 30;
             this.lbDefaultDestination.Text = global::MangaRipper.Properties.Settings.Default.SaveTo;
             this.toolTip1.SetToolTip(this.lbDefaultDestination, "Saves the chapter to the default manga folder");
+            this.lbDefaultDestination.UseMnemonic = false;
             this.lbDefaultDestination.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lbDefaultDestination_MouseClick);
             // 
             // txtMessage

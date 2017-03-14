@@ -145,7 +145,7 @@ namespace MangaRipper
 
                 // Todo: Check the default AND the series directory for the chapters.
                 string destinationDirectory = lbDefaultDestination.Text; //txtSaveTo.Text;
-
+                
                 string testPath = Path.Combine(destinationDirectory, item.Name);
                 bool chapterExists = Directory.Exists(testPath);
 
@@ -159,6 +159,24 @@ namespace MangaRipper
                     if (pageCount == 0)
                         chapterExists = false;
 
+                }
+                else
+                {
+                    testPath = Path.Combine(lbSeriesDestination.Text, item.Name);
+
+                    chapterExists = Directory.Exists(testPath);
+
+                    if (chapterExists)
+                    {
+                        // Check if the directory has any files (pages).
+                        int pageCount = Directory.GetFiles(testPath).Length;
+
+                        // If the page count is zero, treat it as the user hasn't downloaded
+                        // that chapter yet.
+                        if (pageCount == 0)
+                            chapterExists = false;
+
+                    }
                 }
 
                 if (!chapterExists)
@@ -459,7 +477,8 @@ namespace MangaRipper
         {
             string
                 defaultSeriesDestination = Properties.Settings.Default.DefaultSaveDestination,
-                series = cbTitleUrl.Items[cbTitleUrl.SelectedIndex].ToString();
+                series = cbTitleUrl.Items[cbTitleUrl.SelectedIndex].ToString(),
+                path = string.Empty;
 
             if (string.IsNullOrEmpty(defaultSeriesDestination))
                 defaultSeriesDestination = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -468,9 +487,13 @@ namespace MangaRipper
             series = series.Substring(series.LastIndexOf('/') + 1);
 
             var item = (IChapter)dgvChapter.Rows[0].DataBoundItem;
-            series = item.Name.Substring(0, item.Name.LastIndexOf(" ")).Trim();
+            series = item.Name.Substring(0, item.Name.LastIndexOf(" ")).Trim();            
+            path = Path.Combine(defaultSeriesDestination, series);
 
-            lbSeriesDestination.Text = Path.Combine(defaultSeriesDestination, series);
+            lbSeriesDestination.Text = path;
+
+            if (Directory.Exists(path))
+                rdSeriesDestination.Checked = true;
 
         }
 

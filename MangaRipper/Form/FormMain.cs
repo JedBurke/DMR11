@@ -27,6 +27,19 @@ namespace MangaRipper
         public FormMain()
         {
             InitializeComponent();
+
+            //var items = cbTitleUrl.Items;
+            //object[] sorted = new object[items.Count];
+
+            //List<object> itemsToBeSorted = new List<object>();
+            //itemsToBeSorted.Sort();
+
+            //cbTitleUrl.BeginUpdate();
+
+            //cbTitleUrl.Items.AddRange(itemsToBeSorted.ToArray());
+
+            //cbTitleUrl.EndUpdate();
+
         }
 
         private void btnGetChapter_Click(object sender, EventArgs e)
@@ -405,4 +418,12 @@ namespace MangaRipper
 
         }
     }
+
+
+    public class SortedComboBox : ComboBox
+    {
+        
+    }
+
 }
+

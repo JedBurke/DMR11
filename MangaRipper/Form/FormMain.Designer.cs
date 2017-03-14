@@ -63,11 +63,11 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnAddPrefixCounter = new System.Windows.Forms.Button();
             this.nudThread = new System.Windows.Forms.NumericUpDown();
+            this.btnPasteUrl = new System.Windows.Forms.Button();
             this.txtSaveTo = new System.Windows.Forms.TextBox();
             this.txtMessage = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnAddNew = new System.Windows.Forms.Button();
-            this.btnPasteUrl = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQueueChapter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSupportedSites)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChapter)).BeginInit();
@@ -103,7 +103,7 @@
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAdd.Location = new System.Drawing.Point(143, 361);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(94, 23);
+            this.btnAdd.Size = new System.Drawing.Size(147, 23);
             this.btnAdd.TabIndex = 8;
             this.btnAdd.Text = "Add Selected";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -112,9 +112,9 @@
             // btnAddAll
             // 
             this.btnAddAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddAll.Location = new System.Drawing.Point(243, 361);
+            this.btnAddAll.Location = new System.Drawing.Point(296, 361);
             this.btnAddAll.Name = "btnAddAll";
-            this.btnAddAll.Size = new System.Drawing.Size(94, 23);
+            this.btnAddAll.Size = new System.Drawing.Size(65, 23);
             this.btnAddAll.TabIndex = 9;
             this.btnAddAll.Text = "Add All";
             this.btnAddAll.UseVisualStyleBackColor = true;
@@ -453,6 +453,18 @@
             0,
             0});
             // 
+            // btnPasteUrl
+            // 
+            this.btnPasteUrl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPasteUrl.Location = new System.Drawing.Point(749, 9);
+            this.btnPasteUrl.Name = "btnPasteUrl";
+            this.btnPasteUrl.Size = new System.Drawing.Size(24, 23);
+            this.btnPasteUrl.TabIndex = 25;
+            this.btnPasteUrl.Text = "P";
+            this.toolTip1.SetToolTip(this.btnPasteUrl, "Paste URL from clipboard and get chapters");
+            this.btnPasteUrl.UseVisualStyleBackColor = true;
+            this.btnPasteUrl.Click += new System.EventHandler(this.btnPasteUrl_Click);
+            // 
             // txtSaveTo
             // 
             this.txtSaveTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -481,25 +493,13 @@
             // btnAddNew
             // 
             this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddNew.Location = new System.Drawing.Point(343, 361);
+            this.btnAddNew.Location = new System.Drawing.Point(367, 361);
             this.btnAddNew.Name = "btnAddNew";
-            this.btnAddNew.Size = new System.Drawing.Size(94, 23);
+            this.btnAddNew.Size = new System.Drawing.Size(70, 23);
             this.btnAddNew.TabIndex = 10;
             this.btnAddNew.Text = "Add new";
             this.btnAddNew.UseVisualStyleBackColor = true;
             this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
-            // 
-            // btnPasteUrl
-            // 
-            this.btnPasteUrl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPasteUrl.Location = new System.Drawing.Point(749, 9);
-            this.btnPasteUrl.Name = "btnPasteUrl";
-            this.btnPasteUrl.Size = new System.Drawing.Size(24, 23);
-            this.btnPasteUrl.TabIndex = 25;
-            this.btnPasteUrl.Text = "P";
-            this.toolTip1.SetToolTip(this.btnPasteUrl, "Paste URL from clipboard and get chapters");
-            this.btnPasteUrl.UseVisualStyleBackColor = true;
-            this.btnPasteUrl.Click += new System.EventHandler(this.btnPasteUrl_Click);
             // 
             // FormMain
             // 

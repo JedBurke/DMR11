@@ -40,12 +40,10 @@ namespace MangaRipper.Core
 
         protected override List<Uri> ParsePageAddresses(string html)
         {
-            Console.WriteLine("Parse page address!");
-
             List<Uri> list = new List<Uri>();
 
             string pattern = "<option value=\"(Ch-.[^\"]*)\" selected";
-            Regex reg = new Regex(pattern, RegexOptions.IgnoreCase);
+            Regex reg = new Regex(pattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
             MatchCollection matches = reg.Matches(html);
 
             foreach (Match match in matches)

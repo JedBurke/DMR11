@@ -13,7 +13,7 @@ namespace MangaRipper.Core
         protected override List<IChapter> ParseChapterObjects(string html)
         {
             var list = new List<IChapter>();
-            string pattern = "<td>\n<a href=\"(?=/Manga/)(?<Value>.[^\"]*)\" title=\"(?<Text>.[^\"]*)\"";
+            string pattern = "<td>\\s+<a\\s+href=\"(?=/Manga/)(?<Value>.[^\"]*)\"\\s+title=\"(?<Text>.[^\"]*)\"";
             
             Regex reg = new Regex(pattern,
                 RegexOptions.IgnoreCase);

@@ -163,6 +163,7 @@ namespace MangaRipper.Core
                 Directory.CreateDirectory(saveToFolder);
 
                 int countImage = 0;
+                bool useAutoNumbering = false;
 
                 foreach (Uri imageAddress in ImageAddresses)
                 {
@@ -171,9 +172,29 @@ namespace MangaRipper.Core
                     // Todo: Check if path has an extension.                    
                     string pageFileName = Path.GetFileName(imageAddress.LocalPath);
 
-                    if (!Regex.IsMatch(pageFileName, ".(png|jpg|jpeg)$", System.Text.RegularExpressions.RegexOptions.IgnoreCase))
+                    // Console.WriteLine("Image Host: {0}", imageAddress.Host);
+
+                    if (!useAutoNumbering)
                     {
-                        pageFileName = Regex.Replace(imageAddress.Query, "\\?title=(.*)", "$1");
+                        if (Regex.IsMatch(imageAddress.Host, "googleusercontent", RegexOptions.IgnoreCase | RegexOptions.Compiled))
+                            useAutoNumbering = true;
+                    }
+                    else
+                    {
+                        if (!Regex.IsMatch(pageFileName, "\\.(png|jpg|jpeg)$", System.Text.RegularExpressions.RegexOptions.IgnoreCase))
+                        {
+                            pageFileName = Regex.Replace(imageAddress.Query, "\\?title=(.*)", "$1");
+                        }
+                    }                           
+
+                    if (useAutoNumbering)
+                    {
+                        // Assume the extension is jpg since it's the most common. 
+                        // Most image viewers will check the header and display it properly regardless
+                        // of its extension. This is for Windows Explorer to display the thumbnail.
+                        string ext = ".jpg";
+                        
+                        pageFileName = string.Concat(countImage.ToString().PadLeft(3, '0'), ext);
                     }
 
                     string filePath = saveToFolder + "\\" + pageFileName;

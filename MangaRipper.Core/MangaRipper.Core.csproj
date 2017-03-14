@@ -43,7 +43,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CloudFlareUtilities">
-      <HintPath>..\..\CloudFlareUtilities.dll</HintPath>
+      <HintPath>..\..\..\CloudFlareUtilities.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

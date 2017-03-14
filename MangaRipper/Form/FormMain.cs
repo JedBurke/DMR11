@@ -18,6 +18,7 @@ namespace MangaRipper
 {
     public partial class FormMain : Form
     {
+
         BindingList<IChapter> DownloadQueue;
 
         protected const string FILENAME_ICHAPTER_COLLECTION = "IChapterCollection.bin";
@@ -108,11 +109,44 @@ namespace MangaRipper
 
         private void btnAddNew_Click(object sender, EventArgs e)
         {
-            var items = new List<IChapter>();
+            int limit = 0,
+                chaptersAdded = 0;
 
-            foreach (DataGridViewRow row in dgvChapter.Rows)
+            if (Helper.KeyState.IsShiftKeyPressed())
+                limit = 5;
+
+            //foreach (DataGridViewRow row in dgvChapter.Rows)
+            //{
+            //    var item = (IChapter)row.DataBoundItem;
+            //    string destinationDirectory = txtSaveTo.Text;
+
+            //    string testPath = Path.Combine(destinationDirectory, item.Name);
+            //    bool chapterExists = Directory.Exists(testPath);
+
+            //    if (chapterExists)
+            //    {
+            //        // Check if the directory has any files (pages).
+            //        int pageCount = Directory.GetFiles(testPath).Length;
+
+            //        // If the page count is zero, treat it as the user hasn't downloaded
+            //        // that chapter yet.
+            //        if (pageCount == 0)
+            //            chapterExists = false;
+
+            //    }
+
+            //    if (!chapterExists)
+            //    {
+            //        items.Add((IChapter)row.DataBoundItem);
+
+            //        if (limit > 0 && (++chaptersAdded == limit))
+            //            break;
+            //    }
+            //}
+
+            for (int i = dgvChapter.RowCount; i-- > 0; )
             {
-                var item = (IChapter)row.DataBoundItem;
+                var item = (IChapter)dgvChapter.Rows[i].DataBoundItem;
                 string destinationDirectory = txtSaveTo.Text;
 
                 string testPath = Path.Combine(destinationDirectory, item.Name);
@@ -131,18 +165,18 @@ namespace MangaRipper
                 }
 
                 if (!chapterExists)
-                    items.Add((IChapter)row.DataBoundItem);                
-            }
-
-            items.Reverse();
-
-            foreach (IChapter item in items)
-            {
-                if (DownloadQueue.IndexOf(item) < 0)
                 {
-                    DownloadQueue.Add(item);
+                    if (DownloadQueue.IndexOf(item) < 0)
+                    {
+                        DownloadQueue.Add(item);
+
+                        if (limit > 0 && (++chaptersAdded == limit))
+                            break;
+                    }
+
                 }
             }
+
 
         }
 
@@ -394,14 +428,14 @@ namespace MangaRipper
                 if (Clipboard.ContainsText())
                 {
                     string pastedUrl = Clipboard.GetData(DataFormats.StringFormat).ToString();
-                    
+
                     if (!string.IsNullOrWhiteSpace(pastedUrl))
                     {
                         pastedUrl = pastedUrl.Trim();
                         cbTitleUrl.Text = pastedUrl;
                         clipboardCopied = true;
                     }
-                    
+
                 }
             }
             catch (Exception)
@@ -417,12 +451,7 @@ namespace MangaRipper
             }
 
         }
-    }
 
-
-    public class SortedComboBox : ComboBox
-    {
-        
     }
 
 }

@@ -106,6 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helper\AppInfo.cs" />
+    <Compile Include="Helper\KeyState.cs" />
     <Compile Include="Helper\Option.cs" />
     <Compile Include="Form\FormOption.cs">
       <SubType>Form</SubType>
@@ -126,6 +127,7 @@
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Helper\Common.cs" />
+    <Compile Include="Helper\VirtualKeyStates.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form\FormMain.resx">

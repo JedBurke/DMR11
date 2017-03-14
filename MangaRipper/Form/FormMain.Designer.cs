@@ -103,20 +103,22 @@
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAdd.Location = new System.Drawing.Point(143, 361);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(147, 23);
+            this.btnAdd.Size = new System.Drawing.Size(163, 23);
             this.btnAdd.TabIndex = 8;
             this.btnAdd.Text = "Add Selected";
+            this.toolTip1.SetToolTip(this.btnAdd, "Add selected chapters to queue");
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnAddAll
             // 
             this.btnAddAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddAll.Location = new System.Drawing.Point(296, 361);
+            this.btnAddAll.Location = new System.Drawing.Point(311, 361);
             this.btnAddAll.Name = "btnAddAll";
-            this.btnAddAll.Size = new System.Drawing.Size(65, 23);
+            this.btnAddAll.Size = new System.Drawing.Size(60, 23);
             this.btnAddAll.TabIndex = 9;
-            this.btnAddAll.Text = "Add All";
+            this.btnAddAll.Text = "All";
+            this.toolTip1.SetToolTip(this.btnAddAll, "Add all chapters to queue");
             this.btnAddAll.UseVisualStyleBackColor = true;
             this.btnAddAll.Click += new System.EventHandler(this.btnAddAll_Click);
             // 
@@ -128,6 +130,7 @@
             this.btnRemove.Size = new System.Drawing.Size(105, 23);
             this.btnRemove.TabIndex = 16;
             this.btnRemove.Text = "Remove Selected";
+            this.toolTip1.SetToolTip(this.btnRemove, "Remove selected chapters from the queue");
             this.btnRemove.UseVisualStyleBackColor = true;
             this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
@@ -139,6 +142,7 @@
             this.btnRemoveAll.Size = new System.Drawing.Size(105, 23);
             this.btnRemoveAll.TabIndex = 17;
             this.btnRemoveAll.Text = "Remove All";
+            this.toolTip1.SetToolTip(this.btnRemoveAll, "Remove all chapters from the queue");
             this.btnRemoveAll.UseVisualStyleBackColor = true;
             this.btnRemoveAll.Click += new System.EventHandler(this.btnRemoveAll_Click);
             // 
@@ -207,23 +211,24 @@
             // btnChangeSaveTo
             // 
             this.btnChangeSaveTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnChangeSaveTo.Location = new System.Drawing.Point(312, 390);
+            this.btnChangeSaveTo.Location = new System.Drawing.Point(341, 390);
             this.btnChangeSaveTo.Name = "btnChangeSaveTo";
             this.btnChangeSaveTo.Size = new System.Drawing.Size(30, 23);
             this.btnChangeSaveTo.TabIndex = 13;
             this.btnChangeSaveTo.Text = "...";
-            this.toolTip1.SetToolTip(this.btnChangeSaveTo, "Change Folder");
+            this.toolTip1.SetToolTip(this.btnChangeSaveTo, "Change folder");
             this.btnChangeSaveTo.UseVisualStyleBackColor = true;
             this.btnChangeSaveTo.Click += new System.EventHandler(this.btnChangeSaveTo_Click);
             // 
             // btnOpenFolder
             // 
             this.btnOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnOpenFolder.Location = new System.Drawing.Point(348, 390);
+            this.btnOpenFolder.Location = new System.Drawing.Point(377, 390);
             this.btnOpenFolder.Name = "btnOpenFolder";
-            this.btnOpenFolder.Size = new System.Drawing.Size(89, 23);
+            this.btnOpenFolder.Size = new System.Drawing.Size(60, 23);
             this.btnOpenFolder.TabIndex = 14;
-            this.btnOpenFolder.Text = "Open Folder";
+            this.btnOpenFolder.Text = "Open";
+            this.toolTip1.SetToolTip(this.btnOpenFolder, "Open destination folder");
             this.btnOpenFolder.UseVisualStyleBackColor = true;
             this.btnOpenFolder.Click += new System.EventHandler(this.btnOpenFolder_Click);
             // 
@@ -423,7 +428,7 @@
             this.btnAddPrefixCounter.Size = new System.Drawing.Size(120, 23);
             this.btnAddPrefixCounter.TabIndex = 7;
             this.btnAddPrefixCounter.Text = "Add Prefix Counter";
-            this.toolTip1.SetToolTip(this.btnAddPrefixCounter, "Add Prefix Counter to Chapter Name");
+            this.toolTip1.SetToolTip(this.btnAddPrefixCounter, "Add prefix counter to chapter name");
             this.btnAddPrefixCounter.UseVisualStyleBackColor = true;
             this.btnAddPrefixCounter.Click += new System.EventHandler(this.btnAddPrefixCounter_Click);
             // 
@@ -446,7 +451,7 @@
             this.nudThread.Size = new System.Drawing.Size(47, 22);
             this.nudThread.TabIndex = 24;
             this.nudThread.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.nudThread, "Max Connections Number");
+            this.toolTip1.SetToolTip(this.nudThread, "Maximum number of connections");
             this.nudThread.Value = new decimal(new int[] {
             1,
             0,
@@ -472,7 +477,7 @@
             this.txtSaveTo.Location = new System.Drawing.Point(66, 391);
             this.txtSaveTo.Name = "txtSaveTo";
             this.txtSaveTo.ReadOnly = true;
-            this.txtSaveTo.Size = new System.Drawing.Size(240, 22);
+            this.txtSaveTo.Size = new System.Drawing.Size(269, 22);
             this.txtSaveTo.TabIndex = 12;
             this.txtSaveTo.Text = global::MangaRipper.Properties.Settings.Default.SaveTo;
             // 
@@ -493,11 +498,12 @@
             // btnAddNew
             // 
             this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddNew.Location = new System.Drawing.Point(367, 361);
+            this.btnAddNew.Location = new System.Drawing.Point(377, 361);
             this.btnAddNew.Name = "btnAddNew";
-            this.btnAddNew.Size = new System.Drawing.Size(70, 23);
+            this.btnAddNew.Size = new System.Drawing.Size(60, 23);
             this.btnAddNew.TabIndex = 10;
-            this.btnAddNew.Text = "Add new";
+            this.btnAddNew.Text = "New";
+            this.toolTip1.SetToolTip(this.btnAddNew, "Add latest chapters to queue\r\nHold SHIFT to only add the 5 latest chapters");
             this.btnAddNew.UseVisualStyleBackColor = true;
             this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
             // 

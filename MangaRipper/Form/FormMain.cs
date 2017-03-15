@@ -486,6 +486,9 @@ namespace MangaRipper
         
         void PrepareSeriesDirectory()
         {
+            // Todo: Set series-specific directory path to default.
+            if (dgvChapter.RowCount == 0)
+                return;
             
             string
                 defaultSeriesDestination = Properties.Settings.Default.DefaultSaveDestination,

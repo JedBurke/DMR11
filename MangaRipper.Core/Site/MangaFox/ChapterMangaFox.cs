@@ -15,9 +15,7 @@ namespace MangaRipper.Core
         {
             var list = new List<Uri>();
 
-            string imageRegexPattern = "<img src=\"(?<Value>[^\"]+)\"\\s+on";
-            imageRegexPattern = "<img.*onerror=\"this.src='(?<Value>.[^']*)'";
-            imageRegexPattern = "<img src=\"(?<Value>[^\"]+)\" width";
+            string imageRegexPattern = "<img\\s+src=\"(?<Value>[^\"]+)\"\\s+width";
 
             Regex reg = new Regex(imageRegexPattern,
                                   RegexOptions.IgnoreCase);
@@ -28,6 +26,8 @@ namespace MangaRipper.Core
                 var value = new Uri(Address, match.Groups["Value"].Value);
                 list.Add(value);
             }
+
+            Console.WriteLine("MangaFox: {0} pages", list.Count);
 
             return list;
         }
@@ -43,7 +43,7 @@ namespace MangaRipper.Core
                 var value = new Uri(Address, (match.Groups["Value"].Value + ".html"));
                 list.Add(value);
             }
-
+            
             return list.Distinct().ToList();
         }
     }

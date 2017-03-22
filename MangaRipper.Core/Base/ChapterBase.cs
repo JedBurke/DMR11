@@ -209,8 +209,7 @@ namespace MangaRipper.Core
 
             return _task;
         }
-
-
+                
         private void PopulateImageAddress(string html)
         {
             // Single page. May not only apply to KissManga.

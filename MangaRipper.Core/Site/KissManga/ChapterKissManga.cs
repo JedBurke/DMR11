@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Jurassic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+
 
 namespace MangaRipper.Core
 {
@@ -17,21 +19,33 @@ namespace MangaRipper.Core
 
         protected override List<Uri> ParseImageAddresses(string html)
         {
+
             var list = new List<Uri>();
 
-            string imageRegexPattern = "lstImages.push\\(\"(?<Value>.[^\"]*)\"\\)";
+            string imageRegexPattern = "lstImages.push\\((?<Func>.[^\\(]*)\\(\"(?<Value>.[^\"]*)\"\\)";
 
             Regex reg = new Regex(imageRegexPattern,
-                                  RegexOptions.IgnoreCase);
+                                  RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
             MatchCollection matches = reg.Matches(html);
 
-            foreach (Match match in matches)
+            if (matches != null && matches.Count > 0)
             {
-                var value = new Uri(Address, match.Groups["Value"].Value);
-                list.Add(value);
+                var engine = new Jurassic.ScriptEngine();
+                engine.Execute(Properties.Resources.KissManga_CryptoJs);
+                engine.Execute(Properties.Resources.KissManga_lo);
+                
+                foreach (Match match in matches)
+                {
+                    string function = match.Groups["Func"].Value;
+                    
+                    string decryptedUri = engine.CallGlobalFunction<string>(function, match.Groups["Value"].Value);
 
-                Console.WriteLine(value);
+                    var value = new Uri(Address, decryptedUri);
+                    list.Add(value);
+                }
+                
+                engine = null;
             }
 
             return list;

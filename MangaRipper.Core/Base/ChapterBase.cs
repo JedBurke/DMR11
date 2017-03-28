@@ -172,7 +172,6 @@ namespace MangaRipper.Core
                     // Todo: Check if path has an extension.                    
                     string pageFileName = Path.GetFileName(imageAddress.LocalPath);
 
-                    // Console.WriteLine("Image Host: {0}", imageAddress.Host);
 
                     if (!useAutoNumbering)
                     {
@@ -185,7 +184,7 @@ namespace MangaRipper.Core
                         {
                             pageFileName = Regex.Replace(imageAddress.Query, "\\?title=(.*)", "$1");
                         }
-                    }                           
+                    }
 
                     if (useAutoNumbering)
                     {
@@ -193,7 +192,7 @@ namespace MangaRipper.Core
                         // Most image viewers will check the header and display it properly regardless
                         // of its extension. This is for Windows Explorer to display the thumbnail.
                         string ext = ".jpg";
-                        
+
                         pageFileName = string.Concat(countImage.ToString().PadLeft(3, '0'), ext);
                     }
 
@@ -209,7 +208,7 @@ namespace MangaRipper.Core
 
             return _task;
         }
-                
+
         private void PopulateImageAddress(string html)
         {
             // Single page. May not only apply to KissManga.
@@ -289,12 +288,14 @@ namespace MangaRipper.Core
 
         private string DownloadString(Uri address)
         {
+            //// Reroute             
+            //return DownloadStringR(address);
+
             StringBuilder result = new StringBuilder();
 
 
             if (UserAgentIndex == -1)
                 UserAgentIndex = (new Random()).Next(0, UserAgents.Length);
-
 
             try
             {
@@ -388,5 +389,58 @@ namespace MangaRipper.Core
                 throw new Exception(error, ex);
             }
         }
+
+
+        // Todo: Implement a reusable http client to bypass the KissManga wait.
+
+        HttpClient ReusableClient = null;
+        ClearanceHandler ReusableKissHandler = null;
+
+        private string DownloadStringR(Uri address)
+        {
+            // Todo: Optimize. Don't wrap entire code block in Try/Catch
+
+            var result = new StringBuilder();
+            var content = string.Empty;
+
+            if (ReusableClient == null || ReusableKissHandler == null)
+            {
+                Console.WriteLine("Initializing new client.");
+
+                if (UserAgentIndex == -1)
+                {
+                    UserAgentIndex = (new Random()).Next(0, UserAgents.Length);
+                }
+
+                ReusableKissHandler = new ClearanceHandler();
+
+                ReusableClient = new HttpClient(ReusableKissHandler)
+                {
+                    Timeout = TimeSpan.FromSeconds(15)
+                };
+            }
+
+            try
+            {
+                content = ReusableClient.GetStringAsync(address.ToString()).Result;
+            }
+            catch (Exception ex)
+            {
+                string error = String.Format("{0} - Error while download: {2} - Reason: {3}", DateTime.Now.ToLongTimeString(), this.Name, address.AbsoluteUri, ex.Message);
+                throw new Exception(error, ex);
+            }
+
+            result.Append(content);
+
+            return result.ToString();
+        }
+
+        /// <summary>
+        /// A method called before the parsing the image addresses occur.
+        /// </summary>
+        virtual public void PreParseImageAddresses(params object[] options)
+        {
+        }
+        
     }
 }

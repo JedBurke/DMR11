@@ -78,6 +78,7 @@ namespace MangaRipper
                     btnGetChapter.Enabled = true;
                     dgvChapter.DataSource = title.Chapters;
                     
+                    
                     PrepareSeriesDirectory();
 
                     if (t.Exception != null && t.Exception.InnerException != null)

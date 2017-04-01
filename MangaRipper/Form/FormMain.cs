@@ -79,6 +79,7 @@ namespace MangaRipper
                     dgvChapter.DataSource = title.Chapters;
                     
                     
+                    
                     PrepareSeriesDirectory();
 
                     if (t.Exception != null && t.Exception.InnerException != null)
@@ -485,7 +486,7 @@ namespace MangaRipper
                 rdSeriesDestination.Checked = true;
         }
         
-        void PrepareSeriesDirectory()
+        private void PrepareSeriesDirectory()
         {
             // Todo: Set series-specific directory path to default.
             if (dgvChapter.RowCount == 0)
@@ -525,7 +526,9 @@ namespace MangaRipper
             series = series.Substring(series.LastIndexOf('/') + 1);
 
             var item = (IChapter)dgvChapter.Rows[0].DataBoundItem;
-            series = item.Name.Substring(0, item.Name.LastIndexOf(" ")).Trim();            
+            series = item.Name.Substring(0, item.Name.LastIndexOf(" ")).Trim();
+       
+            // Todo: Replace invalid characters.
             path = Path.Combine(defaultSeriesDestination, series);
 
             lbSeriesDestination.Text = path;

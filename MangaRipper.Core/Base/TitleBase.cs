@@ -16,7 +16,6 @@ namespace MangaRipper.Core
 {
     public abstract class TitleBase : ITitle
     {
-
         protected virtual List<Uri> ParseChapterAddresses(string html)
         {
             return null;
@@ -28,6 +27,12 @@ namespace MangaRipper.Core
         {
             get;
             protected set;
+        }
+
+        public string SeriesTitle
+        {
+            get;
+            set;
         }
 
         public Uri Address
@@ -42,6 +47,8 @@ namespace MangaRipper.Core
         {
             Address = address;
         }
+
+        //abstract string GetSeriesTitle();
 
         public Task PopulateChapterAsync(Progress<int> progress)
         {
@@ -75,12 +82,12 @@ namespace MangaRipper.Core
                 var sb = new StringBuilder();
                 sb.AppendLine(html);
 
-                List<Uri> uris = ParseChapterAddresses(html);
+                List<Uri> addresses = ParseChapterAddresses(html);
 
-                if (uris != null)
+                if (addresses != null)
                 {
                     int count = 0;
-                    foreach (Uri item in uris)
+                    foreach (Uri item in addresses)
                     {
                         string content = string.Empty;
 
@@ -92,7 +99,7 @@ namespace MangaRipper.Core
 
                         sb.AppendLine(content);
                         count++;
-                        progress.ReportProgress(count * 100 / uris.Count);
+                        progress.ReportProgress(count * 100 / addresses.Count);
                     }
                 }
 

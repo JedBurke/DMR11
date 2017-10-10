@@ -23,18 +23,9 @@ namespace MangaRipper.Core
                 case "mangafox.me":
                     title = new TitleMangaFox(uri);
                     break;
-                case "read.mangashare.com":
-                    title = new TitleMangaShare(uri);
-                    break;
-                case "www.mangatoshokan.com":
-                    title = new TitleMangaToshokan(uri);
-                    break;
                 case "www.mangahere.co":
                 case "www.mangahere.com":
                     title = new TitleMangaHere(uri);
-                    break;
-                case "www.otakuworks.com":
-                    title = new TitleOtakuworks(uri);
                     break;
                 case "www.mangareader.net":
                     title = new TitleMangaReader(uri);

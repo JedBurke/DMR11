@@ -67,7 +67,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>MangaRipper.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>5C3E0C775A90E1ECAB024F38E5BB908ABA8DBF4F</ManifestCertificateThumbprint>
@@ -182,9 +183,6 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="MangaRipper.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MangaRipper.Core\MangaRipper.Core.csproj">

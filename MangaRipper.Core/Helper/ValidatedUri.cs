@@ -8,6 +8,11 @@ namespace MangaRipper.Core.Helper
 {
     public class ValidatedUri : Uri
     {
+        public ValidatedUri(string uri)
+            : base(CheckAndInsertMissingScheme(uri))
+        {
+        }
+
         public static Uri CreateUri(string uri)
         {
             uri = CheckAndInsertMissingScheme(uri);

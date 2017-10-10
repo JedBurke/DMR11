@@ -77,9 +77,9 @@ namespace MangaRipper
                 {
                     btnGetChapter.Enabled = true;
                     dgvChapter.DataSource = title.Chapters;
-                    
-                    
-                    
+
+
+
                     PrepareSeriesDirectory();
 
                     if (t.Exception != null && t.Exception.InnerException != null)
@@ -147,7 +147,9 @@ namespace MangaRipper
 
                 // Todo: Check the default AND the series directory for the chapters.
                 string destinationDirectory = lbDefaultDestination.Text; //txtSaveTo.Text;
-                
+
+                // Todo: Check if the series destination exists, create the directory if it doesn't.
+
                 string testPath = Path.Combine(destinationDirectory, item.Name);
                 bool chapterExists = Directory.Exists(testPath);
 
@@ -166,28 +168,34 @@ namespace MangaRipper
                 {
                     testPath = Path.Combine(lbSeriesDestination.Text, item.Name);
                     chapterExists = Directory.Exists(testPath);
+                    string seriesDestination = lbSeriesDestination.Text;
+                    bool seriesDestinationExists = Directory.Exists(seriesDestination);
 
-                    if (!chapterExists)
+                    if (seriesDestinationExists)
                     {
-                        foreach (var sub in Directory.GetDirectories(lbSeriesDestination.Text))
+                        if (!chapterExists)
                         {
-                            testPath = Path.Combine(sub, item.Name);
-                            chapterExists = Directory.Exists(testPath);
+                            foreach (var sub in Directory.GetDirectories(seriesDestination))
+                            {
+                                testPath = Path.Combine(sub, item.Name);
+                                chapterExists = Directory.Exists(testPath);
 
-                            Console.WriteLine("Path: {0} | Exists: {1}", testPath, chapterExists);
+                                Console.WriteLine("Path: {0} | Exists: {1}", testPath, chapterExists);
+                            }
                         }
-                    }
 
 
-                    if (chapterExists)
-                    {
-                        // Check if the directory has any files (pages).
-                        int pageCount = Directory.GetFiles(testPath).Length;
+                        if (chapterExists)
+                        {
+                            // Check if the directory has any files (pages).
+                            int pageCount = Directory.GetFiles(testPath).Length;
 
-                        // If the page count is zero, treat it as the user hasn't downloaded
-                        // that chapter yet.
-                        if (pageCount == 0)
-                            chapterExists = false;
+                            // If the page count is zero, treat it as the user hasn't downloaded
+                            // that chapter yet.
+                            if (pageCount == 0)
+                                chapterExists = false;
+
+                        }
 
                     }
                 }
@@ -485,13 +493,13 @@ namespace MangaRipper
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
                 rdSeriesDestination.Checked = true;
         }
-        
+
         private void PrepareSeriesDirectory()
         {
             // Todo: Set series-specific directory path to default.
             if (dgvChapter.RowCount == 0)
                 return;
-            
+
             string
                 defaultSeriesDestination = Properties.Settings.Default.DefaultSaveDestination,
                 series = string.Empty,
@@ -527,7 +535,7 @@ namespace MangaRipper
 
             var item = (IChapter)dgvChapter.Rows[0].DataBoundItem;
             series = item.Name.Substring(0, item.Name.LastIndexOf(" ")).Trim();
-       
+
             // Todo: Replace invalid characters.
             path = Path.Combine(defaultSeriesDestination, series);
 

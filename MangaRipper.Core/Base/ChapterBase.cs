@@ -27,9 +27,9 @@ namespace MangaRipper.Core
         [NonSerialized]
         private Progress<ChapterProgress> _progress;
 
-        abstract protected List<Uri> ParsePageAddresses(string html);
+        abstract protected List<UriValidated> ParsePageAddresses(string html);
 
-        abstract protected List<Uri> ParseImageAddresses(string html);
+        abstract protected List<UriValidated> ParseImageAddresses(string html);
 
         private int UserAgentIndex = -1;
 
@@ -92,13 +92,13 @@ namespace MangaRipper.Core
             set;
         }
 
-        public Uri Address
+        public UriValidated Address
         {
             get;
             protected set;
         }
 
-        private List<Uri> ImageAddresses
+        private List<UriValidated> ImageAddresses
         {
             get;
             set;
@@ -134,7 +134,7 @@ namespace MangaRipper.Core
 
         public IWebProxy Proxy { get; set; }
 
-        public ChapterBase(string name, Uri address)
+        public ChapterBase(string name, UriValidated address)
         {
             Name = name;
             Address = address;
@@ -165,7 +165,7 @@ namespace MangaRipper.Core
                 int countImage = 0;
                 bool useAutoNumbering = false;
 
-                foreach (Uri imageAddress in ImageAddresses)
+                foreach (UriValidated imageAddress in ImageAddresses)
                 {
                     _cancellationToken.ThrowIfCancellationRequested();
 
@@ -219,14 +219,14 @@ namespace MangaRipper.Core
 
             else
             {
-                List<Uri> pageAddresses = ParsePageAddresses(html);
+                List<UriValidated> pageAddresses = ParsePageAddresses(html);
                 Console.WriteLine("Pages in chapter: {0}", pageAddresses.Count);
 
                 var sbHtml = new StringBuilder();
 
                 int countPage = 0;
 
-                foreach (Uri pageAddress in pageAddresses)
+                foreach (UriValidated pageAddress in pageAddresses)
                 {
                     _cancellationToken.ThrowIfCancellationRequested();
                     string content = DownloadString(pageAddress);
@@ -242,7 +242,7 @@ namespace MangaRipper.Core
 
         }
 
-        private void DownloadFile(Uri address, string fileName)
+        private void DownloadFile(UriValidated address, string fileName)
         {
             try
             {
@@ -286,7 +286,7 @@ namespace MangaRipper.Core
             }
         }
 
-        private string DownloadString(Uri address)
+        private string DownloadString(UriValidated address)
         {
             //// Reroute             
             //return DownloadStringR(address);
@@ -396,7 +396,7 @@ namespace MangaRipper.Core
         HttpClient ReusableClient = null;
         ClearanceHandler ReusableKissHandler = null;
 
-        private string DownloadStringR(Uri address)
+        private string DownloadStringR(UriValidated address)
         {
             // Todo: Optimize. Don't wrap entire code block in Try/Catch
 

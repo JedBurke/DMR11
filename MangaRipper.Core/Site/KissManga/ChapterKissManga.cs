@@ -12,7 +12,7 @@ namespace MangaRipper.Core
     [Serializable]
     class ChapterKissManga : ChapterBase
     {
-        public ChapterKissManga(string name, Uri address)
+        public ChapterKissManga(string name, UriValidated address)
             : base(name, address)
         {
             SinglePage = true;
@@ -58,14 +58,14 @@ namespace MangaRipper.Core
             
         }
 
-        protected override List<Uri> ParseImageAddresses(string html)
+        protected override List<UriValidated> ParseImageAddresses(string html)
         {
             if (Engine == null)
                 Engine = new Jurassic.ScriptEngine();
 
             PreParseImageAddresses(html);
 
-            var list = new List<Uri>();
+            var list = new List<UriValidated>();
 
             string imageRegexPattern = "lstImages.push\\((?<Func>.[^\\(]*)\\(\"(?<Value>.[^\"]*)\"\\)";
 
@@ -82,7 +82,9 @@ namespace MangaRipper.Core
 
                     string uri = SanitizeImageAddress(match.Groups["Value"].Value, Engine, decryptFunctionName);
 
-                    var value = new Uri(Address, uri);
+                    //var value = new ValidatedUri(Address, uri);
+                    // TODO: Check value.
+                    var value = new UriValidated(string.Concat(Address, uri));
                     list.Add(value);
                 }                
             }
@@ -91,9 +93,9 @@ namespace MangaRipper.Core
         }
 
 
-        protected override List<Uri> ParsePageAddresses(string html)
+        protected override List<UriValidated> ParsePageAddresses(string html)
         {
-            List<Uri> list = new List<Uri>();
+            List<UriValidated> list = new List<UriValidated>();
 
             string pattern = "<option value=\"(Ch-.[^\"]*)\" selected";
             Regex reg = new Regex(pattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
@@ -101,11 +103,14 @@ namespace MangaRipper.Core
 
             foreach (Match match in matches)
             {
-                var value = new Uri(Address, (match.Groups["Value"].Value));
+                var value = new UriValidated(Address, match.Groups["Value"].Value);
 
                 Console.WriteLine(value);
+
                 if (!list.Contains(value))
+                {
                     list.Add(value);
+                }
             }
 
             return list.Distinct().ToList();

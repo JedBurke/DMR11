@@ -12,7 +12,7 @@ namespace MangaRipper.Core
         /// </summary>
         /// <param name="uri"></param>
         /// <returns></returns>
-        public static ITitle CreateTitle(Uri uri)
+        public static ITitle CreateTitle(UriValidated uri)
         {
             ITitle title = null;
             switch (uri.Host)

@@ -68,7 +68,7 @@ namespace MangaRipper
         {
             try
             {
-                var titleUrl = new Uri(cbTitleUrl.Text);
+                var titleUrl = new UriValidated(cbTitleUrl.Text);
                 ITitle title = TitleFactory.CreateTitle(titleUrl);
                 title.Proxy = Option.GetProxy();
                 btnGetChapter.Enabled = false;

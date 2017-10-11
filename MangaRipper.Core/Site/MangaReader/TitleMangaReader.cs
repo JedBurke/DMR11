@@ -8,18 +8,17 @@ namespace MangaRipper.Core
 {
     public class TitleMangaReader : TitleBase
     {
-        public TitleMangaReader(Uri address) : base(address) { }
+        public TitleMangaReader(UriValidated address) : base(address) { }
 
         protected override List<IChapter> ParseChapterObjects(string html)
         {
             var list = new List<IChapter>();
-            Regex reg = new Regex("<a href=\"(?<Value>[^\"]+)\">(?<Text>[^<]+)</a> :",
-                RegexOptions.IgnoreCase);
+            Regex reg = new Regex("<a href=\"(?<Value>[^\"]+)\">(?<Text>[^<]+)</a> :",RegexOptions.IgnoreCase);
             MatchCollection matches = reg.Matches(html);
 
             foreach (Match match in matches)
             {
-                var value = new Uri(Address, match.Groups["Value"].Value);
+                var value = new UriValidated(Address, match.Groups["Value"].Value);
                 string name = match.Groups["Text"].Value;
 
                 var recentItem = list.Where(c => c.Address == value).FirstOrDefault();

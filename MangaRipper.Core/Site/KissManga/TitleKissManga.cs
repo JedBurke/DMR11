@@ -8,7 +8,7 @@ namespace MangaRipper.Core
 {
     class TitleKissManga : TitleBase
     {
-        public TitleKissManga(Uri address) : base(address) { }
+        public TitleKissManga(UriValidated address) : base(address) { }
 
         protected override List<IChapter> ParseChapterObjects(string html)
         {
@@ -35,7 +35,7 @@ namespace MangaRipper.Core
 
             foreach (Match match in matches)
             {
-                var value = new Uri(Address, match.Groups["Value"].Value);
+                var value = new UriValidated(Address, match.Groups["Value"].Value);
                 string name = match.Groups["Text"].Value;
                 
                 // A variable to store the chapter number.
@@ -78,7 +78,7 @@ namespace MangaRipper.Core
             return list;
         }
 
-        protected override List<Uri> ParseChapterAddresses(string html)
+        protected override List<UriValidated> ParseChapterAddresses(string html)
         {
             return base.ParseChapterAddresses(html);
         }

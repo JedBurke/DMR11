@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MangaRipper")]
-[assembly: AssemblyDescription("MangaRipper is a small and very easy to use application that is able to automatically download your favorites manga series from some 'read manga online' websites.")]
+[assembly: AssemblyTitle("MangaRipped")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Nguyen Dan Phuong")]
-[assembly: AssemblyProduct("MangaRipper")]
-[assembly: AssemblyCopyright("Copyright ©  2011")]
+[assembly: AssemblyCompany("MangaRipped Contributors")]
+[assembly: AssemblyProduct("MangaRipped")]
+[assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

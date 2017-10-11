@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
 
-namespace MangaRipper.Core.Helper
+namespace System
 {
-    public class ValidatedUri : Uri
+    public class UriValidated : Uri
     {
-        public ValidatedUri(string uri)
+        public UriValidated(string uri)
             : base(CheckAndInsertMissingScheme(uri))
         {
         }
-
+        
+        public UriValidated(UriValidated baseUri, string relativeUri)
+            : base(baseUri, relativeUri)
+        {
+        }
+                
         public static Uri CreateUri(string uri)
         {
             uri = CheckAndInsertMissingScheme(uri);

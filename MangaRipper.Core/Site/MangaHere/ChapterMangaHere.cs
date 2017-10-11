@@ -9,11 +9,11 @@ namespace MangaRipper.Core
     [Serializable]
     class ChapterMangaHere : ChapterBase
     {
-        public ChapterMangaHere(string name, Uri address) : base(name, address) { }
+        public ChapterMangaHere(string name, UriValidated address) : base(name, address) { }
 
-        protected override List<Uri> ParsePageAddresses(string html)
+        protected override List<UriValidated> ParsePageAddresses(string html)
         {
-            var list = new List<Uri>();
+            var list = new List<UriValidated>();
             list.Add(Address);
             Regex reg = new Regex(@"<option value=""(?<Value>http://www.mangahere.co[m]?/manga/[^""]+)"" (|selected=""selected"")>\d+</option>",
                 RegexOptions.IgnoreCase);
@@ -21,7 +21,7 @@ namespace MangaRipper.Core
 
             foreach (Match match in matches)
             {
-                var value = new Uri(Address, match.Groups["Value"].Value);
+                var value = new UriValidated(Address, match.Groups["Value"].Value);
 
                 if (!list.Contains(value))
                     list.Add(value);
@@ -30,9 +30,9 @@ namespace MangaRipper.Core
             return list.Distinct().ToList();
         }
 
-        protected override List<Uri> ParseImageAddresses(string html)
+        protected override List<UriValidated> ParseImageAddresses(string html)
         {
-            var list = new List<Uri>();
+            var list = new List<UriValidated>();
 
             // "<img src=\"(?<Value>[^\"]+)\" onerror=\""
             string pattern = "<img src=\"(?<Value>[^\"]+)\" onload=\"loadImg\\(this\\)\"";
@@ -45,7 +45,7 @@ namespace MangaRipper.Core
 
             foreach (Match match in matches)
             {
-                var value = new Uri(Address, match.Groups["Value"].Value);
+                var value = new UriValidated(Address, match.Groups["Value"].Value);
                 list.Add(value);
             }
 

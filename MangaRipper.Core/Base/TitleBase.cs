@@ -16,7 +16,7 @@ namespace MangaRipper.Core
 {
     public abstract class TitleBase : ITitle
     {
-        protected virtual List<Uri> ParseChapterAddresses(string html)
+        protected virtual List<UriValidated> ParseChapterAddresses(string html)
         {
             return null;
         }
@@ -35,7 +35,7 @@ namespace MangaRipper.Core
             set;
         }
 
-        public Uri Address
+        public UriValidated Address
         {
             get;
             protected set;
@@ -43,7 +43,7 @@ namespace MangaRipper.Core
 
         public IWebProxy Proxy { get; set; }
 
-        public TitleBase(Uri address)
+        public TitleBase(UriValidated address)
         {
             Address = address;
         }
@@ -82,7 +82,7 @@ namespace MangaRipper.Core
                 var sb = new StringBuilder();
                 sb.AppendLine(html);
 
-                List<Uri> addresses = ParseChapterAddresses(html);
+                List<UriValidated> addresses = ParseChapterAddresses(html);
 
                 if (addresses != null)
                 {

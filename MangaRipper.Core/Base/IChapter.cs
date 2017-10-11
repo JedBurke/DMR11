@@ -17,7 +17,7 @@ namespace MangaRipper.Core
             set;
         }
 
-        Uri Address
+        UriValidated Address
         {
             get;
         }

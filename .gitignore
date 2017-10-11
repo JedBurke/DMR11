@@ -3,3 +3,4 @@
 **/packages/*
 *.suo
 *.user
+*.ps1

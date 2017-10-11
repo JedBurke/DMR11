@@ -92,7 +92,12 @@
   <ItemGroup>
     <Folder Include="Site\MangaPark\" />
   </ItemGroup>
-  <ItemGroup>
+  <ItemGroup>    
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Nlog.xsd"/>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

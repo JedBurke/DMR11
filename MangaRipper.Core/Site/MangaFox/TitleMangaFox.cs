@@ -14,21 +14,16 @@ namespace MangaRipper.Core
 
         protected override List<IChapter> ParseChapterObjects(string html)
         {
-            var details = new ParseDetails<IChapter>
-            {
-                xpath = "//a[contains(@class, 'tips')]",
-                attributeName = "href",
-                
-                parseAction = new Func<HtmlNode, ParseDetails<IChapter>, IChapter>((element, parseDetails) => 
-                {
-                    var uri = Parsing.CreateUriFromElementAttributeValue(element, parseDetails);
-                    var chapter = new ChapterMangaFox(element.InnerText, uri);
-
-                    return chapter ?? null;
-                })
-            };
-
+            var details = new ChapterParseDetails("//a[contains(@class, 'tips')]", "href", ChapterParseAction);
             return Parsing.ParseChapters(html, details);
+        }
+
+        public IChapter ChapterParseAction(HtmlNode element, IParseDetails<IChapter> parseDetails)
+        {
+            var uri = Parsing.CreateUriFromElementAttributeValue(element, parseDetails);
+            var chapter = new ChapterMangaFox(element.InnerText, uri);
+
+            return chapter ?? null;
         }
     }
 }

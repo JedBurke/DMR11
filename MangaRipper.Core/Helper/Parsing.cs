@@ -10,17 +10,17 @@ namespace MangaRipper.Core.Helper
 {
     public class Parsing
     {
-        public static List<UriValidated> ParseAddresses(string html, ParseDetails<UriValidated> details)
+        public static List<UriValidated> ParseAddresses(string html, IParseDetails<UriValidated> details)
         {
             return ParseContent<UriValidated>(html, details);
         }
 
-        public static List<IChapter> ParseChapters(string html, ParseDetails<IChapter> details)
+        public static List<IChapter> ParseChapters(string html, IParseDetails<IChapter> details)
         {
             return ParseContent<IChapter>(html, details);
         }
 
-        public static List<T> ParseContent<T>(string html, ParseDetails<T> details)
+        public static List<T> ParseContent<T>(string html, IParseDetails<T> details)
         {
             var list = new List<T>();
             var doc = new HtmlDocument();
@@ -29,15 +29,15 @@ namespace MangaRipper.Core.Helper
             {
                 doc.LoadHtml(html);
 
-                var elements = doc.DocumentNode.SelectNodes(details.xpath);
+                var elements = doc.DocumentNode.SelectNodes(details.XPath);
 
                 foreach (var element in elements)
                 {
                     T obj = default(T);
 
-                    if (details.parseAction != null)
+                    if (details.ParseAction != null)
                     {
-                        obj = details.parseAction(element, details);
+                        obj = details.ParseAction(element, details);
 
                         if (obj == null)
                         {
@@ -61,32 +61,73 @@ namespace MangaRipper.Core.Helper
             return list.Distinct().ToList();
         }
 
-        public static UriValidated CreateUriFromElementAttributeValue<T>(HtmlNode element, ParseDetails<T> details) 
+        public static UriValidated CreateUriFromElementAttributeValue<T>(HtmlNode element, IParseDetails<T> details) 
         {
-            return new UriValidated(element.GetAttributeValue(details.attributeName, null));
+            return new UriValidated(element.GetAttributeValue(details.AttributeName, null));
+        }
+        
+    }
+
+    public interface IParseDetails<T>
+    {
+        string XPath { get; set; }
+        string AttributeName { get; set; }
+        Func<HtmlNode, IParseDetails<T>, T> ParseAction { get; set; }
+    }
+
+    public class ParseDetails<T> : IParseDetails<T>
+    {
+        public ParseDetails(string xpath, string attributeName, Func<HtmlNode, IParseDetails<T>, T> parseAction)
+        {
+            this.XPath = xpath;
+            this.AttributeName = attributeName;
+            this.ParseAction = parseAction;
         }
 
-    }
+        public string XPath
+        {
+            get;
+            set;
+        }
 
-    public interface IParseDetails
-    {
-        string documentHtml { get; set; }
-    }
+        public string AttributeName
+        {
+            get;
+            set;
+        }
 
-    public struct ParseDetails<T>
-    {
-        public string xpath;
-        public string attributeName;
-        public Func<HtmlNode, ParseDetails<T>, T> parseAction;
-    }
-
-    public interface IOP<T>
-    {
-
+        public Func<HtmlNode, IParseDetails<T>, T> ParseAction
+        {
+            get;
+            set;
+        }
     }
     
-    public struct ChapterParseDetails : IOP<IChapter>
+    public class ChapterParseDetails : IParseDetails<IChapter>
     {
-        public ChapterParseDetails()
+        public ChapterParseDetails(string xpath, string attributeName, Func<HtmlNode, IParseDetails<IChapter>, IChapter> parseAction)
+        {
+            XPath = xpath;
+            AttributeName = attributeName;
+            ParseAction = parseAction;
+        }
+
+        public string XPath
+        {
+            get;
+            set;
+        }
+
+        public string AttributeName
+        {
+            get;
+            set;
+        }
+        
+        public Func<HtmlNode, IParseDetails<IChapter>, IChapter> ParseAction
+        {
+            get;
+            set;
+        }
     }
 }

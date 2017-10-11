@@ -1,4 +1,5 @@
-﻿using HtmlAgilityPack;
+﻿using MangaRipper.Core.Helper;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,21 +14,21 @@ namespace MangaRipper.Core
 
         protected override List<IChapter> ParseChapterObjects(string html)
         {
-            var list = new List<IChapter>();
-            var chapterXpath = "//a[contains(@class, 'tips')]";
-            var doc = new HtmlDocument();
-            
-            doc.LoadHtml(html);
-            var chapterElements = doc.DocumentNode.SelectNodes(chapterXpath);
-            foreach (var chapterElement in chapterElements)
+            var details = new ParseDetails<IChapter>
             {
-                UriValidated uri = new UriValidated(chapterElement.GetAttributeValue("href", null));
-                IChapter chapter = new ChapterMangaFox(chapterElement.InnerText, uri);
+                xpath = "//a[contains(@class, 'tips')]",
+                attributeName = "href",
+                
+                parseAction = new Func<HtmlNode, ParseDetails<IChapter>, IChapter>((element, parseDetails) => 
+                {
+                    var uri = Parsing.CreateUriFromElementAttributeValue(element, parseDetails);
+                    var chapter = new ChapterMangaFox(element.InnerText, uri);
 
-                list.Add(chapter);
-            }
+                    return chapter ?? null;
+                })
+            };
 
-            return list;
+            return Parsing.ParseChapters(html, details);
         }
     }
 }

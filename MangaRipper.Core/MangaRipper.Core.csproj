@@ -73,6 +73,7 @@
     <Compile Include="Helper\ChapterProgress.cs" />
     <Compile Include="Helper\Extension.cs" />
     <Compile Include="Base\Progress.cs" />
+    <Compile Include="Helper\Parsing.cs" />
     <Compile Include="Helper\ValidatedUri.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -92,12 +93,12 @@
   <ItemGroup>
     <Folder Include="Site\MangaPark\" />
   </ItemGroup>
-  <ItemGroup>    
+  <ItemGroup>
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
-    <None Include="Nlog.xsd"/>
+    <None Include="Nlog.xsd" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

@@ -31,6 +31,8 @@ namespace MangaRipper.Core.Helper
 
                 var elements = doc.DocumentNode.SelectNodes(details.XPath);
 
+                details.Logger.Debug("Selected node count: {0}", elements.Count);
+
                 foreach (var element in elements)
                 {
                     T obj = default(T);
@@ -63,7 +65,10 @@ namespace MangaRipper.Core.Helper
 
         public static UriValidated CreateUriFromElementAttributeValue<T>(HtmlNode element, IParseDetails<T> details) 
         {
-            return new UriValidated(element.GetAttributeValue(details.AttributeName, null));
+            var value = element.GetAttributeValue(details.AttributeName, null);
+            details.Logger.Debug("Creating validated URI from \"{0}\"", value);
+
+            return new UriValidated(value);
         }
         
     }

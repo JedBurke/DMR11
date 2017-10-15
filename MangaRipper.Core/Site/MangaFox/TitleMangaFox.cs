@@ -17,6 +17,9 @@ namespace MangaRipper.Core
 
         protected override List<IChapter> ParseChapterObjects(string html)
         {
+            logger.Debug("Entering ParseChapterObjects");
+            logger.Trace("Html parameter: {0}", html);
+
             var details = new ChapterParseDetails("//a[contains(@class, 'tips')]", "href", ChapterParseAction, logger);
             return Parsing.ParseChapters(html, details);
         }

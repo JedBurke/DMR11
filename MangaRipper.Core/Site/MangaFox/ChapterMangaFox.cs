@@ -49,6 +49,7 @@ namespace MangaRipper.Core
 
             if (!string.IsNullOrWhiteSpace(pageNumberValue) && int.TryParse(pageNumberValue, out pageNumberInt))
             {
+                details.Logger.Trace("Parsing chapter link as \"{0}\"", string.Concat(Address.ToString(), pageNumberInt, ".html"));
                 return new UriValidated(Address, string.Concat(pageNumberInt, ".html"));
             }
 

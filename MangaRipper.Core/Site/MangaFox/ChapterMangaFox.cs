@@ -22,12 +22,11 @@ namespace MangaRipper.Core
             (
                 "//img[@id='image']",
                 "src",
-                new Func<HtmlNode, IParseDetails<UriValidated>, UriValidated>((element, parseDetails) => Parsing.CreateUriFromElementAttributeValue(element, parseDetails))
-                
+                (element, parseDetails) => Parsing.CreateUriFromElementAttributeValue(element, parseDetails),
+                logger
             );
 
             return Parsing.ParseAddresses(html, details);
-
         }
 
         protected override List<UriValidated> ParsePageAddresses(string html)
@@ -35,10 +34,10 @@ namespace MangaRipper.Core
             var details = new ParseDetails<UriValidated>(
                 "//select[@class='m'][1]/option",
                 "value",
-                new Func<HtmlNode, IParseDetails<UriValidated>, UriValidated>((element, parseDetails) =>
-                    ParseAction(element, parseDetails))
+                (element, parseDetails) => ParseAction(element, parseDetails),
+                logger
             );
-
+            
             return Parsing.ParseAddresses(html, details);
 
         }

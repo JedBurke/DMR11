@@ -68,7 +68,12 @@ namespace MangaRipper.Core.Helper
         
     }
 
-    public interface IParseDetails<T>
+    public interface ICommand
+    {
+        ILogger Logger { get; set; }
+    }
+
+    public interface IParseDetails<T> : ICommand
     {
         string XPath { get; set; }
         string AttributeName { get; set; }
@@ -77,11 +82,12 @@ namespace MangaRipper.Core.Helper
 
     public class ParseDetails<T> : IParseDetails<T>
     {
-        public ParseDetails(string xpath, string attributeName, Func<HtmlNode, IParseDetails<T>, T> parseAction)
+        public ParseDetails(string xpath, string attributeName, Func<HtmlNode, IParseDetails<T>, T> parseAction, ILogger logger)
         {
             this.XPath = xpath;
             this.AttributeName = attributeName;
             this.ParseAction = parseAction;
+            this.Logger = logger;
         }
 
         public string XPath
@@ -101,15 +107,22 @@ namespace MangaRipper.Core.Helper
             get;
             set;
         }
+
+        public ILogger Logger
+        {
+            get;
+            set;
+        }
     }
     
     public class ChapterParseDetails : IParseDetails<IChapter>
     {
-        public ChapterParseDetails(string xpath, string attributeName, Func<HtmlNode, IParseDetails<IChapter>, IChapter> parseAction)
+        public ChapterParseDetails(string xpath, string attributeName, Func<HtmlNode, IParseDetails<IChapter>, IChapter> parseAction, ILogger logger)
         {
             XPath = xpath;
             AttributeName = attributeName;
             ParseAction = parseAction;
+            this.Logger = logger;
         }
 
         public string XPath
@@ -125,6 +138,12 @@ namespace MangaRipper.Core.Helper
         }
         
         public Func<HtmlNode, IParseDetails<IChapter>, IChapter> ParseAction
+        {
+            get;
+            set;
+        }
+
+        public ILogger Logger
         {
             get;
             set;

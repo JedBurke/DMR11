@@ -20,7 +20,7 @@ namespace MangaRipper.Core
                 case "kissmanga.com":
                     title = new TitleKissManga(uri);
                     break;
-                case "mangafox.me":
+                case "mangafox.la":
                     title = new TitleMangaFox(uri);
                     break;
                 case "www.mangahere.co":

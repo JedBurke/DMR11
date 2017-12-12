@@ -390,6 +390,7 @@ namespace MangaRipper
         {
             cbTitleUrl.Items.Clear();
             StringCollection sc = MangaRipper.Properties.Settings.Default.Bookmark;
+
             if (sc != null)
             {
                 foreach (string item in sc)

@@ -54,6 +54,9 @@
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.4.4.12\lib\net45\NLog.dll</HintPath>
     </Reference>
+    <Reference Include="ini-parser">
+      <HintPath>..\packages\ini-parser.3.4.0\lib\net20\INIFileParser.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
@@ -85,6 +88,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Site\Distill\ChapterDistill.cs" />
+    <Compile Include="Site\Distill\TitleDistill.cs" />
     <Compile Include="Site\KissManga\ChapterKissManga.cs" />
     <Compile Include="Site\KissManga\TitleKissManga.cs" />
     <Compile Include="Site\MangaFox\ChapterMangaFox.cs" />

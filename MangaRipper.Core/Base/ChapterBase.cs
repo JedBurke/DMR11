@@ -249,9 +249,11 @@ namespace MangaRipper.Core
                 if (File.Exists(fileName) == false)
                 {
                     HttpWebRequest request = (HttpWebRequest)WebRequest.Create(address);
+                    request.Host = address.Host;
                     request.Proxy = Proxy;
                     request.Credentials = CredentialCache.DefaultCredentials;
                     request.Referer = Address.AbsoluteUri;
+
                     using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                     {
                         using (Stream responseStream = response.GetResponseStream())

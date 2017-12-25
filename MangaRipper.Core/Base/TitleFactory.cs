@@ -33,7 +33,7 @@ namespace MangaRipper.Core
                 default:
                     {
                         // Check if Host distillation exists for this website.
-                        if (TitleDistill.CanDistill(uri))
+                        if (TitleDistill.IsDistilled(uri))
                         {
                             title = new TitleDistill(uri);
                         }

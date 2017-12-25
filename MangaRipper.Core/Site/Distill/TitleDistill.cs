@@ -32,7 +32,7 @@ namespace MangaRipper.Core
         /// </summary>
         /// <param name="uri">The service's URI to check.</param>
         /// <returns></returns>
-        public static bool CanDistill(UriValidated uri)
+        public static bool IsDistilled(UriValidated uri)
         {
             IniData data = LoadConfigFile(uri);
             
@@ -51,7 +51,7 @@ namespace MangaRipper.Core
             return false;
         }
 
-        public static IniData LoadConfigFile(UriValidated uri)
+        private static IniData LoadConfigFile(UriValidated uri)
         {
             var configPath = LookupConfigPath(uri);
             return GetConfigFile(configPath);
@@ -67,7 +67,13 @@ namespace MangaRipper.Core
             var paths = Directory.EnumerateDirectories(HOST_LOOKUP_PATH);
             foreach (var path in paths)
             {
+                if (host.StartsWith("www.") || host.StartsWith("raw."))
+                {
+                    host = host.Substring(4);
+                }
+
                 string hostName = host.Substring(0, host.LastIndexOf('.'));
+
                 string directoryName = Path.GetFileName(path);
 
                 if (string.Compare(directoryName, hostName, true) == 0)
@@ -110,7 +116,7 @@ namespace MangaRipper.Core
         public IChapter ChapterParseAction(HtmlNode element, IParseDetails<IChapter> parseDetails)
         {
             var uri = Parsing.CreateUriFromElementAttributeValue(element, parseDetails);
-            var chapter = new ChapterDistill(element.InnerText, uri);
+            var chapter = new ChapterDistill(element.InnerText, uri, this.HostData);
 
             return chapter ?? null;
         }

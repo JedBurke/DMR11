@@ -134,6 +134,8 @@ namespace MangaRipper.Core
 
         public IWebProxy Proxy { get; set; }
 
+        public string Referrer { get; set; }
+
         public ChapterBase(string name, UriValidated address)
         {
             Name = name;
@@ -252,10 +254,17 @@ namespace MangaRipper.Core
                     request.Host = address.Host;
                     request.Proxy = Proxy;
                     request.Credentials = CredentialCache.DefaultCredentials;
-                    request.Referer = Address.AbsoluteUri;
-
+                    //request.Referer = Referrer ?? Address.AbsoluteUri;
+                    
+                    request.CookieContainer = new CookieContainer();
+                                                            
                     using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                     {
+                        foreach (Cookie cookie in response.Cookies)
+                        {
+                            request.CookieContainer.Add(cookie);
+                        }
+
                         using (Stream responseStream = response.GetResponseStream())
                         {
                             string tmpFileName = Path.GetTempFileName();

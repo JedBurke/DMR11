@@ -17,8 +17,18 @@ namespace MangaRipper.Core
 
         private IniData HostData = null;
 
-        public ChapterDistill(string name, UriValidated address) : base(name, address) {
-            HostData = TitleDistill.LoadConfigFile(address);
+        public ChapterDistill(string name, UriValidated address, IniData configData) : base(name, address) {
+            
+            if (configData == null)
+            {
+                throw new ArgumentNullException();
+            }
+            else
+            {
+                HostData = configData;
+
+                //Referrer = HostData["host"]["referer"];
+            }
         }
 
         protected override List<UriValidated> ParseImageAddresses(string html)

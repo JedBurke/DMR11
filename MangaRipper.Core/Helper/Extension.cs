@@ -6,7 +6,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace MangaRipper.Core
+namespace DMR11.Core
 {
     public static class Extension
     {

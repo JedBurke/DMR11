@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MangaRipper.Core
+namespace DMR11.Core
 {
     public class ChapterProgress
     {

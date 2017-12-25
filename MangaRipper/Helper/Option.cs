@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Net;
-using MangaRipper.Properties;
+using DMR11.Properties;
 using System.Security;
 
-namespace MangaRipper
+namespace DMR11
 {
     static class Option
     {

@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Deployment.Application;
 using System.Windows.Forms;
 
-namespace MangaRipper
+namespace DMR11
 {
     /// <summary>
     /// Give information about application

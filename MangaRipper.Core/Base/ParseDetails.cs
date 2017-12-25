@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MangaRipper.Core.Helper
+namespace DMR11.Core.Helper
 {
     public class ParseDetails<T> : IParseDetails<T>
     {

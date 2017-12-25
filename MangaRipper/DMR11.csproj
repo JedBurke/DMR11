@@ -8,8 +8,8 @@
     <ProjectGuid>{E4C5D602-ED1E-4C04-B845-74EC5A58530D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MangaRipper</RootNamespace>
-    <AssemblyName>MR11</AssemblyName>
+    <RootNamespace>DMR11</RootNamespace>
+    <AssemblyName>DMR11</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -191,9 +191,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MangaRipper.Core\MangaRipper.Core.csproj">
+    <ProjectReference Include="..\MangaRipper.Core\DMR11.Core.csproj">
       <Project>{13EFFE36-DBB8-4573-9260-B601177F66E3}</Project>
-      <Name>MangaRipper.Core</Name>
+      <Name>DMR11.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

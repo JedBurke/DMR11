@@ -1,4 +1,4 @@
-﻿namespace MangaRipper
+﻿namespace DMR11
 {
     partial class FormOption
     {
@@ -102,9 +102,9 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::MangaRipper.Properties.Settings.Default, "ProxyPort", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.numericUpDown1.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::MangaRipper.Properties.Settings.Default, "ProxyEnable", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.numericUpDown1.Enabled = global::MangaRipper.Properties.Settings.Default.ProxyEnable;
+            this.numericUpDown1.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::DMR11.Properties.Settings.Default, "ProxyPort", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.numericUpDown1.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::DMR11.Properties.Settings.Default, "ProxyEnable", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.numericUpDown1.Enabled = global::DMR11.Properties.Settings.Default.ProxyEnable;
             this.numericUpDown1.Location = new System.Drawing.Point(92, 70);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             65535,
@@ -119,13 +119,13 @@
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(141, 22);
             this.numericUpDown1.TabIndex = 4;
-            this.numericUpDown1.Value = global::MangaRipper.Properties.Settings.Default.ProxyPort;
+            this.numericUpDown1.Value = global::DMR11.Properties.Settings.Default.ProxyPort;
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = global::MangaRipper.Properties.Settings.Default.ProxyEnable;
-            this.checkBox1.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MangaRipper.Properties.Settings.Default, "ProxyEnable", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.checkBox1.Checked = global::DMR11.Properties.Settings.Default.ProxyEnable;
+            this.checkBox1.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::DMR11.Properties.Settings.Default, "ProxyEnable", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBox1.Location = new System.Drawing.Point(92, 19);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(91, 17);
@@ -135,37 +135,37 @@
             // 
             // textBox4
             // 
-            this.textBox4.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::MangaRipper.Properties.Settings.Default, "ProxyPassword", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox4.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::MangaRipper.Properties.Settings.Default, "ProxyEnable", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox4.Enabled = global::MangaRipper.Properties.Settings.Default.ProxyEnable;
+            this.textBox4.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DMR11.Properties.Settings.Default, "ProxyPassword", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox4.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::DMR11.Properties.Settings.Default, "ProxyEnable", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox4.Enabled = global::DMR11.Properties.Settings.Default.ProxyEnable;
             this.textBox4.Location = new System.Drawing.Point(92, 126);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(141, 22);
             this.textBox4.TabIndex = 8;
-            this.textBox4.Text = global::MangaRipper.Properties.Settings.Default.ProxyPassword;
+            this.textBox4.Text = global::DMR11.Properties.Settings.Default.ProxyPassword;
             this.textBox4.UseSystemPasswordChar = true;
             // 
             // textBox3
             // 
-            this.textBox3.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::MangaRipper.Properties.Settings.Default, "ProxyUserName", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox3.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::MangaRipper.Properties.Settings.Default, "ProxyEnable", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox3.Enabled = global::MangaRipper.Properties.Settings.Default.ProxyEnable;
+            this.textBox3.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DMR11.Properties.Settings.Default, "ProxyUserName", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox3.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::DMR11.Properties.Settings.Default, "ProxyEnable", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox3.Enabled = global::DMR11.Properties.Settings.Default.ProxyEnable;
             this.textBox3.Location = new System.Drawing.Point(92, 98);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(141, 22);
             this.textBox3.TabIndex = 6;
-            this.textBox3.Text = global::MangaRipper.Properties.Settings.Default.ProxyUserName;
+            this.textBox3.Text = global::DMR11.Properties.Settings.Default.ProxyUserName;
             // 
             // textBox1
             // 
-            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::MangaRipper.Properties.Settings.Default, "ProxyHost", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::MangaRipper.Properties.Settings.Default, "ProxyEnable", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox1.Enabled = global::MangaRipper.Properties.Settings.Default.ProxyEnable;
+            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DMR11.Properties.Settings.Default, "ProxyHost", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::DMR11.Properties.Settings.Default, "ProxyEnable", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox1.Enabled = global::DMR11.Properties.Settings.Default.ProxyEnable;
             this.textBox1.Location = new System.Drawing.Point(92, 42);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(141, 22);
             this.textBox1.TabIndex = 2;
-            this.textBox1.Text = global::MangaRipper.Properties.Settings.Default.ProxyHost;
+            this.textBox1.Text = global::DMR11.Properties.Settings.Default.ProxyHost;
             // 
             // grpSaveDestination
             // 
@@ -180,13 +180,13 @@
             // 
             // txtSaveDestination
             // 
-            this.txtSaveDestination.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::MangaRipper.Properties.Settings.Default, "DefaultSaveDestination", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.txtSaveDestination.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DMR11.Properties.Settings.Default, "DefaultSaveDestination", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.txtSaveDestination.Location = new System.Drawing.Point(6, 21);
             this.txtSaveDestination.Name = "txtSaveDestination";
             this.txtSaveDestination.ReadOnly = true;
             this.txtSaveDestination.Size = new System.Drawing.Size(239, 22);
             this.txtSaveDestination.TabIndex = 0;
-            this.txtSaveDestination.Text = global::MangaRipper.Properties.Settings.Default.DefaultSaveDestination;
+            this.txtSaveDestination.Text = global::DMR11.Properties.Settings.Default.DefaultSaveDestination;
             // 
             // btnSaveBrowse
             // 

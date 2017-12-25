@@ -1,6 +1,8 @@
 **/bin/*
 **/obj/*
 **/packages/*
+**/testresults/*
+**/concepts/*
 *.suo
 *.user
 *.ps1

@@ -7,7 +7,7 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MangaRipper.Core
+namespace DMR11.Core
 {
     public interface IChapter
     {

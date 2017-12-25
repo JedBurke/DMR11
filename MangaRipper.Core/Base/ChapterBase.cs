@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 
-namespace MangaRipper.Core
+namespace DMR11.Core
 {
     [Serializable]
     public abstract class ChapterBase : IChapter

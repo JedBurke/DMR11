@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("DMR11.Core")]
+[assembly: AssemblyTitle("MangaRipper_Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("DMR11.Core")]
+[assembly: AssemblyProduct("MangaRipper_Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("4f242171-5855-45ca-8e94-50b101ce7c2e")]
+[assembly: Guid("4e60a5b4-394e-4715-9b02-e2d30c9ed18e")]
 
 // Version information for an assembly consists of the following four values:
 //

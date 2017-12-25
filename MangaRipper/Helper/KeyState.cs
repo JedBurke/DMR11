@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MangaRipper.Helper
+namespace DMR11.Helper
 {
     /// <summary>
     /// Represents a class used to get the state of a keyboard key.

@@ -9,9 +9,9 @@ using System.IO;
 using System.Text.RegularExpressions;
 using NLog;
 using HtmlAgilityPack;
-using MangaRipper.Core.Helper;
+using DMR11.Core.Helper;
 
-namespace MangaRipper.Core
+namespace DMR11.Core
 {
     public class TitleDistill : TitleBase
     {

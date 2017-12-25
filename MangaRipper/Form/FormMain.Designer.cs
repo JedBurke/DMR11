@@ -1,4 +1,4 @@
-﻿namespace MangaRipper
+﻿namespace DMR11
 {
     partial class FormMain
     {
@@ -317,12 +317,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cbTitleUrl.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cbTitleUrl.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbTitleUrl.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::MangaRipper.Properties.Settings.Default, "Url", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cbTitleUrl.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DMR11.Properties.Settings.Default, "Url", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cbTitleUrl.Location = new System.Drawing.Point(40, 11);
             this.cbTitleUrl.Name = "cbTitleUrl";
             this.cbTitleUrl.Size = new System.Drawing.Size(703, 21);
             this.cbTitleUrl.TabIndex = 1;
-            this.cbTitleUrl.Text = global::MangaRipper.Properties.Settings.Default.Url;
+            this.cbTitleUrl.Text = global::DMR11.Properties.Settings.Default.Url;
             // 
             // btnAddBookmark
             // 
@@ -430,7 +430,7 @@
             // 
             this.lbDefaultDestination.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbDefaultDestination.AutoSize = true;
-            this.lbDefaultDestination.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::MangaRipper.Properties.Settings.Default, "SaveTo", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.lbDefaultDestination.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DMR11.Properties.Settings.Default, "SaveTo", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.lbDefaultDestination.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbDefaultDestination.Location = new System.Drawing.Point(57, 471);
             this.lbDefaultDestination.MaximumSize = new System.Drawing.Size(385, 17);
@@ -438,7 +438,7 @@
             this.lbDefaultDestination.Name = "lbDefaultDestination";
             this.lbDefaultDestination.Size = new System.Drawing.Size(380, 17);
             this.lbDefaultDestination.TabIndex = 30;
-            this.lbDefaultDestination.Text = global::MangaRipper.Properties.Settings.Default.SaveTo;
+            this.lbDefaultDestination.Text = global::DMR11.Properties.Settings.Default.SaveTo;
             this.toolTip1.SetToolTip(this.lbDefaultDestination, "Saves the chapter to the default manga folder");
             this.lbDefaultDestination.UseMnemonic = false;
             this.lbDefaultDestination.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lbDefaultDestination_MouseClick);

@@ -1,4 +1,4 @@
-﻿using MangaRipper.Core.Helper;
+﻿using DMR11.Core.Helper;
 using HtmlAgilityPack;
 using NLog;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace MangaRipper.Core
+namespace DMR11.Core
 {
     [Serializable]
     public class ChapterMangaFox : ChapterBase

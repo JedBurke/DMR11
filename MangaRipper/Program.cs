@@ -5,7 +5,7 @@ using System.Xml.Linq;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace MangaRipper
+namespace DMR11
 {
     static class Program
     {

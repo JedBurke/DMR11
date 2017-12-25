@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using System.Deployment.Application;
 
-namespace MangaRipper
+namespace DMR11
 {
     partial class AboutBox : Form
     {

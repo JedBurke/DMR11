@@ -12,7 +12,7 @@ using System.Threading;
 using System.Net.Http;
 
 
-namespace MangaRipper.Core
+namespace DMR11.Core
 {
     public abstract class TitleBase : ITitle
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace MangaRipper.Core
+namespace DMR11.Core
 {
     public class Progress<T>
     {

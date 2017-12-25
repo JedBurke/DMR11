@@ -10,11 +10,11 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Deployment.Application;
 using System.Collections.Specialized;
-using MangaRipper.Core;
+using DMR11.Core;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MangaRipper
+namespace DMR11
 {
     public partial class FormMain : Form
     {
@@ -72,7 +72,7 @@ namespace MangaRipper
                 ITitle title = TitleFactory.CreateTitle(titleUrl);
                 title.Proxy = Option.GetProxy();
                 btnGetChapter.Enabled = false;
-                var task = title.PopulateChapterAsync(new MangaRipper.Core.Progress<int>(progress => txtPercent.Text = progress + "%"));
+                var task = title.PopulateChapterAsync(new DMR11.Core.Progress<int>(progress => txtPercent.Text = progress + "%"));
                 task.ContinueWith(t =>
                 {
                     btnGetChapter.Enabled = true;
@@ -263,7 +263,7 @@ namespace MangaRipper
                 {
                     chapter.Proxy = Option.GetProxy();
                     btnDownload.Enabled = false;
-                    var task = chapter.DownloadImageAsync(SaveDestination, _cts.Token, new MangaRipper.Core.Progress<ChapterProgress>(c =>
+                    var task = chapter.DownloadImageAsync(SaveDestination, _cts.Token, new DMR11.Core.Progress<ChapterProgress>(c =>
                         {
                             foreach (DataGridViewRow item in dgvQueueChapter.Rows)
                             {
@@ -327,9 +327,9 @@ namespace MangaRipper
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            this.Size = MangaRipper.Properties.Settings.Default.Size;
-            this.Location = MangaRipper.Properties.Settings.Default.Location;
-            this.WindowState = MangaRipper.Properties.Settings.Default.WindowState;
+            this.Size = DMR11.Properties.Settings.Default.Size;
+            this.Location = DMR11.Properties.Settings.Default.Location;
+            this.WindowState = DMR11.Properties.Settings.Default.WindowState;
 
             dgvQueueChapter.AutoGenerateColumns = false;
             dgvChapter.AutoGenerateColumns = false;
@@ -367,13 +367,13 @@ namespace MangaRipper
         {
             if (this.WindowState == FormWindowState.Normal)
             {
-                MangaRipper.Properties.Settings.Default.Size = this.Size;
-                MangaRipper.Properties.Settings.Default.Location = this.Location;
-                MangaRipper.Properties.Settings.Default.WindowState = this.WindowState;
+                DMR11.Properties.Settings.Default.Size = this.Size;
+                DMR11.Properties.Settings.Default.Location = this.Location;
+                DMR11.Properties.Settings.Default.WindowState = this.WindowState;
             }
             else if (this.WindowState == FormWindowState.Maximized)
             {
-                MangaRipper.Properties.Settings.Default.WindowState = this.WindowState;
+                DMR11.Properties.Settings.Default.WindowState = this.WindowState;
             }
 
             Properties.Settings.Default.Save();
@@ -389,7 +389,7 @@ namespace MangaRipper
         private void LoadBookmark()
         {
             cbTitleUrl.Items.Clear();
-            StringCollection sc = MangaRipper.Properties.Settings.Default.Bookmark;
+            StringCollection sc = DMR11.Properties.Settings.Default.Bookmark;
 
             if (sc != null)
             {
@@ -402,7 +402,7 @@ namespace MangaRipper
 
         private void btnAddBookmark_Click(object sender, EventArgs e)
         {
-            StringCollection sc = MangaRipper.Properties.Settings.Default.Bookmark;
+            StringCollection sc = DMR11.Properties.Settings.Default.Bookmark;
             if (sc == null)
             {
                 sc = new StringCollection();
@@ -410,18 +410,18 @@ namespace MangaRipper
             if (sc.Contains(cbTitleUrl.Text) == false)
             {
                 sc.Add(cbTitleUrl.Text);
-                MangaRipper.Properties.Settings.Default.Bookmark = sc;
+                DMR11.Properties.Settings.Default.Bookmark = sc;
                 LoadBookmark();
             }
         }
 
         private void btnRemoveBookmark_Click(object sender, EventArgs e)
         {
-            StringCollection sc = MangaRipper.Properties.Settings.Default.Bookmark;
+            StringCollection sc = DMR11.Properties.Settings.Default.Bookmark;
             if (sc != null)
             {
                 sc.Remove(cbTitleUrl.Text);
-                MangaRipper.Properties.Settings.Default.Bookmark = sc;
+                DMR11.Properties.Settings.Default.Bookmark = sc;
 
                 LoadBookmark();
             }

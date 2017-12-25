@@ -1,4 +1,4 @@
-﻿namespace MangaRipper
+﻿namespace DMR11
 {
     partial class AboutBox
     {

@@ -1,7 +1,7 @@
 ﻿using IniParser.Model;
 using IniParser.Parser;
 using HtmlAgilityPack;
-using MangaRipper.Core.Helper;
+using DMR11.Core.Helper;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MangaRipper.Core
+namespace DMR11.Core
 {
     public class ChapterDistill : ChapterBase
     {

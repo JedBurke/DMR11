@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 
 
-namespace MangaRipper.Core
+namespace DMR11.Core
 {
     [Serializable]
     class ChapterKissManga : ChapterBase

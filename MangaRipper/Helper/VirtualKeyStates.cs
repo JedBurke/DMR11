@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MangaRipper.Helper
+namespace DMR11.Helper
 {
     public enum VirtualKeyStates : int
     {

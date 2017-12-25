@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MangaRipper", "MangaRipper\MangaRipper.csproj", "{E4C5D602-ED1E-4C04-B845-74EC5A58530D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DMR11", "MangaRipper\DMR11.csproj", "{E4C5D602-ED1E-4C04-B845-74EC5A58530D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MangaRipper.Core", "MangaRipper.Core\MangaRipper.Core.csproj", "{13EFFE36-DBB8-4573-9260-B601177F66E3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DMR11.Core", "MangaRipper.Core\DMR11.Core.csproj", "{13EFFE36-DBB8-4573-9260-B601177F66E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MR11D_Tests", "MangaRipper_Tests\MR11D_Tests.csproj", "{3CB043DB-81BC-42FD-B6EE-E9FC36C0583B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DMR11_Tests", "MangaRipper_Tests\DMR11_Tests.csproj", "{3CB043DB-81BC-42FD-B6EE-E9FC36C0583B}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution

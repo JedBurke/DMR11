@@ -334,7 +334,10 @@ namespace DMR11
             dgvQueueChapter.AutoGenerateColumns = false;
             dgvChapter.AutoGenerateColumns = false;
 
-            this.Text = String.Format("{0} {1}", Application.ProductName, AppInfo.DeploymentVersion);
+            var semanticVersion = Application.ProductVersion.Substring(0, Application.ProductVersion.LastIndexOf('.'));
+
+            this.Text = string.Format("{0} - {1}", Application.ProductName, semanticVersion);
+
 
             //foreach (string[] item in TitleFactory.GetSupportedSites())
             //{

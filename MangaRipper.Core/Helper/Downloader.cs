@@ -23,9 +23,11 @@ namespace DMR11.Core.Helper
             }
         }
 
+        string UserAgent;
+
         private Downloader()
         {
-
+            UserAgent = "Mozilla/5.0 (X11; Linux x86_64; rv:28.0) Gecko/20100101 Firefox/28.0";
         }
 
         public string DownloadString(UriValidated address)
@@ -45,14 +47,14 @@ namespace DMR11.Core.Helper
                         Console.WriteLine("Host is KissManga.");
 
                         handlerKiss = new ClearanceHandler();
-                        
+
                         // Create a HttpClient that uses the handler to bypass CloudFlare's JavaScript challange.
                         client = new HttpClient(handlerKiss)
                         {
                             Timeout = TimeSpan.FromSeconds(15)
                         };
-                        
-                        
+
+
 
                     }
                     else
@@ -72,12 +74,16 @@ namespace DMR11.Core.Helper
                         //client.DefaultRequestHeaders.Add("Referer", address.Host);
                         //client.DefaultRequestHeaders.Add("User-Agent", UserAgents[UserAgentIndex]);
                     }
-                                       
+
                     var content = client.GetStringAsync(address.ToString()).Result;
 
                     result.Append(content);
 
 
+                }
+                catch (WebException webEx)
+                {
+                    Console.WriteLine(webEx.ToString());
                 }
                 catch (Exception)
                 {
@@ -111,7 +117,11 @@ namespace DMR11.Core.Helper
             request.Host = address.Host;
             //request.Proxy = Proxy;
             request.Credentials = CredentialCache.DefaultCredentials;
+            //request.Accept = "gzip, deflate";
             //request.Referer = Referrer ?? Address.AbsoluteUri;
+            request.Referer = address.AbsoluteUri;
+
+            request.UserAgent = UserAgent;
 
             request.CookieContainer = cookieContainer;
 
@@ -125,6 +135,7 @@ namespace DMR11.Core.Helper
                 if (File.Exists(fileName) == false)
                 {
                     HttpWebRequest request = MakeRequest(address);
+                    
 
                     using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                     {

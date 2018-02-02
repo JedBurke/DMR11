@@ -28,6 +28,7 @@ namespace DMR11.Core
                 HostData = configData;
 
                 //Referrer = HostData["host"]["referer"];
+                
             }
         }
 
@@ -65,6 +66,8 @@ namespace DMR11.Core
 
         private UriValidated ParseAction(HtmlNode element, IParseDetails<UriValidated> details)
         {
+            // If there is a function registered and it returns the address, parse it, otherwise return null.
+
             var pageNumberValue = element.GetAttributeValue(details.AttributeName, string.Empty);
             var pageNumberInt = 0;
 

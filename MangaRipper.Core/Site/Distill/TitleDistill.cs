@@ -104,7 +104,7 @@ namespace DMR11.Core
         protected override List<IChapter> ParseChapterObjects(string html)
         {
             logger.Debug("Entering ParseChapterObjects");
-            logger.Trace("Html parameter: {0}", html);
+            //logger.Trace("Html parameter: {0}", html);
 
             string path = HostData["chapters"]["path"];
             string pathValue = HostData["chapters"]["value"];

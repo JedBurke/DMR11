@@ -35,6 +35,8 @@ namespace DMR11.Core.Helper
 
                 foreach (var element in elements)
                 {
+                    Console.WriteLine("Node hit: {0}", element.InnerText);
+
                     T obj = default(T);
 
                     if (details.ParseAction != null)

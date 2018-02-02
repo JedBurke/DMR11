@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DMR11", "MangaRipper\DMR11.csproj", "{E4C5D602-ED1E-4C04-B845-74EC5A58530D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DMR11", "DMR11\DMR11.csproj", "{E4C5D602-ED1E-4C04-B845-74EC5A58530D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DMR11.Core", "MangaRipper.Core\DMR11.Core.csproj", "{13EFFE36-DBB8-4573-9260-B601177F66E3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DMR11.Core", "DMR11.Core\DMR11.Core.csproj", "{13EFFE36-DBB8-4573-9260-B601177F66E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DMR11_Tests", "MangaRipper_Tests\DMR11_Tests.csproj", "{3CB043DB-81BC-42FD-B6EE-E9FC36C0583B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DMR11_Tests", "DMR11_Tests\DMR11_Tests.csproj", "{3CB043DB-81BC-42FD-B6EE-E9FC36C0583B}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = MangaRipper.vsmdi
+		CategoryFile = DMR11.vsmdi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,8 +22,8 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{E4C5D602-ED1E-4C04-B845-74EC5A58530D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E4C5D602-ED1E-4C04-B845-74EC5A58530D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E4C5D602-ED1E-4C04-B845-74EC5A58530D}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{E4C5D602-ED1E-4C04-B845-74EC5A58530D}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{E4C5D602-ED1E-4C04-B845-74EC5A58530D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E4C5D602-ED1E-4C04-B845-74EC5A58530D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{E4C5D602-ED1E-4C04-B845-74EC5A58530D}.Debug|x86.ActiveCfg = Debug|x86
 		{E4C5D602-ED1E-4C04-B845-74EC5A58530D}.Debug|x86.Build.0 = Debug|x86
 		{E4C5D602-ED1E-4C04-B845-74EC5A58530D}.Release|Any CPU.ActiveCfg = Release|x86

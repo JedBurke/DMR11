@@ -58,11 +58,11 @@
     <Compile Include="BookmarkTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MangaRipper.Core\DMR11.Core.csproj">
+    <ProjectReference Include="..\DMR11.Core\DMR11.Core.csproj">
       <Project>{13effe36-dbb8-4573-9260-b601177f66e3}</Project>
       <Name>DMR11.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MangaRipper\DMR11.csproj">
+    <ProjectReference Include="..\DMR11\DMR11.csproj">
       <Project>{e4c5d602-ed1e-4c04-b845-74ec5a58530d}</Project>
       <Name>DMR11</Name>
     </ProjectReference>

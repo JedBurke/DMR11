@@ -72,6 +72,7 @@
             // btnGetChapter
             // 
             this.btnGetChapter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGetChapter.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnGetChapter.Location = new System.Drawing.Point(901, 10);
             this.btnGetChapter.Name = "btnGetChapter";
             this.btnGetChapter.Size = new System.Drawing.Size(91, 23);
@@ -85,6 +86,7 @@
             // 
             this.btnDownload.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnDownload.Location = new System.Drawing.Point(800, 563);
             this.btnDownload.Name = "btnDownload";
             this.btnDownload.Size = new System.Drawing.Size(108, 23);
@@ -96,6 +98,7 @@
             // btnAdd
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnAdd.Location = new System.Drawing.Point(143, 427);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(163, 23);
@@ -108,6 +111,7 @@
             // btnAddAll
             // 
             this.btnAddAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAddAll.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnAddAll.Location = new System.Drawing.Point(311, 427);
             this.btnAddAll.Name = "btnAddAll";
             this.btnAddAll.Size = new System.Drawing.Size(60, 23);
@@ -120,6 +124,7 @@
             // btnRemove
             // 
             this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRemove.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnRemove.Location = new System.Drawing.Point(537, 564);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(111, 23);
@@ -132,6 +137,7 @@
             // btnRemoveAll
             // 
             this.btnRemoveAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRemoveAll.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnRemoveAll.Location = new System.Drawing.Point(654, 564);
             this.btnRemoveAll.Name = "btnRemoveAll";
             this.btnRemoveAll.Size = new System.Drawing.Size(87, 23);
@@ -195,6 +201,7 @@
             // btnStop
             // 
             this.btnStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnStop.Location = new System.Drawing.Point(914, 563);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(78, 23);
@@ -206,6 +213,7 @@
             // btnChangeSaveTo
             // 
             this.btnChangeSaveTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnChangeSaveTo.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnChangeSaveTo.Location = new System.Drawing.Point(341, 472);
             this.btnChangeSaveTo.Name = "btnChangeSaveTo";
             this.btnChangeSaveTo.Size = new System.Drawing.Size(30, 22);
@@ -218,6 +226,7 @@
             // btnOpenFolder
             // 
             this.btnOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnOpenFolder.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnOpenFolder.Location = new System.Drawing.Point(377, 472);
             this.btnOpenFolder.Name = "btnOpenFolder";
             this.btnOpenFolder.Size = new System.Drawing.Size(60, 22);
@@ -239,6 +248,7 @@
             // btnOptions
             // 
             this.btnOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnOptions.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnOptions.Location = new System.Drawing.Point(443, 564);
             this.btnOptions.Name = "btnOptions";
             this.btnOptions.Size = new System.Drawing.Size(88, 23);
@@ -293,6 +303,7 @@
             // btnAddBookmark
             // 
             this.btnAddBookmark.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddBookmark.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnAddBookmark.Location = new System.Drawing.Point(775, 9);
             this.btnAddBookmark.Name = "btnAddBookmark";
             this.btnAddBookmark.Size = new System.Drawing.Size(24, 23);
@@ -305,6 +316,7 @@
             // btnRemoveBookmark
             // 
             this.btnRemoveBookmark.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRemoveBookmark.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnRemoveBookmark.Location = new System.Drawing.Point(805, 9);
             this.btnRemoveBookmark.Name = "btnRemoveBookmark";
             this.btnRemoveBookmark.Size = new System.Drawing.Size(24, 23);
@@ -317,6 +329,7 @@
             // btnAddPrefixCounter
             // 
             this.btnAddPrefixCounter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAddPrefixCounter.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnAddPrefixCounter.Location = new System.Drawing.Point(12, 427);
             this.btnAddPrefixCounter.Name = "btnAddPrefixCounter";
             this.btnAddPrefixCounter.Size = new System.Drawing.Size(120, 23);
@@ -355,6 +368,7 @@
             // btnPasteUrl
             // 
             this.btnPasteUrl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPasteUrl.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnPasteUrl.Location = new System.Drawing.Point(749, 9);
             this.btnPasteUrl.Name = "btnPasteUrl";
             this.btnPasteUrl.Size = new System.Drawing.Size(24, 23);
@@ -367,6 +381,7 @@
             // btnAddNew
             // 
             this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnAddNew.Location = new System.Drawing.Point(377, 427);
             this.btnAddNew.Name = "btnAddNew";
             this.btnAddNew.Size = new System.Drawing.Size(60, 23);

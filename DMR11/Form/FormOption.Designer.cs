@@ -180,6 +180,7 @@
             // 
             // btnSaveBrowse
             // 
+            this.btnSaveBrowse.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnSaveBrowse.Location = new System.Drawing.Point(170, 49);
             this.btnSaveBrowse.Name = "btnSaveBrowse";
             this.btnSaveBrowse.Size = new System.Drawing.Size(75, 23);

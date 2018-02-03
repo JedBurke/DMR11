@@ -44,7 +44,6 @@
             this.btnChangeSaveTo = new System.Windows.Forms.Button();
             this.btnOpenFolder = new System.Windows.Forms.Button();
             this.lblUrl = new System.Windows.Forms.Label();
-            this.txtPercent = new System.Windows.Forms.TextBox();
             this.btnHowToUse = new System.Windows.Forms.Button();
             this.btnOptions = new System.Windows.Forms.Button();
             this.btnAbout = new System.Windows.Forms.Button();
@@ -66,6 +65,7 @@
             this.lbDestination = new System.Windows.Forms.Label();
             this.rdDefaultDestination = new System.Windows.Forms.RadioButton();
             this.rdSeriesDestination = new System.Windows.Forms.RadioButton();
+            this.txtPercent = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQueueChapter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChapter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudThread)).BeginInit();
@@ -74,9 +74,9 @@
             // btnGetChapter
             // 
             this.btnGetChapter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGetChapter.Location = new System.Drawing.Point(876, 10);
+            this.btnGetChapter.Location = new System.Drawing.Point(901, 10);
             this.btnGetChapter.Name = "btnGetChapter";
-            this.btnGetChapter.Size = new System.Drawing.Size(116, 23);
+            this.btnGetChapter.Size = new System.Drawing.Size(91, 23);
             this.btnGetChapter.TabIndex = 5;
             this.btnGetChapter.Text = "Get Chapters";
             this.toolTip1.SetToolTip(this.btnGetChapter, "Retrieve chapters from the current URL");
@@ -237,16 +237,6 @@
             this.lblUrl.Size = new System.Drawing.Size(27, 13);
             this.lblUrl.TabIndex = 0;
             this.lblUrl.Text = "URL";
-            // 
-            // txtPercent
-            // 
-            this.txtPercent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPercent.Enabled = false;
-            this.txtPercent.Location = new System.Drawing.Point(835, 11);
-            this.txtPercent.Name = "txtPercent";
-            this.txtPercent.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.txtPercent.Size = new System.Drawing.Size(35, 22);
-            this.txtPercent.TabIndex = 4;
             // 
             // btnHowToUse
             // 
@@ -490,11 +480,21 @@
             this.rdSeriesDestination.TabIndex = 28;
             this.rdSeriesDestination.UseVisualStyleBackColor = true;
             // 
+            // txtPercent
+            // 
+            this.txtPercent.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPercent.Location = new System.Drawing.Point(847, 11);
+            this.txtPercent.Name = "txtPercent";
+            this.txtPercent.Size = new System.Drawing.Size(48, 21);
+            this.txtPercent.TabIndex = 31;
+            this.txtPercent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1012, 614);
+            this.Controls.Add(this.txtPercent);
             this.Controls.Add(this.lbDefaultDestination);
             this.Controls.Add(this.lbSeriesDestination);
             this.Controls.Add(this.rdSeriesDestination);
@@ -512,7 +512,6 @@
             this.Controls.Add(this.btnAbout);
             this.Controls.Add(this.btnOptions);
             this.Controls.Add(this.btnHowToUse);
-            this.Controls.Add(this.txtPercent);
             this.Controls.Add(this.lblUrl);
             this.Controls.Add(this.btnChangeSaveTo);
             this.Controls.Add(this.btnStop);
@@ -525,7 +524,7 @@
             this.Controls.Add(this.btnDownload);
             this.Controls.Add(this.btnGetChapter);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Icon = System.Drawing.SystemIcons.Application; //((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(1020, 644);
             this.Name = "FormMain";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
@@ -551,7 +550,6 @@
         private System.Windows.Forms.Button btnChangeSaveTo;
         private System.Windows.Forms.Button btnOpenFolder;
         private System.Windows.Forms.Label lblUrl;
-        private System.Windows.Forms.TextBox txtPercent;
         private System.Windows.Forms.Button btnHowToUse;
         private System.Windows.Forms.Button btnOptions;
         private System.Windows.Forms.Button btnAbout;
@@ -576,5 +574,6 @@
         private System.Windows.Forms.RadioButton rdSeriesDestination;
         private System.Windows.Forms.Label lbSeriesDestination;
         private System.Windows.Forms.Label lbDefaultDestination;
+        private System.Windows.Forms.Label txtPercent;
     }
 }

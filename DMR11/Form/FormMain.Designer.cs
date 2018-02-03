@@ -44,9 +44,7 @@
             this.btnChangeSaveTo = new System.Windows.Forms.Button();
             this.btnOpenFolder = new System.Windows.Forms.Button();
             this.lblUrl = new System.Windows.Forms.Label();
-            this.btnHowToUse = new System.Windows.Forms.Button();
             this.btnOptions = new System.Windows.Forms.Button();
-            this.btnAbout = new System.Windows.Forms.Button();
             this.dgvChapter = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
@@ -87,9 +85,9 @@
             // 
             this.btnDownload.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDownload.Location = new System.Drawing.Point(719, 563);
+            this.btnDownload.Location = new System.Drawing.Point(800, 563);
             this.btnDownload.Name = "btnDownload";
-            this.btnDownload.Size = new System.Drawing.Size(162, 23);
+            this.btnDownload.Size = new System.Drawing.Size(108, 23);
             this.btnDownload.TabIndex = 18;
             this.btnDownload.Text = "Start Download";
             this.btnDownload.UseVisualStyleBackColor = true;
@@ -98,7 +96,7 @@
             // btnAdd
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAdd.Location = new System.Drawing.Point(143, 391);
+            this.btnAdd.Location = new System.Drawing.Point(143, 427);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(163, 23);
             this.btnAdd.TabIndex = 8;
@@ -110,7 +108,7 @@
             // btnAddAll
             // 
             this.btnAddAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddAll.Location = new System.Drawing.Point(311, 391);
+            this.btnAddAll.Location = new System.Drawing.Point(311, 427);
             this.btnAddAll.Name = "btnAddAll";
             this.btnAddAll.Size = new System.Drawing.Size(60, 23);
             this.btnAddAll.TabIndex = 9;
@@ -122,9 +120,9 @@
             // btnRemove
             // 
             this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRemove.Location = new System.Drawing.Point(443, 563);
+            this.btnRemove.Location = new System.Drawing.Point(537, 564);
             this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(105, 23);
+            this.btnRemove.Size = new System.Drawing.Size(111, 23);
             this.btnRemove.TabIndex = 16;
             this.btnRemove.Text = "Remove Selected";
             this.toolTip1.SetToolTip(this.btnRemove, "Remove selected chapters from the queue");
@@ -134,9 +132,9 @@
             // btnRemoveAll
             // 
             this.btnRemoveAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRemoveAll.Location = new System.Drawing.Point(554, 563);
+            this.btnRemoveAll.Location = new System.Drawing.Point(654, 564);
             this.btnRemoveAll.Name = "btnRemoveAll";
-            this.btnRemoveAll.Size = new System.Drawing.Size(105, 23);
+            this.btnRemoveAll.Size = new System.Drawing.Size(87, 23);
             this.btnRemoveAll.TabIndex = 17;
             this.btnRemoveAll.Text = "Remove All";
             this.toolTip1.SetToolTip(this.btnRemoveAll, "Remove all chapters from the queue");
@@ -197,9 +195,9 @@
             // btnStop
             // 
             this.btnStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStop.Location = new System.Drawing.Point(887, 563);
+            this.btnStop.Location = new System.Drawing.Point(914, 563);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(105, 23);
+            this.btnStop.Size = new System.Drawing.Size(78, 23);
             this.btnStop.TabIndex = 19;
             this.btnStop.Text = "Stop";
             this.btnStop.UseVisualStyleBackColor = true;
@@ -208,7 +206,7 @@
             // btnChangeSaveTo
             // 
             this.btnChangeSaveTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnChangeSaveTo.Location = new System.Drawing.Point(341, 436);
+            this.btnChangeSaveTo.Location = new System.Drawing.Point(341, 472);
             this.btnChangeSaveTo.Name = "btnChangeSaveTo";
             this.btnChangeSaveTo.Size = new System.Drawing.Size(30, 22);
             this.btnChangeSaveTo.TabIndex = 13;
@@ -220,7 +218,7 @@
             // btnOpenFolder
             // 
             this.btnOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnOpenFolder.Location = new System.Drawing.Point(377, 436);
+            this.btnOpenFolder.Location = new System.Drawing.Point(377, 472);
             this.btnOpenFolder.Name = "btnOpenFolder";
             this.btnOpenFolder.Size = new System.Drawing.Size(60, 22);
             this.btnOpenFolder.TabIndex = 14;
@@ -238,38 +236,16 @@
             this.lblUrl.TabIndex = 0;
             this.lblUrl.Text = "URL";
             // 
-            // btnHowToUse
-            // 
-            this.btnHowToUse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnHowToUse.Location = new System.Drawing.Point(123, 563);
-            this.btnHowToUse.Name = "btnHowToUse";
-            this.btnHowToUse.Size = new System.Drawing.Size(203, 23);
-            this.btnHowToUse.TabIndex = 21;
-            this.btnHowToUse.Text = "How To Use && F.A.Q.";
-            this.btnHowToUse.UseVisualStyleBackColor = true;
-            this.btnHowToUse.Click += new System.EventHandler(this.btnHowToUse_Click);
-            // 
             // btnOptions
             // 
             this.btnOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnOptions.Location = new System.Drawing.Point(12, 563);
+            this.btnOptions.Location = new System.Drawing.Point(443, 564);
             this.btnOptions.Name = "btnOptions";
-            this.btnOptions.Size = new System.Drawing.Size(105, 23);
+            this.btnOptions.Size = new System.Drawing.Size(88, 23);
             this.btnOptions.TabIndex = 20;
             this.btnOptions.Text = "Options";
             this.btnOptions.UseVisualStyleBackColor = true;
             this.btnOptions.Click += new System.EventHandler(this.btnOptions_Click);
-            // 
-            // btnAbout
-            // 
-            this.btnAbout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAbout.Location = new System.Drawing.Point(332, 563);
-            this.btnAbout.Name = "btnAbout";
-            this.btnAbout.Size = new System.Drawing.Size(105, 23);
-            this.btnAbout.TabIndex = 22;
-            this.btnAbout.Text = "About";
-            this.btnAbout.UseVisualStyleBackColor = true;
-            this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
             // 
             // dgvChapter
             // 
@@ -288,7 +264,7 @@
             this.dgvChapter.ReadOnly = true;
             this.dgvChapter.RowHeadersVisible = false;
             this.dgvChapter.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvChapter.Size = new System.Drawing.Size(425, 347);
+            this.dgvChapter.Size = new System.Drawing.Size(425, 383);
             this.dgvChapter.TabIndex = 6;
             // 
             // dataGridViewTextBoxColumn4
@@ -341,7 +317,7 @@
             // btnAddPrefixCounter
             // 
             this.btnAddPrefixCounter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddPrefixCounter.Location = new System.Drawing.Point(12, 391);
+            this.btnAddPrefixCounter.Location = new System.Drawing.Point(12, 427);
             this.btnAddPrefixCounter.Name = "btnAddPrefixCounter";
             this.btnAddPrefixCounter.Size = new System.Drawing.Size(120, 23);
             this.btnAddPrefixCounter.TabIndex = 7;
@@ -353,7 +329,7 @@
             // nudThread
             // 
             this.nudThread.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudThread.Location = new System.Drawing.Point(666, 564);
+            this.nudThread.Location = new System.Drawing.Point(747, 564);
             this.nudThread.Maximum = new decimal(new int[] {
             5,
             0,
@@ -391,7 +367,7 @@
             // btnAddNew
             // 
             this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddNew.Location = new System.Drawing.Point(377, 391);
+            this.btnAddNew.Location = new System.Drawing.Point(377, 427);
             this.btnAddNew.Name = "btnAddNew";
             this.btnAddNew.Size = new System.Drawing.Size(60, 23);
             this.btnAddNew.TabIndex = 10;
@@ -405,7 +381,7 @@
             this.lbSeriesDestination.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbSeriesDestination.AutoSize = true;
             this.lbSeriesDestination.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbSeriesDestination.Location = new System.Drawing.Point(57, 514);
+            this.lbSeriesDestination.Location = new System.Drawing.Point(57, 550);
             this.lbSeriesDestination.MaximumSize = new System.Drawing.Size(380, 17);
             this.lbSeriesDestination.MinimumSize = new System.Drawing.Size(380, 17);
             this.lbSeriesDestination.Name = "lbSeriesDestination";
@@ -422,7 +398,7 @@
             this.lbDefaultDestination.AutoSize = true;
             this.lbDefaultDestination.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DMR11.Properties.Settings.Default, "SaveTo", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.lbDefaultDestination.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbDefaultDestination.Location = new System.Drawing.Point(57, 471);
+            this.lbDefaultDestination.Location = new System.Drawing.Point(57, 507);
             this.lbDefaultDestination.MaximumSize = new System.Drawing.Size(385, 17);
             this.lbDefaultDestination.MinimumSize = new System.Drawing.Size(380, 17);
             this.lbDefaultDestination.Name = "lbDefaultDestination";
@@ -452,7 +428,7 @@
             this.lbDestination.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbDestination.AutoSize = true;
             this.lbDestination.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbDestination.Location = new System.Drawing.Point(12, 436);
+            this.lbDestination.Location = new System.Drawing.Point(12, 472);
             this.lbDestination.Name = "lbDestination";
             this.lbDestination.Size = new System.Drawing.Size(123, 20);
             this.lbDestination.TabIndex = 26;
@@ -463,7 +439,7 @@
             this.rdDefaultDestination.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.rdDefaultDestination.AutoSize = true;
             this.rdDefaultDestination.Checked = true;
-            this.rdDefaultDestination.Location = new System.Drawing.Point(37, 474);
+            this.rdDefaultDestination.Location = new System.Drawing.Point(37, 510);
             this.rdDefaultDestination.Name = "rdDefaultDestination";
             this.rdDefaultDestination.Size = new System.Drawing.Size(14, 13);
             this.rdDefaultDestination.TabIndex = 27;
@@ -474,7 +450,7 @@
             // 
             this.rdSeriesDestination.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.rdSeriesDestination.AutoSize = true;
-            this.rdSeriesDestination.Location = new System.Drawing.Point(37, 517);
+            this.rdSeriesDestination.Location = new System.Drawing.Point(37, 553);
             this.rdSeriesDestination.Name = "rdSeriesDestination";
             this.rdSeriesDestination.Size = new System.Drawing.Size(14, 13);
             this.rdSeriesDestination.TabIndex = 28;
@@ -482,6 +458,7 @@
             // 
             // txtPercent
             // 
+            this.txtPercent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPercent.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPercent.Location = new System.Drawing.Point(847, 11);
             this.txtPercent.Name = "txtPercent";
@@ -509,9 +486,7 @@
             this.Controls.Add(this.btnAddBookmark);
             this.Controls.Add(this.cbTitleUrl);
             this.Controls.Add(this.dgvChapter);
-            this.Controls.Add(this.btnAbout);
             this.Controls.Add(this.btnOptions);
-            this.Controls.Add(this.btnHowToUse);
             this.Controls.Add(this.lblUrl);
             this.Controls.Add(this.btnChangeSaveTo);
             this.Controls.Add(this.btnStop);
@@ -550,9 +525,7 @@
         private System.Windows.Forms.Button btnChangeSaveTo;
         private System.Windows.Forms.Button btnOpenFolder;
         private System.Windows.Forms.Label lblUrl;
-        private System.Windows.Forms.Button btnHowToUse;
         private System.Windows.Forms.Button btnOptions;
-        private System.Windows.Forms.Button btnAbout;
         private System.Windows.Forms.DataGridView dgvChapter;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;

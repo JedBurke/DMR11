@@ -161,7 +161,7 @@ namespace DMR11.Core
                     PopulateImageAddress(html);
                 }
 
-                string saveToFolder = SaveTo + "\\" + this.Name.RemoveFileNameInvalidChar();
+                string saveToFolder = SaveTo + "\\" + this.Name.Trim().RemoveFileNameInvalidChar();
                 Directory.CreateDirectory(saveToFolder);
 
                 int countImage = 0;

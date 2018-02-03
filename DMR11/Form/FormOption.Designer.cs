@@ -39,8 +39,8 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.grpSaveDestination = new System.Windows.Forms.GroupBox();
-            this.txtSaveDestination = new System.Windows.Forms.TextBox();
             this.btnSaveBrowse = new System.Windows.Forms.Button();
+            this.txtSaveDestination = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.grpSaveDestination.SuspendLayout();
@@ -178,16 +178,6 @@
             this.grpSaveDestination.TabStop = false;
             this.grpSaveDestination.Text = "Save Destination";
             // 
-            // txtSaveDestination
-            // 
-            this.txtSaveDestination.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DMR11.Properties.Settings.Default, "DefaultSaveDestination", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txtSaveDestination.Location = new System.Drawing.Point(6, 21);
-            this.txtSaveDestination.Name = "txtSaveDestination";
-            this.txtSaveDestination.ReadOnly = true;
-            this.txtSaveDestination.Size = new System.Drawing.Size(239, 22);
-            this.txtSaveDestination.TabIndex = 0;
-            this.txtSaveDestination.Text = global::DMR11.Properties.Settings.Default.DefaultSaveDestination;
-            // 
             // btnSaveBrowse
             // 
             this.btnSaveBrowse.Location = new System.Drawing.Point(170, 49);
@@ -198,10 +188,21 @@
             this.btnSaveBrowse.UseVisualStyleBackColor = true;
             this.btnSaveBrowse.Click += new System.EventHandler(this.btnSaveBrowse_Click);
             // 
+            // txtSaveDestination
+            // 
+            this.txtSaveDestination.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DMR11.Properties.Settings.Default, "DefaultSaveDestination", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.txtSaveDestination.Location = new System.Drawing.Point(6, 21);
+            this.txtSaveDestination.Name = "txtSaveDestination";
+            this.txtSaveDestination.ReadOnly = true;
+            this.txtSaveDestination.Size = new System.Drawing.Size(239, 22);
+            this.txtSaveDestination.TabIndex = 0;
+            this.txtSaveDestination.Text = global::DMR11.Properties.Settings.Default.DefaultSaveDestination;
+            // 
             // FormOption
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.ClientSize = new System.Drawing.Size(277, 311);
             this.Controls.Add(this.grpSaveDestination);
             this.Controls.Add(this.groupBox1);

@@ -355,17 +355,6 @@ namespace DMR11
             LoadBookmark();
         }
 
-        private void btnAbout_Click(object sender, EventArgs e)
-        {
-            var about = new AboutBox();
-            about.ShowDialog(this);
-        }
-
-        private void btnHowToUse_Click(object sender, EventArgs e)
-        {
-            Process.Start("http://mangaripper.codeplex.com/documentation");
-        }
-
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (this.WindowState == FormWindowState.Normal)

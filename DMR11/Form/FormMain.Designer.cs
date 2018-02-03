@@ -411,11 +411,16 @@
             // 
             // txtMessage
             // 
+            this.txtMessage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.txtMessage.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtMessage.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.txtMessage.Location = new System.Drawing.Point(0, 592);
+            this.txtMessage.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMessage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtMessage.Location = new System.Drawing.Point(0, 598);
+            this.txtMessage.Margin = new System.Windows.Forms.Padding(5);
             this.txtMessage.Name = "txtMessage";
             this.txtMessage.ReadOnly = true;
-            this.txtMessage.Size = new System.Drawing.Size(1012, 22);
+            this.txtMessage.Size = new System.Drawing.Size(1012, 16);
             this.txtMessage.TabIndex = 23;
             // 
             // timer1
@@ -470,6 +475,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.ClientSize = new System.Drawing.Size(1012, 614);
             this.Controls.Add(this.txtPercent);
             this.Controls.Add(this.lbDefaultDestination);

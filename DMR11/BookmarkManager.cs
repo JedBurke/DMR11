@@ -23,7 +23,7 @@ namespace DMR11
                 this._loadedPath = value;
             }
         }
-
+        
         public void LoadBookmarks()
         {
         }
@@ -35,10 +35,13 @@ namespace DMR11
                 LoadedPath = path;
 
                 var bookmarksFile = File.ReadAllBytes(LoadedPath);
-                var stream = new MemoryStream(bookmarksFile);
-                var serializer = new DataContractJsonSerializer(typeof(Bookmark[]));
 
-                Bookmarks.AddRange((Bookmark[])serializer.ReadObject(stream));                
+                using (var stream = new MemoryStream(bookmarksFile))
+                {
+                    var serializer = new DataContractJsonSerializer(typeof(Bookmark[]));
+
+                    Bookmarks.AddRange((Bookmark[])serializer.ReadObject(stream));
+                }
 
             }
             else
@@ -70,21 +73,23 @@ namespace DMR11
 
         public void Save(string path)
         {
-            var memoryStream = new MemoryStream();
-            var serializer = new DataContractJsonSerializer(typeof(Bookmark[]));
-
-            serializer.WriteObject(memoryStream, Bookmarks.ToArray());
-
-            if (!File.Exists(path))
+            using (var stream = new MemoryStream())
             {
-                var pathDirectory = Path.GetDirectoryName(path);
-                
-                if (!Directory.Exists(pathDirectory))
-                    Directory.CreateDirectory(pathDirectory);
+                var serializer = new DataContractJsonSerializer(typeof(Bookmark[]));
 
+                serializer.WriteObject(stream, Bookmarks.ToArray());
+
+                if (!File.Exists(path))
+                {
+                    var pathDirectory = Path.GetDirectoryName(path);
+
+                    if (!Directory.Exists(pathDirectory))
+                        Directory.CreateDirectory(pathDirectory);
+
+                }
+
+                File.WriteAllBytes(path, stream.ToArray());
             }
-
-            File.WriteAllBytes(path, memoryStream.ToArray());
         }
 
         public BookmarkManager()

@@ -9,7 +9,7 @@ using System.Runtime.Serialization.Json;
 
 namespace DMR11
 {
-    public class BookmarkManager
+    public class BookmarkManager : IDisposable
     {
         private string _loadedPath;
         public string LoadedPath
@@ -23,7 +23,7 @@ namespace DMR11
                 this._loadedPath = value;
             }
         }
-        
+
         public void LoadBookmarks()
         {
         }
@@ -46,7 +46,12 @@ namespace DMR11
             }
             else
             {
-                throw new FileNotFoundException();
+                string pathDirectory = Path.GetDirectoryName(path);
+                
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(pathDirectory);
+
+                File.WriteAllText(path, string.Empty);
             }
 
         }
@@ -65,6 +70,25 @@ namespace DMR11
             }
         }
 
+        public bool RemoveBookmark(string series)
+        {
+            if (IsBookmarked(series))
+            {
+                var bookmark = GetBookmark(series);
+                
+                if (bookmark != null)
+                {
+                   return RemoveBookmark(bookmark);
+                }
+            }
+
+            return false;
+        }
+
+        public bool RemoveBookmark(Bookmark bookmark)
+        {
+            return Bookmarks.Remove(bookmark);
+        }
 
         public void Save()
         {
@@ -103,9 +127,31 @@ namespace DMR11
             LoadBookmarks(path);
         }
 
+        public Bookmark this[string seriesName]
+        {
+            get
+            {
+                return GetBookmark(seriesName);
+            }
+        }
+
+        public Bookmark this[Bookmark bookmark]
+        {
+            set
+            {
+                AddBookmark(value);
+            }
+        }
         
         List<Bookmark> Bookmarks = null;
-        
+
+        public Bookmark GetBookmark(string seriesName)
+        {
+            seriesName = FormatInputSeries(seriesName);
+
+            return Bookmarks.FirstOrDefault(bookmark => string.Compare(bookmark.Name, seriesName, true) == 0);
+        }
+
         /// <summary>
         /// Returns a the list of bookmarked series.
         /// </summary>
@@ -128,8 +174,8 @@ namespace DMR11
 
             if (string.IsNullOrWhiteSpace(seriesName))
                 throw new ArgumentNullException();
-            
-            seriesName = seriesName.Trim();
+
+            seriesName = FormatInputSeries(seriesName);
 
             return Bookmarks.Any(bookmark => string.Compare(bookmark.Name, seriesName, true) == 0);
         }
@@ -167,26 +213,42 @@ namespace DMR11
             return uriStringRep;
         }
 
-        public Bookmark LookupBookmark(string seriesName)
+        /// <summary>
+        /// Formats the series name according to standards.
+        /// </summary>
+        /// <param name="seriesName">The series name to be formatted.</param>
+        /// <returns>A string representation of the formatted series name.</returns>
+        private string FormatInputSeries(string seriesName)
         {
-            return Bookmarks.FirstOrDefault(bookmark => string.Compare(bookmark.Name, seriesName, true) == 0);
+            string seriesFormatted = string.Empty;
+
+            seriesFormatted = seriesName.Trim();
+
+            return seriesFormatted;
         }
 
-        public Bookmark this[string seriesName]
+        /// <summary>
+        /// Gets or sets whether to flush the bookmarks to the disk before disposing of the manager.
+        /// </summary>
+        public bool AutoFlush
         {
-            get
+            get;
+            set;
+        }
+
+        public void Dispose()
+        {
+            if (Bookmarks != null)
             {
-                return LookupBookmark(seriesName);
-            }
-        }
+                if (AutoFlush)
+                {
+                    Save();
+                }
 
-        public Bookmark this[Bookmark bookmark]
-        {
-            set
-            {
-                AddBookmark(value);
+                Bookmarks.Clear();
+                Bookmarks = null;
             }
-        }
 
+        }
     }
 }

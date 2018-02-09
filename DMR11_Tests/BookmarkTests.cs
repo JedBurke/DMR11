@@ -15,7 +15,7 @@ namespace DMR11_Tests
         BookmarkManager manager = null;
 
         [TestInitialize]
-        public void SetupBookmarks()
+        public void Test_Initialize()
         {
             manager = new BookmarkManager(bookmarksPath);
 
@@ -47,7 +47,16 @@ namespace DMR11_Tests
         }
 
         [TestMethod]
-        public void LoadBookmarks()
+        public void Test_GetBookmark()
+        {
+            Assert.IsNotNull(manager["Minamoto-kun Monogatari"]);
+            Assert.IsNotNull(manager["minamoto-kun monogatari"]);
+
+            Assert.AreEqual(manager["minamoto-kun monogatari"].SaveDestination, "D:/manga/minamoto-kun_monogatari", true);
+        }
+
+        [TestMethod]
+        public void Test_GetBookmarks()
         {
             foreach (var bookmark in manager.GetBookmarks())
             {
@@ -57,7 +66,7 @@ namespace DMR11_Tests
         }
 
         [TestMethod]
-        public void SaveBookmarks()
+        public void Test_SaveBookmarks()
         {
             var minamoto = new Bookmark()
             {
@@ -74,19 +83,14 @@ namespace DMR11_Tests
         }
 
         [TestMethod]
-        public void RemoveBookmark()
+        public void Test_RemoveBookmark()
         {
+            Assert.IsTrue(manager.IsBookmarked("minamoto-kun monogatari"));
+            Assert.IsTrue(manager.RemoveBookmark("minamoto-kun monogatari"));
+
+            manager.Save();
         }
-
-        [TestMethod]
-        public void Test_Lookup()
-        {
-            Assert.IsNotNull(manager["Minamoto-kun Monogatari"]);
-            Assert.IsNotNull(manager["minamoto-kun monogatari"]);
-
-            Assert.AreEqual(manager["minamoto-kun monogatari"].SaveDestination, "D:/manga/minamoto-kun_monogatari", true);
-        }
-
+        
         [TestMethod]
         public void Test_IsBookmarked()
         {
@@ -96,6 +100,12 @@ namespace DMR11_Tests
            Assert.IsTrue(manager.IsBookmarked(new Uri("https://test.manga.com/minamoto-kun_monogatari"), true));
            Assert.IsFalse(manager.IsBookmarked(new Uri("https://Test.Manga.Com/minamoto-kun_monogatari")));
         }
-        
+
+        [TestCleanup]
+        public void Test_Cleanup()
+        {
+            manager.Dispose();
+        }
+
     }
 }

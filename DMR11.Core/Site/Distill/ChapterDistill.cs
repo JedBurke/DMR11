@@ -28,6 +28,7 @@ namespace DMR11.Core
             }
             else
             {
+
                 HostVariables = new Dictionary<string, string>();
                 HostVariables.Add("host", address.Host);
                 HostVariables.Add("address", address.ToString());
@@ -36,6 +37,16 @@ namespace DMR11.Core
                 HostData = configData;
 
                 //Referrer = HostData["host"]["referer"];
+
+                // Short-circuit the page listing if all of the 'pages' (chapter images) are in a single HTML page.
+                if (HostData["host"].ContainsKey("single_page"))
+                {
+                    bool singlePage = false;
+                    bool.TryParse(HostData["host"]["single_page"], out singlePage);
+
+                    SinglePage = singlePage;
+
+                }
 
             }
         }
@@ -58,6 +69,9 @@ namespace DMR11.Core
 
         protected override List<UriValidated> ParsePageAddresses(string html)
         {
+            if (SinglePage)
+                return new List<UriValidated>();
+
             string path = HostData["pages"]["path"],
                    value = HostData["pages"]["value"];
 

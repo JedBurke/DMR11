@@ -25,36 +25,42 @@ namespace DMR11.Core.Helper
             var list = new List<T>();
             var doc = new HtmlDocument();
 
+            if (string.IsNullOrWhiteSpace(html))
+                return list;
+
             try
             {
                 doc.LoadHtml(html);
 
                 var elements = doc.DocumentNode.SelectNodes(details.XPath);
 
-                details.Logger.Debug("Selected node count: {0}", elements.Count);
-
-                foreach (var element in elements)
+                if (elements != null && elements.Count > 0)
                 {
-                    Console.WriteLine("Node hit: {0}", element.InnerText);
+                    details.Logger.Debug("Selected node count: {0}", elements.Count);
 
-                    T obj = default(T);
-
-                    if (details.ParseAction != null)
+                    foreach (var element in elements)
                     {
-                        obj = details.ParseAction(element, details);
+                        //Console.WriteLine("Node hit: {0}", element.InnerText);
 
-                        if (obj == null)
+                        T obj = default(T);
+
+                        if (details.ParseAction != null)
+                        {
+                            obj = details.ParseAction(element, details);
+
+                            if (obj == null)
+                            {
+                                throw new ArgumentNullException();
+                            }
+                        }
+                        else
                         {
                             throw new ArgumentNullException();
                         }
-                    }
-                    else
-                    {
-                        throw new ArgumentNullException();
-                    }
 
-                    list.Add(obj);
+                        list.Add(obj);
 
+                    }
                 }
             }
             finally

@@ -27,7 +27,8 @@ namespace DMR11.Core.Helper
 
         private Downloader()
         {
-            UserAgent = "Mozilla/5.0 (X11; Linux x86_64; rv:28.0) Gecko/20100101 Firefox/28.0";
+            //UserAgent = "Mozilla/5.0 (X11; Linux x86_64; rv:28.0) Gecko/20100101 Firefox/28.0";
+            UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1";
         }
 
         public string DownloadString(UriValidated address)
@@ -41,7 +42,7 @@ namespace DMR11.Core.Helper
                     HttpClientHandler handler = null;
                     ClearanceHandler handlerKiss = null;
                     HttpClient client = null;
-
+                    
                     if (string.Compare(address.Host, "kissmanga.com") == 0)
                     {
                         Console.WriteLine("Host is KissManga.");
@@ -62,8 +63,9 @@ namespace DMR11.Core.Helper
                         handler = new HttpClientHandler()
                         {
                             AutomaticDecompression = DecompressionMethods.GZip,
-                            Credentials = CredentialCache.DefaultCredentials,
-                            CookieContainer = cookieContainer ?? (cookieContainer = new CookieContainer())
+                            Credentials = CredentialCache.DefaultNetworkCredentials,
+                            CookieContainer = cookieContainer ?? (cookieContainer = new CookieContainer()),
+                            UseCookies = true
                         };
 
                         client = new HttpClient(handler)
@@ -71,6 +73,10 @@ namespace DMR11.Core.Helper
                             Timeout = TimeSpan.FromSeconds(15)
                         };
 
+                        client.DefaultRequestHeaders.Add("User-Agent", UserAgent);
+                        client.DefaultRequestHeaders.Add("Host", address.Host);
+                        client.DefaultRequestHeaders.Add("Referer", address.Host);
+                        
                         //client.DefaultRequestHeaders.Add("Referer", address.Host);
                         //client.DefaultRequestHeaders.Add("User-Agent", UserAgents[UserAgentIndex]);
                     }
@@ -116,14 +122,17 @@ namespace DMR11.Core.Helper
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(address);
             request.Host = address.Host;
             //request.Proxy = Proxy;
-            request.Credentials = CredentialCache.DefaultCredentials;
+            request.Credentials = CredentialCache.DefaultNetworkCredentials;
             //request.Accept = "gzip, deflate";
+            request.Accept = "*/*";
             //request.Referer = Referrer ?? Address.AbsoluteUri;
             request.Referer = address.AbsoluteUri;
 
             request.UserAgent = UserAgent;
 
             request.CookieContainer = cookieContainer;
+
+            Console.WriteLine(string.Concat(DateTime.Now.ToLongDateString(), " ", DateTime.Now.ToLongTimeString()));
 
             return request;
         }
@@ -134,8 +143,7 @@ namespace DMR11.Core.Helper
             {
                 if (File.Exists(fileName) == false)
                 {
-                    HttpWebRequest request = MakeRequest(address);
-                    
+                   HttpWebRequest request = MakeRequest(address);
 
                     using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                     {

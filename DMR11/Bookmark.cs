@@ -18,6 +18,8 @@ namespace DMR11
             this.DateUpdated = DateTime.UtcNow.Ticks;
         }
 
+        string _name = string.Empty;
+
         /// <summary>
         /// Sets the 'DateUpdated' property to the current time.
         /// </summary>
@@ -29,8 +31,17 @@ namespace DMR11
         [DataMember]
         public string Name
         {
-            get;
-            set;
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new ArgumentNullException();
+
+                _name = value.Trim();
+            }
         }
 
         [DataMember]

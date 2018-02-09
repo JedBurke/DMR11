@@ -133,6 +133,7 @@
     <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddBookmarkStatus.cs" />
     <Compile Include="Bookmark.cs" />
     <Compile Include="BookmarkCollection.cs" />
     <Compile Include="BookmarkManager.cs" />

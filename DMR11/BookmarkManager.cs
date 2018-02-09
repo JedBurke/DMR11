@@ -48,11 +48,20 @@ namespace DMR11
 
         }
 
-        public bool AddBookmark(Bookmark bookmark)
+        public AddBookmarkStatus AddBookmark(Bookmark bookmark)
         {
-            _bookmarks.Add(bookmark);
-            return true;
+            if (!IsBookmarked(bookmark.SeriesUri))
+            {
+                Bookmarks.Add(bookmark);
+
+                return AddBookmarkStatus.Success;
+            }
+            else
+            {
+                return AddBookmarkStatus.Duplicate;
+            }
         }
+
 
         public void Save()
         {
@@ -80,7 +89,7 @@ namespace DMR11
 
         public BookmarkManager()
         {
-            _bookmarks = new List<Bookmark>();
+            Bookmarks = new List<Bookmark>();
         }
 
         public BookmarkManager(string path)
@@ -90,19 +99,34 @@ namespace DMR11
         }
 
         
-        List<Bookmark> _bookmarks = null;
-
-        List<Bookmark> Bookmarks
-        {
-            get
-            {
-                return _bookmarks;
-            }
-        }
-
+        List<Bookmark> Bookmarks = null;
+        
+        /// <summary>
+        /// Returns a the list of bookmarked series.
+        /// </summary>
+        /// <returns></returns>
         public Bookmark[] GetBookmarks()
         {
-            return _bookmarks.ToArray();
+            return Bookmarks.ToArray();
+        }
+
+        /// <summary>
+        /// Returns whether the input series name matches that of a bookmarked series. The look-up is done
+        /// in a case-insensitive manner with the input string stripped of its opening and closing whitespace.
+        /// </summary>
+        /// <param name="seriesName">The series which to search.</param>
+        /// <returns>A boolean value of whether the series has been bookmarked.</returns>
+        public bool IsBookmarked(string seriesName)
+        {
+            if (Bookmarks.Count == 0)
+                return false;
+
+            if (string.IsNullOrWhiteSpace(seriesName))
+                throw new ArgumentNullException();
+            
+            seriesName = seriesName.Trim();
+
+            return Bookmarks.Any(bookmark => string.Compare(bookmark.Name, seriesName, true) == 0);
         }
 
         /// <summary>

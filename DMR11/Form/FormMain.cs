@@ -50,17 +50,7 @@ namespace DMR11
         {
             InitializeComponent();
 
-            //var items = cbTitleUrl.Items;
-            //object[] sorted = new object[items.Count];
-
-            //List<object> itemsToBeSorted = new List<object>();
-            //itemsToBeSorted.Sort();
-
-            //cbTitleUrl.BeginUpdate();
-
-            //cbTitleUrl.Items.AddRange(itemsToBeSorted.ToArray());
-
-            //cbTitleUrl.EndUpdate();
+            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
 
         }
 

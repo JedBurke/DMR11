@@ -47,7 +47,7 @@ namespace DMR11.Core
                     SinglePage = singlePage;
 
                 }
-
+                
             }
         }
 

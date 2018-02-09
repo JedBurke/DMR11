@@ -24,7 +24,7 @@ namespace DMR11.Core
             : base(address)
         {
             HostData = LoadConfigFile(address);
-
+            
         }
 
         /// <summary>

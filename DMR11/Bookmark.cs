@@ -49,6 +49,7 @@ namespace DMR11
             set;
         }
 
+
         [DataMember]
         public bool Completed
         {
@@ -65,6 +66,13 @@ namespace DMR11
 
         [DataMember]
         public long DateUpdated
+        {
+            get;
+            set;
+        }
+
+        [DataMember(Name="Destination")]
+        public string SaveDestination
         {
             get;
             set;

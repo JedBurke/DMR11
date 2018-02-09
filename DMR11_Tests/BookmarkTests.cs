@@ -10,78 +10,87 @@ namespace DMR11_Tests
     [TestClass]
     public class BookmarkTest
     {
-        [TestMethod]
-        public void SerializeBookmarks()
+        string bookmarksPath = "settings/bookmarks.json";
+        BookmarkManager manager = null;
+
+        [TestInitialize]
+        public void SetupBookmarks()
         {
-            var bookmarkManager = new DMR11.BookmarkManager();
-            bookmarkManager.LoadBookmarks("settings/bookmarks.xml");
+            manager = new BookmarkManager(bookmarksPath);
 
-            //var bookmarks = new Bookmarks();
-            //bookmarks.BookmarkedSeries = new[] {
-            //    new Bookmark() {
-            //        Name = "Grand Blue",
-            //        SeriesUri = new UriValidated("//mangafox.la/manga/grand_blue"),
-            //        Completed = false
-            //    },
-            //    new Bookmark() {
-            //        Name = "Crows"
-            //    }
-            //};
+            if (manager.GetBookmarks().Length == 0)
+            {
+                Console.WriteLine("Bookmarks are empty...");
 
-            //var bookmark = new DMR11.Bookmark();
-            //bookmark.Name = "Grand Blue";
-            //bookmark.SeriesUri = new UriValidated("//mangafox.la/manga/grand_blue");
-
-            var i = new Bookmark[] {
-                new Bookmark() {
+                manager.AddBookmark(new Bookmark()
+                {
                     Name = "Grand Blue",
-                    SeriesUri = new UriValidated("//mangafox.la/manga/grand_blue"),
-                    Completed = false
-                },
-                new Bookmark() {
-                    Name = "Crows"
-                }
-            };
+                    SeriesUri = new UriValidated("http://test.manga.com/grand_blue"),
+                    SaveDestination = "D:/manga/grand_blue",
+                    DateAdded = DateTime.Now.Ticks,
+                    DateUpdated = DateTime.Now.Ticks,
+                    Site = "test-manga"
+                });
 
 
-            var stream1 = new MemoryStream();
-            var xmlSer = new DataContractJsonSerializer(typeof(Bookmark[]));
-                        
-            xmlSer.WriteObject(stream1, i);
+                manager.AddBookmark(new Bookmark()
+                {
+                    Name = "Crows",
+                    SeriesUri = new UriValidated("http://test.manga.com/crows"),
+                    SaveDestination = "D:/manga/crows",
+                    DateAdded = DateTime.Now.Ticks,
+                    DateUpdated = DateTime.Now.Ticks,
+                    Site = "test-manga"
+                });
+            }
+        }
 
-            stream1.Position = 0;
-            StreamReader sr = new StreamReader(stream1);
+        [TestMethod]
+        public void LoadBookmarks()
+        {
+            foreach (var bookmark in manager.GetBookmarks())
+            {
+                Console.WriteLine(bookmark.Name);
+            }
+            
+        }
 
-            Console.WriteLine("Bookmark");
-            //Console.WriteLine(sr.ReadToEnd());
+        [TestMethod]
+        public void SaveBookmarks()
+        {
+            manager.AddBookmark(new Bookmark()
+            {
+                Name = "Minamoto-kun Monogatari",
+                SeriesUri = new UriValidated("http://test.manga.com/minamoto-kun_monogatari"),
+                SaveDestination  = "D:/manga/minamoto-kun_monogatari",
+                Site = "test-manga"
+            });
 
-            File.WriteAllText(DateTime.Now.Ticks + ".json", sr.ReadToEnd());
+            manager.Save();
+        }
+
+        [TestMethod]
+        public void RemoveBookmark()
+        {
 
         }
 
         [TestMethod]
-        public void DeserializeBookmarks()
+        public void Test_Lookup()
         {
-            var bookmarkManager = new DMR11.BookmarkManager();
-            //bookmarkManager.LoadBookmarks("settings/bookmarks.xml");
-            var file = System.IO.File.ReadAllBytes("settings/bookmarks.json");
+            Assert.IsNotNull(manager["Minamoto-kun Monogatari"]);
+            Assert.IsNotNull(manager["minamoto-kun monogatari"]);
 
-            var stream1 = new MemoryStream(file);
-
-            var xmlSer = new DataContractJsonSerializer(typeof(DMR11.Bookmark[]));
-
-            object i = xmlSer.ReadObject(stream1);
-
-
-            Console.WriteLine("Strop");
+            Assert.AreEqual(manager["minamoto-kun monogatari"].SaveDestination, "D:/manga/minamoto-kun_monogatari", true);
         }
 
-        [DataContract(Name = "bookmarks")]
-        public class Bookmarks
+        [TestMethod]
+        public void Test_IsBookmarked()
         {
-            [DataMember]
-            public Bookmark[] BookmarkedSeries;
+           Assert.IsTrue(manager.IsBookmarked(new Uri("http://test.manga.com/minamoto-kun_monogatari")));
+           Assert.IsTrue(manager.IsBookmarked(new Uri("https://test.manga.com/minamoto-kun_monogatari"), true));
+           Assert.IsFalse(manager.IsBookmarked(new Uri("https://Test.Manga.Com/minamoto-kun_monogatari")));
         }
-
+        
     }
 }

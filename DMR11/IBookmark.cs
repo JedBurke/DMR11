@@ -12,6 +12,7 @@ namespace DMR11
         string Name { get; set; }
         string Site { get; set; }
         Uri SeriesUri { get; set; }
+        string SaveDestination { get; set; }
         bool Completed { get; set; }
         long DateAdded { get; set; }
         long DateUpdated { get; set; }

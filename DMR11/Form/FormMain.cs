@@ -50,6 +50,7 @@ namespace DMR11
         {
             InitializeComponent();
 
+            this.Icon = SystemIcons.Application;
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
 
         }
@@ -101,6 +102,7 @@ namespace DMR11
             {
                 if (DownloadQueue.IndexOf(item) < 0)
                 {
+                    item.SaveDestination = SaveDestination;
                     DownloadQueue.Add(item);
                 }
             }
@@ -118,6 +120,7 @@ namespace DMR11
             {
                 if (DownloadQueue.IndexOf(item) < 0)
                 {
+                    item.SaveDestination = SaveDestination;
                     DownloadQueue.Add(item);
                 }
             }
@@ -194,8 +197,11 @@ namespace DMR11
                 {
                     if (DownloadQueue.IndexOf(item) < 0)
                     {
-                        DownloadQueue.Add(item);
+                        // Save the chapter to the current save destination.
+                        item.SaveDestination = SaveDestination;
 
+                        DownloadQueue.Add(item);
+                        
                         if (limit > 0 && (++chaptersAdded == limit))
                             break;
                     }

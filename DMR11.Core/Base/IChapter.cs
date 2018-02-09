@@ -22,9 +22,10 @@ namespace DMR11.Core
             get;
         }
 
-        string SaveTo
+        string SaveDestination
         {
             get;
+            set;
         }
 
         bool IsBusy

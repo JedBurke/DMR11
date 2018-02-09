@@ -104,10 +104,10 @@ namespace DMR11.Core
             set;
         }
 
-        public string SaveTo
+        public string SaveDestination
         {
             get;
-            protected set;
+            set;
         }
 
         public bool IsBusy
@@ -147,7 +147,7 @@ namespace DMR11.Core
         {
             _cancellationToken = cancellationToken;
             _progress = progress;
-            SaveTo = fileName;
+            SaveDestination = fileName;
 
             _task = Task.Factory.StartNew(() =>
             {
@@ -161,7 +161,7 @@ namespace DMR11.Core
                     PopulateImageAddress(html);
                 }
 
-                string saveToFolder = SaveTo + "\\" + this.Name.Trim().RemoveFileNameInvalidChar();
+                string saveToFolder = SaveDestination + "\\" + this.Name.Trim().RemoveFileNameInvalidChar();
                 Directory.CreateDirectory(saveToFolder);
 
                 int countImage = 0;

@@ -213,6 +213,15 @@
       <Name>DMR11.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\appbar.clipboard.paste.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\appbar.page.corner.bookmark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\appbar.page.corner.text.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if "$(ConfigurationName)" == "Release" (

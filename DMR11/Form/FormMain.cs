@@ -57,6 +57,7 @@ namespace DMR11
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
 
             bookmarks = new BookmarkManager("user/bookmarks.json");
+
         }
 
         private void btnGetChapter_Click(object sender, EventArgs e)

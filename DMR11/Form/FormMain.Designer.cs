@@ -91,9 +91,9 @@
             this.btnDownload.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnDownload.Location = new System.Drawing.Point(800, 556);
+            this.btnDownload.Location = new System.Drawing.Point(806, 556);
             this.btnDownload.Name = "btnDownload";
-            this.btnDownload.Size = new System.Drawing.Size(108, 23);
+            this.btnDownload.Size = new System.Drawing.Size(110, 23);
             this.btnDownload.TabIndex = 18;
             this.btnDownload.Text = "Start Download";
             this.btnDownload.UseVisualStyleBackColor = true;
@@ -129,9 +129,9 @@
             // 
             this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnRemove.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnRemove.Location = new System.Drawing.Point(537, 557);
+            this.btnRemove.Location = new System.Drawing.Point(543, 557);
             this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(111, 23);
+            this.btnRemove.Size = new System.Drawing.Size(113, 23);
             this.btnRemove.TabIndex = 16;
             this.btnRemove.Text = "Remove Selected";
             this.toolTip1.SetToolTip(this.btnRemove, "Remove selected chapters from the queue");
@@ -142,9 +142,9 @@
             // 
             this.btnRemoveAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnRemoveAll.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnRemoveAll.Location = new System.Drawing.Point(654, 557);
+            this.btnRemoveAll.Location = new System.Drawing.Point(660, 557);
             this.btnRemoveAll.Name = "btnRemoveAll";
-            this.btnRemoveAll.Size = new System.Drawing.Size(87, 23);
+            this.btnRemoveAll.Size = new System.Drawing.Size(89, 23);
             this.btnRemoveAll.TabIndex = 17;
             this.btnRemoveAll.Text = "Remove All";
             this.toolTip1.SetToolTip(this.btnRemoveAll, "Remove all chapters from the queue");
@@ -170,12 +170,12 @@
             this.ColChapterStatus,
             this.ColChapterUrl,
             this.Column1});
-            this.dgvQueueChapter.Location = new System.Drawing.Point(443, 47);
+            this.dgvQueueChapter.Location = new System.Drawing.Point(449, 47);
             this.dgvQueueChapter.Name = "dgvQueueChapter";
             this.dgvQueueChapter.ReadOnly = true;
             this.dgvQueueChapter.RowHeadersVisible = false;
             this.dgvQueueChapter.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvQueueChapter.Size = new System.Drawing.Size(549, 501);
+            this.dgvQueueChapter.Size = new System.Drawing.Size(551, 501);
             this.dgvQueueChapter.TabIndex = 10;
             // 
             // ColChapterName
@@ -220,9 +220,9 @@
             // 
             this.btnStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnStop.Location = new System.Drawing.Point(914, 556);
+            this.btnStop.Location = new System.Drawing.Point(920, 556);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(78, 23);
+            this.btnStop.Size = new System.Drawing.Size(80, 23);
             this.btnStop.TabIndex = 19;
             this.btnStop.Text = "Stop";
             this.btnStop.UseVisualStyleBackColor = true;
@@ -268,9 +268,9 @@
             // 
             this.btnOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnOptions.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnOptions.Location = new System.Drawing.Point(443, 557);
+            this.btnOptions.Location = new System.Drawing.Point(449, 557);
             this.btnOptions.Name = "btnOptions";
-            this.btnOptions.Size = new System.Drawing.Size(88, 23);
+            this.btnOptions.Size = new System.Drawing.Size(90, 23);
             this.btnOptions.TabIndex = 20;
             this.btnOptions.Text = "Options";
             this.btnOptions.UseVisualStyleBackColor = true;
@@ -372,7 +372,7 @@
             // nudThread
             // 
             this.nudThread.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudThread.Location = new System.Drawing.Point(747, 557);
+            this.nudThread.Location = new System.Drawing.Point(753, 557);
             this.nudThread.Maximum = new decimal(new int[] {
             5,
             0,
@@ -385,7 +385,7 @@
             0});
             this.nudThread.Name = "nudThread";
             this.nudThread.ReadOnly = true;
-            this.nudThread.Size = new System.Drawing.Size(47, 22);
+            this.nudThread.Size = new System.Drawing.Size(49, 22);
             this.nudThread.TabIndex = 24;
             this.nudThread.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.toolTip1.SetToolTip(this.nudThread, "Maximum number of connections");
@@ -527,6 +527,8 @@
             // 
             // headerPanel
             // 
+            this.headerPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.headerPanel.Controls.Add(this.lblUrl);
             this.headerPanel.Controls.Add(this.txtPercent);
             this.headerPanel.Controls.Add(this.btnGetChapter);
@@ -536,7 +538,7 @@
             this.headerPanel.Controls.Add(this.btnPasteUrl);
             this.headerPanel.Location = new System.Drawing.Point(0, 0);
             this.headerPanel.Name = "headerPanel";
-            this.headerPanel.Size = new System.Drawing.Size(1012, 50);
+            this.headerPanel.Size = new System.Drawing.Size(1012, 47);
             this.headerPanel.TabIndex = 32;
             // 
             // FormMain
@@ -545,7 +547,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.ClientSize = new System.Drawing.Size(1012, 614);
-            this.Controls.Add(this.headerPanel);
             this.Controls.Add(this.lbDefaultDestination);
             this.Controls.Add(this.lbSeriesDestination);
             this.Controls.Add(this.rdSeriesDestination);
@@ -566,6 +567,7 @@
             this.Controls.Add(this.btnAddAll);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnDownload);
+            this.Controls.Add(this.headerPanel);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(1020, 644);

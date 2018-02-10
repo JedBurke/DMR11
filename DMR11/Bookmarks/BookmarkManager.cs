@@ -32,28 +32,30 @@ namespace DMR11
         {
             if (File.Exists(path))
             {
-                LoadedPath = path;
-
-                var bookmarksFile = File.ReadAllBytes(LoadedPath);
+                var bookmarksFile = File.ReadAllBytes(path);
 
                 using (var stream = new MemoryStream(bookmarksFile))
                 {
-                    var serializer = new DataContractJsonSerializer(typeof(Bookmark[]));
+                    if (stream.Length > 0)
+                    {
+                        var serializer = new DataContractJsonSerializer(typeof(Bookmark[]));
 
-                    Bookmarks.AddRange((Bookmark[])serializer.ReadObject(stream));
+                        Bookmarks.AddRange((Bookmark[])serializer.ReadObject(stream));
+                    }
                 }
 
             }
             else
             {
                 string pathDirectory = Path.GetDirectoryName(path);
-                
+
                 if (!Directory.Exists(path))
                     Directory.CreateDirectory(pathDirectory);
 
                 File.WriteAllText(path, string.Empty);
             }
 
+            LoadedPath = path;
         }
 
         public AddBookmarkStatus AddBookmark(Bookmark bookmark)
@@ -75,10 +77,10 @@ namespace DMR11
             if (IsBookmarked(series))
             {
                 var bookmark = GetBookmark(series);
-                
+
                 if (bookmark != null)
                 {
-                   return RemoveBookmark(bookmark);
+                    return RemoveBookmark(bookmark);
                 }
             }
 
@@ -142,7 +144,7 @@ namespace DMR11
                 AddBookmark(value);
             }
         }
-        
+
         List<Bookmark> Bookmarks = null;
 
         public Bookmark GetBookmark(string seriesName)

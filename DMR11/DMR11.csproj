@@ -133,10 +133,10 @@
     <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddBookmarkStatus.cs" />
-    <Compile Include="Bookmark.cs" />
-    <Compile Include="BookmarkCollection.cs" />
-    <Compile Include="BookmarkManager.cs" />
+    <Compile Include="Bookmarks\AddBookmarkStatus.cs" />
+    <Compile Include="Bookmarks\Bookmark.cs" />
+    <Compile Include="Bookmarks\BookmarkCollection.cs" />
+    <Compile Include="Bookmarks\BookmarkManager.cs" />
     <Compile Include="Helper\AppInfo.cs" />
     <Compile Include="Helper\KeyState.cs" />
     <Compile Include="Helper\Option.cs" />
@@ -154,7 +154,7 @@
     </Compile>
     <Compile Include="Helper\Common.cs" />
     <Compile Include="Helper\VirtualKeyStates.cs" />
-    <Compile Include="IBookmark.cs" />
+    <Compile Include="Bookmarks\IBookmark.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form\FormMain.resx">

@@ -25,6 +25,9 @@ namespace DMR11
 
         private CancellationTokenSource _cts;
 
+        private BookmarkManager bookmarks = null;
+
+
         private string SaveDestination
         {
             get
@@ -53,6 +56,7 @@ namespace DMR11
             this.Icon = SystemIcons.Application;
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
 
+            bookmarks = new BookmarkManager("user/bookmarks.json");
         }
 
         private void btnGetChapter_Click(object sender, EventArgs e)
@@ -366,6 +370,9 @@ namespace DMR11
 
             Properties.Settings.Default.Save();
             Common.SaveIChapterCollection(DownloadQueue, FILENAME_ICHAPTER_COLLECTION);
+
+            bookmarks.Save();
+            bookmarks.Dispose();
         }
 
         private void btnOptions_Click(object sender, EventArgs e)
@@ -377,40 +384,29 @@ namespace DMR11
         private void LoadBookmark()
         {
             cbTitleUrl.Items.Clear();
-            StringCollection sc = DMR11.Properties.Settings.Default.Bookmark;
+            
+            cbTitleUrl.Items.AddRange(bookmarks.GetBookmarks().Select(bookmark => bookmark.SeriesUri).ToArray());
 
-            if (sc != null)
-            {
-                foreach (string item in sc)
-                {
-                    cbTitleUrl.Items.Add(item);
-                }
-            }
         }
 
         private void btnAddBookmark_Click(object sender, EventArgs e)
         {
-            StringCollection sc = DMR11.Properties.Settings.Default.Bookmark;
-            if (sc == null)
+            var bookmark = new Bookmark() { 
+                Name = cbTitleUrl.Text,
+                SeriesUri = new UriValidated(cbTitleUrl.Text)
+            };
+
+            if (bookmarks.AddBookmark(bookmark) == AddBookmarkStatus.Success)
             {
-                sc = new StringCollection();
-            }
-            if (sc.Contains(cbTitleUrl.Text) == false)
-            {
-                sc.Add(cbTitleUrl.Text);
-                DMR11.Properties.Settings.Default.Bookmark = sc;
                 LoadBookmark();
             }
+
         }
 
         private void btnRemoveBookmark_Click(object sender, EventArgs e)
-        {
-            StringCollection sc = DMR11.Properties.Settings.Default.Bookmark;
-            if (sc != null)
+        {            
+            if (bookmarks.RemoveBookmark(cbTitleUrl.Text))
             {
-                sc.Remove(cbTitleUrl.Text);
-                DMR11.Properties.Settings.Default.Bookmark = sc;
-
                 LoadBookmark();
             }
         }

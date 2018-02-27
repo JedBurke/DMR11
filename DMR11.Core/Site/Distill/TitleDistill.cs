@@ -16,7 +16,6 @@ namespace DMR11.Core
     public class TitleDistill : TitleBase
     {
         const string HOST_LOOKUP_PATH = "hosts";
-        const string CONFIG_FILE_NAME = "config.ini";
 
         IniData HostData = null;
 
@@ -78,7 +77,7 @@ namespace DMR11.Core
 
                 if (string.Compare(directoryName, hostName, true) == 0)
                 {
-                    return Path.Combine(path, CONFIG_FILE_NAME);
+                    return Path.Combine(path, WebsiteHost.WebsiteHost.CONFIG_FILE_NAME);
                 }
             }
 

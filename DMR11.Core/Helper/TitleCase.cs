@@ -5,12 +5,34 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DMR11.Core.Helper
-{    
+{
     public class WordConverter
     {
         public static string ToTitleCase(string input)
         {
             return ToTitleCase(input, null);
+        }
+
+        public static string ToTitleCase(string input, TitleCaseExclusions language)
+        {
+            string[] excludedWords = null;
+
+            switch (language)
+            {
+                case TitleCaseExclusions.English:
+                    excludedWords = ExclusionsEng;
+                    break;
+                case TitleCaseExclusions.Japanese:
+                    excludedWords = ExclusionsJpn;
+                    break;
+
+                case TitleCaseExclusions.EnglishAndJapanese:
+                    excludedWords = ExclusionsEngAndJpn;
+                    break;
+            }
+
+            return ToTitleCase(input, excludedWords);
+
         }
 
         public static string ToTitleCase(string input, string[] excludedWords)
@@ -28,7 +50,7 @@ namespace DMR11.Core.Helper
                 var currentWord = splitWords[wordIndex].ToLowerInvariant();
 
                 // Capitialize the first word, last word, and words which aren't excluded.
-                if (wordIndex == 0 || wordIndex == splitWords.Length -1 || (excludedWords != null && Array.IndexOf(excludedWords, currentWord) == -1))
+                if (wordIndex == 0 || wordIndex == splitWords.Length - 1 || (excludedWords != null && Array.IndexOf(excludedWords, currentWord) == -1))
                 {
                     currentWord = CapitalizeWord(currentWord);
                 }
@@ -71,11 +93,82 @@ namespace DMR11.Core.Helper
 
         }
 
-        public static readonly string[] ExclusionsJpn = new string[] {
-            ""
+        public static string[] _exclusionsEngAndJpn = null;
+
+        public static string[] ExclusionsEngAndJpn
+        {
+            get
+            {
+                if (_exclusionsEngAndJpn == null)
+                {
+                    _exclusionsEngAndJpn = new string[ExclusionsEng.Length + ExclusionsJpn.Length];
+                    
+                    Array.Copy(ExclusionsEng, _exclusionsEngAndJpn, ExclusionsEng.Length);
+                    Array.Copy(ExclusionsJpn, 0, _exclusionsEngAndJpn, ExclusionsEng.Length, ExclusionsJpn.Length);
+                }
+
+                return _exclusionsEngAndJpn;
+            }
+        }
+
+        public static string[] ExclusionsJpn
+        {
+            get
+            {
+                return _exclusionsJpn;
+            }
+        }
+
+        public static string[] ExclusionsEng {
+            get
+            {
+                return _exclusionsEng;
+            }
+        }
+
+        private static string[] _exclusionsJpn = new string[] {
+            "bakari",
+            "bakashi",
+            "dake",
+            "de",
+            "e",
+            "ga",
+            "hodo",
+            "ka",
+            "kai",
+            "kara",
+            "kedo",
+            "kiri",
+            "kke",
+            "koso",
+            "made",
+            "me",
+            "mo",
+            "nado",
+            "nara",
+            "ne",
+            "ni",
+            "no",
+            "nomi",
+            "o",
+            "sae",
+            "shi",
+            "shika",
+            "sura",
+            "to",
+            "tte",
+            "tteba",
+            "wa",
+            "ya",
+            "yara",
+            "yo",
+            "yori",
+            "ze",
+            "zo",
+            "zutsu"
         };
 
-        public static readonly string[] ExclusionsEng = new string[] {
+        private static string[] _exclusionsEng = new string[] {
             // Articles
             "a",
             "an",

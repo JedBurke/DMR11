@@ -76,6 +76,7 @@
     <Compile Include="Base\ChapterParseDetails.cs" />
     <Compile Include="Helper\ChapterProgress.cs" />
     <Compile Include="Helper\Downloader.cs" />
+    <Compile Include="Helper\ExcludedWordsForLanguage.cs" />
     <Compile Include="Helper\Extension.cs" />
     <Compile Include="Base\Progress.cs" />
     <Compile Include="Base\ParseDetails.cs" />

@@ -17,6 +17,7 @@ namespace DMR11.Core
         /// <returns></returns>
         public static string RemoveFileNameInvalidChar(this String input)
         {
+            // Todo: Optimize;
             return input.Replace("\\", "").Replace("/", "").Replace(":", "")
                         .Replace("*", "").Replace("?", "").Replace("\"", "")
                         .Replace("<", "").Replace(">", "").Replace("|", "");

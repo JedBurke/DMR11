@@ -63,7 +63,7 @@ namespace DMR11.Core
                 client.Timeout = TimeSpan.FromSeconds(25);
                 string html = null;
 
-                client.DefaultRequestHeaders.Add("User-Agent", Helper.UserAgents.UserAgent);
+                client.DefaultRequestHeaders.Add("User-Agent", Service.UserAgent.CurrentUserAgent);
                 
 
                 try

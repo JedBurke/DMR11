@@ -22,7 +22,7 @@ namespace DMR11.Core
             }
             else
             {
-                string message = String.Format("This site ({0}) is not supported.", uri.Host);
+                string message = String.Format("'{0}' is currently unsupported.", uri.Host);
                 throw new Exception(message);
             }
 

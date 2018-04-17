@@ -63,7 +63,7 @@ namespace DMR11.Core
                 client.Timeout = TimeSpan.FromSeconds(25);
                 string html = null;
 
-                client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36");
+                client.DefaultRequestHeaders.Add("User-Agent", Helper.UserAgents.UserAgent);
                 
 
                 try

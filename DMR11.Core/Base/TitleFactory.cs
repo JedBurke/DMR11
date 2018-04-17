@@ -15,38 +15,17 @@ namespace DMR11.Core
         public static ITitle CreateTitle(UriValidated uri)
         {
             ITitle title = null;
-            switch (uri.Host)
+            
+            if (TitleDistill.IsDistilled(uri))
             {
-                case "kissmanga.com":
-                    title = new TitleKissManga(uri);
-                    break;
-                //case "mangafox.la":
-                //    title = new TitleMangaFox(uri);
-                //    break;
-                case "www.mangahere.co":
-                case "www.mangahere.com":
-                    title = new TitleMangaHere(uri);
-                    break;
-                case "www.mangareader.net":
-                    title = new TitleMangaReader(uri);
-                    break;
-                default:
-                    {
-                        // Check if Host distillation exists for this website.
-                        if (TitleDistill.IsDistilled(uri))
-                        {
-                            title = new TitleDistill(uri);
-                        }
-                        else
-                        {
-                            string message = String.Format("This site ({0}) is not supported.", uri.Host);
-                            throw new Exception(message);
-                        }
-
-                        break;
-                    }
-
+                title = new TitleDistill(uri);
             }
+            else
+            {
+                string message = String.Format("This site ({0}) is not supported.", uri.Host);
+                throw new Exception(message);
+            }
+
             return title;
         }
 

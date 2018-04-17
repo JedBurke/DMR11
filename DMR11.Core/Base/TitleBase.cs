@@ -57,11 +57,14 @@ namespace DMR11.Core
                 progress.ReportProgress(0);
 
 #if MISSED_KISS
-                CloudFlareUtilities.ClearanceHandler handler = new CloudFlareUtilities.ClearanceHandler();
+                var handler = new CloudFlareUtilities.ClearanceHandler(new StatusRedirectionHandler());
 
                 HttpClient client = new HttpClient(handler);
                 client.Timeout = TimeSpan.FromSeconds(25);
                 string html = null;
+
+                client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36");
+                
 
                 try
                 {

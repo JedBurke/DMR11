@@ -103,6 +103,7 @@
     <Compile Include="Site\MangaHere\TitleMangaHere.cs" />
     <Compile Include="Site\MangaReader\ChapterMangaReader.cs" />
     <Compile Include="Site\MangaReader\TitleMangaReader.cs" />
+    <Compile Include="StatusRedirectionHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Site\MangaPark\" />

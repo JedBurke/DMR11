@@ -78,27 +78,38 @@
             // btnGetChapter
             // 
             this.btnGetChapter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGetChapter.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnGetChapter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(215)))), ((int)(((byte)(215)))));
+            this.btnGetChapter.FlatAppearance.BorderSize = 0;
+            this.btnGetChapter.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnGetChapter.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
+            this.btnGetChapter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGetChapter.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGetChapter.Location = new System.Drawing.Point(902, 11);
             this.btnGetChapter.Name = "btnGetChapter";
-            this.btnGetChapter.Size = new System.Drawing.Size(91, 25);
+            this.btnGetChapter.Size = new System.Drawing.Size(98, 25);
             this.btnGetChapter.TabIndex = 5;
             this.btnGetChapter.Text = "Get Chapters";
             this.toolTip1.SetToolTip(this.btnGetChapter, "Retrieve chapters from the current URL");
-            this.btnGetChapter.UseVisualStyleBackColor = true;
+            this.btnGetChapter.UseVisualStyleBackColor = false;
             this.btnGetChapter.Click += new System.EventHandler(this.btnGetChapter_Click);
             // 
             // btnDownload
             // 
             this.btnDownload.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnDownload.Location = new System.Drawing.Point(806, 569);
+            this.btnDownload.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(215)))), ((int)(((byte)(215)))));
+            this.btnDownload.FlatAppearance.BorderSize = 0;
+            this.btnDownload.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnDownload.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
+            this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDownload.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDownload.ForeColor = System.Drawing.Color.Black;
+            this.btnDownload.Location = new System.Drawing.Point(806, 565);
             this.btnDownload.Name = "btnDownload";
-            this.btnDownload.Size = new System.Drawing.Size(110, 23);
+            this.btnDownload.Size = new System.Drawing.Size(110, 25);
             this.btnDownload.TabIndex = 18;
             this.btnDownload.Text = "Start Download";
-            this.btnDownload.UseVisualStyleBackColor = true;
+            this.btnDownload.UseVisualStyleBackColor = false;
             this.btnDownload.Click += new System.EventHandler(this.btnDownload_Click);
             // 
             // btnAdd
@@ -131,7 +142,7 @@
             // 
             this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnRemove.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnRemove.Location = new System.Drawing.Point(543, 570);
+            this.btnRemove.Location = new System.Drawing.Point(543, 566);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(113, 23);
             this.btnRemove.TabIndex = 16;
@@ -144,7 +155,7 @@
             // 
             this.btnRemoveAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnRemoveAll.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnRemoveAll.Location = new System.Drawing.Point(660, 570);
+            this.btnRemoveAll.Location = new System.Drawing.Point(660, 566);
             this.btnRemoveAll.Name = "btnRemoveAll";
             this.btnRemoveAll.Size = new System.Drawing.Size(89, 23);
             this.btnRemoveAll.TabIndex = 17;
@@ -177,7 +188,7 @@
             this.dgvQueueChapter.ReadOnly = true;
             this.dgvQueueChapter.RowHeadersVisible = false;
             this.dgvQueueChapter.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvQueueChapter.Size = new System.Drawing.Size(551, 516);
+            this.dgvQueueChapter.Size = new System.Drawing.Size(551, 512);
             this.dgvQueueChapter.TabIndex = 10;
             // 
             // ColChapterName
@@ -221,13 +232,19 @@
             // btnStop
             // 
             this.btnStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnStop.Location = new System.Drawing.Point(920, 569);
+            this.btnStop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(215)))), ((int)(((byte)(215)))));
+            this.btnStop.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnStop.FlatAppearance.BorderSize = 0;
+            this.btnStop.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnStop.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
+            this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStop.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStop.Location = new System.Drawing.Point(920, 565);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(80, 23);
+            this.btnStop.Size = new System.Drawing.Size(80, 25);
             this.btnStop.TabIndex = 19;
             this.btnStop.Text = "Stop";
-            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.UseVisualStyleBackColor = false;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // btnChangeSaveTo
@@ -270,7 +287,7 @@
             // 
             this.btnOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnOptions.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnOptions.Location = new System.Drawing.Point(449, 570);
+            this.btnOptions.Location = new System.Drawing.Point(449, 566);
             this.btnOptions.Name = "btnOptions";
             this.btnOptions.Size = new System.Drawing.Size(90, 23);
             this.btnOptions.TabIndex = 20;
@@ -374,7 +391,7 @@
             // nudThread
             // 
             this.nudThread.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudThread.Location = new System.Drawing.Point(753, 570);
+            this.nudThread.Location = new System.Drawing.Point(753, 566);
             this.nudThread.Maximum = new decimal(new int[] {
             5,
             0,

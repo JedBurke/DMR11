@@ -305,7 +305,10 @@ namespace DMR11
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            _cts.Cancel();
+            if (_cts != null)
+            {
+                _cts.Cancel();
+            }
         }
 
         private void btnChangeSaveTo_Click(object sender, EventArgs e)

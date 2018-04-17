@@ -1,6 +1,7 @@
 ﻿#define MISSED_KISS
 
 using CloudFlareUtilities;
+using DMR11.Core.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -213,12 +214,12 @@ namespace DMR11.Core
 
         private void DownloadFile(UriValidated address, string fileName)
         {
-            Helper.Downloader.Instance.DownloadFile(address, fileName, _cancellationToken);
+            Downloader.Instance.DownloadFile(address, fileName, _cancellationToken);
         }
 
         private string DownloadString(UriValidated address)
         {
-            return Helper.Downloader.Instance.DownloadString(address);
+            return Downloader.Instance.DownloadString(address);
         }
         
         /// <summary>

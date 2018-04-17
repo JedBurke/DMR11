@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DMR11.Core.Helper
+namespace DMR11.Core.Service
 {
     public class Downloader
     {

@@ -40,25 +40,37 @@ namespace DMR11.Core
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the chapter's name.
+        /// </summary>
         public string Name
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the chapter's URI.
+        /// </summary>
         public UriValidated Address
         {
             get;
             protected set;
         }
-
-        private List<UriValidated> ImageAddresses
+        
+        /// <summary>
+        /// Gets or sets the location of where to save the downloaded chapter.
+        /// </summary>
+        public string SaveDestination
         {
             get;
             set;
         }
-
-        public string SaveDestination
+        
+        /// <summary>
+        /// Gets or sets a list of URIs representing the pages in the chapter.
+        /// </summary>
+        private List<UriValidated> ImageAddresses
         {
             get;
             set;
@@ -115,6 +127,7 @@ namespace DMR11.Core
                     PopulateImageAddress(html);
                 }
 
+                // Todo: Refactor.
                 string saveToFolder = SaveDestination + "\\" + this.Name.Trim().RemoveFileNameInvalidChar();
                 Directory.CreateDirectory(saveToFolder);
 
@@ -207,47 +220,7 @@ namespace DMR11.Core
         {
             return Helper.Downloader.Instance.DownloadString(address);
         }
-
-
-        // Todo: Implement a reusable http client to bypass the KissManga wait.
-
-        HttpClient ReusableClient = null;
-        ClearanceHandler ReusableKissHandler = null;
-
-        private string DownloadStringR(UriValidated address)
-        {
-            // Todo: Optimize. Don't wrap entire code block in Try/Catch
-
-            var result = new StringBuilder();
-            var content = string.Empty;
-
-            if (ReusableClient == null || ReusableKissHandler == null)
-            {
-                Console.WriteLine("Initializing new client.");
-                
-                ReusableKissHandler = new ClearanceHandler();
-
-                ReusableClient = new HttpClient(ReusableKissHandler)
-                {
-                    Timeout = TimeSpan.FromSeconds(15)
-                };
-            }
-
-            try
-            {
-                content = ReusableClient.GetStringAsync(address.ToString()).Result;
-            }
-            catch (Exception ex)
-            {
-                string error = String.Format("{0} - Error while download: {2} - Reason: {3}", DateTime.Now.ToLongTimeString(), this.Name, address.AbsoluteUri, ex.Message);
-                throw new Exception(error, ex);
-            }
-
-            result.Append(content);
-
-            return result.ToString();
-        }
-
+        
         /// <summary>
         /// A method called before the parsing the image addresses occur.
         /// </summary>

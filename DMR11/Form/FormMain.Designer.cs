@@ -53,7 +53,7 @@
             this.cbTitleUrl = new System.Windows.Forms.ComboBox();
             this.btnAddBookmark = new System.Windows.Forms.Button();
             this.btnRemoveBookmark = new System.Windows.Forms.Button();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.MainToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.btnAddPrefixCounter = new System.Windows.Forms.Button();
             this.nudThread = new System.Windows.Forms.NumericUpDown();
             this.btnPasteUrl = new System.Windows.Forms.Button();
@@ -90,7 +90,7 @@
             this.btnGetChapter.Size = new System.Drawing.Size(98, 25);
             this.btnGetChapter.TabIndex = 5;
             this.btnGetChapter.Text = "Get Chapters";
-            this.toolTip1.SetToolTip(this.btnGetChapter, "Retrieve chapters from the current URL");
+            this.MainToolTip.SetToolTip(this.btnGetChapter, "Retrieve chapters from the current URL");
             this.btnGetChapter.UseVisualStyleBackColor = false;
             this.btnGetChapter.Click += new System.EventHandler(this.btnGetChapter_Click);
             // 
@@ -118,12 +118,12 @@
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnAdd.Location = new System.Drawing.Point(143, 433);
+            this.btnAdd.Location = new System.Drawing.Point(172, 433);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(163, 23);
+            this.btnAdd.Size = new System.Drawing.Size(133, 23);
             this.btnAdd.TabIndex = 8;
             this.btnAdd.Text = "Add Selected";
-            this.toolTip1.SetToolTip(this.btnAdd, "Add selected chapters to queue");
+            this.MainToolTip.SetToolTip(this.btnAdd, "Add selected chapters to queue");
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
@@ -136,7 +136,7 @@
             this.btnAddAll.Size = new System.Drawing.Size(60, 23);
             this.btnAddAll.TabIndex = 9;
             this.btnAddAll.Text = "All";
-            this.toolTip1.SetToolTip(this.btnAddAll, "Add all chapters to queue");
+            this.MainToolTip.SetToolTip(this.btnAddAll, "Add all chapters to queue");
             this.btnAddAll.UseVisualStyleBackColor = true;
             this.btnAddAll.Click += new System.EventHandler(this.btnAddAll_Click);
             // 
@@ -156,7 +156,7 @@
             this.btnRemove.Size = new System.Drawing.Size(89, 25);
             this.btnRemove.TabIndex = 16;
             this.btnRemove.Text = "Remove";
-            this.toolTip1.SetToolTip(this.btnRemove, "Remove selected chapters from the queue");
+            this.MainToolTip.SetToolTip(this.btnRemove, "Remove selected chapters from the queue");
             this.btnRemove.UseVisualStyleBackColor = false;
             this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
@@ -176,7 +176,7 @@
             this.btnRemoveAll.Size = new System.Drawing.Size(89, 25);
             this.btnRemoveAll.TabIndex = 17;
             this.btnRemoveAll.Text = "Remove All";
-            this.toolTip1.SetToolTip(this.btnRemoveAll, "Remove all chapters from the queue");
+            this.MainToolTip.SetToolTip(this.btnRemoveAll, "Remove all chapters from the queue");
             this.btnRemoveAll.UseVisualStyleBackColor = false;
             this.btnRemoveAll.Click += new System.EventHandler(this.btnRemoveAll_Click);
             // 
@@ -273,7 +273,7 @@
             this.btnChangeSaveTo.Size = new System.Drawing.Size(30, 22);
             this.btnChangeSaveTo.TabIndex = 13;
             this.btnChangeSaveTo.Text = "...";
-            this.toolTip1.SetToolTip(this.btnChangeSaveTo, "Change folder");
+            this.MainToolTip.SetToolTip(this.btnChangeSaveTo, "Change folder");
             this.btnChangeSaveTo.UseVisualStyleBackColor = true;
             this.btnChangeSaveTo.Click += new System.EventHandler(this.btnChangeSaveTo_Click);
             // 
@@ -286,7 +286,7 @@
             this.btnOpenFolder.Size = new System.Drawing.Size(60, 22);
             this.btnOpenFolder.TabIndex = 14;
             this.btnOpenFolder.Text = "Open";
-            this.toolTip1.SetToolTip(this.btnOpenFolder, "Open destination folder");
+            this.MainToolTip.SetToolTip(this.btnOpenFolder, "Open destination folder");
             this.btnOpenFolder.UseVisualStyleBackColor = true;
             this.btnOpenFolder.Click += new System.EventHandler(this.btnOpenFolder_Click);
             // 
@@ -371,7 +371,7 @@
             this.btnAddBookmark.Name = "btnAddBookmark";
             this.btnAddBookmark.Size = new System.Drawing.Size(28, 25);
             this.btnAddBookmark.TabIndex = 2;
-            this.toolTip1.SetToolTip(this.btnAddBookmark, "Bookmark this URL");
+            this.MainToolTip.SetToolTip(this.btnAddBookmark, "Bookmark this URL");
             this.btnAddBookmark.UseVisualStyleBackColor = true;
             this.btnAddBookmark.Click += new System.EventHandler(this.btnAddBookmark_Click);
             // 
@@ -389,21 +389,28 @@
             this.btnRemoveBookmark.Name = "btnRemoveBookmark";
             this.btnRemoveBookmark.Size = new System.Drawing.Size(28, 25);
             this.btnRemoveBookmark.TabIndex = 3;
-            this.toolTip1.SetToolTip(this.btnRemoveBookmark, "Remove this bookmarked URL");
+            this.MainToolTip.SetToolTip(this.btnRemoveBookmark, "Remove this bookmarked URL");
             this.btnRemoveBookmark.UseVisualStyleBackColor = true;
             this.btnRemoveBookmark.Click += new System.EventHandler(this.btnRemoveBookmark_Click);
             // 
             // btnAddPrefixCounter
             // 
             this.btnAddPrefixCounter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddPrefixCounter.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnAddPrefixCounter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(215)))), ((int)(((byte)(215)))));
+            this.btnAddPrefixCounter.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnAddPrefixCounter.FlatAppearance.BorderSize = 0;
+            this.btnAddPrefixCounter.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnAddPrefixCounter.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
+            this.btnAddPrefixCounter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddPrefixCounter.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddPrefixCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
             this.btnAddPrefixCounter.Location = new System.Drawing.Point(12, 433);
             this.btnAddPrefixCounter.Name = "btnAddPrefixCounter";
-            this.btnAddPrefixCounter.Size = new System.Drawing.Size(120, 23);
+            this.btnAddPrefixCounter.Size = new System.Drawing.Size(83, 25);
             this.btnAddPrefixCounter.TabIndex = 7;
-            this.btnAddPrefixCounter.Text = "Add Prefix Counter";
-            this.toolTip1.SetToolTip(this.btnAddPrefixCounter, "Add prefix counter to chapter name");
-            this.btnAddPrefixCounter.UseVisualStyleBackColor = true;
+            this.btnAddPrefixCounter.Text = "Format...";
+            this.MainToolTip.SetToolTip(this.btnAddPrefixCounter, "Format the directory name of the downloaded chapter(s)");
+            this.btnAddPrefixCounter.UseVisualStyleBackColor = false;
             this.btnAddPrefixCounter.Click += new System.EventHandler(this.btnAddPrefixCounter_Click);
             // 
             // nudThread
@@ -425,7 +432,7 @@
             this.nudThread.Size = new System.Drawing.Size(49, 22);
             this.nudThread.TabIndex = 24;
             this.nudThread.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.nudThread, "Maximum number of connections");
+            this.MainToolTip.SetToolTip(this.nudThread, "Maximum number of connections");
             this.nudThread.Value = new decimal(new int[] {
             1,
             0,
@@ -446,7 +453,7 @@
             this.btnPasteUrl.Name = "btnPasteUrl";
             this.btnPasteUrl.Size = new System.Drawing.Size(28, 25);
             this.btnPasteUrl.TabIndex = 25;
-            this.toolTip1.SetToolTip(this.btnPasteUrl, "Paste URL from clipboard and get chapters");
+            this.MainToolTip.SetToolTip(this.btnPasteUrl, "Paste URL from clipboard and get chapters");
             this.btnPasteUrl.UseVisualStyleBackColor = true;
             this.btnPasteUrl.Click += new System.EventHandler(this.btnPasteUrl_Click);
             // 
@@ -459,7 +466,7 @@
             this.btnAddNew.Size = new System.Drawing.Size(60, 23);
             this.btnAddNew.TabIndex = 10;
             this.btnAddNew.Text = "New";
-            this.toolTip1.SetToolTip(this.btnAddNew, "Add latest chapters to queue\r\nHold SHIFT to only add the 5 latest chapters");
+            this.MainToolTip.SetToolTip(this.btnAddNew, "Add latest chapters to queue\r\nHold SHIFT to only add the 5 latest chapters");
             this.btnAddNew.UseVisualStyleBackColor = true;
             this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
             // 
@@ -476,7 +483,7 @@
             this.lbSeriesDestination.Size = new System.Drawing.Size(380, 17);
             this.lbSeriesDestination.TabIndex = 29;
             this.lbSeriesDestination.Text = "Series-Specific Destination";
-            this.toolTip1.SetToolTip(this.lbSeriesDestination, "Saves the chapter to the series\' folder");
+            this.MainToolTip.SetToolTip(this.lbSeriesDestination, "Saves the chapter to the series\' folder");
             this.lbSeriesDestination.UseMnemonic = false;
             this.lbSeriesDestination.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lbSeriesDestination_MouseClick);
             // 
@@ -494,7 +501,7 @@
             this.lbDefaultDestination.Size = new System.Drawing.Size(380, 17);
             this.lbDefaultDestination.TabIndex = 30;
             this.lbDefaultDestination.Text = global::DMR11.Properties.Settings.Default.SaveTo;
-            this.toolTip1.SetToolTip(this.lbDefaultDestination, "Saves the chapter to the default manga folder");
+            this.MainToolTip.SetToolTip(this.lbDefaultDestination, "Saves the chapter to the default manga folder");
             this.lbDefaultDestination.UseMnemonic = false;
             this.lbDefaultDestination.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lbDefaultDestination_MouseClick);
             // 
@@ -655,7 +662,7 @@
         private System.Windows.Forms.ComboBox cbTitleUrl;
         private System.Windows.Forms.Button btnAddBookmark;
         private System.Windows.Forms.Button btnRemoveBookmark;
-        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolTip MainToolTip;
         private System.Windows.Forms.Button btnAddPrefixCounter;
         private System.Windows.Forms.TextBox txtMessage;
         private System.Windows.Forms.NumericUpDown nudThread;

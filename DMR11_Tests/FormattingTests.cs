@@ -30,7 +30,7 @@ namespace DMR11_Tests
             
             var format = "{0} - {1:000.#######}";
 
-            Assert.AreEqual("Houkago Play - 003.9", string.Format(format, seriesName, chapter));
+            Assert.AreEqual("Houkago Play - 003.96", string.Format(format, seriesName, chapter));
 
         }
     }

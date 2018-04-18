@@ -106,7 +106,7 @@
             this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDownload.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDownload.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
-            this.btnDownload.Location = new System.Drawing.Point(806, 565);
+            this.btnDownload.Location = new System.Drawing.Point(890, 565);
             this.btnDownload.Name = "btnDownload";
             this.btnDownload.Size = new System.Drawing.Size(110, 25);
             this.btnDownload.TabIndex = 18;
@@ -120,7 +120,7 @@
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnAdd.Location = new System.Drawing.Point(172, 433);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(133, 23);
+            this.btnAdd.Size = new System.Drawing.Size(133, 25);
             this.btnAdd.TabIndex = 8;
             this.btnAdd.Text = "Add Selected";
             this.MainToolTip.SetToolTip(this.btnAdd, "Add selected chapters to queue");
@@ -133,7 +133,7 @@
             this.btnAddAll.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnAddAll.Location = new System.Drawing.Point(311, 433);
             this.btnAddAll.Name = "btnAddAll";
-            this.btnAddAll.Size = new System.Drawing.Size(60, 23);
+            this.btnAddAll.Size = new System.Drawing.Size(60, 25);
             this.btnAddAll.TabIndex = 9;
             this.btnAddAll.Text = "All";
             this.MainToolTip.SetToolTip(this.btnAddAll, "Add all chapters to queue");
@@ -256,7 +256,7 @@
             this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStop.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStop.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
-            this.btnStop.Location = new System.Drawing.Point(920, 565);
+            this.btnStop.Location = new System.Drawing.Point(806, 565);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(80, 25);
             this.btnStop.TabIndex = 19;
@@ -268,9 +268,9 @@
             // 
             this.btnChangeSaveTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnChangeSaveTo.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnChangeSaveTo.Location = new System.Drawing.Point(341, 478);
+            this.btnChangeSaveTo.Location = new System.Drawing.Point(321, 477);
             this.btnChangeSaveTo.Name = "btnChangeSaveTo";
-            this.btnChangeSaveTo.Size = new System.Drawing.Size(30, 22);
+            this.btnChangeSaveTo.Size = new System.Drawing.Size(39, 25);
             this.btnChangeSaveTo.TabIndex = 13;
             this.btnChangeSaveTo.Text = "...";
             this.MainToolTip.SetToolTip(this.btnChangeSaveTo, "Change folder");
@@ -281,9 +281,9 @@
             // 
             this.btnOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnOpenFolder.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnOpenFolder.Location = new System.Drawing.Point(377, 478);
+            this.btnOpenFolder.Location = new System.Drawing.Point(366, 477);
             this.btnOpenFolder.Name = "btnOpenFolder";
-            this.btnOpenFolder.Size = new System.Drawing.Size(60, 22);
+            this.btnOpenFolder.Size = new System.Drawing.Size(71, 25);
             this.btnOpenFolder.TabIndex = 14;
             this.btnOpenFolder.Text = "Open";
             this.MainToolTip.SetToolTip(this.btnOpenFolder, "Open destination folder");
@@ -463,7 +463,7 @@
             this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnAddNew.Location = new System.Drawing.Point(377, 433);
             this.btnAddNew.Name = "btnAddNew";
-            this.btnAddNew.Size = new System.Drawing.Size(60, 23);
+            this.btnAddNew.Size = new System.Drawing.Size(60, 25);
             this.btnAddNew.TabIndex = 10;
             this.btnAddNew.Text = "New";
             this.MainToolTip.SetToolTip(this.btnAddNew, "Add latest chapters to queue\r\nHold SHIFT to only add the 5 latest chapters");

@@ -55,6 +55,7 @@ namespace DMR11
 
             this.Icon = SystemIcons.Application;
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
+            SetButtonStyle();
 
             bookmarks = new BookmarkManager("user/bookmarks.json");
 
@@ -533,6 +534,34 @@ namespace DMR11
             if (Directory.Exists(path))
                 rdSeriesDestination.Checked = true;
 
+        }
+
+        private void SetButtonStyle()
+        {
+            var buttonFont = new Font("Segoe UI", 9, FontStyle.Regular, GraphicsUnit.Point);
+
+            this.Controls.OfType<Button>().ToList().ForEach((button) => {
+                if (button != null)
+                {
+                    button.FlatStyle = FlatStyle.Flat;
+
+                    button.FlatAppearance.BorderColor = Color.DarkGray;
+                    button.FlatAppearance.BorderSize = 0;
+                    button.FlatAppearance.MouseOverBackColor = Color.LightGray;
+                    button.FlatAppearance.MouseDownBackColor = Color.Silver;
+
+                    if (button.BackgroundImage == null)
+                    {
+                        button.BackColor = Color.FromArgb(215, 215, 215);
+                        button.ForeColor = Color.FromArgb(45, 45, 45);
+                        button.Font = buttonFont;
+                    }
+                    else
+                    {
+                        button.BackColor = Color.FromArgb(230, 230, 230);
+                    }
+                }
+            });
         }
 
     }

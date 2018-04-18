@@ -293,12 +293,13 @@
             // lblUrl
             // 
             this.lblUrl.AutoSize = true;
+            this.lblUrl.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUrl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblUrl.Location = new System.Drawing.Point(13, 14);
+            this.lblUrl.Location = new System.Drawing.Point(8, 11);
             this.lblUrl.Name = "lblUrl";
-            this.lblUrl.Size = new System.Drawing.Size(27, 13);
+            this.lblUrl.Size = new System.Drawing.Size(87, 21);
             this.lblUrl.TabIndex = 0;
-            this.lblUrl.Text = "URL";
+            this.lblUrl.Text = "Series URL";
             // 
             // btnOptions
             // 
@@ -350,9 +351,9 @@
             this.cbTitleUrl.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbTitleUrl.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DMR11.Properties.Settings.Default, "Url", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cbTitleUrl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbTitleUrl.Location = new System.Drawing.Point(41, 11);
+            this.cbTitleUrl.Location = new System.Drawing.Point(101, 11);
             this.cbTitleUrl.Name = "cbTitleUrl";
-            this.cbTitleUrl.Size = new System.Drawing.Size(695, 25);
+            this.cbTitleUrl.Size = new System.Drawing.Size(635, 25);
             this.cbTitleUrl.TabIndex = 1;
             this.cbTitleUrl.Text = global::DMR11.Properties.Settings.Default.Url;
             // 

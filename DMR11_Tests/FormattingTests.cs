@@ -26,11 +26,12 @@ namespace DMR11_Tests
         public void Test_PrefixChapterDouble()
         {
             var seriesName = "Houkago Play";
-            var chapter = 3.5;
+            var chapter = 3.96f;
+            
+            var format = "{0} - {1:000.#######}";
 
-            var format = "{0} - {1:000.#}";
+            Assert.AreEqual("Houkago Play - 003.9", string.Format(format, seriesName, chapter));
 
-            Assert.AreEqual("Houkago Play - 003.5", string.Format(format, seriesName, chapter));
         }
     }
 }

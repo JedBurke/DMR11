@@ -95,8 +95,7 @@
             // 
             // btnDownload
             // 
-            this.btnDownload.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDownload.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
             this.btnDownload.FlatAppearance.BorderSize = 0;
             this.btnDownload.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;

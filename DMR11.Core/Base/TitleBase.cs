@@ -16,6 +16,8 @@ namespace DMR11.Core
 {
     public abstract class TitleBase : ITitle
     {
+        abstract protected string ParseSeriesTitle(string html);
+
         protected virtual List<UriValidated> ParseChapterAddresses(string html)
         {
             return null;
@@ -87,6 +89,8 @@ namespace DMR11.Core
                 {
                     var sb = new StringBuilder();
                     sb.AppendLine(html);
+
+                    SeriesTitle = ParseSeriesTitle(html);
 
                     List<UriValidated> addresses = ParseChapterAddresses(html);
 

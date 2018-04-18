@@ -101,6 +101,19 @@ namespace DMR11.Core
 
         static ILogger logger = LogManager.GetCurrentClassLogger();
 
+        protected override string ParseSeriesTitle(string html)
+        {
+            logger.Debug("Entering ParseSeriesTitle");
+
+            string path = HostData["title"]["path"];
+            string pathvalue = HostData["title"]["value"];
+
+            var details = new ParseDetails<string>(path, pathvalue, TitleParseAction, logger);
+            var title = Parsing.ParseContent<string>(html, details);
+
+            return (title != null && title.Count > 0) ? title[0] : "Untitled";
+        }
+
         protected override List<IChapter> ParseChapterObjects(string html)
         {
             logger.Debug("Entering ParseChapterObjects");
@@ -119,6 +132,22 @@ namespace DMR11.Core
             var chapter = new ChapterDistill(element.InnerText, uri, this.HostData);
 
             return chapter ?? null;
+        }
+
+        public string TitleParseAction(HtmlNode element, IParseDetails<string> parseDetails)
+        {
+            string title = string.Empty;
+
+            if (parseDetails.AttributeName == "$(__inner_text)")
+            {
+                title = element.InnerText;
+            }
+            else
+            {
+                title = element.GetAttributeValue(parseDetails.AttributeName, null);
+            }
+
+            return title;
         }
     }
 }

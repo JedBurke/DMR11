@@ -78,13 +78,12 @@
             // btnGetChapter
             // 
             this.btnGetChapter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGetChapter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(215)))), ((int)(((byte)(215)))));
             this.btnGetChapter.FlatAppearance.BorderSize = 0;
             this.btnGetChapter.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
             this.btnGetChapter.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
-            this.btnGetChapter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGetChapter.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnGetChapter.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGetChapter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
+            this.btnGetChapter.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnGetChapter.Location = new System.Drawing.Point(902, 11);
             this.btnGetChapter.Name = "btnGetChapter";
             this.btnGetChapter.Size = new System.Drawing.Size(98, 25);
@@ -98,14 +97,13 @@
             // 
             this.btnDownload.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDownload.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(215)))), ((int)(((byte)(215)))));
             this.btnDownload.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
             this.btnDownload.FlatAppearance.BorderSize = 0;
             this.btnDownload.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
             this.btnDownload.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
-            this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnDownload.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDownload.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
+            this.btnDownload.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnDownload.Location = new System.Drawing.Point(890, 565);
             this.btnDownload.Name = "btnDownload";
             this.btnDownload.Size = new System.Drawing.Size(110, 25);
@@ -143,17 +141,16 @@
             // btnRemove
             // 
             this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRemove.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(215)))), ((int)(((byte)(215)))));
             this.btnRemove.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
             this.btnRemove.FlatAppearance.BorderSize = 0;
             this.btnRemove.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
             this.btnRemove.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
-            this.btnRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRemove.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnRemove.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRemove.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
-            this.btnRemove.Location = new System.Drawing.Point(545, 565);
+            this.btnRemove.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnRemove.Location = new System.Drawing.Point(522, 565);
             this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(89, 25);
+            this.btnRemove.Size = new System.Drawing.Size(72, 25);
             this.btnRemove.TabIndex = 16;
             this.btnRemove.Text = "Remove";
             this.MainToolTip.SetToolTip(this.btnRemove, "Remove selected chapters from the queue");
@@ -163,15 +160,14 @@
             // btnRemoveAll
             // 
             this.btnRemoveAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRemoveAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(215)))), ((int)(((byte)(215)))));
             this.btnRemoveAll.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
             this.btnRemoveAll.FlatAppearance.BorderSize = 0;
             this.btnRemoveAll.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
             this.btnRemoveAll.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
-            this.btnRemoveAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRemoveAll.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnRemoveAll.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRemoveAll.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
-            this.btnRemoveAll.Location = new System.Drawing.Point(640, 565);
+            this.btnRemoveAll.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnRemoveAll.Location = new System.Drawing.Point(600, 565);
             this.btnRemoveAll.Name = "btnRemoveAll";
             this.btnRemoveAll.Size = new System.Drawing.Size(89, 25);
             this.btnRemoveAll.TabIndex = 17;
@@ -248,15 +244,14 @@
             // btnStop
             // 
             this.btnStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(215)))), ((int)(((byte)(215)))));
             this.btnStop.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
             this.btnStop.FlatAppearance.BorderSize = 0;
             this.btnStop.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
             this.btnStop.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
-            this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnStop.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStop.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
-            this.btnStop.Location = new System.Drawing.Point(806, 565);
+            this.btnStop.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnStop.Location = new System.Drawing.Point(795, 565);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(80, 25);
             this.btnStop.TabIndex = 19;
@@ -307,7 +302,7 @@
             this.btnOptions.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnOptions.Location = new System.Drawing.Point(449, 565);
             this.btnOptions.Name = "btnOptions";
-            this.btnOptions.Size = new System.Drawing.Size(90, 25);
+            this.btnOptions.Size = new System.Drawing.Size(67, 25);
             this.btnOptions.TabIndex = 20;
             this.btnOptions.Text = "Options";
             this.btnOptions.UseVisualStyleBackColor = true;
@@ -396,14 +391,13 @@
             // btnAddPrefixCounter
             // 
             this.btnAddPrefixCounter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddPrefixCounter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(215)))), ((int)(((byte)(215)))));
             this.btnAddPrefixCounter.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
             this.btnAddPrefixCounter.FlatAppearance.BorderSize = 0;
             this.btnAddPrefixCounter.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
             this.btnAddPrefixCounter.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
-            this.btnAddPrefixCounter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddPrefixCounter.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnAddPrefixCounter.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddPrefixCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
+            this.btnAddPrefixCounter.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnAddPrefixCounter.Location = new System.Drawing.Point(12, 433);
             this.btnAddPrefixCounter.Name = "btnAddPrefixCounter";
             this.btnAddPrefixCounter.Size = new System.Drawing.Size(83, 25);
@@ -416,7 +410,7 @@
             // nudThread
             // 
             this.nudThread.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudThread.Location = new System.Drawing.Point(744, 567);
+            this.nudThread.Location = new System.Drawing.Point(721, 567);
             this.nudThread.Maximum = new decimal(new int[] {
             5,
             0,

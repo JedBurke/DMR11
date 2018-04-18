@@ -11,6 +11,12 @@ namespace DMR11.Core
 {
     public interface ITitle
     {
+        string SeriesTitle
+        {
+            get;
+            set;
+        }
+
         List<IChapter> Chapters
         {
             get;

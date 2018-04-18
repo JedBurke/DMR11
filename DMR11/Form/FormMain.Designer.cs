@@ -84,6 +84,7 @@
             this.btnGetChapter.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
             this.btnGetChapter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGetChapter.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGetChapter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
             this.btnGetChapter.Location = new System.Drawing.Point(902, 11);
             this.btnGetChapter.Name = "btnGetChapter";
             this.btnGetChapter.Size = new System.Drawing.Size(98, 25);
@@ -104,7 +105,7 @@
             this.btnDownload.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
             this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDownload.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDownload.ForeColor = System.Drawing.Color.Black;
+            this.btnDownload.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
             this.btnDownload.Location = new System.Drawing.Point(806, 565);
             this.btnDownload.Name = "btnDownload";
             this.btnDownload.Size = new System.Drawing.Size(110, 25);
@@ -142,27 +143,41 @@
             // btnRemove
             // 
             this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRemove.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnRemove.Location = new System.Drawing.Point(543, 566);
+            this.btnRemove.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(215)))), ((int)(((byte)(215)))));
+            this.btnRemove.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnRemove.FlatAppearance.BorderSize = 0;
+            this.btnRemove.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnRemove.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
+            this.btnRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRemove.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRemove.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
+            this.btnRemove.Location = new System.Drawing.Point(545, 565);
             this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(113, 23);
+            this.btnRemove.Size = new System.Drawing.Size(89, 25);
             this.btnRemove.TabIndex = 16;
-            this.btnRemove.Text = "Remove Selected";
+            this.btnRemove.Text = "Remove";
             this.toolTip1.SetToolTip(this.btnRemove, "Remove selected chapters from the queue");
-            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.UseVisualStyleBackColor = false;
             this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // btnRemoveAll
             // 
             this.btnRemoveAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRemoveAll.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnRemoveAll.Location = new System.Drawing.Point(660, 566);
+            this.btnRemoveAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(215)))), ((int)(((byte)(215)))));
+            this.btnRemoveAll.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnRemoveAll.FlatAppearance.BorderSize = 0;
+            this.btnRemoveAll.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnRemoveAll.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
+            this.btnRemoveAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRemoveAll.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRemoveAll.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
+            this.btnRemoveAll.Location = new System.Drawing.Point(640, 565);
             this.btnRemoveAll.Name = "btnRemoveAll";
-            this.btnRemoveAll.Size = new System.Drawing.Size(89, 23);
+            this.btnRemoveAll.Size = new System.Drawing.Size(89, 25);
             this.btnRemoveAll.TabIndex = 17;
             this.btnRemoveAll.Text = "Remove All";
             this.toolTip1.SetToolTip(this.btnRemoveAll, "Remove all chapters from the queue");
-            this.btnRemoveAll.UseVisualStyleBackColor = true;
+            this.btnRemoveAll.UseVisualStyleBackColor = false;
             this.btnRemoveAll.Click += new System.EventHandler(this.btnRemoveAll_Click);
             // 
             // dgvQueueChapter
@@ -240,6 +255,7 @@
             this.btnStop.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
             this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStop.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStop.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
             this.btnStop.Location = new System.Drawing.Point(920, 565);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(80, 25);
@@ -288,9 +304,9 @@
             // 
             this.btnOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnOptions.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnOptions.Location = new System.Drawing.Point(449, 566);
+            this.btnOptions.Location = new System.Drawing.Point(449, 565);
             this.btnOptions.Name = "btnOptions";
-            this.btnOptions.Size = new System.Drawing.Size(90, 23);
+            this.btnOptions.Size = new System.Drawing.Size(90, 25);
             this.btnOptions.TabIndex = 20;
             this.btnOptions.Text = "Options";
             this.btnOptions.UseVisualStyleBackColor = true;
@@ -392,7 +408,7 @@
             // nudThread
             // 
             this.nudThread.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudThread.Location = new System.Drawing.Point(753, 566);
+            this.nudThread.Location = new System.Drawing.Point(744, 567);
             this.nudThread.Maximum = new decimal(new int[] {
             5,
             0,

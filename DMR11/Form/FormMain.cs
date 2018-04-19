@@ -486,6 +486,8 @@ namespace DMR11
 
         private void PrepareSeriesDirectory()
         {
+            // Todo: Refactor.
+
             // Todo: Set series-specific directory path to default.
             if (dgvChapter.RowCount == 0)
             {
@@ -539,7 +541,13 @@ namespace DMR11
             lbSeriesDestination.Text = path;
 
             if (Directory.Exists(path))
+            {
                 rdSeriesDestination.Checked = true;
+            }
+            else
+            {
+                rdDefaultDestination.Checked = true;
+            }
 
         }
 

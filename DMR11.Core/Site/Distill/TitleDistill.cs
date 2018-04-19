@@ -138,7 +138,8 @@ namespace DMR11.Core
         {
             string title = string.Empty;
 
-            if (parseDetails.AttributeName == "$(__inner_text)")
+            // Todo: Replace with correct function call.
+            if (string.Compare(parseDetails.AttributeName, "$(__inner_text)", true) == 0)
             {
                 title = element.InnerText;
             }

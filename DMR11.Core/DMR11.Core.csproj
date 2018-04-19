@@ -75,7 +75,7 @@
     <Compile Include="Base\TitleFactory.cs" />
     <Compile Include="Base\ChapterParseDetails.cs" />
     <Compile Include="Helper\ChapterProgress.cs" />
-    <Compile Include="Helper\Downloader.cs" />
+    <Compile Include="Service\Downloader.cs" />
     <Compile Include="Helper\ExcludedWordsForLanguage.cs" />
     <Compile Include="Helper\Extension.cs" />
     <Compile Include="Base\Progress.cs" />

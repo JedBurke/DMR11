@@ -16,6 +16,8 @@ namespace DMR11.Core
 {
     public abstract class TitleBase : ITitle
     {
+        abstract protected string ParseSeriesTitle(string html);
+
         protected virtual List<UriValidated> ParseChapterAddresses(string html)
         {
             return null;
@@ -52,17 +54,21 @@ namespace DMR11.Core
 
         public Task PopulateChapterAsync(Progress<int> progress)
         {
+            // Todo: Too long, refactor.
+
             return Task.Factory.StartNew(() =>
             {
                 progress.ReportProgress(0);
 
 #if MISSED_KISS
-                CloudFlareUtilities.ClearanceHandler handler = new CloudFlareUtilities.ClearanceHandler();
+                var handler = new CloudFlareUtilities.ClearanceHandler(new StatusRedirectionHandler());
 
                 HttpClient client = new HttpClient(handler);
                 client.Timeout = TimeSpan.FromSeconds(25);
                 string html = null;
 
+                client.DefaultRequestHeaders.Add("User-Agent", Service.UserAgent.CurrentUserAgent);
+                
                 try
                 {
                      html = client.GetStringAsync(Address.ToString()).Result;
@@ -79,31 +85,36 @@ namespace DMR11.Core
                 client.Encoding = Encoding.UTF8;
                 string html = client.DownloadString(Address);
 #endif
-                var sb = new StringBuilder();
-                sb.AppendLine(html);
-
-                List<UriValidated> addresses = ParseChapterAddresses(html);
-
-                if (addresses != null)
+                if (!string.IsNullOrWhiteSpace(html))
                 {
-                    int count = 0;
-                    foreach (Uri item in addresses)
+                    var sb = new StringBuilder();
+                    sb.AppendLine(html);
+
+                    SeriesTitle = ParseSeriesTitle(html);
+
+                    List<UriValidated> addresses = ParseChapterAddresses(html);
+
+                    if (addresses != null)
                     {
-                        string content = string.Empty;
+                        int count = 0;
+                        foreach (Uri item in addresses)
+                        {
+                            string content = string.Empty;
 
 #if MISSED_KISS
-                        content = client.GetStringAsync(item.ToString()).Result;
+                            content = client.GetStringAsync(item.ToString()).Result;
 #else
                         content = client.DownloadString(item);
 #endif
 
-                        sb.AppendLine(content);
-                        count++;
-                        progress.ReportProgress(count * 100 / addresses.Count);
+                            sb.AppendLine(content);
+                            count++;
+                            progress.ReportProgress(count * 100 / addresses.Count);
+                        }
                     }
-                }
 
-                Chapters = ParseChapterObjects(sb.ToString());
+                    Chapters = ParseChapterObjects(sb.ToString());
+                }
 
                 progress.ReportProgress(100);
             });

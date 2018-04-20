@@ -27,6 +27,7 @@ namespace DMR11
 
         private BookmarkManager bookmarks = null;
 
+        private ITitle currentTitle = null;
 
         private string SaveDestination
         {
@@ -55,6 +56,7 @@ namespace DMR11
 
             this.Icon = SystemIcons.Application;
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
+            SetButtonStyle();
 
             bookmarks = new BookmarkManager("user/bookmarks.json");
 
@@ -66,6 +68,7 @@ namespace DMR11
             {
                 var titleUrl = new UriValidated(cbTitleUrl.Text);
                 ITitle title = TitleFactory.CreateTitle(titleUrl);
+                currentTitle = title;
                 title.Proxy = Option.GetProxy();
                 btnGetChapter.Enabled = false;
                 var task = title.PopulateChapterAsync(new DMR11.Core.Progress<int>(progress => txtPercent.Text = progress + "%"));
@@ -73,9 +76,7 @@ namespace DMR11
                 {
                     btnGetChapter.Enabled = true;
                     dgvChapter.DataSource = title.Chapters;
-
-
-
+                                        
                     PrepareSeriesDirectory();
 
                     if (t.Exception != null && t.Exception.InnerException != null)
@@ -305,7 +306,10 @@ namespace DMR11
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            _cts.Cancel();
+            if (_cts != null)
+            {
+                _cts.Cancel();
+            }
         }
 
         private void btnChangeSaveTo_Click(object sender, EventArgs e)
@@ -482,45 +486,54 @@ namespace DMR11
 
         private void PrepareSeriesDirectory()
         {
+            // Todo: Refactor.
+
             // Todo: Set series-specific directory path to default.
             if (dgvChapter.RowCount == 0)
+            {
                 return;
+            }
 
             string
                 defaultSeriesDestination = Properties.Settings.Default.DefaultSaveDestination,
                 series = string.Empty,
                 path = string.Empty;
 
-            if (!string.IsNullOrWhiteSpace(cbTitleUrl.Text))
-            {
-                Uri seriesUri = null;
+            //if (!string.IsNullOrWhiteSpace(cbTitleUrl.Text))
+            //{
+            //    Uri seriesUri = null;
 
-                if (Uri.TryCreate(cbTitleUrl.Text, UriKind.Absolute, out seriesUri))
-                    series = seriesUri.ToString();
+            //    if (Uri.TryCreate(cbTitleUrl.Text, UriKind.Absolute, out seriesUri))
+            //    {
+            //        series = seriesUri.ToString();
+            //    }
+            //    else
+            //    {
+            //        series = cbTitleUrl.SelectedItem.ToString();
+            //    }
+            //}
+            //else
+            //{
+            //    series = cbTitleUrl.Text;
+            //}
 
-                else
-                    series = cbTitleUrl.SelectedItem.ToString();
-            }
-            else
-            {
-                series = cbTitleUrl.Text;
-            }
 
-
-            if (string.IsNullOrWhiteSpace(series))
-            {
-                // Todo: Set series-specific directory path to default.
-                return;
-            }
+            //if (string.IsNullOrWhiteSpace(series))
+            //{
+            //    // Todo: Set series-specific directory path to default.
+            //    return;
+            //}
 
             if (string.IsNullOrEmpty(defaultSeriesDestination))
                 defaultSeriesDestination = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-            series = series.TrimEnd('/');
-            series = series.Substring(series.LastIndexOf('/') + 1);
+            //series = series.TrimEnd('/');
+            //series = series.Substring(series.LastIndexOf('/') + 1);
 
-            var item = (IChapter)dgvChapter.Rows[0].DataBoundItem;
-            series = item.Name.Substring(0, item.Name.LastIndexOf(" ")).Trim();
+            //var item = (IChapter)dgvChapter.Rows[0].DataBoundItem;
+            //series = item.Name.Substring(0, item.Name.LastIndexOf(" ")).Trim();
+
+            series = currentTitle.SeriesTitle;
 
             // Todo: Replace invalid characters.
             path = Path.Combine(defaultSeriesDestination, series);
@@ -528,8 +541,49 @@ namespace DMR11
             lbSeriesDestination.Text = path;
 
             if (Directory.Exists(path))
+            {
                 rdSeriesDestination.Checked = true;
+            }
+            else
+            {
+                rdDefaultDestination.Checked = true;
+            }
 
+        }
+
+        private void SetButtonStyle()
+        {
+            var buttonFont = new Font("Segoe UI", 9, FontStyle.Regular, GraphicsUnit.Point);
+
+            foreach (var container in new[] { this.Controls, this.headerPanel.Controls })
+            {
+                container.OfType<Button>().ToList().ForEach((button) => StyleButton(button, buttonFont));
+            }
+
+        }
+
+        private void StyleButton(Button button, Font buttonFont)
+        {
+            if (button != null && buttonFont != null)
+            {
+                button.FlatStyle = FlatStyle.Flat;
+
+                button.FlatAppearance.BorderColor = Color.DarkGray;
+                button.FlatAppearance.BorderSize = 0;
+                button.FlatAppearance.MouseOverBackColor = Color.LightGray;
+                button.FlatAppearance.MouseDownBackColor = Color.Silver;
+
+                if (button.BackgroundImage == null)
+                {
+                    button.BackColor = Color.FromArgb(215, 215, 215);
+                    button.ForeColor = Color.FromArgb(45, 45, 45);
+                    button.Font = buttonFont;
+                }
+                else
+                {
+                    button.BackColor = Color.FromArgb(230, 230, 230);
+                }
+            }
         }
 
     }

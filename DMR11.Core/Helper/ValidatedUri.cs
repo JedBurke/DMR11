@@ -7,6 +7,7 @@ namespace System
 {
     public class UriValidated : Uri
     {
+        // Todo: Call correct constructor.
         public UriValidated(string uri)
             : base(CheckAndInsertMissingScheme(uri))
         {

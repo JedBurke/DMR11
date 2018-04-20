@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DMR11.Core.Helper
+namespace DMR11.Core.Service
 {
     public class Downloader
     {
@@ -27,8 +27,7 @@ namespace DMR11.Core.Helper
 
         private Downloader()
         {
-            //UserAgent = "Mozilla/5.0 (X11; Linux x86_64; rv:28.0) Gecko/20100101 Firefox/28.0";
-            UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1";
+            UserAgent = Service.UserAgent.CurrentUserAgent;
         }
 
         public string DownloadString(UriValidated address)
@@ -53,9 +52,7 @@ namespace DMR11.Core.Helper
                         client = new HttpClient(handlerKiss)
                         {
                             Timeout = TimeSpan.FromSeconds(15)
-                        };
-
-
+                        };                        
 
                     }
                     else
@@ -77,15 +74,12 @@ namespace DMR11.Core.Helper
                         client.DefaultRequestHeaders.Add("Host", address.Host);
                         client.DefaultRequestHeaders.Add("Referer", address.Host);
                         
-                        //client.DefaultRequestHeaders.Add("Referer", address.Host);
-                        //client.DefaultRequestHeaders.Add("User-Agent", UserAgents[UserAgentIndex]);
                     }
 
                     var content = client.GetStringAsync(address.ToString()).Result;
 
                     result.Append(content);
-
-
+                    
                 }
                 catch (WebException webEx)
                 {
@@ -93,7 +87,6 @@ namespace DMR11.Core.Helper
                 }
                 catch (Exception)
                 {
-
                     throw;
                 }
 
@@ -185,6 +178,7 @@ namespace DMR11.Core.Helper
 
         public void SetUserAgent(string userAgent)
         {
+            Service.UserAgent.CurrentUserAgent = userAgent;
         }
 
         public void ClearCookies()

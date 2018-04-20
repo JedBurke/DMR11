@@ -53,7 +53,7 @@
             this.cbTitleUrl = new System.Windows.Forms.ComboBox();
             this.btnAddBookmark = new System.Windows.Forms.Button();
             this.btnRemoveBookmark = new System.Windows.Forms.Button();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.MainToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.btnAddPrefixCounter = new System.Windows.Forms.Button();
             this.nudThread = new System.Windows.Forms.NumericUpDown();
             this.btnPasteUrl = new System.Windows.Forms.Button();
@@ -67,48 +67,60 @@
             this.rdSeriesDestination = new System.Windows.Forms.RadioButton();
             this.txtPercent = new System.Windows.Forms.Label();
             this.headerPanel = new System.Windows.Forms.Panel();
+            this.StatusPanel = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQueueChapter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChapter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudThread)).BeginInit();
             this.headerPanel.SuspendLayout();
+            this.StatusPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnGetChapter
             // 
             this.btnGetChapter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGetChapter.FlatAppearance.BorderSize = 0;
+            this.btnGetChapter.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnGetChapter.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
             this.btnGetChapter.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnGetChapter.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGetChapter.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnGetChapter.Location = new System.Drawing.Point(902, 11);
             this.btnGetChapter.Name = "btnGetChapter";
-            this.btnGetChapter.Size = new System.Drawing.Size(91, 25);
+            this.btnGetChapter.Size = new System.Drawing.Size(98, 25);
             this.btnGetChapter.TabIndex = 5;
             this.btnGetChapter.Text = "Get Chapters";
-            this.toolTip1.SetToolTip(this.btnGetChapter, "Retrieve chapters from the current URL");
-            this.btnGetChapter.UseVisualStyleBackColor = true;
+            this.MainToolTip.SetToolTip(this.btnGetChapter, "Retrieve chapters from the current URL");
+            this.btnGetChapter.UseVisualStyleBackColor = false;
             this.btnGetChapter.Click += new System.EventHandler(this.btnGetChapter_Click);
             // 
             // btnDownload
             // 
-            this.btnDownload.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDownload.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnDownload.FlatAppearance.BorderSize = 0;
+            this.btnDownload.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnDownload.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
             this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnDownload.Location = new System.Drawing.Point(806, 556);
+            this.btnDownload.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDownload.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnDownload.Location = new System.Drawing.Point(890, 565);
             this.btnDownload.Name = "btnDownload";
-            this.btnDownload.Size = new System.Drawing.Size(110, 23);
+            this.btnDownload.Size = new System.Drawing.Size(110, 25);
             this.btnDownload.TabIndex = 18;
             this.btnDownload.Text = "Start Download";
-            this.btnDownload.UseVisualStyleBackColor = true;
+            this.btnDownload.UseVisualStyleBackColor = false;
             this.btnDownload.Click += new System.EventHandler(this.btnDownload_Click);
             // 
             // btnAdd
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnAdd.Location = new System.Drawing.Point(143, 420);
+            this.btnAdd.Location = new System.Drawing.Point(172, 433);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(163, 23);
+            this.btnAdd.Size = new System.Drawing.Size(133, 25);
             this.btnAdd.TabIndex = 8;
             this.btnAdd.Text = "Add Selected";
-            this.toolTip1.SetToolTip(this.btnAdd, "Add selected chapters to queue");
+            this.MainToolTip.SetToolTip(this.btnAdd, "Add selected chapters to queue");
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
@@ -116,39 +128,51 @@
             // 
             this.btnAddAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAddAll.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnAddAll.Location = new System.Drawing.Point(311, 420);
+            this.btnAddAll.Location = new System.Drawing.Point(311, 433);
             this.btnAddAll.Name = "btnAddAll";
-            this.btnAddAll.Size = new System.Drawing.Size(60, 23);
+            this.btnAddAll.Size = new System.Drawing.Size(60, 25);
             this.btnAddAll.TabIndex = 9;
             this.btnAddAll.Text = "All";
-            this.toolTip1.SetToolTip(this.btnAddAll, "Add all chapters to queue");
+            this.MainToolTip.SetToolTip(this.btnAddAll, "Add all chapters to queue");
             this.btnAddAll.UseVisualStyleBackColor = true;
             this.btnAddAll.Click += new System.EventHandler(this.btnAddAll_Click);
             // 
             // btnRemove
             // 
             this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRemove.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnRemove.FlatAppearance.BorderSize = 0;
+            this.btnRemove.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnRemove.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
             this.btnRemove.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnRemove.Location = new System.Drawing.Point(543, 557);
+            this.btnRemove.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRemove.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnRemove.Location = new System.Drawing.Point(522, 565);
             this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(113, 23);
+            this.btnRemove.Size = new System.Drawing.Size(72, 25);
             this.btnRemove.TabIndex = 16;
-            this.btnRemove.Text = "Remove Selected";
-            this.toolTip1.SetToolTip(this.btnRemove, "Remove selected chapters from the queue");
-            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Text = "Remove";
+            this.MainToolTip.SetToolTip(this.btnRemove, "Remove selected chapters from the queue");
+            this.btnRemove.UseVisualStyleBackColor = false;
             this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // btnRemoveAll
             // 
             this.btnRemoveAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRemoveAll.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnRemoveAll.FlatAppearance.BorderSize = 0;
+            this.btnRemoveAll.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnRemoveAll.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
             this.btnRemoveAll.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnRemoveAll.Location = new System.Drawing.Point(660, 557);
+            this.btnRemoveAll.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRemoveAll.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnRemoveAll.Location = new System.Drawing.Point(600, 565);
             this.btnRemoveAll.Name = "btnRemoveAll";
-            this.btnRemoveAll.Size = new System.Drawing.Size(89, 23);
+            this.btnRemoveAll.Size = new System.Drawing.Size(89, 25);
             this.btnRemoveAll.TabIndex = 17;
             this.btnRemoveAll.Text = "Remove All";
-            this.toolTip1.SetToolTip(this.btnRemoveAll, "Remove all chapters from the queue");
-            this.btnRemoveAll.UseVisualStyleBackColor = true;
+            this.MainToolTip.SetToolTip(this.btnRemoveAll, "Remove all chapters from the queue");
+            this.btnRemoveAll.UseVisualStyleBackColor = false;
             this.btnRemoveAll.Click += new System.EventHandler(this.btnRemoveAll_Click);
             // 
             // dgvQueueChapter
@@ -175,7 +199,7 @@
             this.dgvQueueChapter.ReadOnly = true;
             this.dgvQueueChapter.RowHeadersVisible = false;
             this.dgvQueueChapter.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvQueueChapter.Size = new System.Drawing.Size(551, 501);
+            this.dgvQueueChapter.Size = new System.Drawing.Size(551, 512);
             this.dgvQueueChapter.TabIndex = 10;
             // 
             // ColChapterName
@@ -219,25 +243,31 @@
             // btnStop
             // 
             this.btnStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnStop.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnStop.FlatAppearance.BorderSize = 0;
+            this.btnStop.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnStop.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
             this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnStop.Location = new System.Drawing.Point(920, 556);
+            this.btnStop.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStop.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnStop.Location = new System.Drawing.Point(795, 565);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(80, 23);
+            this.btnStop.Size = new System.Drawing.Size(80, 25);
             this.btnStop.TabIndex = 19;
             this.btnStop.Text = "Stop";
-            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.UseVisualStyleBackColor = false;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // btnChangeSaveTo
             // 
             this.btnChangeSaveTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnChangeSaveTo.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnChangeSaveTo.Location = new System.Drawing.Point(341, 465);
+            this.btnChangeSaveTo.Location = new System.Drawing.Point(321, 477);
             this.btnChangeSaveTo.Name = "btnChangeSaveTo";
-            this.btnChangeSaveTo.Size = new System.Drawing.Size(30, 22);
+            this.btnChangeSaveTo.Size = new System.Drawing.Size(39, 25);
             this.btnChangeSaveTo.TabIndex = 13;
             this.btnChangeSaveTo.Text = "...";
-            this.toolTip1.SetToolTip(this.btnChangeSaveTo, "Change folder");
+            this.MainToolTip.SetToolTip(this.btnChangeSaveTo, "Change folder");
             this.btnChangeSaveTo.UseVisualStyleBackColor = true;
             this.btnChangeSaveTo.Click += new System.EventHandler(this.btnChangeSaveTo_Click);
             // 
@@ -245,32 +275,33 @@
             // 
             this.btnOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnOpenFolder.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnOpenFolder.Location = new System.Drawing.Point(377, 465);
+            this.btnOpenFolder.Location = new System.Drawing.Point(366, 477);
             this.btnOpenFolder.Name = "btnOpenFolder";
-            this.btnOpenFolder.Size = new System.Drawing.Size(60, 22);
+            this.btnOpenFolder.Size = new System.Drawing.Size(71, 25);
             this.btnOpenFolder.TabIndex = 14;
             this.btnOpenFolder.Text = "Open";
-            this.toolTip1.SetToolTip(this.btnOpenFolder, "Open destination folder");
+            this.MainToolTip.SetToolTip(this.btnOpenFolder, "Open destination folder");
             this.btnOpenFolder.UseVisualStyleBackColor = true;
             this.btnOpenFolder.Click += new System.EventHandler(this.btnOpenFolder_Click);
             // 
             // lblUrl
             // 
             this.lblUrl.AutoSize = true;
+            this.lblUrl.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUrl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblUrl.Location = new System.Drawing.Point(13, 14);
+            this.lblUrl.Location = new System.Drawing.Point(8, 11);
             this.lblUrl.Name = "lblUrl";
-            this.lblUrl.Size = new System.Drawing.Size(27, 13);
+            this.lblUrl.Size = new System.Drawing.Size(87, 21);
             this.lblUrl.TabIndex = 0;
-            this.lblUrl.Text = "URL";
+            this.lblUrl.Text = "Series URL";
             // 
             // btnOptions
             // 
             this.btnOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnOptions.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnOptions.Location = new System.Drawing.Point(449, 557);
+            this.btnOptions.Location = new System.Drawing.Point(449, 565);
             this.btnOptions.Name = "btnOptions";
-            this.btnOptions.Size = new System.Drawing.Size(90, 23);
+            this.btnOptions.Size = new System.Drawing.Size(67, 25);
             this.btnOptions.TabIndex = 20;
             this.btnOptions.Text = "Options";
             this.btnOptions.UseVisualStyleBackColor = true;
@@ -293,7 +324,7 @@
             this.dgvChapter.ReadOnly = true;
             this.dgvChapter.RowHeadersVisible = false;
             this.dgvChapter.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvChapter.Size = new System.Drawing.Size(425, 364);
+            this.dgvChapter.Size = new System.Drawing.Size(425, 377);
             this.dgvChapter.TabIndex = 6;
             // 
             // dataGridViewTextBoxColumn4
@@ -314,9 +345,9 @@
             this.cbTitleUrl.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbTitleUrl.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DMR11.Properties.Settings.Default, "Url", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cbTitleUrl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbTitleUrl.Location = new System.Drawing.Point(41, 11);
+            this.cbTitleUrl.Location = new System.Drawing.Point(101, 11);
             this.cbTitleUrl.Name = "cbTitleUrl";
-            this.cbTitleUrl.Size = new System.Drawing.Size(695, 25);
+            this.cbTitleUrl.Size = new System.Drawing.Size(635, 25);
             this.cbTitleUrl.TabIndex = 1;
             this.cbTitleUrl.Text = global::DMR11.Properties.Settings.Default.Url;
             // 
@@ -334,7 +365,7 @@
             this.btnAddBookmark.Name = "btnAddBookmark";
             this.btnAddBookmark.Size = new System.Drawing.Size(28, 25);
             this.btnAddBookmark.TabIndex = 2;
-            this.toolTip1.SetToolTip(this.btnAddBookmark, "Bookmark this URL");
+            this.MainToolTip.SetToolTip(this.btnAddBookmark, "Bookmark this URL");
             this.btnAddBookmark.UseVisualStyleBackColor = true;
             this.btnAddBookmark.Click += new System.EventHandler(this.btnAddBookmark_Click);
             // 
@@ -352,27 +383,33 @@
             this.btnRemoveBookmark.Name = "btnRemoveBookmark";
             this.btnRemoveBookmark.Size = new System.Drawing.Size(28, 25);
             this.btnRemoveBookmark.TabIndex = 3;
-            this.toolTip1.SetToolTip(this.btnRemoveBookmark, "Remove this bookmarked URL");
+            this.MainToolTip.SetToolTip(this.btnRemoveBookmark, "Remove this bookmarked URL");
             this.btnRemoveBookmark.UseVisualStyleBackColor = true;
             this.btnRemoveBookmark.Click += new System.EventHandler(this.btnRemoveBookmark_Click);
             // 
             // btnAddPrefixCounter
             // 
             this.btnAddPrefixCounter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAddPrefixCounter.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnAddPrefixCounter.FlatAppearance.BorderSize = 0;
+            this.btnAddPrefixCounter.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnAddPrefixCounter.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
             this.btnAddPrefixCounter.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnAddPrefixCounter.Location = new System.Drawing.Point(12, 420);
+            this.btnAddPrefixCounter.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddPrefixCounter.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnAddPrefixCounter.Location = new System.Drawing.Point(12, 433);
             this.btnAddPrefixCounter.Name = "btnAddPrefixCounter";
-            this.btnAddPrefixCounter.Size = new System.Drawing.Size(120, 23);
+            this.btnAddPrefixCounter.Size = new System.Drawing.Size(83, 25);
             this.btnAddPrefixCounter.TabIndex = 7;
-            this.btnAddPrefixCounter.Text = "Add Prefix Counter";
-            this.toolTip1.SetToolTip(this.btnAddPrefixCounter, "Add prefix counter to chapter name");
-            this.btnAddPrefixCounter.UseVisualStyleBackColor = true;
+            this.btnAddPrefixCounter.Text = "Format...";
+            this.MainToolTip.SetToolTip(this.btnAddPrefixCounter, "Format the directory name of the downloaded chapter(s)");
+            this.btnAddPrefixCounter.UseVisualStyleBackColor = false;
             this.btnAddPrefixCounter.Click += new System.EventHandler(this.btnAddPrefixCounter_Click);
             // 
             // nudThread
             // 
             this.nudThread.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudThread.Location = new System.Drawing.Point(753, 557);
+            this.nudThread.Location = new System.Drawing.Point(721, 567);
             this.nudThread.Maximum = new decimal(new int[] {
             5,
             0,
@@ -388,7 +425,7 @@
             this.nudThread.Size = new System.Drawing.Size(49, 22);
             this.nudThread.TabIndex = 24;
             this.nudThread.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.nudThread, "Maximum number of connections");
+            this.MainToolTip.SetToolTip(this.nudThread, "Maximum number of connections");
             this.nudThread.Value = new decimal(new int[] {
             1,
             0,
@@ -409,7 +446,7 @@
             this.btnPasteUrl.Name = "btnPasteUrl";
             this.btnPasteUrl.Size = new System.Drawing.Size(28, 25);
             this.btnPasteUrl.TabIndex = 25;
-            this.toolTip1.SetToolTip(this.btnPasteUrl, "Paste URL from clipboard and get chapters");
+            this.MainToolTip.SetToolTip(this.btnPasteUrl, "Paste URL from clipboard and get chapters");
             this.btnPasteUrl.UseVisualStyleBackColor = true;
             this.btnPasteUrl.Click += new System.EventHandler(this.btnPasteUrl_Click);
             // 
@@ -417,12 +454,12 @@
             // 
             this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnAddNew.Location = new System.Drawing.Point(377, 420);
+            this.btnAddNew.Location = new System.Drawing.Point(377, 433);
             this.btnAddNew.Name = "btnAddNew";
-            this.btnAddNew.Size = new System.Drawing.Size(60, 23);
+            this.btnAddNew.Size = new System.Drawing.Size(60, 25);
             this.btnAddNew.TabIndex = 10;
             this.btnAddNew.Text = "New";
-            this.toolTip1.SetToolTip(this.btnAddNew, "Add latest chapters to queue\r\nHold SHIFT to only add the 5 latest chapters");
+            this.MainToolTip.SetToolTip(this.btnAddNew, "Add latest chapters to queue\r\nHold SHIFT to only add the 5 latest chapters");
             this.btnAddNew.UseVisualStyleBackColor = true;
             this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
             // 
@@ -432,14 +469,14 @@
             this.lbSeriesDestination.AutoSize = true;
             this.lbSeriesDestination.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbSeriesDestination.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lbSeriesDestination.Location = new System.Drawing.Point(57, 543);
+            this.lbSeriesDestination.Location = new System.Drawing.Point(57, 556);
             this.lbSeriesDestination.MaximumSize = new System.Drawing.Size(380, 17);
             this.lbSeriesDestination.MinimumSize = new System.Drawing.Size(380, 17);
             this.lbSeriesDestination.Name = "lbSeriesDestination";
             this.lbSeriesDestination.Size = new System.Drawing.Size(380, 17);
             this.lbSeriesDestination.TabIndex = 29;
             this.lbSeriesDestination.Text = "Series-Specific Destination";
-            this.toolTip1.SetToolTip(this.lbSeriesDestination, "Saves the chapter to the series\' folder");
+            this.MainToolTip.SetToolTip(this.lbSeriesDestination, "Saves the chapter to the series\' folder");
             this.lbSeriesDestination.UseMnemonic = false;
             this.lbSeriesDestination.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lbSeriesDestination_MouseClick);
             // 
@@ -450,29 +487,30 @@
             this.lbDefaultDestination.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DMR11.Properties.Settings.Default, "SaveTo", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.lbDefaultDestination.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbDefaultDestination.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lbDefaultDestination.Location = new System.Drawing.Point(57, 500);
+            this.lbDefaultDestination.Location = new System.Drawing.Point(57, 513);
             this.lbDefaultDestination.MaximumSize = new System.Drawing.Size(385, 17);
             this.lbDefaultDestination.MinimumSize = new System.Drawing.Size(380, 17);
             this.lbDefaultDestination.Name = "lbDefaultDestination";
             this.lbDefaultDestination.Size = new System.Drawing.Size(380, 17);
             this.lbDefaultDestination.TabIndex = 30;
             this.lbDefaultDestination.Text = global::DMR11.Properties.Settings.Default.SaveTo;
-            this.toolTip1.SetToolTip(this.lbDefaultDestination, "Saves the chapter to the default manga folder");
+            this.MainToolTip.SetToolTip(this.lbDefaultDestination, "Saves the chapter to the default manga folder");
             this.lbDefaultDestination.UseMnemonic = false;
             this.lbDefaultDestination.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lbDefaultDestination_MouseClick);
             // 
             // txtMessage
             // 
+            this.txtMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txtMessage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.txtMessage.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtMessage.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.txtMessage.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.txtMessage.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMessage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtMessage.Location = new System.Drawing.Point(0, 598);
+            this.txtMessage.Location = new System.Drawing.Point(12, 6);
             this.txtMessage.Margin = new System.Windows.Forms.Padding(5);
             this.txtMessage.Name = "txtMessage";
             this.txtMessage.ReadOnly = true;
-            this.txtMessage.Size = new System.Drawing.Size(1012, 16);
+            this.txtMessage.Size = new System.Drawing.Size(957, 16);
             this.txtMessage.TabIndex = 23;
             // 
             // timer1
@@ -486,7 +524,7 @@
             this.lbDestination.AutoSize = true;
             this.lbDestination.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbDestination.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lbDestination.Location = new System.Drawing.Point(12, 465);
+            this.lbDestination.Location = new System.Drawing.Point(12, 478);
             this.lbDestination.Name = "lbDestination";
             this.lbDestination.Size = new System.Drawing.Size(123, 20);
             this.lbDestination.TabIndex = 26;
@@ -497,7 +535,7 @@
             this.rdDefaultDestination.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.rdDefaultDestination.AutoSize = true;
             this.rdDefaultDestination.Checked = true;
-            this.rdDefaultDestination.Location = new System.Drawing.Point(37, 503);
+            this.rdDefaultDestination.Location = new System.Drawing.Point(37, 516);
             this.rdDefaultDestination.Name = "rdDefaultDestination";
             this.rdDefaultDestination.Size = new System.Drawing.Size(14, 13);
             this.rdDefaultDestination.TabIndex = 27;
@@ -508,7 +546,7 @@
             // 
             this.rdSeriesDestination.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.rdSeriesDestination.AutoSize = true;
-            this.rdSeriesDestination.Location = new System.Drawing.Point(37, 546);
+            this.rdSeriesDestination.Location = new System.Drawing.Point(37, 559);
             this.rdSeriesDestination.Name = "rdSeriesDestination";
             this.rdSeriesDestination.Size = new System.Drawing.Size(14, 13);
             this.rdSeriesDestination.TabIndex = 28;
@@ -541,12 +579,24 @@
             this.headerPanel.Size = new System.Drawing.Size(1012, 47);
             this.headerPanel.TabIndex = 32;
             // 
+            // StatusPanel
+            // 
+            this.StatusPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.StatusPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.StatusPanel.Controls.Add(this.txtMessage);
+            this.StatusPanel.Location = new System.Drawing.Point(0, 599);
+            this.StatusPanel.Name = "StatusPanel";
+            this.StatusPanel.Size = new System.Drawing.Size(1012, 27);
+            this.StatusPanel.TabIndex = 33;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.ClientSize = new System.Drawing.Size(1012, 614);
+            this.ClientSize = new System.Drawing.Size(1012, 627);
+            this.Controls.Add(this.StatusPanel);
             this.Controls.Add(this.lbDefaultDestination);
             this.Controls.Add(this.lbSeriesDestination);
             this.Controls.Add(this.rdSeriesDestination);
@@ -554,7 +604,6 @@
             this.Controls.Add(this.lbDestination);
             this.Controls.Add(this.btnAddNew);
             this.Controls.Add(this.nudThread);
-            this.Controls.Add(this.txtMessage);
             this.Controls.Add(this.btnAddPrefixCounter);
             this.Controls.Add(this.dgvChapter);
             this.Controls.Add(this.btnOptions);
@@ -579,6 +628,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudThread)).EndInit();
             this.headerPanel.ResumeLayout(false);
             this.headerPanel.PerformLayout();
+            this.StatusPanel.ResumeLayout(false);
+            this.StatusPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -604,7 +655,7 @@
         private System.Windows.Forms.ComboBox cbTitleUrl;
         private System.Windows.Forms.Button btnAddBookmark;
         private System.Windows.Forms.Button btnRemoveBookmark;
-        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolTip MainToolTip;
         private System.Windows.Forms.Button btnAddPrefixCounter;
         private System.Windows.Forms.TextBox txtMessage;
         private System.Windows.Forms.NumericUpDown nudThread;
@@ -622,5 +673,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColChapterUrl;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.Panel headerPanel;
+        private System.Windows.Forms.Panel StatusPanel;
     }
 }

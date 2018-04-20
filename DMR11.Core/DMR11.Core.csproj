@@ -75,12 +75,15 @@
     <Compile Include="Base\TitleFactory.cs" />
     <Compile Include="Base\ChapterParseDetails.cs" />
     <Compile Include="Helper\ChapterProgress.cs" />
-    <Compile Include="Helper\Downloader.cs" />
+    <Compile Include="Service\Downloader.cs" />
+    <Compile Include="Helper\ExcludedWordsForLanguage.cs" />
     <Compile Include="Helper\Extension.cs" />
     <Compile Include="Base\Progress.cs" />
     <Compile Include="Base\ParseDetails.cs" />
     <Compile Include="Helper\Parsing.cs" />
-    <Compile Include="Helper\UserAgents.cs" />
+    <Compile Include="Helper\StyleGuide.cs" />
+    <Compile Include="Helper\TitleCase.cs" />
+    <Compile Include="Service\UserAgent.cs" />
     <Compile Include="Helper\ValidatedUri.cs" />
     <Compile Include="Base\ICommand.cs" />
     <Compile Include="Base\IParseDetails.cs" />
@@ -103,21 +106,12 @@
     </Compile>
     <Compile Include="Site\Distill\ChapterDistill.cs" />
     <Compile Include="Site\Distill\TitleDistill.cs" />
-    <Compile Include="Site\KissManga\ChapterKissManga.cs" />
-    <Compile Include="Site\KissManga\TitleKissManga.cs" />
-    <Compile Include="Site\MangaFox\ChapterMangaFox.cs" />
-    <Compile Include="Site\MangaFox\TitleMangaFox.cs" />
-    <Compile Include="Site\MangaHere\ChapterMangaHere.cs" />
-    <Compile Include="Site\MangaHere\TitleMangaHere.cs" />
-    <Compile Include="Site\MangaReader\ChapterMangaReader.cs" />
-    <Compile Include="Site\MangaReader\TitleMangaReader.cs" />
     <Compile Include="SupportedHosts.cs" />
     <Compile Include="WebsiteHost\WebsiteHostDecorator.cs" />
     <Compile Include="WebsiteHost\HostType.cs" />
+    <Compile Include="StatusRedirectionHandler.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Site\MangaPark\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

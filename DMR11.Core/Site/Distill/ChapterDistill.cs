@@ -60,7 +60,7 @@ namespace DMR11.Core
             (
                 path,
                 value,
-                (element, parseDetails) => Parsing.CreateUriFromElementAttributeValue(element, parseDetails),
+                (element, parseDetails) => Parsing.CreateUriFromElementAttributeValue(element, parseDetails, new UriValidated(HostVariables["address_trimmed"])),
                 logger
             );
 

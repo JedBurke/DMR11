@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace DMR11.Core.Helper
 {
-    public class UserAgents
+    public enum TitleCaseExclusions : int
     {
-
+        English,
+        Japanese,
+        EnglishAndJapanese,
+        None
     }
 }

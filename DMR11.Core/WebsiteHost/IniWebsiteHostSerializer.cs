@@ -15,10 +15,10 @@ namespace DMR11.Core.WebsiteHost
             var websiteHostFile = ParseWebsiteHostFile(content);
             var websiteHost = SerializeProperties(websiteHostFile);
 
-            return new WebsiteHost();
+            return websiteHost;
         }
 
-        public IniParser.Model.IniData ParseWebsiteHostFile(string content)
+        public IniData ParseWebsiteHostFile(string content)
         {
             var parser = new IniParser.Parser.IniDataParser();
             var websiteHostFile = parser.Parse(content);
@@ -28,21 +28,44 @@ namespace DMR11.Core.WebsiteHost
 
         public IWebsiteHost SerializeProperties(IniData websiteHostFile)
         {
+            const string 
+                SECTION_HOST = "host",
+                SECTION_TITLE = "title",
+                SECTION_CHAPTERS = "chapters",
+                SECTION_PAGES = "pages",
+                SECTION_PAGE = "page";
+
             var websiteHost = new WebsiteHost();
 
             bool hostSinglePage = false;
+            
+            bool.TryParse(websiteHostFile[SECTION_HOST]["single_page"], out hostSinglePage);
 
-
-            bool.TryParse(websiteHostFile["host"]["single_page"], out hostSinglePage);
-
-            websiteHost.Meta.HostUriPattern = websiteHostFile["host"]["uri"];
-            websiteHost.Host.FriendlyName = websiteHostFile["host"]["friendly_name"];
-            websiteHost.Host.RedirectUri = websiteHostFile["host"]["redirect_uri"];
-                        
+            websiteHost.Host.FriendlyName = websiteHostFile[SECTION_HOST]["friendly_name"];
+            websiteHost.Host.HostUriPattern = websiteHostFile[SECTION_HOST]["uri"];
+            websiteHost.Host.HostUriPatternType = HostUriType.Simple;
+            websiteHost.Host.RedirectUri = websiteHostFile[SECTION_HOST]["redirect_uri"];                        
             websiteHost.Host.SinglePage = hostSinglePage;
 
-            // Disregard the option for now.
-            websiteHost.Host.HostUriPatternType = HostUriType.Simple;
+            websiteHost.Title.Path = websiteHostFile[SECTION_TITLE]["path"];
+            websiteHost.Title.Value = websiteHostFile[SECTION_TITLE]["value"];
+            websiteHost.Title.ParseRegex = websiteHostFile[SECTION_TITLE]["parse_regex"];
+            websiteHost.Title.ParseReplace = websiteHostFile[SECTION_TITLE]["parse_replace"];
+            
+            websiteHost.Chapters.Path = websiteHostFile[SECTION_CHAPTERS]["path"];
+            websiteHost.Chapters.Value = websiteHostFile[SECTION_CHAPTERS]["value"];
+            websiteHost.Chapters.ParseRegex = websiteHostFile[SECTION_CHAPTERS]["parse_regex"];
+            websiteHost.Chapters.ParseReplace = websiteHostFile[SECTION_CHAPTERS]["parse_replace"];
+            
+            websiteHost.Pages.Path = websiteHostFile[SECTION_PAGES]["path"];
+            websiteHost.Pages.Value = websiteHostFile[SECTION_PAGES]["value"];
+            websiteHost.Pages.ParseRegex = websiteHostFile[SECTION_PAGES]["parse_regex"];
+            websiteHost.Pages.ParseReplace = websiteHostFile[SECTION_PAGES]["parse_replace"];
+
+            websiteHost.Page.Path = websiteHostFile[SECTION_PAGE]["path"];
+            websiteHost.Page.Value = websiteHostFile[SECTION_PAGE]["value"];
+            websiteHost.Page.ParseRegex = websiteHostFile[SECTION_PAGE]["parse_regex"];
+            websiteHost.Page.ParseReplace = websiteHostFile[SECTION_PAGE]["parse_replace"];
 
             return websiteHost;
         }

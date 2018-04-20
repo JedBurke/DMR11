@@ -89,6 +89,7 @@
     <Compile Include="Base\IParseDetails.cs" />
     <Compile Include="WebsiteHost\HostSection.cs" />
     <Compile Include="WebsiteHost\HostUriType.cs" />
+    <Compile Include="WebsiteHost\IChapterSection.cs" />
     <Compile Include="WebsiteHost\IHostSection.cs" />
     <Compile Include="WebsiteHost\IniWebsiteHostSerializer.cs" />
     <Compile Include="WebsiteHost\IWebsiteHostSerializer.cs" />

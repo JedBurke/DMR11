@@ -67,7 +67,7 @@
     <Compile Include="TaxonomyTest.cs" />
     <Compile Include="Cloudflare.cs" />
     <Compile Include="FormattingTests.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="WebsiteHostSerializationTests.cs" />
     <Compile Include="WordConversionTests.cs" />
   </ItemGroup>
   <ItemGroup>

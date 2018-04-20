@@ -10,50 +10,33 @@ namespace DMR11.Core.WebsiteHost
     {
         public string FriendlyName
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get;
+            set;
         }
 
-        public string RedirectUri
+        public string HostUriPattern
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public bool SinglePage
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get;
+            set;
         }
 
         public HostUriType HostUriPatternType
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get;
+            set;
         }
+
+        public string RedirectUri
+        {
+            get;
+            set;
+        }
+
+        public bool SinglePage
+        {
+            get;
+            set;
+        }
+
     }
 }

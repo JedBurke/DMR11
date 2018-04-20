@@ -3,6 +3,7 @@
 **/packages/*
 **/testresults/*
 **/concepts/*
+**/spec/*
 *.suo
 *.user
 

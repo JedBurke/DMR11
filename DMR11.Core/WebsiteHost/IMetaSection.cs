@@ -12,11 +12,6 @@ namespace DMR11.Core.WebsiteHost
     public interface IMetaSection
     {
         /// <summary>
-        /// Gets the pattern used to match the host uri.
-        /// </summary>
-        string HostUriPattern { get; set; }
-
-        /// <summary>
         /// Gets the host plugin type.
         /// </summary>
         HostType HostType { get; set; }

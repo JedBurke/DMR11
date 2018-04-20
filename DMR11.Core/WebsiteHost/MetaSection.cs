@@ -9,12 +9,6 @@ namespace DMR11.Core.WebsiteHost
     public class MetaSection : IMetaSection
     {
 
-        public string HostUriPattern
-        {
-            get;
-            set;
-        }
-
         public HostType HostType
         {
             get;

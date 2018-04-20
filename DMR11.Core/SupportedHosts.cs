@@ -61,16 +61,21 @@ namespace DMR11.Core
         public string HostPattern { get; private set; }
         public string HostPath { get; private set; }
 
-        public SupportedHost(string friendlyName, string hostPattern, string hostPath)
+        public SupportedHost(string friendlyName, string hostPattern, string hostPath) : this()
         {
             if (string.IsNullOrWhiteSpace(friendlyName) || string.IsNullOrWhiteSpace(hostPattern) || string.IsNullOrWhiteSpace(hostPath))
+            {
                 throw new ArgumentNullException();
+            }
 
-            this.FriendlyName = friendlyName;
-            this.HostPattern = hostPattern;
+            FriendlyName = friendlyName;
+            HostPattern = hostPattern;
+            HostPath = hostPath;
 
             if (!System.IO.Directory.Exists(hostPath))
+            {
                 throw new System.IO.FileNotFoundException();
+            }
 
         }
     }

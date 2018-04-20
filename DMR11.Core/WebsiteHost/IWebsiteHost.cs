@@ -12,13 +12,13 @@ namespace DMR11.Core.WebsiteHost
 
         IMainSection Host { get; }
 
-        HostSection Title { get; }
+        IHostSection Title { get; }
 
-        HostSection Chapters { get; }
+        IHostSection Chapters { get; }
 
-        HostSection Pages { get; }
+        IHostSection Pages { get; }
 
-        HostSection Page { get; }
+        IHostSection Page { get; }
 
     }
 }

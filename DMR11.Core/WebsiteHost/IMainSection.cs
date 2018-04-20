@@ -29,7 +29,7 @@ namespace DMR11.Core.WebsiteHost
         /// <summary>
         /// Get or sets the method used to match the host uri.
         /// </summary>
-        public HostUriType HostUriPatternType { get; set; }
+        HostUriType HostUriPatternType { get; set; }
 
     }
 }

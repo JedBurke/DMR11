@@ -26,22 +26,22 @@ namespace DMR11.Core.WebsiteHost
             get { return decoratedHost.Host; }
         }
 
-        public HostSection Title
+        public IHostSection Title
         {
             get { return decoratedHost.Title; }
         }
 
-        public HostSection Chapters
+        public IHostSection Chapters
         {
             get { return decoratedHost.Chapters; }
         }
 
-        public HostSection Pages
+        public IHostSection Pages
         {
             get { return decoratedHost.Page; }
         }
 
-        public HostSection Page
+        public IHostSection Page
         {
             get { return decoratedHost.Page; }
         }

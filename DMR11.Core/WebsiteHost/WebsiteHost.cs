@@ -38,24 +38,24 @@ namespace DMR11.Core.WebsiteHost
             get { return _host; }
         }
 
-        public HostSection Title
+        public IHostSection Title
         {
-            get { throw new NotImplementedException(); }
+            get { return _title; }
         }
 
-        public HostSection Chapters
+        public IHostSection Chapters
         {
-            get { throw new NotImplementedException(); }
+            get { return _chapters; }
         }
 
-        public HostSection Pages
+        public IHostSection Pages
         {
-            get { throw new NotImplementedException(); }
+            get { return _pages; }
         }
 
-        public HostSection Page
+        public IHostSection Page
         {
-            get { throw new NotImplementedException(); }
+            get { return _page; }
         }
     }
 }

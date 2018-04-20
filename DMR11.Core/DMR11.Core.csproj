@@ -90,6 +90,8 @@
     <Compile Include="WebsiteHost\HostSection.cs" />
     <Compile Include="WebsiteHost\HostUriType.cs" />
     <Compile Include="WebsiteHost\IHostSection.cs" />
+    <Compile Include="WebsiteHost\IniWebsiteHostSerializer.cs" />
+    <Compile Include="WebsiteHost\IWebsiteHostSerializer.cs" />
     <Compile Include="WebsiteHost\IMainSection.cs" />
     <Compile Include="WebsiteHost\IMetaSection.cs" />
     <Compile Include="WebsiteHost\MainSection.cs" />
@@ -110,6 +112,7 @@
     <Compile Include="WebsiteHost\WebsiteHostDecorator.cs" />
     <Compile Include="WebsiteHost\HostType.cs" />
     <Compile Include="StatusRedirectionHandler.cs" />
+    <Compile Include="WebsiteHost\WebsiteHostSerializer.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

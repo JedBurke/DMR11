@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 using NLog;
 using HtmlAgilityPack;
 using DMR11.Core.Helper;
+using DMR11.Core.WebsiteHost;
 
 namespace DMR11.Core
 {
@@ -17,7 +18,7 @@ namespace DMR11.Core
     {
         const string HOST_LOOKUP_PATH = "hosts";
 
-        IniData HostData = null;
+        IWebsiteHost HostData = null;
 
         public TitleDistill(UriValidated address)
             : base(address)
@@ -33,15 +34,12 @@ namespace DMR11.Core
         /// <returns></returns>
         public static bool IsDistilled(UriValidated uri)
         {
-            IniData data = LoadConfigFile(uri);
+            IWebsiteHost data = LoadConfigFile(uri);
             
             if (data != null)
             {
-                string hostType = data["host"]["type"];
-                string hostPattern = data["host"]["uri"];
-
                 // Assume regex.
-                if (Regex.IsMatch(uri.Host, hostPattern, RegexOptions.Compiled | RegexOptions.IgnoreCase))
+                if (Regex.IsMatch(uri.Host, data.Host.HostUriPattern, RegexOptions.Compiled | RegexOptions.IgnoreCase))
                 {
                     return true;
                 }
@@ -50,10 +48,12 @@ namespace DMR11.Core
             return false;
         }
 
-        private static IniData LoadConfigFile(UriValidated uri)
+        private static IWebsiteHost LoadConfigFile(UriValidated uri)
         {
             var configPath = LookupConfigPath(uri);
-            return GetConfigFile(configPath);
+
+            var serializer = new IniWebsiteHostSerializer();
+            return serializer.SeralizeFromPath(configPath);  
         }
 
         private static string LookupConfigPath(UriValidated uri)
@@ -84,19 +84,12 @@ namespace DMR11.Core
             return string.Empty;
         }
 
-        private static IniData GetConfigFile(string path)
+        private static IWebsiteHost SerializeIniConfigFile(string path)
         {
-            if (File.Exists(path))
-            {
-                var contents = File.ReadAllText(path);
-                var parser = new IniDataParser();
-
-                return parser.Parse(contents);
-
-            }
-
-            return null;
+            var serializer = new IniWebsiteHostSerializer();
+            return serializer.SeralizeFromPath(path);            
         }
+
 
         static ILogger logger = LogManager.GetCurrentClassLogger();
 
@@ -104,8 +97,8 @@ namespace DMR11.Core
         {
             logger.Debug("Entering ParseSeriesTitle");
 
-            string path = HostData["title"]["path"];
-            string pathvalue = HostData["title"]["value"];
+            string path = HostData.Title.Path;
+            string pathvalue = HostData.Title.Value;
 
             var details = new ParseDetails<string>(path, pathvalue, TitleParseAction, logger);
             var title = Parsing.ParseContent<string>(html, details);
@@ -118,8 +111,8 @@ namespace DMR11.Core
             logger.Debug("Entering ParseChapterObjects");
             //logger.Trace("Html parameter: {0}", html);
 
-            string path = HostData["chapters"]["path"];
-            string pathValue = HostData["chapters"]["value"];
+            string path = HostData.Chapters.Path;
+            string pathValue = HostData.Chapters.Value;
 
             var details = new ChapterParseDetails(path, pathValue, ChapterParseAction, logger);
             return Parsing.ParseChapters(html, details);

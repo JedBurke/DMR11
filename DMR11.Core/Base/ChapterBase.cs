@@ -34,6 +34,8 @@ namespace DMR11.Core
         
         /// <summary>
         /// Gets or sets whether all the chapter's pages are in one webpage.
+        /// The page listing is short-circuited if all of the 'pages'
+        /// (chapter images) are in a single HTML page.
         /// </summary>
         public bool SinglePage
         {

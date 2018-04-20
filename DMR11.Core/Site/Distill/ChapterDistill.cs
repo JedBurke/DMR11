@@ -1,5 +1,4 @@
-﻿using IniParser.Model;
-using IniParser.Parser;
+﻿using DMR11.Core.WebsiteHost;
 using HtmlAgilityPack;
 using DMR11.Core.Helper;
 using NLog;
@@ -16,13 +15,13 @@ namespace DMR11.Core
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        private IniData HostData = null;
+        private IWebsiteHost HostData;
 
-        public ChapterDistill(string name, UriValidated address, IniData configData)
+        public ChapterDistill(string name, UriValidated address, IWebsiteHost hostData)
             : base(name, address)
         {
 
-            if (configData == null)
+            if (hostData == null)
             {
                 throw new ArgumentNullException();
             }
@@ -34,32 +33,22 @@ namespace DMR11.Core
                 HostVariables.Add("address", address.ToString());
                 HostVariables.Add("address_trimmed", address.ToString().Substring(0, address.ToString().LastIndexOf('/')));
 
-                HostData = configData;
+                HostData = hostData;
 
                 //Referrer = HostData["host"]["referer"];
 
                 // Short-circuit the page listing if all of the 'pages' (chapter images) are in a single HTML page.
-                if (HostData["host"].ContainsKey("single_page"))
-                {
-                    bool singlePage = false;
-                    bool.TryParse(HostData["host"]["single_page"], out singlePage);
-
-                    SinglePage = singlePage;
-
-                }
+                SinglePage = HostData.Host.SinglePage;
                 
             }
         }
 
         protected override List<UriValidated> ParseImageAddresses(string html)
         {
-            string path = HostData["page"]["path"],
-                   value = HostData["page"]["value"];
-
             var details = new ParseDetails<UriValidated>
             (
-                path,
-                value,
+                HostData.Page.Path,
+                HostData.Page.Value,
                 (element, parseDetails) => Parsing.CreateUriFromElementAttributeValue(element, parseDetails, new UriValidated(HostVariables["address_trimmed"])),
                 logger
             );
@@ -70,26 +59,21 @@ namespace DMR11.Core
         protected override List<UriValidated> ParsePageAddresses(string html)
         {
             if (SinglePage)
+            {
                 return new List<UriValidated>();
+            }
+            else
+            {
+                var details = new ParseDetails<UriValidated>(
+                    HostData.Pages.Path,
+                    HostData.Pages.Value,
+                    (element, parseDetails) => ParseAction(element, parseDetails),
+                    logger
+                );
 
-            string path = HostData["pages"]["path"],
-                   value = HostData["pages"]["value"];
-
-            var details = new ParseDetails<UriValidated>(
-                path,
-                value,
-                (element, parseDetails) => ParseAction(element, parseDetails),
-                logger
-            );
-
-            return Parsing.ParseAddresses(html, details);
-
+                return Parsing.ParseAddresses(html, details);
+            }
         }
-
-        static readonly string
-            HOST_SECTION_PAGES = "pages",
-            HOST_KEY_PARSE_REGEX = "parse_regex",
-            HOST_KEY_PARSE_REPLACE = "parse_replace";
 
         private UriValidated ParseAction(HtmlNode element, IParseDetails<UriValidated> details)
         {
@@ -104,12 +88,10 @@ namespace DMR11.Core
             //    return new UriValidated(Address, string.Concat(pageNumberInt, ".html"));
             //}
 
-            if (
-                HostData[HOST_SECTION_PAGES].ContainsKey(HOST_KEY_PARSE_REGEX) &&
-                HostData[HOST_SECTION_PAGES].ContainsKey(HOST_KEY_PARSE_REPLACE)
-                )
+            if (!string.IsNullOrWhiteSpace(HostData.Pages.ParseRegex) &&
+                !string.IsNullOrWhiteSpace(HostData.Pages.ParseReplace))
             {
-                var regex = new Regex(HostData[HOST_SECTION_PAGES][HOST_KEY_PARSE_REGEX]);
+                var regex = new Regex(HostData.Pages.ParseRegex);
                 var match = Match.Empty;
 
                 var input = element.GetAttributeValue(details.AttributeName, string.Empty);
@@ -135,7 +117,7 @@ namespace DMR11.Core
 
                     //return new UriValidated(input);
 
-                    var replace = VariableLookup(HostData[HOST_SECTION_PAGES][HOST_KEY_PARSE_REPLACE]);
+                    var replace = VariableLookup(HostData.Pages.ParseReplace);
                     return new UriValidated(replace);
                 }
             }

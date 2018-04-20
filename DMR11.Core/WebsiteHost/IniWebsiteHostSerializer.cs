@@ -28,7 +28,8 @@ namespace DMR11.Core.WebsiteHost
 
         public IWebsiteHost SerializeProperties(IniData websiteHostFile)
         {
-            const string 
+            const string
+                SECTION_META = "meta",
                 SECTION_HOST = "host",
                 SECTION_TITLE = "title",
                 SECTION_CHAPTERS = "chapters",
@@ -40,6 +41,11 @@ namespace DMR11.Core.WebsiteHost
             bool hostSinglePage = false;
             
             bool.TryParse(websiteHostFile[SECTION_HOST]["single_page"], out hostSinglePage);
+
+            websiteHost.Meta.HostType = HostType.Simple;
+            websiteHost.Meta.ScriptPath = websiteHostFile[SECTION_META]["script"];
+            websiteHost.Meta.MinimumVersion = Version.Parse("0.5.0");
+            websiteHost.Meta.MaximumVersion = Version.Parse("0.5.0");
 
             websiteHost.Host.FriendlyName = websiteHostFile[SECTION_HOST]["friendly_name"];
             websiteHost.Host.HostUriPattern = websiteHostFile[SECTION_HOST]["uri"];

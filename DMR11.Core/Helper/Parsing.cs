@@ -71,10 +71,15 @@ namespace DMR11.Core.Helper
             return list.Distinct().ToList();
         }
 
-        public static UriValidated CreateUriFromElementAttributeValue<T>(HtmlNode element, IParseDetails<T> details) 
+        public static UriValidated CreateUriFromElementAttributeValue<T>(HtmlNode element, IParseDetails<T> details, UriValidated host) 
         {
             var value = element.GetAttributeValue(details.AttributeName, null);
             details.Logger.Debug("Creating validated URI from \"{0}\"", value);
+
+            if (value.StartsWith("/") && value[1] != '/')
+            {
+                value = string.Concat(host.Scheme, "://", host.Host, value);
+            }
 
             return new UriValidated(value);
         }

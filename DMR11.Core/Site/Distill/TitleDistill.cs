@@ -128,7 +128,7 @@ namespace DMR11.Core
 
         public IChapter ChapterParseAction(HtmlNode element, IParseDetails<IChapter> parseDetails)
         {
-            var uri = Parsing.CreateUriFromElementAttributeValue(element, parseDetails);
+            var uri = Parsing.CreateUriFromElementAttributeValue(element, parseDetails, Address);
             var chapter = new ChapterDistill(element.InnerText, uri, this.HostData);
 
             return chapter ?? null;

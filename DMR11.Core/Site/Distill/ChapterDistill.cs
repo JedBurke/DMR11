@@ -67,12 +67,52 @@ namespace DMR11.Core
                 var details = new ParseDetails<UriValidated>(
                     HostData.Pages.Path,
                     HostData.Pages.Value,
-                    (element, parseDetails) => ParseAction(element, parseDetails),
+                    (element, parseDetails) => GenericParseAction(element, parseDetails, HostData.Pages, (uri) => new UriValidated(uri)),
                     logger
                 );
-
+                
                 return Parsing.ParseAddresses(html, details);
             }
+        }
+
+        private T GenericParseAction<T>(HtmlNode element, IParseDetails<T> details, IHostSection section, Func<string, T> postParse)
+        {
+            if (!string.IsNullOrWhiteSpace(section.ParseRegex) &&
+                !string.IsNullOrWhiteSpace(section.ParseReplace))
+            {
+                var regex = new Regex(section.ParseRegex);
+                var match = Match.Empty;
+
+                var input = element.GetAttributeValue(details.AttributeName, string.Empty);
+                if ((match = regex.Match(input)).Success)
+                {
+                    // Register group values.
+                    foreach (var group in regex.GetGroupNames())
+                    {
+                        var newKey = string.Concat("regex__", group);
+                        var newValue = match.Groups[group].Value;
+
+                        if (HostVariables.ContainsKey(newKey))
+                        {
+                            HostVariables[newKey] = newValue;
+                        }
+                        else
+                        {
+                            HostVariables.Add(newKey, newValue);
+                        }
+                    }
+
+                    var replace = VariableLookup(HostData.Pages.ParseReplace);
+                    return postParse(replace);
+                }
+            }
+            else
+            {
+                var input = element.GetAttributeValue(details.AttributeName, string.Empty);
+                return postParse(input);
+            }
+
+            return default(T);
         }
 
         private UriValidated ParseAction(HtmlNode element, IParseDetails<UriValidated> details)

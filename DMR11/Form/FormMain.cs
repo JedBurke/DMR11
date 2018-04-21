@@ -18,7 +18,6 @@ namespace DMR11
 {
     public partial class FormMain : Form
     {
-
         BindingList<IChapter> DownloadQueue;
 
         protected const string FILENAME_ICHAPTER_COLLECTION = "IChapterCollection.bin";
@@ -265,7 +264,7 @@ namespace DMR11
                 {
                     chapter.Proxy = Option.GetProxy();
                     btnDownload.Enabled = false;
-                    var task = chapter.DownloadImageAsync(SaveDestination, _cts.Token, new DMR11.Core.Progress<ChapterProgress>(c =>
+                    var task = chapter.DownloadImageAsync(chapter.SaveDestination, _cts.Token, new DMR11.Core.Progress<ChapterProgress>(c =>
                         {
                             foreach (DataGridViewRow item in dgvQueueChapter.Rows)
                             {
@@ -487,6 +486,14 @@ namespace DMR11
         private void PrepareSeriesDirectory()
         {
             // Todo: Refactor.
+
+            /* Todo: Format names before checking.
+             * 
+             * Check for the names with the formatting applied instead of what is shown
+             * in the page. If the page contains an invalid character (e.g. :), the
+             * application will determine it hasn't been downloaded yet. This is due to
+             * the application stripping invalid characters from the output.
+             */
 
             // Todo: Set series-specific directory path to default.
             if (dgvChapter.RowCount == 0)

@@ -68,6 +68,7 @@
             this.txtPercent = new System.Windows.Forms.Label();
             this.headerPanel = new System.Windows.Forms.Panel();
             this.StatusPanel = new System.Windows.Forms.Panel();
+            this.btnFromatPreset = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQueueChapter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChapter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudThread)).BeginInit();
@@ -115,9 +116,9 @@
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnAdd.Location = new System.Drawing.Point(172, 433);
+            this.btnAdd.Location = new System.Drawing.Point(192, 433);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(133, 25);
+            this.btnAdd.Size = new System.Drawing.Size(113, 25);
             this.btnAdd.TabIndex = 8;
             this.btnAdd.Text = "Add Selected";
             this.MainToolTip.SetToolTip(this.btnAdd, "Add selected chapters to queue");
@@ -399,7 +400,7 @@
             this.btnAddPrefixCounter.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnAddPrefixCounter.Location = new System.Drawing.Point(12, 433);
             this.btnAddPrefixCounter.Name = "btnAddPrefixCounter";
-            this.btnAddPrefixCounter.Size = new System.Drawing.Size(83, 25);
+            this.btnAddPrefixCounter.Size = new System.Drawing.Size(78, 25);
             this.btnAddPrefixCounter.TabIndex = 7;
             this.btnAddPrefixCounter.Text = "Format...";
             this.MainToolTip.SetToolTip(this.btnAddPrefixCounter, "Format the directory name of the downloaded chapter(s)");
@@ -590,12 +591,24 @@
             this.StatusPanel.Size = new System.Drawing.Size(1012, 27);
             this.StatusPanel.TabIndex = 33;
             // 
+            // btnFromatPreset
+            // 
+            this.btnFromatPreset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnFromatPreset.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFromatPreset.Location = new System.Drawing.Point(93, 433);
+            this.btnFromatPreset.Name = "btnFromatPreset";
+            this.btnFromatPreset.Size = new System.Drawing.Size(24, 25);
+            this.btnFromatPreset.TabIndex = 34;
+            this.btnFromatPreset.Text = "▾";
+            this.btnFromatPreset.UseVisualStyleBackColor = true;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.ClientSize = new System.Drawing.Size(1012, 627);
+            this.Controls.Add(this.btnFromatPreset);
             this.Controls.Add(this.StatusPanel);
             this.Controls.Add(this.lbDefaultDestination);
             this.Controls.Add(this.lbSeriesDestination);
@@ -674,5 +687,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.Panel headerPanel;
         private System.Windows.Forms.Panel StatusPanel;
+        private System.Windows.Forms.Button btnFromatPreset;
     }
 }

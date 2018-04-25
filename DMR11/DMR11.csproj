@@ -137,6 +137,12 @@
     <Compile Include="Bookmarks\Bookmark.cs" />
     <Compile Include="Bookmarks\BookmarkCollection.cs" />
     <Compile Include="Bookmarks\BookmarkManager.cs" />
+    <Compile Include="Form\FormFormat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\FormFormat.Designer.cs">
+      <DependentUpon>FormFormat.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helper\AppInfo.cs" />
     <Compile Include="Helper\KeyState.cs" />
     <Compile Include="Helper\Option.cs" />
@@ -157,6 +163,9 @@
     <Compile Include="Bookmarks\IBookmark.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form\FormFormat.resx">
+      <DependentUpon>FormFormat.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>

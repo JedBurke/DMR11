@@ -27,7 +27,7 @@ namespace DMR11
         private BookmarkManager bookmarks = null;
 
         private ITitle currentTitle = null;
-
+        
         private string SaveDestination
         {
             get
@@ -417,19 +417,32 @@ namespace DMR11
 
         private void btnAddPrefixCounter_Click(object sender, EventArgs e)
         {
-            var chapters = new List<IChapter>();
-            foreach (DataGridViewRow row in dgvChapter.Rows)
-            {
-                IChapter chapter = row.DataBoundItem as IChapter;
-                chapters.Add(chapter);
-            }
-            chapters = Common.CloneIChapterCollection(chapters);
+            //var chapters = new List<IChapter>();
+            //foreach (DataGridViewRow row in dgvChapter.Rows)
+            //{
+            //    IChapter chapter = row.DataBoundItem as IChapter;
+            //    chapters.Add(chapter);
+            //}
+            //chapters = Common.CloneIChapterCollection(chapters);
 
-            chapters.Reverse();
-            chapters.ForEach(r => r.Name = String.Format("[{0:000}] - {1}", chapters.IndexOf(r) + 1, r.Name));
-            chapters.Reverse();
+            //chapters.Reverse();
+            //chapters.ForEach(r => r.Name = String.Format("[{0:000}] - {1}", chapters.IndexOf(r) + 1, r.Name));
+            //chapters.Reverse();
 
-            dgvChapter.DataSource = chapters;
+            //dgvChapter.DataSource = chapters;
+
+            //if (currentTitle != null && currentTitle.HostData != null)
+            //{
+            //    using (var formatDialog = new FormFormat())
+            //    {
+            //        if (formatDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            //        {
+
+            //        }
+            //    }
+            //}
+
+            
         }
 
         private void timer1_Tick(object sender, EventArgs e)

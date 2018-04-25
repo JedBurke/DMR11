@@ -18,13 +18,18 @@ namespace DMR11.Core
     {
         const string HOST_LOOKUP_PATH = "hosts";
 
-        IWebsiteHost HostData = null;
+        //IWebsiteHost HostData = null;
 
         public TitleDistill(UriValidated address)
             : base(address)
         {
             HostData = LoadConfigFile(address);
-            
+
+            HostVariables.Add("host", address.Host);
+            HostVariables.Add("address", address.ToString());
+            HostVariables.Add("address_trimmed", address.ToString().Substring(0, address.ToString().LastIndexOf('/')));
+            HostVariables.Add("series_name", this.SeriesTitle);
+   
         }
 
         /// <summary>
@@ -113,8 +118,8 @@ namespace DMR11.Core
 
             string path = HostData.Chapters.Path;
             string pathValue = HostData.Chapters.Value;
-
-            var details = new ChapterParseDetails(path, pathValue, ChapterParseAction, logger);
+            
+            var details = new ChapterParseDetails(path, pathValue, ChapterParseAction, logger,  HostVariables);
             return Parsing.ParseChapters(html, details);
         }
 
@@ -122,6 +127,14 @@ namespace DMR11.Core
         {
             var uri = Parsing.CreateUriFromElementAttributeValue(element, parseDetails, Address);
             var chapter = new ChapterDistill(element.InnerText, uri, this.HostData);
+            
+            ((Core.Helper.ChapterParseDetails)parseDetails).HostVariables.ToList().ForEach((x) =>
+            {
+                if (chapter.HostVariables.ContainsKey(x.Key))
+                    chapter.HostVariables[x.Key] = x.Value;
+                else
+                    chapter.HostVariables.Add(x.Key, x.Value);
+            });
 
             return chapter ?? null;
         }

@@ -54,7 +54,7 @@
             this.btnAddBookmark = new System.Windows.Forms.Button();
             this.btnRemoveBookmark = new System.Windows.Forms.Button();
             this.MainToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.btnAddPrefixCounter = new System.Windows.Forms.Button();
+            this.btnPresetDialog = new System.Windows.Forms.Button();
             this.nudThread = new System.Windows.Forms.NumericUpDown();
             this.btnPasteUrl = new System.Windows.Forms.Button();
             this.btnAddNew = new System.Windows.Forms.Button();
@@ -388,24 +388,24 @@
             this.btnRemoveBookmark.UseVisualStyleBackColor = true;
             this.btnRemoveBookmark.Click += new System.EventHandler(this.btnRemoveBookmark_Click);
             // 
-            // btnAddPrefixCounter
+            // btnPresetDialog
             // 
-            this.btnAddPrefixCounter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddPrefixCounter.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnAddPrefixCounter.FlatAppearance.BorderSize = 0;
-            this.btnAddPrefixCounter.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
-            this.btnAddPrefixCounter.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
-            this.btnAddPrefixCounter.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnAddPrefixCounter.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddPrefixCounter.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnAddPrefixCounter.Location = new System.Drawing.Point(12, 433);
-            this.btnAddPrefixCounter.Name = "btnAddPrefixCounter";
-            this.btnAddPrefixCounter.Size = new System.Drawing.Size(78, 25);
-            this.btnAddPrefixCounter.TabIndex = 7;
-            this.btnAddPrefixCounter.Text = "Format...";
-            this.MainToolTip.SetToolTip(this.btnAddPrefixCounter, "Format the directory name of the downloaded chapter(s)");
-            this.btnAddPrefixCounter.UseVisualStyleBackColor = false;
-            this.btnAddPrefixCounter.Click += new System.EventHandler(this.btnAddPrefixCounter_Click);
+            this.btnPresetDialog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnPresetDialog.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnPresetDialog.FlatAppearance.BorderSize = 0;
+            this.btnPresetDialog.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnPresetDialog.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
+            this.btnPresetDialog.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnPresetDialog.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPresetDialog.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnPresetDialog.Location = new System.Drawing.Point(12, 433);
+            this.btnPresetDialog.Name = "btnPresetDialog";
+            this.btnPresetDialog.Size = new System.Drawing.Size(78, 25);
+            this.btnPresetDialog.TabIndex = 7;
+            this.btnPresetDialog.Text = "Format...";
+            this.MainToolTip.SetToolTip(this.btnPresetDialog, "Format the directory name of the downloaded chapter(s)");
+            this.btnPresetDialog.UseVisualStyleBackColor = false;
+            this.btnPresetDialog.Click += new System.EventHandler(this.btnAddPrefixCounter_Click);
             // 
             // nudThread
             // 
@@ -617,7 +617,7 @@
             this.Controls.Add(this.lbDestination);
             this.Controls.Add(this.btnAddNew);
             this.Controls.Add(this.nudThread);
-            this.Controls.Add(this.btnAddPrefixCounter);
+            this.Controls.Add(this.btnPresetDialog);
             this.Controls.Add(this.dgvChapter);
             this.Controls.Add(this.btnOptions);
             this.Controls.Add(this.btnChangeSaveTo);
@@ -669,7 +669,7 @@
         private System.Windows.Forms.Button btnAddBookmark;
         private System.Windows.Forms.Button btnRemoveBookmark;
         private System.Windows.Forms.ToolTip MainToolTip;
-        private System.Windows.Forms.Button btnAddPrefixCounter;
+        private System.Windows.Forms.Button btnPresetDialog;
         private System.Windows.Forms.TextBox txtMessage;
         private System.Windows.Forms.NumericUpDown nudThread;
         private System.Windows.Forms.Timer timer1;

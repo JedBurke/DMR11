@@ -28,6 +28,17 @@ namespace DMR11.Core
             set;
         }
 
+        string FormattedChapterName
+        {
+            get;
+        }
+
+        string ChapterNameFormat
+        {
+            get;
+            set;
+        }
+
         bool IsBusy
         {
             get;
@@ -37,6 +48,10 @@ namespace DMR11.Core
         {
             get;
             set;
+        }
+        
+        Dictionary<string, string> HostVariables {
+            get;
         }
 
         Task DownloadImageAsync(string fileName, CancellationToken cancellationToken, Progress<ChapterProgress> progress);

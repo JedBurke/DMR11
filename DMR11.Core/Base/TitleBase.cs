@@ -10,6 +10,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Net.Http;
+using DMR11.Core.WebsiteHost;
 
 
 namespace DMR11.Core
@@ -45,13 +46,16 @@ namespace DMR11.Core
 
         public IWebProxy Proxy { get; set; }
 
+        public IWebsiteHost HostData { get; set; }
+
+        public Dictionary<string, string> HostVariables { get; set; }
+
         public TitleBase(UriValidated address)
         {
             Address = address;
+            HostVariables = new Dictionary<string, string>();
         }
-
-        //abstract string GetSeriesTitle();
-
+        
         public Task PopulateChapterAsync(Progress<int> progress)
         {
             // Todo: Too long, refactor.

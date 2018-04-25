@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using DMR11.Core.WebsiteHost;
 
 namespace DMR11.Core
 {
@@ -28,6 +29,18 @@ namespace DMR11.Core
         }
 
         IWebProxy Proxy
+        {
+            get;
+            set;
+        }
+
+        IWebsiteHost HostData
+        {
+            get;
+            set;
+        }
+
+        Dictionary<string, string> HostVariables
         {
             get;
             set;

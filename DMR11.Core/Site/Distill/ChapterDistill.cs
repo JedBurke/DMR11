@@ -27,16 +27,12 @@ namespace DMR11.Core
             }
             else
             {
-
-                HostVariables = new Dictionary<string, string>();
-                HostVariables.Add("host", address.Host);
-                HostVariables.Add("address", address.ToString());
-                HostVariables.Add("address_trimmed", address.ToString().Substring(0, address.ToString().LastIndexOf('/')));
-
                 HostData = hostData;
 
                 //Referrer = HostData["host"]["referer"];
 
+                HostVariables.Add("chapter", Name);
+                                
                 // Short-circuit the page listing if all of the 'pages' (chapter images) are in a single HTML page.
                 SinglePage = HostData.Host.SinglePage;
                 
@@ -170,7 +166,7 @@ namespace DMR11.Core
             return null;
         }
 
-        Dictionary<string, string> HostVariables = null;
+        //Dictionary<string, string> HostVariables = null;
 
         private string VariableLookup(string input)
         {

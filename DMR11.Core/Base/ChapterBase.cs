@@ -69,6 +69,37 @@ namespace DMR11.Core
             get;
             set;
         }
+
+        public string FormattedChapterName
+        {
+            get
+            {
+                //ChapterNameFormat = "{0} - Ch. {1}";
+
+                string name = Name.Trim().RemoveFileNameInvalidChar();
+                if (string.IsNullOrEmpty(ChapterNameFormat))
+                {
+                    return name;
+                }
+                else
+                {
+                    string formattedName = name;
+
+                    //formattedName = string.Format(ChapterNameFormat, name, HostVariables["chapter"]);
+
+                    return formattedName;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or set the formatting used for creating the chapter directory.
+        /// </summary>
+        public string ChapterNameFormat
+        {
+            get;
+            set;
+        }
         
         /// <summary>
         /// Gets or sets a list of URIs representing the pages in the chapter.
@@ -77,6 +108,13 @@ namespace DMR11.Core
         {
             get;
             set;
+        }
+
+        private Dictionary<string, string> _hostVariables;
+
+        public Dictionary<string, string> HostVariables
+        {
+            get { return _hostVariables; }
         }
 
         public bool IsBusy
@@ -110,6 +148,7 @@ namespace DMR11.Core
             Name = name;
             Address = address;
 
+            _hostVariables = new Dictionary<string, string>();
         }
 
         public Task DownloadImageAsync(string fileName, CancellationToken cancellationToken, Progress<ChapterProgress> progress)
@@ -131,7 +170,8 @@ namespace DMR11.Core
                 }
 
                 // Todo: Refactor.
-                string saveToFolder = SaveDestination + "\\" + this.Name.Trim().RemoveFileNameInvalidChar();
+                
+                string saveToFolder = Path.Combine(SaveDestination, FormattedChapterName);
                 Directory.CreateDirectory(saveToFolder);
 
                 int countImage = 0;
@@ -230,6 +270,6 @@ namespace DMR11.Core
         virtual public void PreParseImageAddresses(params object[] options)
         {
         }
-        
+
     }
 }

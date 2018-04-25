@@ -10,12 +10,13 @@ namespace DMR11.Core.Helper
 {
     public class ChapterParseDetails : IParseDetails<IChapter>
     {
-        public ChapterParseDetails(string xpath, string attributeName, Func<HtmlNode, IParseDetails<IChapter>, IChapter> parseAction, ILogger logger)
+        public ChapterParseDetails(string xpath, string attributeName, Func<HtmlNode, IParseDetails<IChapter>, IChapter> parseAction, ILogger logger, IDictionary<string, string> hostVariables)
         {
             XPath = xpath;
             AttributeName = attributeName;
             ParseAction = parseAction;
             this.Logger = logger;
+            this.HostVariables = hostVariables;
         }
 
         public string XPath
@@ -37,6 +38,12 @@ namespace DMR11.Core.Helper
         }
 
         public ILogger Logger
+        {
+            get;
+            set;
+        }
+
+        public IDictionary<string, string> HostVariables
         {
             get;
             set;

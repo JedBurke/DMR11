@@ -68,14 +68,18 @@ namespace DMR11.Core
                 var handler = new CloudFlareUtilities.ClearanceHandler(new StatusRedirectionHandler());
 
                 HttpClient client = new HttpClient(handler);
-                client.Timeout = TimeSpan.FromSeconds(25);
+                //client.Timeout = TimeSpan.FromSeconds(25);
+                
                 string html = null;
 
-                client.DefaultRequestHeaders.Add("User-Agent", Service.UserAgent.CurrentUserAgent);
+                client.DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+                client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate");
+                client.DefaultRequestHeaders.Add("User-Agent", Service.UserAgent.CurrentUserAgent);                
                 
                 try
                 {
                      html = client.GetStringAsync(Address.ToString()).Result;
+                    
                 }
                 catch (Exception ex)
                 {

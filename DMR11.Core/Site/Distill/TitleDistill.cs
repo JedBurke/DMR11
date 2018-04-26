@@ -128,12 +128,16 @@ namespace DMR11.Core
             var uri = Parsing.CreateUriFromElementAttributeValue(element, parseDetails, Address);
             var chapter = new ChapterDistill(element.InnerText, uri, this.HostData);
             
-            ((Core.Helper.ChapterParseDetails)parseDetails).HostVariables.ToList().ForEach((x) =>
+            ((Core.Helper.ChapterParseDetails)parseDetails).HostVariables.ToList().ForEach((pair) =>
             {
-                if (chapter.HostVariables.ContainsKey(x.Key))
-                    chapter.HostVariables[x.Key] = x.Value;
+                if (chapter.HostVariables.ContainsKey(pair.Key))
+                {
+                    chapter.HostVariables[pair.Key] = pair.Value;
+                }
                 else
-                    chapter.HostVariables.Add(x.Key, x.Value);
+                {
+                    chapter.HostVariables.Add(pair.Key, pair.Value);
+                }
             });
 
             return chapter ?? null;

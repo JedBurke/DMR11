@@ -10,6 +10,24 @@ namespace DMR11_Tests
     public class DownloadTest
     {
         [TestMethod]
+        public void TestMangaPark()
+        {
+            Uri address = new Uri("https://mangapark.com/manga/sekirei");
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(address);
+            request.Credentials = CredentialCache.DefaultCredentials;
+
+            using (var response = request.GetResponse())
+            {
+                using (var responseStream = new StreamReader(response.GetResponseStream()))
+                {
+                    Console.WriteLine(responseStream.ReadToEnd());
+                }
+            }
+
+        }
+
+        [TestMethod]
         public void DownloadFileSenManga()
         {
             try

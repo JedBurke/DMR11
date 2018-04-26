@@ -65,7 +65,10 @@ namespace DMR11.Core
                 progress.ReportProgress(0);
 
 #if MISSED_KISS
-                var handler = new CloudFlareUtilities.ClearanceHandler(new StatusRedirectionHandler());
+                var handler = new CloudFlareUtilities.ClearanceHandler(new StatusRedirectionHandler(new HttpClientHandler()
+                {
+                    AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip
+                }));
 
                 HttpClient client = new HttpClient(handler);
                 //client.Timeout = TimeSpan.FromSeconds(25);
@@ -74,7 +77,8 @@ namespace DMR11.Core
 
                 client.DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
                 client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate");
-                client.DefaultRequestHeaders.Add("User-Agent", Service.UserAgent.CurrentUserAgent);                
+                client.DefaultRequestHeaders.Add("User-Agent", Service.UserAgent.CurrentUserAgent);     
+                
                 
                 try
                 {

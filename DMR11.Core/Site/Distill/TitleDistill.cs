@@ -17,7 +17,7 @@ namespace DMR11.Core
     public class TitleDistill : TitleBase
     {
         const string HOST_LOOKUP_PATH = "hosts";
-
+        
         //IWebsiteHost HostData = null;
 
         public TitleDistill(UriValidated address)
@@ -105,10 +105,32 @@ namespace DMR11.Core
             string path = HostData.Title.Path;
             string pathvalue = HostData.Title.Value;
 
-            var details = new ParseDetails<string>(path, pathvalue, TitleParseAction, logger);
+            //var details = new ParseDetails<string>(path, pathvalue, TitleParseAction, logger);
+            var details = new ParseDetails<string>
+            (
+                path,
+                pathvalue,
+                (element, parseDetails) =>
+                {
+                    return Parsing.GenericParseAction<string>(
+                        element,
+                        parseDetails,
+                        HostData.Title,
+                        (filteredTitle) => filteredTitle,
+                        HostVariables
+                    );
+                },
+                logger
+            );
+
             var title = Parsing.ParseContent<string>(html, details);
 
-            return (title != null && title.Count > 0) ? title[0] : "Untitled";
+            var seriesTitle = (title != null && title.Count > 0) ? title[0] : "Untitled";
+
+            // Todo: Define constant.
+            HostVariables["series_name"] = seriesTitle;
+            
+            return seriesTitle;
         }
 
         protected override List<IChapter> ParseChapterObjects(string html)
@@ -159,5 +181,12 @@ namespace DMR11.Core
 
             return title;
         }
+
+
+        public T GenericParseAction<T>(HtmlNode element, IParseDetails<T> details, IHostSection section, Func<string, T> postParse)
+        {
+            return Parsing.GenericParseAction<T>(element, details, section, postParse, HostVariables);
+        }
+        
     }
 }

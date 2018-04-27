@@ -105,7 +105,6 @@ namespace DMR11.Core
             string path = HostData.Title.Path;
             string pathvalue = HostData.Title.Value;
 
-            //var details = new ParseDetails<string>(path, pathvalue, TitleParseAction, logger);
             var details = new ParseDetails<string>
             (
                 path,
@@ -141,8 +140,44 @@ namespace DMR11.Core
             string path = HostData.Chapters.Path;
             string pathValue = HostData.Chapters.Value;
             
-            var details = new ChapterParseDetails(path, pathValue, ChapterParseAction, logger,  HostVariables);
+            //var details = new ChapterParseDetails(path, pathValue, ChapterParseAction, logger,  HostVariables);
+            var details = new ChapterParseDetails(
+                path,
+                pathValue,
+                (element, parseDetails) =>
+                {
+                    return GenericParseAction<IChapter>
+                    (
+                        element,
+                        parseDetails,
+                        HostData.Chapters,
+                        (chapterUri) => ChapterParseActionUriSupplied(new UriValidated(chapterUri), element, parseDetails)
+                    );
+                },
+                logger,
+                HostVariables
+            );
+            
             return Parsing.ParseChapters(html, details);
+        }
+
+        public IChapter ChapterParseActionUriSupplied(UriValidated chapterUri, HtmlNode element, IParseDetails<IChapter> parseDetails)
+        {
+            var chapter = new ChapterDistill(element.InnerText, chapterUri, this.HostData);
+
+            ((Core.Helper.ChapterParseDetails)parseDetails).HostVariables.ToList().ForEach((pair) =>
+            {
+                if (chapter.HostVariables.ContainsKey(pair.Key))
+                {
+                    chapter.HostVariables[pair.Key] = pair.Value;
+                }
+                else
+                {
+                    chapter.HostVariables.Add(pair.Key, pair.Value);
+                }
+            });
+
+            return chapter ?? null;
         }
 
         public IChapter ChapterParseAction(HtmlNode element, IParseDetails<IChapter> parseDetails)

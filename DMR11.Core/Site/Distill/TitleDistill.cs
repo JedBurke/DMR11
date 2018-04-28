@@ -25,9 +25,16 @@ namespace DMR11.Core
         {
             HostData = LoadConfigFile(address);
 
+            /// Sets the host URI of the series.
             HostVariables.Add("host", address.Host);
-            HostVariables.Add("address", address.ToString());
-            HostVariables.Add("address_trimmed", address.ToString().Substring(0, address.ToString().LastIndexOf('/')));
+
+            /// Sets the series' main address.
+            HostVariables.Add("series_address", address.ToString());
+
+            /// Set the the trimmed address for the main series page.
+            HostVariables.Add("series_address_trimmed", address.ToString().Substring(0, address.ToString().LastIndexOf('/')));
+            
+            /// Sets the series name.
             HostVariables.Add("series_name", this.SeriesTitle);
    
         }

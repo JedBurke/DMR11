@@ -59,7 +59,7 @@ namespace DMR11.Core.Service
                     {
                         handler = new HttpClientHandler()
                         {
-                            AutomaticDecompression = DecompressionMethods.GZip,
+                            AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
                             Credentials = CredentialCache.DefaultNetworkCredentials,
                             CookieContainer = cookieContainer ?? (cookieContainer = new CookieContainer()),
                             UseCookies = true

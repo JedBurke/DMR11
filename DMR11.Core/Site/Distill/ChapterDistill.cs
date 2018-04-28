@@ -31,7 +31,14 @@ namespace DMR11.Core
 
                 //Referrer = HostData["host"]["referer"];
 
+                /// Sets the chapter's name according to the host.
                 HostVariables.Add("chapter", Name);
+
+                /// Sets the chapter's address.
+                HostVariables.Add("address", address.ToString());
+
+                /// Sets a trimmed version of the chapter's address.
+                HostVariables.Add("address_trimmed", address.ToString().Substring(0, address.ToString().LastIndexOf('/')));
                                 
                 // Short-circuit the page listing if all of the 'pages' (chapter images) are in a single HTML page.
                 SinglePage = HostData.Host.SinglePage;

@@ -57,6 +57,20 @@ namespace DMR11
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
             SetButtonStyle();
 
+            /* While the implementation is being decided as well as safe-guards are being set,
+             * disable access to chapter formatting in the 'Release' configuration. In addition
+             * to the formatting, remove the connection counter until it's implemented.
+             * 
+             */
+#if !DEBUG
+            // Hide the buttons related to chapter and page formatting.
+            btnPresetDialog.Visible = false;
+            btnFromatPreset.Visible = false;
+        
+            // Hide the connection selector.
+            nudThread.Visible = false;
+#endif
+
             bookmarks = new BookmarkManager("user/bookmarks.json");
 
         }

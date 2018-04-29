@@ -31,7 +31,7 @@ namespace DMR11.Core
         abstract protected List<UriValidated> ParsePageAddresses(string html);
 
         abstract protected List<UriValidated> ParseImageAddresses(string html);
-        
+
         /// <summary>
         /// Gets or sets whether all the chapter's pages are in one webpage.
         /// The page listing is short-circuited if all of the 'pages'
@@ -60,7 +60,7 @@ namespace DMR11.Core
             get;
             protected set;
         }
-        
+
         /// <summary>
         /// Gets or sets the location of where to save the downloaded chapter.
         /// </summary>
@@ -100,7 +100,7 @@ namespace DMR11.Core
             get;
             set;
         }
-        
+
         /// <summary>
         /// Gets or sets a list of URIs representing the pages in the chapter.
         /// </summary>
@@ -170,7 +170,7 @@ namespace DMR11.Core
                 }
 
                 // Todo: Refactor.
-                
+
                 string saveToFolder = Path.Combine(SaveDestination, FormattedChapterName);
                 Directory.CreateDirectory(saveToFolder);
 
@@ -241,7 +241,32 @@ namespace DMR11.Core
                 foreach (UriValidated pageAddress in pageAddresses)
                 {
                     _cancellationToken.ThrowIfCancellationRequested();
-                    string content = DownloadString(pageAddress);
+                    string content = string.Empty;
+
+                    int retryCount = 0;
+                    const int MAX_RETRIES = 10;
+                    const int RETRY_TIMEOUT = 1000;
+
+                    do
+                    {
+                        try
+                        {
+                            content = DownloadString(pageAddress);
+                            break;
+                        }
+                        catch (Exception)
+                        {
+                            // Todo: Log failure and retry count.
+                            Console.WriteLine("Download failed, retrying. Retry count: {0}", retryCount);
+
+                            if (retryCount == MAX_RETRIES)
+                                throw;
+                            else
+                                Thread.Sleep(RETRY_TIMEOUT * retryCount);
+                        }
+
+                    } while (retryCount++ != MAX_RETRIES);
+
                     sbHtml.AppendLine(content);
 
                     countPage++;
@@ -263,7 +288,7 @@ namespace DMR11.Core
         {
             return Downloader.Instance.DownloadString(address);
         }
-        
+
         /// <summary>
         /// A method called before the parsing the image addresses occur.
         /// </summary>

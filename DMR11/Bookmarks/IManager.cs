@@ -8,12 +8,12 @@ namespace DMR11.Bookmarks
 {
     public interface IManager<T> : IDisposable
     {
-        void Remove();
-
         void Save();
-        void Save(string path);
+        void Save(T subject, string path);
 
+        void Load();
         void Load(string path);
 
+        T Subject { get; }
     }
 }

@@ -21,7 +21,7 @@ namespace DMR11
         }
 
         [DataMember]
-        public UriValidated Url
+        public string Url
         {
             get;
             set;

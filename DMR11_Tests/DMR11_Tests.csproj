@@ -40,6 +40,7 @@
       <HintPath>..\packages\CloudFlareUtilities.0.4.0-alpha\lib\portable45-net45+win8+wpa81\CloudFlareUtilities.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Net" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.WebRequest" />
@@ -67,6 +68,7 @@
     <Compile Include="TaxonomyTest.cs" />
     <Compile Include="Cloudflare.cs" />
     <Compile Include="FormattingTests.cs" />
+    <Compile Include="SerializeManagerTests.cs" />
     <Compile Include="WebsiteHostSerializationTests.cs" />
     <Compile Include="WordConversionTests.cs" />
   </ItemGroup>

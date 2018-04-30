@@ -11,7 +11,7 @@ namespace DMR11
     public interface IMainFormSettings
     {
         string SaveTo { get; set; }
-        UriValidated Url { get; set; }
+        string Url { get; set; }
         string ProxyHost { get; set; }
         decimal ProxyPort { get; set; }
         string ProxyUserName { get; set; }

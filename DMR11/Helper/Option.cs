@@ -18,23 +18,24 @@ namespace DMR11
         {
             IWebProxy wp = null;
 
-            if (Settings.Default.ProxyEnable == true)
-            {
-                try
-                {
-                    string host = Settings.Default.ProxyHost;
-                    int port = Convert.ToInt32(Settings.Default.ProxyPort);
-                    string userName = Settings.Default.ProxyUserName;
-                    string password = Settings.Default.ProxyPassword;
+            // Todo: Implement.
+            //if (MainFormSettings.Default.ProxyEnable == true)
+            //{
+            //    try
+            //    {
+            //        string host = MainFormSettings.Default.ProxyHost;
+            //        int port = Convert.ToInt32(MainFormSettings.Default.ProxyPort);
+            //        string userName = MainFormSettings.Default.ProxyUserName;
+            //        string password = MainFormSettings.Default.ProxyPassword;
 
-                    wp = new WebProxy(host, port);
-                    wp.Credentials = new NetworkCredential(userName, password);
-                }
-                catch
-                {
-                    wp = null;
-                }
-            }
+            //        wp = new WebProxy(host, port);
+            //        wp.Credentials = new NetworkCredential(userName, password);
+            //    }
+            //    catch
+            //    {
+            //        wp = null;
+            //    }
+            //}
 
             return wp;
         }

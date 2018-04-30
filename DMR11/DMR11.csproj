@@ -137,6 +137,7 @@
     <Compile Include="Bookmarks\Bookmark.cs" />
     <Compile Include="Bookmarks\BookmarkCollection.cs" />
     <Compile Include="Bookmarks\BookmarkManager.cs" />
+    <Compile Include="Bookmarks\IManager.cs" />
     <Compile Include="Form\FormFormat.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -161,8 +162,10 @@
     <Compile Include="Helper\Common.cs" />
     <Compile Include="Helper\VirtualKeyStates.cs" />
     <Compile Include="Bookmarks\IBookmark.cs" />
+    <Compile Include="IMainFormSettings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MainFormSettings.cs" />
     <EmbeddedResource Include="Form\FormFormat.resx">
       <DependentUpon>FormFormat.cs</DependentUpon>
     </EmbeddedResource>

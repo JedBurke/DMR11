@@ -343,11 +343,32 @@ namespace DMR11
                 Process.Start(SaveDestination);
         }
 
+        MainFormSettingsManager WindowSettings = null;
+
+        private void LoadSettings()
+        {
+            WindowSettings = new MainFormSettingsManager("user/window.json");
+
+            if (File.Exists("user/window.json"))
+            {
+               WindowSettings.Load();
+            }
+        }
+
+        private void ParseSettings()
+        {
+            this.Size = WindowSettings.Subject.FormSize;
+            this.Location = WindowSettings.Subject.FormLocation;
+            this.WindowState = WindowSettings.Subject.State;
+
+            this.cbTitleUrl.Text = WindowSettings.Subject.Url;
+            this.lbDefaultDestination.Text = WindowSettings.Subject.SaveTo;
+        }
+
         private void FormMain_Load(object sender, EventArgs e)
         {
-            this.Size = DMR11.Properties.Settings.Default.Size;
-            this.Location = DMR11.Properties.Settings.Default.Location;
-            this.WindowState = DMR11.Properties.Settings.Default.WindowState;
+            LoadSettings();
+            ParseSettings();
 
             dgvQueueChapter.AutoGenerateColumns = false;
             dgvChapter.AutoGenerateColumns = false;
@@ -375,20 +396,21 @@ namespace DMR11
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+            WindowSettings.Subject.Url = cbTitleUrl.Text;
+            WindowSettings.Subject.State = this.WindowState;
+
             if (this.WindowState == FormWindowState.Normal)
             {
-                DMR11.Properties.Settings.Default.Size = this.Size;
-                DMR11.Properties.Settings.Default.Location = this.Location;
-                DMR11.Properties.Settings.Default.WindowState = this.WindowState;
+                WindowSettings.Subject.FormSize = this.Size;
+                WindowSettings.Subject.FormLocation = this.Location;
             }
-            else if (this.WindowState == FormWindowState.Maximized)
-            {
-                DMR11.Properties.Settings.Default.WindowState = this.WindowState;
-            }
+            
 
-            Properties.Settings.Default.Save();
+            //Properties.Settings.Default.Save();
             Common.SaveIChapterCollection(DownloadQueue, FILENAME_ICHAPTER_COLLECTION);
 
+
+            WindowSettings.Save();
             bookmarks.Save();
             bookmarks.Dispose();
         }
@@ -529,7 +551,7 @@ namespace DMR11
             }
 
             string
-                defaultSeriesDestination = Properties.Settings.Default.DefaultSaveDestination,
+                defaultSeriesDestination = WindowSettings.Subject.DefaultSaveDestination,
                 series = string.Empty,
                 path = string.Empty;
 

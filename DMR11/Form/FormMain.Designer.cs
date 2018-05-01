@@ -485,7 +485,6 @@
             // 
             this.lbDefaultDestination.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbDefaultDestination.AutoSize = true;
-            this.lbDefaultDestination.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DMR11.Properties.Settings.Default, "SaveTo", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.lbDefaultDestination.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbDefaultDestination.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lbDefaultDestination.Location = new System.Drawing.Point(57, 513);
@@ -494,7 +493,6 @@
             this.lbDefaultDestination.Name = "lbDefaultDestination";
             this.lbDefaultDestination.Size = new System.Drawing.Size(380, 17);
             this.lbDefaultDestination.TabIndex = 30;
-            this.lbDefaultDestination.Text = global::DMR11.Properties.Settings.Default.SaveTo;
             this.MainToolTip.SetToolTip(this.lbDefaultDestination, "Saves the chapter to the default manga folder");
             this.lbDefaultDestination.UseMnemonic = false;
             this.lbDefaultDestination.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lbDefaultDestination_MouseClick);

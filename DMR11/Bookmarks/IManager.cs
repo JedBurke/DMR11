@@ -16,4 +16,12 @@ namespace DMR11.Bookmarks
 
         T Subject { get; }
     }
+
+    public enum IOStatus : int
+    {
+        Success,
+        Failed,
+        FileNotFound,
+        AccessDenied
+    }
 }

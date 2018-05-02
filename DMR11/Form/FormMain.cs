@@ -255,8 +255,21 @@ namespace DMR11
 
         private void btnDownload_Click(object sender, EventArgs e)
         {
-            _cts = new CancellationTokenSource();
-            DownloadChapter();
+            if (btnDownload.Text == "Start Download" && DownloadQueue.Count > 0)
+            {
+                _cts = new CancellationTokenSource();
+                DownloadChapter();
+
+                btnDownload.Text = "Stop";
+            }
+            else if (_cts != null)
+            {
+                _cts.Cancel();
+
+                btnDownload.Text = "Start Download";
+            }
+
+            
         }
 
         private void DownloadChapter(int millisecond)
@@ -277,7 +290,9 @@ namespace DMR11
                 foreach (var chapter in chapters)
                 {
                     chapter.Proxy = Option.GetProxy();
-                    btnDownload.Enabled = false;
+                    //btnDownload.Enabled = false;
+                    btnDownload.Text = "Stop";
+
                     var task = chapter.DownloadImageAsync(chapter.SaveDestination, _cts.Token, new DMR11.Core.Progress<ChapterProgress>(c =>
                         {
                             foreach (DataGridViewRow item in dgvQueueChapter.Rows)
@@ -295,7 +310,8 @@ namespace DMR11
                         switch (t.Status)
                         {
                             case TaskStatus.Canceled:
-                                btnDownload.Enabled = true;
+                                //btnDownload.Enabled = true;
+                                btnDownload.Text = "Start Download";
                                 break;
                             case TaskStatus.Faulted:
                                 txtMessage.Text = t.Exception.InnerException.Message;
@@ -313,7 +329,8 @@ namespace DMR11
             }
             else
             {
-                btnDownload.Enabled = true;
+                //btnDownload.Enabled = true;
+                btnDownload.Text = "Start Download";
             }
         }
 
@@ -324,6 +341,8 @@ namespace DMR11
                 _cts.Cancel();
             }
         }
+
+
 
         private void btnChangeSaveTo_Click(object sender, EventArgs e)
         {

@@ -257,6 +257,7 @@
             this.btnStop.TabIndex = 19;
             this.btnStop.Text = "Stop";
             this.btnStop.UseVisualStyleBackColor = false;
+            this.btnStop.Visible = false;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // btnChangeSaveTo

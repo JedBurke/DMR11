@@ -408,8 +408,7 @@ namespace DMR11
 
             //Properties.Settings.Default.Save();
             Common.SaveIChapterCollection(DownloadQueue, FILENAME_ICHAPTER_COLLECTION);
-
-
+            
             WindowSettings.Save();
             bookmarks.Save();
             bookmarks.Dispose();
@@ -614,16 +613,21 @@ namespace DMR11
 
         private void SetButtonStyle()
         {
+            SetFormButtonStyle(new[] { this.Controls, this.headerPanel.Controls });
+        }
+
+        public static void SetFormButtonStyle(Control.ControlCollection[] controlContainers)
+        {
             var buttonFont = new Font("Segoe UI", 9, FontStyle.Regular, GraphicsUnit.Point);
 
-            foreach (var container in new[] { this.Controls, this.headerPanel.Controls })
+            foreach (var container in controlContainers)
             {
-                container.OfType<Button>().ToList().ForEach((button) => StyleButton(button, buttonFont));
+                container.OfType<Button>().ToList().ForEach((button) => StyleButton(button, buttonFont));                
             }
 
         }
 
-        private void StyleButton(Button button, Font buttonFont)
+        private static void StyleButton(Button button, Font buttonFont)
         {
             if (button != null && buttonFont != null)
             {

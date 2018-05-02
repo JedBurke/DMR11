@@ -175,6 +175,7 @@
             // 
             this.grpSaveDestination.Controls.Add(this.btnSaveBrowse);
             this.grpSaveDestination.Controls.Add(this.txtSaveDestination);
+            this.grpSaveDestination.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpSaveDestination.Location = new System.Drawing.Point(12, 188);
             this.grpSaveDestination.Name = "grpSaveDestination";
             this.grpSaveDestination.Size = new System.Drawing.Size(283, 88);
@@ -198,7 +199,7 @@
             this.txtSaveDestination.Location = new System.Drawing.Point(6, 21);
             this.txtSaveDestination.Name = "txtSaveDestination";
             this.txtSaveDestination.ReadOnly = true;
-            this.txtSaveDestination.Size = new System.Drawing.Size(271, 22);
+            this.txtSaveDestination.Size = new System.Drawing.Size(271, 23);
             this.txtSaveDestination.TabIndex = 0;
             // 
             // btnClose

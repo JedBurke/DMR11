@@ -37,6 +37,7 @@ namespace DMR11
 
         void FormOption_Load(object sender, EventArgs e)
         {
+            FormMain.SetFormButtonStyle(new[] { this.Controls, this.grpSaveDestination.Controls });
             LoadSettings();
         }
         

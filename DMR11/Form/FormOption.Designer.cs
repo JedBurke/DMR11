@@ -41,6 +41,8 @@
             this.grpSaveDestination = new System.Windows.Forms.GroupBox();
             this.btnSaveBrowse = new System.Windows.Forms.Button();
             this.txtSaveDestination = new System.Windows.Forms.TextBox();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.grpSaveDestination.SuspendLayout();
@@ -93,9 +95,10 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Enabled = false;
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(251, 170);
+            this.groupBox1.Size = new System.Drawing.Size(283, 170);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Proxy";
@@ -117,7 +120,7 @@
             0,
             0});
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(141, 22);
+            this.numericUpDown1.Size = new System.Drawing.Size(185, 22);
             this.numericUpDown1.TabIndex = 4;
             this.numericUpDown1.Value = global::DMR11.Properties.Settings.Default.ProxyPort;
             // 
@@ -126,9 +129,10 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.Checked = global::DMR11.Properties.Settings.Default.ProxyEnable;
             this.checkBox1.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::DMR11.Properties.Settings.Default, "ProxyEnable", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.checkBox1.Location = new System.Drawing.Point(92, 19);
+            this.checkBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox1.Location = new System.Drawing.Point(6, 0);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(91, 17);
+            this.checkBox1.Size = new System.Drawing.Size(93, 19);
             this.checkBox1.TabIndex = 0;
             this.checkBox1.Text = "Enable Proxy";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -140,7 +144,7 @@
             this.textBox4.Enabled = global::DMR11.Properties.Settings.Default.ProxyEnable;
             this.textBox4.Location = new System.Drawing.Point(92, 126);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(141, 22);
+            this.textBox4.Size = new System.Drawing.Size(185, 22);
             this.textBox4.TabIndex = 8;
             this.textBox4.Text = global::DMR11.Properties.Settings.Default.ProxyPassword;
             this.textBox4.UseSystemPasswordChar = true;
@@ -152,7 +156,7 @@
             this.textBox3.Enabled = global::DMR11.Properties.Settings.Default.ProxyEnable;
             this.textBox3.Location = new System.Drawing.Point(92, 98);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(141, 22);
+            this.textBox3.Size = new System.Drawing.Size(185, 22);
             this.textBox3.TabIndex = 6;
             this.textBox3.Text = global::DMR11.Properties.Settings.Default.ProxyUserName;
             // 
@@ -163,7 +167,7 @@
             this.textBox1.Enabled = global::DMR11.Properties.Settings.Default.ProxyEnable;
             this.textBox1.Location = new System.Drawing.Point(92, 42);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(141, 22);
+            this.textBox1.Size = new System.Drawing.Size(185, 22);
             this.textBox1.TabIndex = 2;
             this.textBox1.Text = global::DMR11.Properties.Settings.Default.ProxyHost;
             // 
@@ -173,7 +177,7 @@
             this.grpSaveDestination.Controls.Add(this.txtSaveDestination);
             this.grpSaveDestination.Location = new System.Drawing.Point(12, 188);
             this.grpSaveDestination.Name = "grpSaveDestination";
-            this.grpSaveDestination.Size = new System.Drawing.Size(251, 88);
+            this.grpSaveDestination.Size = new System.Drawing.Size(283, 88);
             this.grpSaveDestination.TabIndex = 1;
             this.grpSaveDestination.TabStop = false;
             this.grpSaveDestination.Text = "Save Destination";
@@ -181,7 +185,7 @@
             // btnSaveBrowse
             // 
             this.btnSaveBrowse.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnSaveBrowse.Location = new System.Drawing.Point(170, 49);
+            this.btnSaveBrowse.Location = new System.Drawing.Point(202, 49);
             this.btnSaveBrowse.Name = "btnSaveBrowse";
             this.btnSaveBrowse.Size = new System.Drawing.Size(75, 23);
             this.btnSaveBrowse.TabIndex = 1;
@@ -191,20 +195,40 @@
             // 
             // txtSaveDestination
             // 
-            this.txtSaveDestination.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DMR11.Properties.Settings.Default, "DefaultSaveDestination", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.txtSaveDestination.Location = new System.Drawing.Point(6, 21);
             this.txtSaveDestination.Name = "txtSaveDestination";
             this.txtSaveDestination.ReadOnly = true;
-            this.txtSaveDestination.Size = new System.Drawing.Size(239, 22);
+            this.txtSaveDestination.Size = new System.Drawing.Size(271, 22);
             this.txtSaveDestination.TabIndex = 0;
-            this.txtSaveDestination.Text = global::DMR11.Properties.Settings.Default.DefaultSaveDestination;
+            // 
+            // btnClose
+            // 
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnClose.Location = new System.Drawing.Point(220, 291);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(75, 23);
+            this.btnClose.TabIndex = 2;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Location = new System.Drawing.Point(139, 291);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 3;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // FormOption
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.ClientSize = new System.Drawing.Size(277, 311);
+            this.ClientSize = new System.Drawing.Size(307, 326);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.grpSaveDestination);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -237,5 +261,7 @@
         private System.Windows.Forms.GroupBox grpSaveDestination;
         private System.Windows.Forms.Button btnSaveBrowse;
         private System.Windows.Forms.TextBox txtSaveDestination;
+        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Button btnCancel;
     }
 }

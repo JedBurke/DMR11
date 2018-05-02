@@ -11,18 +11,50 @@ namespace DMR11
 {
     public partial class FormOption : Form
     {
-        public FormOption()
+        public FormOption(IMainFormSettings settings)
         {
             InitializeComponent();
+
+            this.settings = settings;
+
+            this.Load += FormOption_Load;
+            
+            this.FormClosing += FormOption_FormClosing;
+        }
+        
+        IMainFormSettings settings;
+
+        public void LoadSettings()
+        {
+            txtSaveDestination.Text = settings.DefaultSaveDestination;
+        }
+
+        public void ApplySettings()
+        {           
+
+            settings.DefaultSaveDestination = txtSaveDestination.Text;
+        }
+
+        void FormOption_Load(object sender, EventArgs e)
+        {
+            LoadSettings();
+        }
+        
+        void FormOption_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (DialogResult == System.Windows.Forms.DialogResult.OK)
+            {
+                ApplySettings();
+            }
         }
 
         private void btnSaveBrowse_Click(object sender, EventArgs e)
         {
-            using (FolderBrowserDialog fbd = new FolderBrowserDialog())
+            using (FolderBrowserDialog browseDialog = new FolderBrowserDialog())
             {
-                if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                if (browseDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    txtSaveDestination.Text = fbd.SelectedPath;
+                    txtSaveDestination.Text = browseDialog.SelectedPath;
                 }
             }
         }

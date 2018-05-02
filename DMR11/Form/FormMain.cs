@@ -27,7 +27,7 @@ namespace DMR11
         private BookmarkManager bookmarks = null;
 
         private ITitle currentTitle = null;
-        
+
         private string SaveDestination
         {
             get
@@ -89,7 +89,7 @@ namespace DMR11
                 {
                     btnGetChapter.Enabled = true;
                     dgvChapter.DataSource = title.Chapters;
-                                        
+
                     PrepareSeriesDirectory();
 
                     if (t.Exception != null && t.Exception.InnerException != null)
@@ -220,7 +220,7 @@ namespace DMR11
                         item.SaveDestination = SaveDestination;
 
                         DownloadQueue.Add(item);
-                        
+
                         if (limit > 0 && (++chaptersAdded == limit))
                             break;
                     }
@@ -351,7 +351,7 @@ namespace DMR11
 
             if (File.Exists("user/window.json"))
             {
-               WindowSettings.Load();
+                WindowSettings.Load();
             }
         }
 
@@ -404,7 +404,7 @@ namespace DMR11
                 WindowSettings.Subject.FormSize = this.Size;
                 WindowSettings.Subject.FormLocation = this.Location;
             }
-            
+
 
             //Properties.Settings.Default.Save();
             Common.SaveIChapterCollection(DownloadQueue, FILENAME_ICHAPTER_COLLECTION);
@@ -417,21 +417,26 @@ namespace DMR11
 
         private void btnOptions_Click(object sender, EventArgs e)
         {
-            FormOption form = new FormOption();
-            form.ShowDialog(this);
+            using (var optionsDialog = new FormOption(WindowSettings.Subject))
+            {
+                optionsDialog.ShowDialog(this);
+            }
+
+            Console.WriteLine(WindowSettings.Subject.DefaultSaveDestination);
         }
 
         private void LoadBookmark()
         {
             cbTitleUrl.Items.Clear();
-            
+
             cbTitleUrl.Items.AddRange(bookmarks.GetBookmarks().Select(bookmark => bookmark.SeriesUri).ToArray());
 
         }
 
         private void btnAddBookmark_Click(object sender, EventArgs e)
         {
-            var bookmark = new Bookmark() { 
+            var bookmark = new Bookmark()
+            {
                 Name = cbTitleUrl.Text,
                 SeriesUri = new UriValidated(cbTitleUrl.Text)
             };
@@ -444,7 +449,7 @@ namespace DMR11
         }
 
         private void btnRemoveBookmark_Click(object sender, EventArgs e)
-        {            
+        {
             if (bookmarks.RemoveBookmark(cbTitleUrl.Text))
             {
                 LoadBookmark();
@@ -478,7 +483,7 @@ namespace DMR11
             //    }
             //}
 
-            
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)

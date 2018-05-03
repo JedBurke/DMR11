@@ -26,15 +26,18 @@ MSBUILD_PATH = 'c:/windows/microsoft.net/framework64/v4.0.30319/msbuild.exe'
 
 log.info(RELEASE_BIN_DIR)
 
-task :default => %W[
-    :cleanup
-    :setup
-    :build
-    :gather_bin
-    :gather_hosts
-    :zip_setup
-    :cleanup
+task :default => [
+    :cleanup,
+    :setup,
+    :build,
+    :gather_bin,
+    :gather_hosts,
+    :post_gather,
+    :setup_zip,
+    :setup_7zip
 ]
+
+# Todo: Call :cleanup at the end.
 
 # Recursively deletes the files from the previous setup.
 task :cleanup do
@@ -56,9 +59,9 @@ task :setup do
 
     [
         OUTPUT_DIR,
-        HOSTS_DIR,
-        LIB_DIR,
-        USER_DIR
+        HOSTS_OUTPUT_DIR,
+        LIB_OUTPUT_DIR,
+        USER_OUTPUT_DIR
     ].each do |directory|
         log.info "Creating #{directory}"
         Dir.mkdir directory
@@ -85,7 +88,7 @@ task :build do
     
     log.info "Changing directory to #{File.dirname(__FILE__)}"
     Dir.chdir(File.dirname(__FILE__)) do
-        Kernel.exec MSBUILD_PATH + ' ' + command
+        sh MSBUILD_PATH + ' ' + command
     end
 end
 
@@ -130,5 +133,12 @@ task :gather_hosts do
     end
 end
 
-task :zip_setup do
+# Hides the executable's config file.
+task :post_gather do
+end
+
+task :setup_zip do
+end
+
+task :setup_7zip do
 end

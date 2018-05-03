@@ -1,0 +1,134 @@
+require 'fileutils'
+require 'logger'
+
+log = Logger.new(STDOUT)
+log.formatter = proc do |severity, datetime, progname, msg|
+    "#{severity} - [#{datetime}] - #{msg}\n"
+end
+
+PROG_NAME = 'DMR11'
+
+SLN_PATH = File.join(File.dirname(__FILE__), '/DMR11.sln')
+
+HOSTS_DIR = File.join(File.dirname(__FILE__), '../hosts')
+HOSTS_GEN_DIR = File.join(HOSTS_DIR, 'general')
+RELEASE_BIN_DIR = File.join(File.dirname(__FILE__), '/DMR11/bin/Release')
+
+DEPLOY_DIR = File.join(File.dirname(__FILE__), '../releases')
+
+OUTPUT_DIR = File.join(DEPLOY_DIR, PROG_NAME)
+HOSTS_OUTPUT_DIR = File.join(OUTPUT_DIR, 'hosts')
+LIB_OUTPUT_DIR = File.join(OUTPUT_DIR, 'lib')
+USER_OUTPUT_DIR = File.join(OUTPUT_DIR, 'user')
+
+# External
+MSBUILD_PATH = 'c:/windows/microsoft.net/framework64/v4.0.30319/msbuild.exe'
+
+log.info(RELEASE_BIN_DIR)
+
+task :default => %W[
+    :cleanup
+    :setup
+    :build
+    :gather_bin
+    :gather_hosts
+    :zip_setup
+    :cleanup
+]
+
+# Recursively deletes the files from the previous setup.
+task :cleanup do
+    if Dir.exist? OUTPUT_DIR
+        log.info 'Output directory exists, cleaning…'
+
+        FileUtils.remove_dir OUTPUT_DIR
+    end
+end
+
+# Creates the release directory structure.
+task :setup do
+    log.info 'Entering "Setup" task'
+
+    if !Dir.exist? DEPLOY_DIR
+        log.info 'Creating release deployment directory.'
+        Dir.mkdir DEPLOY_DIR
+    end
+
+    [
+        OUTPUT_DIR,
+        HOSTS_DIR,
+        LIB_DIR,
+        USER_DIR
+    ].each do |directory|
+        log.info "Creating #{directory}"
+        Dir.mkdir directory
+    end
+end
+
+task :build do
+    log.info 'Entering "build" task'
+
+    if File.exist? MSBUILD_PATH
+        log.info 'Found MSBuild' 
+    else
+        # Throw
+    end
+    
+    if File.exist? SLN_PATH
+        log.info 'Found solution'
+    else
+        # Throw
+    end
+
+    config = 'Release'
+    command = "\"#{SLN_PATH}\" /t:Build /p:Configuration=#{config}"
+    
+    log.info "Changing directory to #{File.dirname(__FILE__)}"
+    Dir.chdir(File.dirname(__FILE__)) do
+        Kernel.exec MSBUILD_PATH + ' ' + command
+    end
+end
+
+task :gather_bin do
+    log.info 'Entering "Gather Binaries" task.'
+
+    Dir.chdir RELEASE_BIN_DIR do
+        lib = Rake::FileList.new '*.dll'
+        lib.each do |f|
+            FileUtils.cp(f, LIB_OUTPUT_DIR)
+        end
+
+        mainFiles = Rake::FileList.new(
+            "#{PROG_NAME}.exe",
+            "#{PROG_NAME}.exe.config"
+        )
+
+        mainFiles.each do |f|
+            log.info "Copying \"#{f}\" to output…"
+            FileUtils.cp(f, OUTPUT_DIR)
+        end
+    end
+end
+
+# Gathers the host files.
+task :gather_hosts do
+    log.info 'Entering "Gather Hosts" task'
+        
+    hosts = Rake::FileList.new(HOSTS_GEN_DIR + '/*/*.ini')
+    hosts.each do |f|
+        # Todo: Check for NOT_PRODUCTION file to prevent adding to
+        # release build.
+
+        host_dir = File.dirname(f)
+        log.info "Copying \"#{host_dir}\"…"
+
+        FileUtils.copy_entry(
+            host_dir,
+            File.join(HOSTS_OUTPUT_DIR, File.basename(host_dir))
+        )
+
+    end
+end
+
+task :zip_setup do
+end

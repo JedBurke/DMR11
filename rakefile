@@ -1,5 +1,6 @@
 require 'fileutils'
 require 'logger'
+# require 'rake/clean'
 
 log = Logger.new(STDOUT)
 log.formatter = proc do |severity, datetime, progname, msg|
@@ -25,6 +26,7 @@ USER_OUTPUT_DIR = File.join(OUTPUT_DIR, 'user')
 
 # External
 MSBUILD_PATH = 'c:/windows/microsoft.net/framework64/v4.0.30319/msbuild.exe'
+SEVEN_7ZIP_PATH = 'd:/program files/7-zip/7z.exe'
 
 log.info(RELEASE_BIN_DIR)
 
@@ -36,18 +38,23 @@ task :default => [
     :gather_hosts,
     :gather_licenses,
     :post_gather,
-    :setup_zip,
-    :setup_7zip
+    :build_zip,
+    :build_7zip,
+    :cleanup
 ]
 
 # Todo: Call :cleanup at the end.
 
 # Recursively deletes the files from the previous setup.
 task :cleanup do
+    log.info 'Entering cleanup task.'
+
     if Dir.exist? OUTPUT_DIR
         log.info 'Output directory exists, cleaning…'
 
-        FileUtils.remove_dir OUTPUT_DIR
+        FileUtils.remove_dir OUTPUT_DIR, true
+    else
+        log.info 'Output directory doesn\'t exist. Skipping…'
     end
 end
 
@@ -96,7 +103,7 @@ task :build do
     
     log.info "Changing directory to #{File.dirname(__FILE__)}"
     Dir.chdir(File.dirname(__FILE__)) do
-        sh MSBUILD_PATH + ' ' + command
+        system MSBUILD_PATH + ' ' + command
     end
 end
 
@@ -157,6 +164,7 @@ end
 
 # Hides the executable's config file.
 task :post_gather do
+    log.info 'Entering "Post Gather" task.'
     config_path = File.join(OUTPUT_DIR, PROG_NAME + '.exe.config')
 
     if File.exist? config_path
@@ -166,8 +174,24 @@ task :post_gather do
     end
 end
 
-task :setup_zip do
+task :build_zip do
+    log.info 'Entering "Build Zip Archive" task.'
+    build_archive 'zip'
 end
 
-task :setup_7zip do
+task :build_7zip do
+    log.info 'Entering "Build 7-Zip Archive" task.'
+    build_archive '7z'
+end
+
+def build_archive(extension)
+    version = '0.8.0'
+    output_archive = 
+        OUTPUT_DIR +
+        '-' +
+        version +
+        '.' +
+        extension
+
+    system "\"#{SEVEN_7ZIP_PATH}\" a \"#{output_archive}\" \"#{OUTPUT_DIR}\""
 end

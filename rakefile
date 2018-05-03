@@ -12,6 +12,7 @@ SLN_PATH = File.join(File.dirname(__FILE__), '/DMR11.sln')
 
 HOSTS_DIR = File.join(File.dirname(__FILE__), '../hosts')
 HOSTS_GEN_DIR = File.join(HOSTS_DIR, 'general')
+LICENSE_DIR = File.join(File.dirname(__FILE__), '/licenses')
 RELEASE_BIN_DIR = File.join(File.dirname(__FILE__), '/DMR11/bin/Release')
 
 DEPLOY_DIR = File.join(File.dirname(__FILE__), '../releases')
@@ -19,6 +20,7 @@ DEPLOY_DIR = File.join(File.dirname(__FILE__), '../releases')
 OUTPUT_DIR = File.join(DEPLOY_DIR, PROG_NAME)
 HOSTS_OUTPUT_DIR = File.join(OUTPUT_DIR, 'hosts')
 LIB_OUTPUT_DIR = File.join(OUTPUT_DIR, 'lib')
+LICENSE_OUTPUT_DIR = File.join(OUTPUT_DIR, 'licenses')
 USER_OUTPUT_DIR = File.join(OUTPUT_DIR, 'user')
 
 # External
@@ -32,6 +34,7 @@ task :default => [
     :build,
     :gather_bin,
     :gather_hosts,
+    :gather_licenses,
     :post_gather,
     :setup_zip,
     :setup_7zip
@@ -61,10 +64,15 @@ task :setup do
         OUTPUT_DIR,
         HOSTS_OUTPUT_DIR,
         LIB_OUTPUT_DIR,
+        LICENSE_OUTPUT_DIR,
         USER_OUTPUT_DIR
     ].each do |directory|
-        log.info "Creating #{directory}"
-        Dir.mkdir directory
+        if !Dir.exist? directory
+            log.info "Creating #{directory}"
+            Dir.mkdir directory
+        else
+            log.info "Skipping existing directory: #{directory}"
+        end
     end
 end
 
@@ -133,8 +141,29 @@ task :gather_hosts do
     end
 end
 
+task :gather_licenses do
+    log.info 'Entering "Gather Licenses" task.'
+    log.info "License output directory: #{LICENSE_OUTPUT_DIR}"
+    licenses = Rake::FileList.new File.join(LICENSE_DIR, '*-License.txt')
+
+    licenses.each do |license|
+        log.info "Copying \"#{license}\" to output…"
+        FileUtils.copy(
+            license,
+            LICENSE_OUTPUT_DIR
+        )
+    end
+end
+
 # Hides the executable's config file.
 task :post_gather do
+    config_path = File.join(OUTPUT_DIR, PROG_NAME + '.exe.config')
+
+    if File.exist? config_path
+        sh "attrib +h \"#{config_path}\""
+    else
+        log.error "Can't find config file at \"#{config_path}\""
+    end
 end
 
 task :setup_zip do

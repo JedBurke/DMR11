@@ -121,7 +121,7 @@ namespace DMR11.Core.Helper
                     {
                         // Register group values.
                         foreach (var group in regex.GetGroupNames())
-                        {
+                        {                            
                             // Todo: Use section name as well before overwriting the original value.
                             // > regex__pages_conflicting_name
                             // > regex__page_conflicting_name
@@ -151,7 +151,20 @@ namespace DMR11.Core.Helper
 
             return default(T);
         }
-        
+
+        /// <summary>
+        /// Determines whether the input contains a registered variable or meta-variable.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="hostVariables"></param>
+        /// <returns></returns>
+        public static bool IsRegisteredVariable(string input, Dictionary<string, string> hostVariables)
+        {
+            // Todo: Use to check if the value contains '__inner_text' instead of the literal check.
+
+            throw new NotImplementedException();
+        }
+
         public static string VariableLookup(string input, Dictionary<string, string> hostVariables)
         {
             if (hostVariables != null && !string.IsNullOrWhiteSpace(input))

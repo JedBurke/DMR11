@@ -86,24 +86,35 @@ namespace DMR11.Core.Helper
             return new UriValidated(value);
         }
 
+        private static string GetElementValue(HtmlNode element, string innerSelector)
+        {
+            string input = string.Empty;
+            
+            if (string.Compare(innerSelector, "$(__inner_text)", true) == 0)
+            {
+                input = element.InnerText;
+            }
+            else
+            {
+                input = element.GetAttributeValue(innerSelector, string.Empty);
+            }
+            
+            return input;
+        }
+
         public static T GenericParseAction<T>(HtmlNode element, IParseDetails<T> details, IHostSection section, Func<string, T> postParse, Dictionary<string, string> hostVariables)
         {
+            var input = GetElementValue(element, details.AttributeName);
+            
+            // Remove any trailing whitespace or newlines from the value.
+            input = input.Trim();
+
             if (!string.IsNullOrWhiteSpace(section.ParseRegex) &&
                 !string.IsNullOrWhiteSpace(section.ParseReplace))
             {
                 var regex = new Regex(section.ParseRegex);
                 var match = Match.Empty;
-                var input = string.Empty;
-
-                if (string.Compare(details.AttributeName, "$(__inner_text)", true) == 0)
-                {
-                    input = element.InnerText;
-                }
-                else
-                {
-                    input = element.GetAttributeValue(details.AttributeName, string.Empty);
-                }
-
+                
                 if ((match = regex.Match(input)).Success)
                 {
                     // Register group values.
@@ -132,7 +143,6 @@ namespace DMR11.Core.Helper
             }
             else
             {
-                var input = element.GetAttributeValue(details.AttributeName, string.Empty);
                 return postParse(input);
             }
 

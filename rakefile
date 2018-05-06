@@ -168,7 +168,7 @@ task :post_gather do
     config_path = File.join(OUTPUT_DIR, PROG_NAME + '.exe.config')
 
     if File.exist? config_path
-        sh "attrib +h \"#{config_path}\""
+        system "attrib +h \"#{config_path}\""
     else
         log.error "Can't find config file at \"#{config_path}\""
     end
@@ -184,14 +184,25 @@ task :build_7zip do
     build_archive '7z'
 end
 
+task :query do
+    ruby 'Rake/QueryFileVersion.rb'
+end
+
+# Todo: Refactor 'gather_hosts'.
+# Copies the host files to the specified directory.
+
+def refresh_hosts(build_type)
+    if build_type == :release
+
+    elsif build_type == :debug
+
+    end
+end
+
 def build_archive(extension)
+    # Todo: Get assembly version.
     version = '0.8.0'
-    output_archive = 
-        OUTPUT_DIR +
-        '-' +
-        version +
-        '.' +
-        extension
+    output_archive = "#{OUTPUT_DIR}-#{version}.#{extension}"
 
     system "\"#{SEVEN_7ZIP_PATH}\" a \"#{output_archive}\" \"#{OUTPUT_DIR}\""
 end

@@ -105,45 +105,48 @@ namespace DMR11.Core.Helper
         public static T GenericParseAction<T>(HtmlNode element, IParseDetails<T> details, IHostSection section, Func<string, T> postParse, Dictionary<string, string> hostVariables)
         {
             var input = GetElementValue(element, details.AttributeName);
-            
-            // Remove any trailing whitespace or newlines from the value.
-            input = input.Trim();
 
-            if (!string.IsNullOrWhiteSpace(section.ParseRegex) &&
-                !string.IsNullOrWhiteSpace(section.ParseReplace))
+            if (!string.IsNullOrWhiteSpace(input))
             {
-                var regex = new Regex(section.ParseRegex);
-                var match = Match.Empty;
-                
-                if ((match = regex.Match(input)).Success)
+                // Remove any trailing whitespace or newlines from the value.
+                input = input.Trim();
+
+                if (!string.IsNullOrWhiteSpace(section.ParseRegex) &&
+                    !string.IsNullOrWhiteSpace(section.ParseReplace))
                 {
-                    // Register group values.
-                    foreach (var group in regex.GetGroupNames())
+                    var regex = new Regex(section.ParseRegex);
+                    var match = Match.Empty;
+
+                    if ((match = regex.Match(input)).Success)
                     {
-                        // Todo: Use section name as well before overwriting the original value.
-                        // > regex__pages_conflicting_name
-                        // > regex__page_conflicting_name
-
-                        var newKey = string.Concat("regex__", group);
-                        var newValue = match.Groups[group].Value;
-
-                        if (hostVariables.ContainsKey(newKey))
+                        // Register group values.
+                        foreach (var group in regex.GetGroupNames())
                         {
-                            hostVariables[newKey] = newValue;
+                            // Todo: Use section name as well before overwriting the original value.
+                            // > regex__pages_conflicting_name
+                            // > regex__page_conflicting_name
+
+                            var newKey = string.Concat("regex__", group);
+                            var newValue = match.Groups[group].Value;
+
+                            if (hostVariables.ContainsKey(newKey))
+                            {
+                                hostVariables[newKey] = newValue;
+                            }
+                            else
+                            {
+                                hostVariables.Add(newKey, newValue);
+                            }
                         }
-                        else
-                        {
-                            hostVariables.Add(newKey, newValue);
-                        }
+
+                        var replace = VariableLookup(section.ParseReplace, hostVariables);
+                        return postParse(replace);
                     }
-
-                    var replace = VariableLookup(section.ParseReplace, hostVariables);
-                    return postParse(replace);
                 }
-            }
-            else
-            {
-                return postParse(input);
+                else
+                {
+                    return postParse(input);
+                }
             }
 
             return default(T);

@@ -28,6 +28,8 @@ namespace DMR11.Core
         [NonSerialized]
         private Progress<ChapterProgress> _progress;
 
+        private string _saveDestination = string.Empty;
+
         abstract protected List<UriValidated> ParsePageAddresses(string html);
 
         abstract protected List<UriValidated> ParseImageAddresses(string html);
@@ -66,8 +68,19 @@ namespace DMR11.Core
         /// </summary>
         public string SaveDestination
         {
-            get;
-            set;
+            get
+            {
+                return _saveDestination;
+            }
+            set
+            {
+                _saveDestination = value;
+
+                if (!string.IsNullOrWhiteSpace(_saveDestination))
+                {
+                    _saveDestination = Helper.FileSystem.GetSafeFileName(_saveDestination);
+                }
+            }
         }
 
         public string FormattedChapterName
@@ -76,7 +89,7 @@ namespace DMR11.Core
             {
                 //ChapterNameFormat = "{0} - Ch. {1}";
 
-                string name = Name.Trim().RemoveFileNameInvalidChar();
+                string name = Helper.FileSystem.GetSafeFileName(Name.Trim());
                 if (string.IsNullOrEmpty(ChapterNameFormat))
                 {
                     return name;
@@ -172,6 +185,7 @@ namespace DMR11.Core
                 // Todo: Refactor.
 
                 string saveToFolder = Path.Combine(SaveDestination, FormattedChapterName);
+                
                 Directory.CreateDirectory(saveToFolder);
 
                 int countImage = 0;

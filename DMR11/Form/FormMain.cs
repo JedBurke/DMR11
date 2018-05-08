@@ -411,6 +411,9 @@ namespace DMR11
             dgvQueueChapter.DataSource = DownloadQueue;
 
             LoadBookmark();
+
+            dgvChapter.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 11, FontStyle.Regular, GraphicsUnit.Point);
+            dgvQueueChapter.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Regular, GraphicsUnit.Point);
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)

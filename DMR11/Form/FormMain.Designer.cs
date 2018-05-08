@@ -37,6 +37,10 @@
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnRemoveAll = new System.Windows.Forms.Button();
             this.dgvQueueChapter = new System.Windows.Forms.DataGridView();
+            this.ColChapterName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColChapterStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColChapterUrl = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColSaveTo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnChangeSaveTo = new System.Windows.Forms.Button();
             this.btnOpenFolder = new System.Windows.Forms.Button();
@@ -56,7 +60,7 @@
             this.lbSeriesDestination = new System.Windows.Forms.Label();
             this.lbDefaultDestination = new System.Windows.Forms.Label();
             this.txtMessage = new System.Windows.Forms.TextBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.RetryDownloadTimer = new System.Windows.Forms.Timer(this.components);
             this.lbDestination = new System.Windows.Forms.Label();
             this.rdDefaultDestination = new System.Windows.Forms.RadioButton();
             this.rdSeriesDestination = new System.Windows.Forms.RadioButton();
@@ -64,10 +68,6 @@
             this.headerPanel = new System.Windows.Forms.Panel();
             this.StatusPanel = new System.Windows.Forms.Panel();
             this.btnFromatPreset = new System.Windows.Forms.Button();
-            this.ColChapterName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColChapterStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColChapterUrl = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColSaveTo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQueueChapter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChapter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudThread)).BeginInit();
@@ -200,6 +200,44 @@
             this.dgvQueueChapter.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvQueueChapter.Size = new System.Drawing.Size(551, 512);
             this.dgvQueueChapter.TabIndex = 10;
+            // 
+            // ColChapterName
+            // 
+            this.ColChapterName.DataPropertyName = "Name";
+            this.ColChapterName.HeaderText = "Chapter Name";
+            this.ColChapterName.Name = "ColChapterName";
+            this.ColChapterName.ReadOnly = true;
+            this.ColChapterName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ColChapterName.Width = 200;
+            // 
+            // ColChapterStatus
+            // 
+            this.ColChapterStatus.HeaderText = "%";
+            this.ColChapterStatus.Name = "ColChapterStatus";
+            this.ColChapterStatus.ReadOnly = true;
+            this.ColChapterStatus.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ColChapterStatus.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ColChapterStatus.Width = 35;
+            // 
+            // ColChapterUrl
+            // 
+            this.ColChapterUrl.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColChapterUrl.DataPropertyName = "Address";
+            this.ColChapterUrl.HeaderText = "Address";
+            this.ColChapterUrl.Name = "ColChapterUrl";
+            this.ColChapterUrl.ReadOnly = true;
+            this.ColChapterUrl.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ColChapterUrl.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // ColSaveTo
+            // 
+            this.ColSaveTo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColSaveTo.DataPropertyName = "SaveDestination";
+            this.ColSaveTo.HeaderText = "Destination";
+            this.ColSaveTo.Name = "ColSaveTo";
+            this.ColSaveTo.ReadOnly = true;
+            this.ColSaveTo.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ColSaveTo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // btnStop
             // 
@@ -475,10 +513,10 @@
             this.txtMessage.Size = new System.Drawing.Size(957, 16);
             this.txtMessage.TabIndex = 23;
             // 
-            // timer1
+            // tmRetryDownlaod
             // 
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.RetryDownloadTimer.Interval = 1000;
+            this.RetryDownloadTimer.Tick += new System.EventHandler(this.RetryDownloadTimer_Tick);
             // 
             // lbDestination
             // 
@@ -563,44 +601,6 @@
             this.btnFromatPreset.Text = "▾";
             this.btnFromatPreset.UseVisualStyleBackColor = true;
             // 
-            // ColChapterName
-            // 
-            this.ColChapterName.DataPropertyName = "Name";
-            this.ColChapterName.HeaderText = "Chapter Name";
-            this.ColChapterName.Name = "ColChapterName";
-            this.ColChapterName.ReadOnly = true;
-            this.ColChapterName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ColChapterName.Width = 200;
-            // 
-            // ColChapterStatus
-            // 
-            this.ColChapterStatus.HeaderText = "%";
-            this.ColChapterStatus.Name = "ColChapterStatus";
-            this.ColChapterStatus.ReadOnly = true;
-            this.ColChapterStatus.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ColChapterStatus.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ColChapterStatus.Width = 35;
-            // 
-            // ColChapterUrl
-            // 
-            this.ColChapterUrl.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ColChapterUrl.DataPropertyName = "Address";
-            this.ColChapterUrl.HeaderText = "Address";
-            this.ColChapterUrl.Name = "ColChapterUrl";
-            this.ColChapterUrl.ReadOnly = true;
-            this.ColChapterUrl.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ColChapterUrl.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // ColSaveTo
-            // 
-            this.ColSaveTo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ColSaveTo.DataPropertyName = "SaveDestination";
-            this.ColSaveTo.HeaderText = "Destination";
-            this.ColSaveTo.Name = "ColSaveTo";
-            this.ColSaveTo.ReadOnly = true;
-            this.ColSaveTo.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ColSaveTo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -671,7 +671,7 @@
         private System.Windows.Forms.Button btnPresetDialog;
         private System.Windows.Forms.TextBox txtMessage;
         private System.Windows.Forms.NumericUpDown nudThread;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer RetryDownloadTimer;
         private System.Windows.Forms.Button btnAddNew;
         private System.Windows.Forms.Button btnPasteUrl;
         private System.Windows.Forms.Label lbDestination;

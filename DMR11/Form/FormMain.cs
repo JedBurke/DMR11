@@ -277,8 +277,8 @@ namespace DMR11
 
         private void DownloadChapter(int millisecond)
         {
-            timer1.Interval = millisecond;
-            timer1.Enabled = true;
+            RetryDownloadTimer.Interval = millisecond;
+            RetryDownloadTimer.Enabled = true;
         }
 
         private void DownloadChapter()
@@ -503,9 +503,9 @@ namespace DMR11
 
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void RetryDownloadTimer_Tick(object sender, EventArgs e)
         {
-            timer1.Enabled = false;
+            RetryDownloadTimer.Enabled = false;
             DownloadChapter();
         }
 

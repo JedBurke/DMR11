@@ -59,7 +59,7 @@ namespace DMR11
             SetFormTitle();
             SetButtonStyle();
             SetDataGridColumnStyle();
-
+            
             /* While the implementation is being decided as well as safe-guards are being set,
              * disable access to chapter formatting in the 'Release' configuration. In addition
              * to the formatting, remove the connection counter until it's implemented.

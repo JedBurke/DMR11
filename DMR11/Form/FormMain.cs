@@ -56,6 +56,7 @@ namespace DMR11
             this.Icon = SystemIcons.Application;
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
             SetButtonStyle();
+            SetDataGridColumnStyle();
 
             /* While the implementation is being decided as well as safe-guards are being set,
              * disable access to chapter formatting in the 'Release' configuration. In addition
@@ -412,8 +413,6 @@ namespace DMR11
 
             LoadBookmark();
 
-            dgvChapter.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 11, FontStyle.Regular, GraphicsUnit.Point);
-            dgvQueueChapter.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Regular, GraphicsUnit.Point);
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -643,6 +642,38 @@ namespace DMR11
                 }
             }
         }
+
+        private void SetDataGridColumnStyle()
+        {
+            var chapterQueueFont = new Font("Segoe UI", 11, FontStyle.Regular, GraphicsUnit.Point);
+            var downloadQueueFont = new Font(chapterQueueFont.FontFamily, 10, FontStyle.Regular, GraphicsUnit.Point);
+
+            StyleDataGridColumnHeader(dgvChapter, chapterQueueFont);
+            StyleDataGridColumnHeader(dgvQueueChapter, downloadQueueFont);
+        }
+
+        private static void StyleDataGridColumnHeader(DataGridView dataGrid, Font columnHeaderFont)
+        {
+            var defaultColumnStyle = new DataGridViewCellStyle();
+            defaultColumnStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            defaultColumnStyle.BackColor = Color.FromArgb(215, 215, 215);
+            defaultColumnStyle.ForeColor = Color.FromArgb(64, 64, 64);
+            defaultColumnStyle.Padding = new Padding(0, 2, 0, 3);
+
+            if (columnHeaderFont != null)
+            {
+                defaultColumnStyle.Font = columnHeaderFont;
+            }
+
+            dataGrid.ColumnHeadersDefaultCellStyle = defaultColumnStyle;
+            dataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+
+            dataGrid.EnableHeadersVisualStyles = false;
+
+            // Todo: Refactor.
+            dataGrid.BorderStyle = BorderStyle.None;
+        }
+
 
     }
 

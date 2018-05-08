@@ -55,6 +55,8 @@ namespace DMR11
 
             this.Icon = SystemIcons.Application;
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
+
+            SetFormTitle();
             SetButtonStyle();
             SetDataGridColumnStyle();
 
@@ -387,17 +389,12 @@ namespace DMR11
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            LoadSettings();
+            LoadSettings();          
             ParseSettings();
 
             dgvQueueChapter.AutoGenerateColumns = false;
             dgvChapter.AutoGenerateColumns = false;
-
-            var semanticVersion = Application.ProductVersion.Substring(0, Application.ProductVersion.LastIndexOf('.'));
-
-            this.Text = string.Format("{0} - {1}", Application.ProductName, semanticVersion);
-
-
+            
             //foreach (string[] item in TitleFactory.GetSupportedSites())
             //{
             //    dgvSupportedSites.Rows.Add(item);
@@ -674,6 +671,22 @@ namespace DMR11
             dataGrid.BorderStyle = BorderStyle.None;
         }
 
+        private void SetFormTitle()
+        {            
+            this.Text = string.Format("{0} - {1}", Application.ProductName, GetSemanticVersion());
+        }
+
+        private string GetSemanticVersion()
+        {
+            return GetSemanticVersion(Application.ProductVersion);
+        }
+
+        public static string GetSemanticVersion(string version)
+        {
+            var semanticVersion = version.Substring(0, Application.ProductVersion.LastIndexOf('.'));
+
+            return semanticVersion;
+        }
 
     }
 

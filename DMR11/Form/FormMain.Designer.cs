@@ -182,9 +182,6 @@
             this.dgvQueueChapter.AllowUserToAddRows = false;
             this.dgvQueueChapter.AllowUserToDeleteRows = false;
             this.dgvQueueChapter.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            this.dgvQueueChapter.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvQueueChapter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -197,14 +194,6 @@
             this.ColChapterStatus,
             this.ColChapterUrl,
             this.Column1});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(215)))), ((int)(((byte)(215)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvQueueChapter.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvQueueChapter.GridColor = System.Drawing.Color.Silver;
             this.dgvQueueChapter.Location = new System.Drawing.Point(449, 47);
             this.dgvQueueChapter.Name = "dgvQueueChapter";

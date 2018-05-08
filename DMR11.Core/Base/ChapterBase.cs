@@ -78,7 +78,7 @@ namespace DMR11.Core
 
                 if (!string.IsNullOrWhiteSpace(_saveDestination))
                 {
-                    _saveDestination = Helper.FileSystem.GetSafeFileName(_saveDestination);
+                    _saveDestination = Helper.FileSystem.GetSafePath(_saveDestination);
                 }
             }
         }

@@ -578,44 +578,15 @@ namespace DMR11
                 series = string.Empty,
                 path = string.Empty;
 
-            //if (!string.IsNullOrWhiteSpace(cbTitleUrl.Text))
-            //{
-            //    Uri seriesUri = null;
-
-            //    if (Uri.TryCreate(cbTitleUrl.Text, UriKind.Absolute, out seriesUri))
-            //    {
-            //        series = seriesUri.ToString();
-            //    }
-            //    else
-            //    {
-            //        series = cbTitleUrl.SelectedItem.ToString();
-            //    }
-            //}
-            //else
-            //{
-            //    series = cbTitleUrl.Text;
-            //}
-
-
-            //if (string.IsNullOrWhiteSpace(series))
-            //{
-            //    // Todo: Set series-specific directory path to default.
-            //    return;
-            //}
-
             if (string.IsNullOrEmpty(defaultSeriesDestination))
+            {
                 defaultSeriesDestination = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-
-            //series = series.TrimEnd('/');
-            //series = series.Substring(series.LastIndexOf('/') + 1);
-
-            //var item = (IChapter)dgvChapter.Rows[0].DataBoundItem;
-            //series = item.Name.Substring(0, item.Name.LastIndexOf(" ")).Trim();
+            }
 
             series = currentTitle.SeriesTitle;
 
             // Todo: Replace invalid characters.
-            path = Path.Combine(defaultSeriesDestination, series);
+            path = DMR11.Core.Helper.FileSystem.GetSafePath(Path.Combine(defaultSeriesDestination, series));
 
             lbSeriesDestination.Text = path;
 

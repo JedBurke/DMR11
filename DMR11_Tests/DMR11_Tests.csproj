@@ -69,6 +69,7 @@
     <Compile Include="Cloudflare.cs" />
     <Compile Include="FormattingTests.cs" />
     <Compile Include="SerializeManagerTests.cs" />
+    <Compile Include="FileSystemTests.cs" />
     <Compile Include="WebsiteHostSerializationTests.cs" />
     <Compile Include="WordConversionTests.cs" />
   </ItemGroup>

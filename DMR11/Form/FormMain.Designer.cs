@@ -48,7 +48,6 @@
             this.btnOptions = new System.Windows.Forms.Button();
             this.dgvChapter = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.cbTitleUrl = new System.Windows.Forms.ComboBox();
             this.btnAddBookmark = new System.Windows.Forms.Button();
             this.btnRemoveBookmark = new System.Windows.Forms.Button();
@@ -503,7 +502,6 @@
             this.txtMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txtMessage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.txtMessage.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtMessage.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.txtMessage.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMessage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.txtMessage.Location = new System.Drawing.Point(12, 6);
@@ -513,7 +511,7 @@
             this.txtMessage.Size = new System.Drawing.Size(957, 16);
             this.txtMessage.TabIndex = 23;
             // 
-            // tmRetryDownlaod
+            // RetryDownloadTimer
             // 
             this.RetryDownloadTimer.Interval = 1000;
             this.RetryDownloadTimer.Tick += new System.EventHandler(this.RetryDownloadTimer_Tick);
@@ -663,7 +661,6 @@
         private System.Windows.Forms.Button btnOptions;
         private System.Windows.Forms.DataGridView dgvChapter;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.ComboBox cbTitleUrl;
         private System.Windows.Forms.Button btnAddBookmark;
         private System.Windows.Forms.Button btnRemoveBookmark;

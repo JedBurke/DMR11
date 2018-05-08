@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModernFolderBrowserDialog;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -50,12 +51,12 @@ namespace DMR11
         }
 
         private void btnSaveBrowse_Click(object sender, EventArgs e)
-        {
-            using (FolderBrowserDialog browseDialog = new FolderBrowserDialog())
+        {            
+            using (FolderBrowser browserDialog = new FolderBrowser())
             {
-                if (browseDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                if (browserDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    txtSaveDestination.Text = browseDialog.SelectedPath;
+                    txtSaveDestination.Text = browserDialog.SelectedPath;
                 }
             }
         }

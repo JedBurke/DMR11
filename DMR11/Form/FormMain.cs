@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ModernFolderBrowserDialog;
+using DMR11.Core;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,7 +12,6 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Deployment.Application;
 using System.Collections.Specialized;
-using DMR11.Core;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -27,6 +28,8 @@ namespace DMR11
         private BookmarkManager bookmarks = null;
 
         private ITitle currentTitle = null;
+
+        private FolderBrowser browserDialog = null;
 
         private string SaveDestination
         {
@@ -344,19 +347,16 @@ namespace DMR11
                 _cts.Cancel();
             }
         }
-
-
-
+                
         private void btnChangeSaveTo_Click(object sender, EventArgs e)
-        {
-            folderBrowserDialog1.SelectedPath = SaveDestination;
+        {            
+            browserDialog.SelectedPath = SaveDestination;
 
-            DialogResult dr = folderBrowserDialog1.ShowDialog(this);
-            if (dr == DialogResult.OK)
+            if (browserDialog.ShowDialog() == DialogResult.OK)
             {
-                SaveDestination = folderBrowserDialog1.SelectedPath;
+                SaveDestination = browserDialog.SelectedPath;
             }
-
+            
         }
 
         private void btnOpenFolder_Click(object sender, EventArgs e)
@@ -400,6 +400,8 @@ namespace DMR11
             //    dgvSupportedSites.Rows.Add(item);
             //}
 
+            browserDialog = new ModernFolderBrowserDialog.FolderBrowser();
+
             if (String.IsNullOrEmpty(lbDefaultDestination.Text))
             {
                 lbDefaultDestination.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -409,7 +411,6 @@ namespace DMR11
             dgvQueueChapter.DataSource = DownloadQueue;
 
             LoadBookmark();
-
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)

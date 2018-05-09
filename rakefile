@@ -1,5 +1,6 @@
 require 'fileutils'
 require 'logger'
+require_relative 'rake/QueryFileVersion'
 # require 'rake/clean'
 
 log = Logger.new(STDOUT)
@@ -8,6 +9,7 @@ log.formatter = proc do |severity, datetime, progname, msg|
 end
 
 PROG_NAME = 'DMR11'
+EXE_NAME = "#{PROG_NAME}.exe"
 
 SLN_PATH = File.join(File.dirname(__FILE__), '/DMR11.sln')
 
@@ -23,6 +25,7 @@ HOSTS_OUTPUT_DIR = File.join(OUTPUT_DIR, 'hosts')
 LIB_OUTPUT_DIR = File.join(OUTPUT_DIR, 'lib')
 LICENSE_OUTPUT_DIR = File.join(OUTPUT_DIR, 'licenses')
 USER_OUTPUT_DIR = File.join(OUTPUT_DIR, 'user')
+EXE_OUTPUT_PATH = File.join(OUTPUT_DIR, EXE_NAME)
 
 # External
 MSBUILD_PATH = 'c:/windows/microsoft.net/framework64/v4.0.30319/msbuild.exe'
@@ -176,16 +179,12 @@ end
 
 task :build_zip do
     log.info 'Entering "Build Zip Archive" task.'
-    build_archive 'zip'
+    build_archive('zip', get_main_exe_ver)
 end
 
 task :build_7zip do
     log.info 'Entering "Build 7-Zip Archive" task.'
-    build_archive '7z'
-end
-
-task :query do
-    ruby 'Rake/QueryFileVersion.rb'
+    build_archive('7z', get_main_exe_ver)
 end
 
 # Todo: Refactor 'gather_hosts'.
@@ -199,9 +198,11 @@ def refresh_hosts(build_type)
     end
 end
 
-def build_archive(extension)
-    # Todo: Get assembly version.
-    version = '0.8.0'
+def get_main_exe_ver()
+    QueryFileVersion.query_semantic_version EXE_OUTPUT_PATH
+end
+
+def build_archive(extension, version = :latest)
     output_archive = "#{OUTPUT_DIR}-#{version}.#{extension}"
 
     system "\"#{SEVEN_7ZIP_PATH}\" a \"#{output_archive}\" \"#{OUTPUT_DIR}\""

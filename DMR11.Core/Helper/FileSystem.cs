@@ -125,7 +125,7 @@ namespace DMR11.Core.Helper
             rootRemoved = rootRemoved.Remove(rootRemoved.Length - fileName.Length, fileName.Length);
             fileName = GetSafeFileName(fileName);
 
-            return Path.Combine(root, string.Join("", Path.Combine(rootRemoved, fileName).Split(invalidChars.ToArray())));
+            return Path.Combine(root, string.Join("", Path.Combine(rootRemoved, fileName).Split(invalidChars.ToArray()))).Trim();
         }
     }
 }

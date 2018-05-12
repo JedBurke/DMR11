@@ -4,42 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DMR11.Core
+namespace DMR11.Core.Net
 {
-    public abstract class UriDecorator : Uri
+    public class ValidatedUri : UriDecorator
     {
-        protected Uri decoratedUri;
-
-        public UriDecorator(Uri uri) : base(uri.ToString())
-        {
-            decoratedUri = uri;
-        }
-
-        public void SetDecoratedUri(Uri uri)
-        {
-            decoratedUri = uri;
-        }
-
-    }
-
-    public class ValidateUri : UriDecorator
-    {
-        public ValidateUri(Uri decorated) : base(decorated)
+        public ValidatedUri(Uri decorated)
+            : base(decorated)
         {
         }
 
-        public ValidateUri(string uri) : base(new Uri(CheckAndInsertMissingScheme(uri)))
+        public ValidatedUri(string uri)
+            : base(new Uri(CheckAndInsertMissingScheme(uri)))
         {            
             
         }
-
-        public enum UriScheme : int
-        {
-            Http = 0,
-            Https,
-            Ftp
-        }
-
+        
         /// <summary>
         /// Checks if the URI is missing the HTTP or HTTPS scheme.
         /// </summary>
@@ -70,24 +49,5 @@ namespace DMR11.Core
             // Todo: Enhance the enum and make use of the read-only fields.
             return string.Concat(scheme.ToString().ToLower(), ":");
         }
-
     }
-
-    public class UpcaseUri : UriDecorator
-    {
-        public UpcaseUri(string uri) : this(new Uri(uri))
-        {
-        }
-
-        public UpcaseUri(Uri decorated) : base(decorated)
-        {
-        }
-
-        public override string ToString()
-        {
-            return decoratedUri.ToString().ToUpper();
-        }
-    }
-
-
 }

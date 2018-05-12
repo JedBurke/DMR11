@@ -6,30 +6,13 @@ using System.Threading.Tasks;
 
 namespace DMR11.Core
 {
-    public interface IDecorator<T>
-    {
-        T SetDecorated(T decorated);
-    }
-
-    public abstract class Decorator<T> : IDecorator<T>
-    {
-        protected T decorated;
-        
-        public T SetDecorated(T decorated)
-        {
-            this.decorated = decorated;
-            return this.decorated;
-        }
-    }
-
-    public abstract class UriDecorator : Decorator<Uri>
+    public abstract class UriDecorator : Uri
     {
         protected Uri decoratedUri;
 
-        public UriDecorator(Uri uri)
+        public UriDecorator(Uri uri) : base(uri.ToString())
         {
             decoratedUri = uri;
-            
         }
 
         public void SetDecoratedUri(Uri uri)
@@ -37,18 +20,6 @@ namespace DMR11.Core
             decoratedUri = uri;
         }
 
-        public new string AbsolutePath
-        {
-            get
-            {
-                return decoratedUri.AbsolutePath;
-            }
-        }
-
-        public override string ToString()
-        {
-            return decoratedUri.ToString();
-        }
     }
 
     public class ValidateUri : UriDecorator
@@ -62,6 +33,12 @@ namespace DMR11.Core
             
         }
 
+        public enum UriScheme : int
+        {
+            Http = 0,
+            Https,
+            Ftp
+        }
 
         /// <summary>
         /// Checks if the URI is missing the HTTP or HTTPS scheme.
@@ -69,20 +46,16 @@ namespace DMR11.Core
         /// <param name="uri">The URI to check.</param>
         /// <param name="preferredScheme">The scheme to insert if it is missing one.</param>
         /// <returns></returns>
-        public static string CheckAndInsertMissingScheme(string uri, string preferredScheme = "http")
+        public static string CheckAndInsertMissingScheme(string uri, UriScheme preferredScheme = UriScheme.Http)
         {
             var missingSchemePattern = "^(?!http[s]:)(?=//)";
 
             if (System.Text.RegularExpressions.Regex.IsMatch(uri, missingSchemePattern, System.Text.RegularExpressions.RegexOptions.IgnoreCase))
             {
-                // Insert the missing colon if the preferred scheme doesn't end with one.
-                if (!preferredScheme.EndsWith(":"))
-                {
-                    preferredScheme = string.Concat(preferredScheme, ":");
-                }
+                var scheme = GetUriSchemeDisplay(preferredScheme);
 
                 // Return the uri with the preferred scheme prefixed.
-                return uri.Insert(0, preferredScheme);
+                return string.Concat(scheme, uri);
             }
             else
             {
@@ -92,15 +65,21 @@ namespace DMR11.Core
 
         }
 
+        private static string GetUriSchemeDisplay(UriScheme scheme)
+        {
+            // Todo: Enhance the enum and make use of the read-only fields.
+            return string.Concat(scheme.ToString().ToLower(), ":");
+        }
+
     }
 
-    public class SwitchUri : UriDecorator
+    public class UpcaseUri : UriDecorator
     {
-        public SwitchUri(string uri) : this(new Uri(uri))
+        public UpcaseUri(string uri) : this(new Uri(uri))
         {
         }
 
-        public SwitchUri(Uri decorated) : base(decorated)
+        public UpcaseUri(Uri decorated) : base(decorated)
         {
         }
 

@@ -93,13 +93,22 @@ namespace DMR11_Tests
         }
 
         [TestMethod]
-        public void Test_ValidatedUriDecorator()
+        public void Test_ValidatedUri_Constructor()
         {
-            var scheme = "http:";
-            var uri = "//www.fanfox.net/manga/name/vol_5_ch_15/1.htm";
+            Assert.AreEqual(
+                "http://www.fanfox.net/manga/name/vol_5_ch_15/1.htm",
+                new ValidatedUri("//www.fanfox.net/manga/name/vol_5_ch_15/1.htm").ToString()
+            );
 
-            var validatedUri = new ValidatedUri(uri);
-            Assert.AreEqual(string.Concat(scheme, uri), validatedUri.ToString());
+            Assert.AreEqual(
+                "http://www.fanfox.net/manga/name/vol_5_ch_15/1.htm",
+                new ValidatedUri("http://www.fanfox.net/manga/name/vol_5_ch_15/1.htm").ToString()
+            );
+            
+            Assert.AreNotEqual(
+                "https://www.fanfox.net/manga/name/vol_5_ch_15/1.htm",
+                new ValidatedUri("//www.fanfox.net/manga/name/vol_5_ch_15/1.htm").ToString()
+            );
 
         }
 

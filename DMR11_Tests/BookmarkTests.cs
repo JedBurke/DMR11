@@ -84,6 +84,15 @@ namespace DMR11_Tests
             Assert.AreEqual(manager.AddBookmark(minamoto), AddBookmarkStatus.Duplicate);
         }
 
+        [TestMethod]
+        public void Test_GetBookmark_with_URI()
+        {
+            Assert.IsNull(manager.GetBookmarkByUri(new ValidatedUri("https://test.manga.com/minamoto-kun_monogatari")));
+            Assert.IsNotNull(manager.GetBookmarkByUri(new ValidatedUri("http://test.manga.com/minamoto-kun_monogatari")));
+            
+            // Checks if the series is a match without its scheme.
+            Assert.IsNotNull(manager.GetBookmarkByUri(new ValidatedUri("https://test.manga.com/minamoto-kun_monogatari"), false));
+        }
 
         [TestMethod]
         public void Test_AddSuccess()

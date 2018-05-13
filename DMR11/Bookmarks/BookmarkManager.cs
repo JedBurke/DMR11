@@ -77,7 +77,7 @@ namespace DMR11
         {
             if (IsBookmarked(series))
             {
-                var bookmark = GetBookmark(series);
+                var bookmark = GetBookmarkBySeries(series);
 
                 if (bookmark != null)
                 {
@@ -136,7 +136,7 @@ namespace DMR11
         {
             get
             {
-                return GetBookmark(seriesName);
+                return GetBookmarkBySeries(seriesName);
             }
         }
 
@@ -150,21 +150,41 @@ namespace DMR11
 
         List<Bookmark> Bookmarks = null;
 
-        public Bookmark GetBookmark(string seriesName)
+        public Bookmark GetBookmarkBySeries(string seriesName)
         {
             seriesName = FormatInputSeries(seriesName);
 
             return Bookmarks.FirstOrDefault(bookmark => string.Compare(bookmark.Name, seriesName, true) == 0);
         }
 
-        public Bookmark GetBookmarkByUri(string bookmarkUri)
+        public Bookmark GetBookmarkByUri(string bookmarkUri, bool strict = true)
         {
-            return GetBookmarkByUri(new ValidatedUri(bookmarkUri));
+            return GetBookmarkByUri(new ValidatedUri(bookmarkUri), strict);
         }
 
-        public Bookmark GetBookmarkByUri(Uri bookmarkUri)
+        public Bookmark GetBookmarkByUri(Uri bookmarkUri, bool strict = true)
         {
-            return Bookmarks.FirstOrDefault(bookmark => bookmark.SeriesUri == bookmarkUri);
+            Bookmark selectedBookmark = null;
+            
+            foreach (var bookmark in Bookmarks)
+            {
+                /// Selects the bookmark if it matches the requested one without its scheme.
+
+                if (bookmark.SeriesUri == bookmarkUri)
+                {
+                    selectedBookmark = bookmark;
+                    break;
+                }
+                else if (!strict && selectedBookmark == null)
+                {
+                    if (string.Compare(StripUriScheme(bookmark.SeriesUri), StripUriScheme(bookmarkUri), true) == 0)
+                    {
+                        selectedBookmark = bookmark;
+                    }
+                }
+            }
+
+            return selectedBookmark;
         }
 
         /// <summary>
@@ -194,7 +214,7 @@ namespace DMR11
 
             return Bookmarks.Any(bookmark => string.Compare(bookmark.Name, seriesName, true) == 0);
         }
-
+        
         /// <summary>
         /// Returns whether the input URI matches a bookmarked series.
         /// </summary>

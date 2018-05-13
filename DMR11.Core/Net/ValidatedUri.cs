@@ -79,3 +79,6 @@ namespace DMR11.Core.Net
         }
     }
 }
+
+/// TODO: Fix case where the scheme and delimiter is missing.
+/// Example: example.com vs //example.com vs http[s]://example.com

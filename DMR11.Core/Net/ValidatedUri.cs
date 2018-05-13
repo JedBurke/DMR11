@@ -44,19 +44,17 @@ namespace DMR11.Core.Net
         /// <returns>Returns the URI with the missing scheme.</returns>
         public static string CheckAndInsertMissingScheme(string uri, UriScheme preferredScheme = UriScheme.Http)
         {
-            if (Regex.IsMatch(uri, MissingSchemeTestPattern, RegexOptions.IgnoreCase | RegexOptions.Compiled))
-            {
-                var scheme = GetUriSchemeDisplay(preferredScheme);
+            return IsMissingUriScheme(uri) ? string.Concat(GetUriSchemeDisplay(preferredScheme), uri) : uri;
+        }
 
-                // Return the uri with the preferred scheme prefixed.
-                return string.Concat(scheme, uri);
-            }
-            else
-            {
-                // Return the unchanged value.
-                return uri;
-            }
-
+        /// <summary>
+        /// Determines if the requested URI is missing its scheme.
+        /// </summary>
+        /// <param name="uri">The string-representation of the URI to be checked.</param>
+        /// <returns>A boolean result of whether the scheme is to be inferred.</returns>
+        public static bool IsMissingUriScheme(string uri)
+        {
+            return Regex.IsMatch(uri, MissingSchemeTestPattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
         }
 
         /// <summary>
@@ -64,7 +62,7 @@ namespace DMR11.Core.Net
         /// </summary>
         /// <param name="scheme">The URI scheme which to have its display name returned.</param>
         /// <returns>Returns the string-represented display name of the scheme.</returns>
-        private static string GetUriSchemeDisplay(UriScheme scheme)
+        public static string GetUriSchemeDisplay(UriScheme scheme)
         {
             // Todo: Enhance the enum and make use of the read-only fields.
             return string.Concat(scheme.ToString().ToLower(), ":");

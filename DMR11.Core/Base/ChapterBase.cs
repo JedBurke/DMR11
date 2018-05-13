@@ -117,7 +117,7 @@ namespace DMR11.Core
         /// <summary>
         /// Gets or sets a list of URIs representing the pages in the chapter.
         /// </summary>
-        private List<UriValidated> ImageAddresses
+        private List<Uri> ImageAddresses
         {
             get;
             set;
@@ -156,7 +156,7 @@ namespace DMR11.Core
 
         public string Referrer { get; set; }
 
-        public ChapterBase(string name, UriValidated address)
+        public ChapterBase(string name, Uri address)
         {
             Name = name;
             Address = address;
@@ -191,7 +191,7 @@ namespace DMR11.Core
                 int countImage = 0;
                 bool useAutoNumbering = false;
 
-                foreach (UriValidated imageAddress in ImageAddresses)
+                foreach (var imageAddress in ImageAddresses)
                 {
                     _cancellationToken.ThrowIfCancellationRequested();
 
@@ -245,14 +245,14 @@ namespace DMR11.Core
 
             else
             {
-                List<UriValidated> pageAddresses = ParsePageAddresses(html);
+                List<Uri> pageAddresses = ParsePageAddresses(html);
                 Console.WriteLine("Pages in chapter: {0}", pageAddresses.Count);
 
                 var sbHtml = new StringBuilder();
 
                 int countPage = 0;
 
-                foreach (UriValidated pageAddress in pageAddresses)
+                foreach (var pageAddress in pageAddresses)
                 {
                     _cancellationToken.ThrowIfCancellationRequested();
                     string content = string.Empty;
@@ -293,12 +293,12 @@ namespace DMR11.Core
 
         }
 
-        private void DownloadFile(UriValidated address, string fileName)
+        private void DownloadFile(Uri address, string fileName)
         {
             Downloader.Instance.DownloadFile(address, fileName, _cancellationToken);
         }
 
-        private string DownloadString(UriValidated address)
+        private string DownloadString(Uri address)
         {
             return Downloader.Instance.DownloadString(address);
         }

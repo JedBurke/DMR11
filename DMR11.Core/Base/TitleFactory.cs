@@ -8,7 +8,7 @@ namespace DMR11.Core
     public static class TitleFactory
     {
         /// <summary>
-        /// Create Title object base on uri
+        /// Create a Title object base on the URI.
         /// </summary>
         /// <param name="uri"></param>
         /// <returns></returns>
@@ -30,17 +30,15 @@ namespace DMR11.Core
         }
 
         /// <summary>
-        /// Get list of supported manga sites
+        /// Gets a list of supported manga sites.
         /// </summary>
         /// <returns></returns>
         public static List<string[]> GetSupportedSites()
         {
-            var lst = new List<string[]>();
-            lst.Add(new string[] { "MangaFox", "http://mangafox.me/", "English" });
-            lst.Add(new string[] { "MangaHere", "http://www.mangahere.com/", "English" });
-            lst.Add(new string[] { "MangaReader", "http://www.mangareader.net/", "English" });
-            lst.Add(new string[] { "MangaShare", "http://read.mangashare.com/", "English" });
-            return lst;
+            /// Todo: Iterate through the host directories and display the name, lang code, and URI for
+            /// the hosts contained within.
+
+            throw new NotImplementedException();
         }
     }
 }

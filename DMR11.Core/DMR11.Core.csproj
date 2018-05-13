@@ -76,6 +76,11 @@
     <Compile Include="Base\ChapterParseDetails.cs" />
     <Compile Include="Helper\ChapterProgress.cs" />
     <Compile Include="Helper\FileSystem.cs" />
+    <Compile Include="Helper\ValidatedUri.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Net\UriScheme.cs" />
+    <Compile Include="Net\ValidatedUri.cs" />
     <Compile Include="Service\Downloader.cs" />
     <Compile Include="Helper\ExcludedWordsForLanguage.cs" />
     <Compile Include="Helper\Extension.cs" />
@@ -85,9 +90,9 @@
     <Compile Include="Helper\StyleGuide.cs" />
     <Compile Include="Helper\TitleCase.cs" />
     <Compile Include="Service\UserAgent.cs" />
-    <Compile Include="Helper\ValidatedUri.cs" />
     <Compile Include="Base\ICommand.cs" />
     <Compile Include="Base\IParseDetails.cs" />
+    <Compile Include="Net\UriDecorator.cs" />
     <Compile Include="WebsiteHost\HostSection.cs" />
     <Compile Include="WebsiteHost\HostUriType.cs" />
     <Compile Include="WebsiteHost\IChapterSection.cs" />

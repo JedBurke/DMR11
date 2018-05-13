@@ -1,5 +1,6 @@
-﻿using ModernFolderBrowserDialog;
-using DMR11.Core;
+﻿using DMR11.Core;
+using DMR11.Core.Net;
+using ModernFolderBrowserDialog;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -456,7 +457,7 @@ namespace DMR11
             var bookmark = new Bookmark()
             {
                 Name = cbTitleUrl.Text,
-                SeriesUri = new UriValidated(cbTitleUrl.Text)
+                SeriesUri = new ValidatedUri(cbTitleUrl.Text)
             };
 
             if (bookmarks.AddBookmark(bookmark) == AddBookmarkStatus.Success)

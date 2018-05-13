@@ -1,5 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using DMR11.Core;
+using DMR11.Core.Net;
 using System.Net;
 using System.IO;
 
@@ -89,5 +91,17 @@ namespace DMR11_Tests
                 //throw new OperationCanceledException(error, ex);
             }
         }
+
+        [TestMethod]
+        public void Test_ValidatedUriDecorator()
+        {
+            var scheme = "http:";
+            var uri = "//www.fanfox.net/manga/name/vol_5_ch_15/1.htm";
+
+            var validatedUri = new ValidatedUri(uri);
+            Assert.AreEqual(string.Concat(scheme, uri), validatedUri.ToString());
+
+        }
+
     }
 }

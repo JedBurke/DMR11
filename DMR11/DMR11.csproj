@@ -138,7 +138,6 @@
   <ItemGroup>
     <Compile Include="Bookmarks\AddBookmarkStatus.cs" />
     <Compile Include="Bookmarks\Bookmark.cs" />
-    <Compile Include="Bookmarks\BookmarkCollection.cs" />
     <Compile Include="Bookmarks\BookmarkManager.cs" />
     <Compile Include="Bookmarks\IManager.cs" />
     <Compile Include="Form\FormFormat.cs">

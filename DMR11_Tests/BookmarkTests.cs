@@ -48,6 +48,7 @@ namespace DMR11_Tests
                 SaveDestination = "D:/manga/minamoto-kun_monogatari",
                 Site = "test-manga"
             });
+
         }
 
         [TestMethod]
@@ -62,15 +63,22 @@ namespace DMR11_Tests
         [TestMethod]
         public void Test_GetBookmarks()
         {
-            foreach (var bookmark in manager.GetBookmarks())
-            {
-                Console.WriteLine("Series: {0}", bookmark.Name);
-            }
-
+            Assert.AreEqual(3, manager.GetBookmarks().Length);
         }
 
         [TestMethod]
-        public void Test_AddDuplicate()
+        public void Test_GetBookmark_with_URI()
+        {
+            Assert.IsNull(manager.GetBookmarkByUri(new ValidatedUri("https://test.manga.com/minamoto-kun_monogatari")));
+            Assert.IsNotNull(manager.GetBookmarkByUri(new ValidatedUri("http://test.manga.com/minamoto-kun_monogatari")));
+
+            // Checks if the series is a match without its scheme.
+            Assert.IsNotNull(manager.GetBookmarkByUri(new ValidatedUri("https://test.manga.com/minamoto-kun_monogatari"), false));
+        }
+
+
+        [TestMethod]
+        public void Test_Add_Duplicate_Bookmark()
         {
             var minamoto = new Bookmark()
             {
@@ -83,9 +91,8 @@ namespace DMR11_Tests
             Assert.AreEqual(manager.AddBookmark(minamoto), AddBookmarkStatus.Duplicate);
         }
 
-
         [TestMethod]
-        public void Test_AddSuccess()
+        public void Test_Sucessfully_Add_Bookmark()
         {
             var minamoto = new Bookmark()
             {
@@ -95,7 +102,7 @@ namespace DMR11_Tests
                 Site = "test-manga"
             };
 
-            manager.RemoveBookmark(minamoto);
+            Assert.IsTrue(manager.RemoveBookmark(minamoto));
 
             Assert.AreEqual(manager.AddBookmark(minamoto), AddBookmarkStatus.Success);
         }

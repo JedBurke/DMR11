@@ -63,6 +63,9 @@ namespace DMR11
             SetFormTitle();
             SetButtonStyle();
             SetDataGridColumnStyle();
+
+            ChapterAuxiliaryDock.Height = dgvChapter.ColumnHeadersHeight + dgvChapter.ColumnHeadersDefaultCellStyle.Padding.Vertical;
+            ChapterAuxiliaryDock.BackColor = dgvChapter.ColumnHeadersDefaultCellStyle.BackColor;
             
             /* While the implementation is being decided as well as safe-guards are being set,
              * disable access to chapter formatting in the 'Release' configuration. In addition
@@ -604,7 +607,7 @@ namespace DMR11
 
         private void SetButtonStyle()
         {
-            SetFormButtonStyle(new[] { this.Controls, this.headerPanel.Controls });
+            SetFormButtonStyle(new[] { this.Controls, this.headerPanel.Controls, this.ChapterAuxiliaryDock.Controls });
         }
 
         public static void SetFormButtonStyle(Control.ControlCollection[] controlContainers)

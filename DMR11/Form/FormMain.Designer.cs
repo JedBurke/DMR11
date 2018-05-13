@@ -49,12 +49,9 @@
             this.dgvChapter = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cbTitleUrl = new System.Windows.Forms.ComboBox();
-            this.btnAddBookmark = new System.Windows.Forms.Button();
-            this.btnRemoveBookmark = new System.Windows.Forms.Button();
             this.MainToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.btnPresetDialog = new System.Windows.Forms.Button();
             this.nudThread = new System.Windows.Forms.NumericUpDown();
-            this.btnPasteUrl = new System.Windows.Forms.Button();
             this.btnAddNew = new System.Windows.Forms.Button();
             this.lbSeriesDestination = new System.Windows.Forms.Label();
             this.lbDefaultDestination = new System.Windows.Forms.Label();
@@ -67,11 +64,17 @@
             this.headerPanel = new System.Windows.Forms.Panel();
             this.StatusPanel = new System.Windows.Forms.Panel();
             this.btnFromatPreset = new System.Windows.Forms.Button();
+            this.ChapterAuxiliaryDock = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnAddBookmark = new System.Windows.Forms.Button();
+            this.btnRemoveBookmark = new System.Windows.Forms.Button();
+            this.btnPasteUrl = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQueueChapter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChapter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudThread)).BeginInit();
             this.headerPanel.SuspendLayout();
             this.StatusPanel.SuspendLayout();
+            this.ChapterAuxiliaryDock.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnGetChapter
@@ -352,42 +355,6 @@
             this.cbTitleUrl.TabIndex = 1;
             this.cbTitleUrl.Text = global::DMR11.Properties.Settings.Default.Url;
             // 
-            // btnAddBookmark
-            // 
-            this.btnAddBookmark.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddBookmark.BackgroundImage = global::DMR11.Properties.Resources.appbar_page_corner_bookmark;
-            this.btnAddBookmark.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnAddBookmark.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnAddBookmark.FlatAppearance.BorderSize = 0;
-            this.btnAddBookmark.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
-            this.btnAddBookmark.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
-            this.btnAddBookmark.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddBookmark.Location = new System.Drawing.Point(776, 11);
-            this.btnAddBookmark.Name = "btnAddBookmark";
-            this.btnAddBookmark.Size = new System.Drawing.Size(28, 25);
-            this.btnAddBookmark.TabIndex = 2;
-            this.MainToolTip.SetToolTip(this.btnAddBookmark, "Bookmark this URL");
-            this.btnAddBookmark.UseVisualStyleBackColor = true;
-            this.btnAddBookmark.Click += new System.EventHandler(this.btnAddBookmark_Click);
-            // 
-            // btnRemoveBookmark
-            // 
-            this.btnRemoveBookmark.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRemoveBookmark.BackgroundImage = global::DMR11.Properties.Resources.appbar_page_corner_text;
-            this.btnRemoveBookmark.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnRemoveBookmark.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnRemoveBookmark.FlatAppearance.BorderSize = 0;
-            this.btnRemoveBookmark.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
-            this.btnRemoveBookmark.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
-            this.btnRemoveBookmark.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRemoveBookmark.Location = new System.Drawing.Point(806, 11);
-            this.btnRemoveBookmark.Name = "btnRemoveBookmark";
-            this.btnRemoveBookmark.Size = new System.Drawing.Size(28, 25);
-            this.btnRemoveBookmark.TabIndex = 3;
-            this.MainToolTip.SetToolTip(this.btnRemoveBookmark, "Remove this bookmarked URL");
-            this.btnRemoveBookmark.UseVisualStyleBackColor = true;
-            this.btnRemoveBookmark.Click += new System.EventHandler(this.btnRemoveBookmark_Click);
-            // 
             // btnPresetDialog
             // 
             this.btnPresetDialog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -432,24 +399,6 @@
             0,
             0,
             0});
-            // 
-            // btnPasteUrl
-            // 
-            this.btnPasteUrl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPasteUrl.BackgroundImage = global::DMR11.Properties.Resources.appbar_clipboard_paste;
-            this.btnPasteUrl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnPasteUrl.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnPasteUrl.FlatAppearance.BorderSize = 0;
-            this.btnPasteUrl.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
-            this.btnPasteUrl.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
-            this.btnPasteUrl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPasteUrl.Location = new System.Drawing.Point(742, 11);
-            this.btnPasteUrl.Name = "btnPasteUrl";
-            this.btnPasteUrl.Size = new System.Drawing.Size(28, 25);
-            this.btnPasteUrl.TabIndex = 25;
-            this.MainToolTip.SetToolTip(this.btnPasteUrl, "Paste URL from clipboard and get chapters");
-            this.btnPasteUrl.UseVisualStyleBackColor = true;
-            this.btnPasteUrl.Click += new System.EventHandler(this.btnPasteUrl_Click);
             // 
             // btnAddNew
             // 
@@ -599,12 +548,87 @@
             this.btnFromatPreset.Text = "▾";
             this.btnFromatPreset.UseVisualStyleBackColor = true;
             // 
+            // ChapterAuxiliaryDock
+            // 
+            this.ChapterAuxiliaryDock.Controls.Add(this.button1);
+            this.ChapterAuxiliaryDock.Location = new System.Drawing.Point(215, 47);
+            this.ChapterAuxiliaryDock.Name = "ChapterAuxiliaryDock";
+            this.ChapterAuxiliaryDock.Size = new System.Drawing.Size(222, 34);
+            this.ChapterAuxiliaryDock.TabIndex = 35;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.BackgroundImage = global::DMR11.Properties.Resources.appbar_information;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.Location = new System.Drawing.Point(181, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(41, 34);
+            this.button1.TabIndex = 0;
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // btnAddBookmark
+            // 
+            this.btnAddBookmark.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddBookmark.BackgroundImage = global::DMR11.Properties.Resources.appbar_page_corner_bookmark;
+            this.btnAddBookmark.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnAddBookmark.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnAddBookmark.FlatAppearance.BorderSize = 0;
+            this.btnAddBookmark.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnAddBookmark.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
+            this.btnAddBookmark.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddBookmark.Location = new System.Drawing.Point(776, 11);
+            this.btnAddBookmark.Name = "btnAddBookmark";
+            this.btnAddBookmark.Size = new System.Drawing.Size(28, 25);
+            this.btnAddBookmark.TabIndex = 2;
+            this.MainToolTip.SetToolTip(this.btnAddBookmark, "Bookmark this URL");
+            this.btnAddBookmark.UseVisualStyleBackColor = true;
+            this.btnAddBookmark.Click += new System.EventHandler(this.btnAddBookmark_Click);
+            // 
+            // btnRemoveBookmark
+            // 
+            this.btnRemoveBookmark.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRemoveBookmark.BackgroundImage = global::DMR11.Properties.Resources.appbar_page_corner_text;
+            this.btnRemoveBookmark.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnRemoveBookmark.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnRemoveBookmark.FlatAppearance.BorderSize = 0;
+            this.btnRemoveBookmark.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnRemoveBookmark.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
+            this.btnRemoveBookmark.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRemoveBookmark.Location = new System.Drawing.Point(806, 11);
+            this.btnRemoveBookmark.Name = "btnRemoveBookmark";
+            this.btnRemoveBookmark.Size = new System.Drawing.Size(28, 25);
+            this.btnRemoveBookmark.TabIndex = 3;
+            this.MainToolTip.SetToolTip(this.btnRemoveBookmark, "Remove this bookmarked URL");
+            this.btnRemoveBookmark.UseVisualStyleBackColor = true;
+            this.btnRemoveBookmark.Click += new System.EventHandler(this.btnRemoveBookmark_Click);
+            // 
+            // btnPasteUrl
+            // 
+            this.btnPasteUrl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPasteUrl.BackgroundImage = global::DMR11.Properties.Resources.appbar_clipboard_paste;
+            this.btnPasteUrl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnPasteUrl.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnPasteUrl.FlatAppearance.BorderSize = 0;
+            this.btnPasteUrl.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnPasteUrl.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
+            this.btnPasteUrl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPasteUrl.Location = new System.Drawing.Point(742, 11);
+            this.btnPasteUrl.Name = "btnPasteUrl";
+            this.btnPasteUrl.Size = new System.Drawing.Size(28, 25);
+            this.btnPasteUrl.TabIndex = 25;
+            this.MainToolTip.SetToolTip(this.btnPasteUrl, "Paste URL from clipboard and get chapters");
+            this.btnPasteUrl.UseVisualStyleBackColor = true;
+            this.btnPasteUrl.Click += new System.EventHandler(this.btnPasteUrl_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.ClientSize = new System.Drawing.Size(1012, 627);
+            this.Controls.Add(this.ChapterAuxiliaryDock);
             this.Controls.Add(this.btnFromatPreset);
             this.Controls.Add(this.StatusPanel);
             this.Controls.Add(this.lbDefaultDestination);
@@ -640,6 +664,7 @@
             this.headerPanel.PerformLayout();
             this.StatusPanel.ResumeLayout(false);
             this.StatusPanel.PerformLayout();
+            this.ChapterAuxiliaryDock.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -684,5 +709,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColChapterStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColChapterUrl;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColSaveTo;
+        private System.Windows.Forms.Panel ChapterAuxiliaryDock;
+        private System.Windows.Forms.Button button1;
     }
 }

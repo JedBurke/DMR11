@@ -241,6 +241,9 @@
   <ItemGroup>
     <Folder Include="3rd-party\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\appbar.information.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

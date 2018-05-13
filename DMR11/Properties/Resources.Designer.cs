@@ -73,6 +73,16 @@ namespace DMR11.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap appbar_information {
+            get {
+                object obj = ResourceManager.GetObject("appbar_information", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap appbar_page_corner_bookmark {
             get {
                 object obj = ResourceManager.GetObject("appbar_page_corner_bookmark", resourceCulture);

@@ -1,10 +1,11 @@
-﻿using System;
-using System.Linq;
+﻿using DMR11;
+using DMR11.Core.Net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Linq;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
-using DMR11;
 
 namespace DMR11_Tests
 {
@@ -18,32 +19,35 @@ namespace DMR11_Tests
         public void Test_Initialize()
         {
             manager = new BookmarkManager(bookmarksPath);
-
-            if (manager.GetBookmarks().Length == 0)
+            
+            manager.AddBookmark(new Bookmark()
             {
-                Console.WriteLine("Bookmarks are empty...");
-
-                manager.AddBookmark(new Bookmark()
-                {
-                    Name = "Grand Blue",
-                    SeriesUri = new UriValidated("http://test.manga.com/grand_blue"),
-                    SaveDestination = "D:/manga/grand_blue",
-                    DateAdded = DateTime.Now.Ticks,
-                    DateUpdated = DateTime.Now.Ticks,
-                    Site = "test-manga"
-                });
+                Name = "Grand Blue",
+                SeriesUri = new ValidatedUri("http://test.manga.com/grand_blue"),
+                SaveDestination = "D:/manga/grand_blue",
+                DateAdded = DateTime.Now.Ticks,
+                DateUpdated = DateTime.Now.Ticks,
+                Site = "test-manga"
+            });
 
 
-                manager.AddBookmark(new Bookmark()
-                {
-                    Name = "Crows",
-                    SeriesUri = new UriValidated("http://test.manga.com/crows"),
-                    SaveDestination = "D:/manga/crows",
-                    DateAdded = DateTime.Now.Ticks,
-                    DateUpdated = DateTime.Now.Ticks,
-                    Site = "test-manga"
-                });
-            }
+            manager.AddBookmark(new Bookmark()
+            {
+                Name = "Crows",
+                SeriesUri = new ValidatedUri("http://test.manga.com/crows"),
+                SaveDestination = "D:/manga/crows",
+                DateAdded = DateTime.Now.Ticks,
+                DateUpdated = DateTime.Now.Ticks,
+                Site = "test-manga"
+            });
+
+            manager.AddBookmark(new Bookmark()
+            {
+                Name = "Minamoto-kun Monogatari",
+                SeriesUri = new ValidatedUri("http://test.manga.com/minamoto-kun_monogatari"),
+                SaveDestination = "D:/manga/minamoto-kun_monogatari",
+                Site = "test-manga"
+            });
         }
 
         [TestMethod]
@@ -62,23 +66,43 @@ namespace DMR11_Tests
             {
                 Console.WriteLine("Series: {0}", bookmark.Name);
             }
+
+        }
+
+        [TestMethod]
+        public void Test_AddDuplicate()
+        {
+            var minamoto = new Bookmark()
+            {
+                Name = "Minamoto-kun Monogatari",
+                SeriesUri = new ValidatedUri("http://test.manga.com/minamoto-kun_monogatari"),
+                SaveDestination = "D:/manga/minamoto-kun_monogatari",
+                Site = "test-manga"
+            };
             
+            Assert.AreEqual(manager.AddBookmark(minamoto), AddBookmarkStatus.Duplicate);
+        }
+
+
+        [TestMethod]
+        public void Test_AddSuccess()
+        {
+            var minamoto = new Bookmark()
+            {
+                Name = "Minamoto-kun Monogatari",
+                SeriesUri = new ValidatedUri("http://test.manga.com/minamoto-kun_monogatari"),
+                SaveDestination = "D:/manga/minamoto-kun_monogatari",
+                Site = "test-manga"
+            };
+
+            manager.RemoveBookmark(minamoto);
+
+            Assert.AreEqual(manager.AddBookmark(minamoto), AddBookmarkStatus.Success);
         }
 
         [TestMethod]
         public void Test_SaveBookmarks()
         {
-            var minamoto = new Bookmark()
-            {
-                Name = "Minamoto-kun Monogatari",
-                SeriesUri = new UriValidated("http://test.manga.com/minamoto-kun_monogatari"),
-                SaveDestination = "D:/manga/minamoto-kun_monogatari",
-                Site = "test-manga"
-            };
-
-
-            Assert.AreEqual(manager.AddBookmark(minamoto), AddBookmarkStatus.Success);
-
             manager.Save();
         }
 
@@ -90,15 +114,15 @@ namespace DMR11_Tests
 
             manager.Save();
         }
-        
+
         [TestMethod]
         public void Test_IsBookmarked()
         {
             Assert.IsTrue(manager.IsBookmarked("Minamoto-kun Monogatari   "));
 
-           Assert.IsTrue(manager.IsBookmarked(new Uri("http://test.manga.com/minamoto-kun_monogatari")));
-           Assert.IsTrue(manager.IsBookmarked(new Uri("https://test.manga.com/minamoto-kun_monogatari"), true));
-           Assert.IsFalse(manager.IsBookmarked(new Uri("https://Test.Manga.Com/minamoto-kun_monogatari")));
+            Assert.IsTrue(manager.IsBookmarked(new ValidatedUri("http://test.manga.com/minamoto-kun_monogatari")));
+            Assert.IsTrue(manager.IsBookmarked(new ValidatedUri("https://test.manga.com/minamoto-kun_monogatari"), true));
+            Assert.IsFalse(manager.IsBookmarked(new ValidatedUri("https://Test.Manga.Com/minamoto-kun_monogatari")));
         }
 
         [TestCleanup]

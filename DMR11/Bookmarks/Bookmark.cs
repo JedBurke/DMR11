@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DMR11.Core.Net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -51,8 +52,6 @@ namespace DMR11
             set;
         }
 
-
-        // Todo: Revert to UriValidated
         [DataMember(Name="Uri")]
         public Uri SeriesUri
         {

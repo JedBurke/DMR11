@@ -12,7 +12,7 @@ namespace DMR11.Core
         /// </summary>
         /// <param name="uri"></param>
         /// <returns></returns>
-        public static ITitle CreateTitle(UriValidated uri)
+        public static ITitle CreateTitle(Uri uri)
         {
             ITitle title = null;
             

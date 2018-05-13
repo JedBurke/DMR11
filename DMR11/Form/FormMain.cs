@@ -89,11 +89,12 @@ namespace DMR11
         {
             try
             {
-                var titleUrl = new UriValidated(cbTitleUrl.Text);
-                ITitle title = TitleFactory.CreateTitle(titleUrl);
+                var seriesUri = new ValidatedUri(cbTitleUrl.Text);
+                ITitle title = TitleFactory.CreateTitle(seriesUri);
                 currentTitle = title;
                 title.Proxy = Option.GetProxy();
                 btnGetChapter.Enabled = false;
+
                 var task = title.PopulateChapterAsync(new DMR11.Core.Progress<int>(progress => txtPercent.Text = progress + "%"));
                 task.ContinueWith(t =>
                 {

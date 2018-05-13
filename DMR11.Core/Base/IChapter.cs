@@ -17,7 +17,7 @@ namespace DMR11.Core
             set;
         }
 
-        UriValidated Address
+        Uri Address
         {
             get;
         }

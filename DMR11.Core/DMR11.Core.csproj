@@ -76,9 +76,6 @@
     <Compile Include="Base\ChapterParseDetails.cs" />
     <Compile Include="Helper\ChapterProgress.cs" />
     <Compile Include="Helper\FileSystem.cs" />
-    <Compile Include="Helper\ValidatedUri.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Net\UriScheme.cs" />
     <Compile Include="Net\ValidatedUri.cs" />
     <Compile Include="Service\Downloader.cs" />

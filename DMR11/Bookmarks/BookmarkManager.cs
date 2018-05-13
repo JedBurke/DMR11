@@ -81,16 +81,16 @@ namespace DMR11
 
                 if (bookmark != null)
                 {
-                    return RemoveBookmark(bookmark);
+                    return Bookmarks.Remove(bookmark);
                 }
             }
 
             return false;
         }
 
-        public bool RemoveBookmark(Bookmark bookmark)
+        public bool RemoveBookmark(Bookmark bookmark, bool strict = true)
         {
-            var selected = Bookmarks.FirstOrDefault(bk => bk.SeriesUri == bookmark.SeriesUri);
+            var selected = GetBookmarkByUri(bookmark.SeriesUri, strict);
 
             return selected == null ? false : Bookmarks.Remove(selected);
         }
@@ -168,13 +168,13 @@ namespace DMR11
             
             foreach (var bookmark in Bookmarks)
             {
-                /// Selects the bookmark if it matches the requested one without its scheme.
-
                 if (bookmark.SeriesUri == bookmarkUri)
                 {
                     selectedBookmark = bookmark;
                     break;
                 }
+
+                /// Selects the bookmark if it matches the requested one without its scheme.
                 else if (!strict && selectedBookmark == null)
                 {
                     if (string.Compare(StripUriScheme(bookmark.SeriesUri), StripUriScheme(bookmarkUri), true) == 0)

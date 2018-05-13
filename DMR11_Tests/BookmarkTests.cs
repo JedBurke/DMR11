@@ -105,7 +105,7 @@ namespace DMR11_Tests
                 Site = "test-manga"
             };
 
-            manager.RemoveBookmark(minamoto);
+            Assert.IsTrue(manager.RemoveBookmark(minamoto));
 
             Assert.AreEqual(manager.AddBookmark(minamoto), AddBookmarkStatus.Success);
         }

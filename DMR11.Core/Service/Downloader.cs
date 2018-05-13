@@ -30,7 +30,7 @@ namespace DMR11.Core.Service
             UserAgent = Service.UserAgent.CurrentUserAgent;
         }
 
-        public string DownloadString(UriValidated address)
+        public string DownloadString(Uri address)
         {
             StringBuilder result = new StringBuilder();
             
@@ -105,7 +105,7 @@ namespace DMR11.Core.Service
 
         private CookieContainer cookieContainer = null;
 
-        private HttpWebRequest MakeRequest(UriValidated address)
+        private HttpWebRequest MakeRequest(Uri address)
         {
             if (cookieContainer == null)
             {
@@ -130,7 +130,7 @@ namespace DMR11.Core.Service
             return request;
         }
 
-        public void DownloadFile(UriValidated address, string fileName, CancellationToken token)
+        public void DownloadFile(Uri address, string fileName, CancellationToken token)
         {
             try
             {

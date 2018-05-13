@@ -1,4 +1,5 @@
 ﻿using DMR11.Core.WebsiteHost;
+using DMR11.Core.Net;
 using HtmlAgilityPack;
 using DMR11.Core.Helper;
 using NLog;
@@ -17,7 +18,7 @@ namespace DMR11.Core
 
         private IWebsiteHost HostData;
 
-        public ChapterDistill(string name, UriValidated address, IWebsiteHost hostData)
+        public ChapterDistill(string name, Uri address, IWebsiteHost hostData)
             : base(name, address)
         {
 
@@ -46,9 +47,9 @@ namespace DMR11.Core
             }
         }
 
-        protected override List<UriValidated> ParseImageAddresses(string html)
+        protected override List<Uri> ParseImageAddresses(string html)
         {
-            var details = new ParseDetails<UriValidated>
+            var details = new ParseDetails<Uri>
             (
                 HostData.Page.Path,
                 HostData.Page.Value,
@@ -60,7 +61,7 @@ namespace DMR11.Core
                         (x) => Parsing.CreateUriFromElementAttributeValue(
                             element,
                             parseDetails,
-                            new UriValidated(HostVariables["address_trimmed"]
+                            new ValidatedUri(HostVariables["address_trimmed"]
                         )
                     )
                   );
@@ -73,18 +74,18 @@ namespace DMR11.Core
             return Parsing.ParseAddresses(html, details);
         }
 
-        protected override List<UriValidated> ParsePageAddresses(string html)
+        protected override List<Uri> ParsePageAddresses(string html)
         {
             if (SinglePage)
             {
-                return new List<UriValidated>();
+                return new List<Uri>();
             }
             else
             {
-                var details = new ParseDetails<UriValidated>(
+                var details = new ParseDetails<Uri>(
                     HostData.Pages.Path,
                     HostData.Pages.Value,
-                    (element, parseDetails) => GenericParseAction(element, parseDetails, HostData.Pages, (uri) => new UriValidated(uri)),
+                    (element, parseDetails) => GenericParseAction(element, parseDetails, HostData.Pages, (uri) => new ValidatedUri(uri)),
                     logger
                 );
                 

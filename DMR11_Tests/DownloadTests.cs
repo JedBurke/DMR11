@@ -14,7 +14,7 @@ namespace DMR11_Tests
         [TestMethod]
         public void TestMangaPark()
         {
-            Uri address = new Uri("https://mangapark.com/manga/sekirei");
+            var address = new ValidatedUri("https://mangapark.com/manga/sekirei");
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(address);
             request.Credentials = CredentialCache.DefaultCredentials;
@@ -34,7 +34,7 @@ namespace DMR11_Tests
         {
             try
             {
-                Uri address = new Uri("https://raw.senmanga.com/viewer/Minamoto-kun_Monogatari/239/2?token=12norzsrobp2l.22h1qvxtew5j");
+                var address = new ValidatedUri("https://raw.senmanga.com/viewer/Minamoto-kun_Monogatari/239/2?token=12norzsrobp2l.22h1qvxtew5j");
                 string fileName = "_test_file";
 
                 if (File.Exists(fileName) == false)
@@ -93,14 +93,27 @@ namespace DMR11_Tests
         }
 
         [TestMethod]
-        public void Test_ValidatedUriDecorator()
+        public void Test_ValidatedUri_Constructor()
         {
-            var scheme = "http:";
-            var uri = "//www.fanfox.net/manga/name/vol_5_ch_15/1.htm";
+            Assert.AreEqual(
+                "http://www.fanfox.net/manga/name/vol_5_ch_15/1.htm",
+                new ValidatedUri("//www.fanfox.net/manga/name/vol_5_ch_15/1.htm").ToString()
+            );
 
-            var validatedUri = new ValidatedUri(uri);
-            Assert.AreEqual(string.Concat(scheme, uri), validatedUri.ToString());
+            Assert.AreEqual(
+                "http://www.fanfox.net/manga/name/vol_5_ch_15/1.htm",
+                new ValidatedUri("http://www.fanfox.net/manga/name/vol_5_ch_15/1.htm").ToString()
+            );
+            
+            Assert.AreNotEqual(
+                "https://www.fanfox.net/manga/name/vol_5_ch_15/1.htm",
+                new ValidatedUri("//www.fanfox.net/manga/name/vol_5_ch_15/1.htm").ToString()
+            );
 
+            Assert.AreEqual(
+                "https://www.fanfox.net/manga/name/vol_5_ch_15/1.htm",
+                new ValidatedUri("//www.fanfox.net/manga/name/vol_5_ch_15/1.htm", UriScheme.Https).ToString()
+            );
         }
 
     }

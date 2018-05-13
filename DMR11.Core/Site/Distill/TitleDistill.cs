@@ -20,7 +20,7 @@ namespace DMR11.Core
         
         //IWebsiteHost HostData = null;
 
-        public TitleDistill(UriValidated address)
+        public TitleDistill(Uri address)
             : base(address)
         {
             HostData = LoadConfigFile(address);
@@ -44,7 +44,7 @@ namespace DMR11.Core
         /// </summary>
         /// <param name="uri">The service's URI to check.</param>
         /// <returns></returns>
-        public static bool IsDistilled(UriValidated uri)
+        public static bool IsDistilled(Uri uri)
         {
             IWebsiteHost data = LoadConfigFile(uri);
             
@@ -60,7 +60,7 @@ namespace DMR11.Core
             return false;
         }
 
-        private static IWebsiteHost LoadConfigFile(UriValidated uri)
+        private static IWebsiteHost LoadConfigFile(Uri uri)
         {
             var configPath = LookupConfigPath(uri);
 
@@ -68,7 +68,7 @@ namespace DMR11.Core
             return serializer.SeralizeFromPath(configPath);  
         }
 
-        private static string LookupConfigPath(UriValidated uri)
+        private static string LookupConfigPath(Uri uri)
         {
             return LookupConfigPath(uri.Host);
         }
@@ -158,7 +158,7 @@ namespace DMR11.Core
                         element,
                         parseDetails,
                         HostData.Chapters,
-                        (chapterUri) => ChapterParseActionUriSupplied(new UriValidated(chapterUri), element, parseDetails)
+                        (chapterUri) => ChapterParseActionUriSupplied(new DMR11.Core.Net.ValidatedUri(chapterUri), element, parseDetails)
                     );
                 },
                 logger,
@@ -168,7 +168,7 @@ namespace DMR11.Core
             return Parsing.ParseChapters(html, details);
         }
 
-        public IChapter ChapterParseActionUriSupplied(UriValidated chapterUri, HtmlNode element, IParseDetails<IChapter> parseDetails)
+        public IChapter ChapterParseActionUriSupplied(Uri chapterUri, HtmlNode element, IParseDetails<IChapter> parseDetails)
         {
             var chapter = new ChapterDistill(element.InnerText, chapterUri, this.HostData);
 

@@ -22,13 +22,23 @@ namespace DMR11.Core.Net
         }
 
         /// <summary>
-        /// Creates a new instance of ValidatedUri from a string representing the Uri.
+        /// Creates a new ValidatedUri instance of the specified URI.
         /// </summary>
-        /// <param name="uri">The string to be instantized as a ValidateUri.</param>
+        /// <param name="uri">The string to be instantized as a ValidatedUri.</param>
         public ValidatedUri(string uri)
-            : base(new Uri(CheckAndInsertMissingScheme(uri)))
+            : this(uri, UriScheme.Http)
         {            
             
+        }
+
+        /// <summary>
+        /// Creates a new ValidatedUri instance of the specified URI. 
+        /// </summary>
+        /// <param name="uri">The string to be instantized as a ValidatedUri.</param>
+        /// <param name="defaultScheme">The scheme to be used if the URI's scheme is to be inferred.</param>
+        public ValidatedUri(string uri, UriScheme defaultScheme)
+            : base(new Uri(CheckAndInsertMissingScheme(uri, defaultScheme)))
+        {
         }
         
         /// <summary>

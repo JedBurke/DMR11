@@ -110,6 +110,10 @@ namespace DMR11_Tests
                 new ValidatedUri("//www.fanfox.net/manga/name/vol_5_ch_15/1.htm").ToString()
             );
 
+            Assert.AreEqual(
+                "https://www.fanfox.net/manga/name/vol_5_ch_15/1.htm",
+                new ValidatedUri("//www.fanfox.net/manga/name/vol_5_ch_15/1.htm", UriScheme.Https).ToString()
+            );
         }
 
     }

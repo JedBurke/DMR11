@@ -41,7 +41,7 @@ namespace DMR11.Core.Net
         /// </summary>
         /// <param name="uri">The URI to check.</param>
         /// <param name="preferredScheme">The scheme to insert if it is missing one.</param>
-        /// <returns>The URI with the missing scheme.</returns>
+        /// <returns>Returns the URI with the missing scheme.</returns>
         public static string CheckAndInsertMissingScheme(string uri, UriScheme preferredScheme = UriScheme.Http)
         {
             if (Regex.IsMatch(uri, MissingSchemeTestPattern, RegexOptions.IgnoreCase | RegexOptions.Compiled))
@@ -63,7 +63,7 @@ namespace DMR11.Core.Net
         /// Gets the display name of a URI scheme.
         /// </summary>
         /// <param name="scheme">The URI scheme which to have its display name returned.</param>
-        /// <returns>The display name of the scheme.</returns>
+        /// <returns>Returns the string-represented display name of the scheme.</returns>
         private static string GetUriSchemeDisplay(UriScheme scheme)
         {
             // Todo: Enhance the enum and make use of the read-only fields.

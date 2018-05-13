@@ -14,7 +14,7 @@ namespace DMR11_Tests
         [TestMethod]
         public void TestMangaPark()
         {
-            Uri address = new Uri("https://mangapark.com/manga/sekirei");
+            var address = new ValidatedUri("https://mangapark.com/manga/sekirei");
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(address);
             request.Credentials = CredentialCache.DefaultCredentials;
@@ -34,7 +34,7 @@ namespace DMR11_Tests
         {
             try
             {
-                Uri address = new Uri("https://raw.senmanga.com/viewer/Minamoto-kun_Monogatari/239/2?token=12norzsrobp2l.22h1qvxtew5j");
+                var address = new ValidatedUri("https://raw.senmanga.com/viewer/Minamoto-kun_Monogatari/239/2?token=12norzsrobp2l.22h1qvxtew5j");
                 string fileName = "_test_file";
 
                 if (File.Exists(fileName) == false)

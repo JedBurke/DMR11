@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DMR11.Core.Net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -89,7 +90,9 @@ namespace DMR11
 
         public bool RemoveBookmark(Bookmark bookmark)
         {
-            return Bookmarks.Remove(bookmark);
+            var selected = Bookmarks.FirstOrDefault(bk => bk.SeriesUri == bookmark.SeriesUri);
+
+            return selected == null ? false : Bookmarks.Remove(selected);
         }
 
         public void Save()
@@ -152,6 +155,16 @@ namespace DMR11
             seriesName = FormatInputSeries(seriesName);
 
             return Bookmarks.FirstOrDefault(bookmark => string.Compare(bookmark.Name, seriesName, true) == 0);
+        }
+
+        public Bookmark GetBookmarkByUri(string bookmarkUri)
+        {
+            return GetBookmarkByUri(new ValidatedUri(bookmarkUri));
+        }
+
+        public Bookmark GetBookmarkByUri(Uri bookmarkUri)
+        {
+            return Bookmarks.FirstOrDefault(bookmark => bookmark.SeriesUri == bookmarkUri);
         }
 
         /// <summary>

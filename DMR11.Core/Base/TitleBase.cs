@@ -19,7 +19,7 @@ namespace DMR11.Core
     {
         abstract protected string ParseSeriesTitle(string html);
 
-        protected virtual List<UriValidated> ParseChapterAddresses(string html)
+        protected virtual List<Uri> ParseChapterAddresses(string html)
         {
             return null;
         }
@@ -38,7 +38,7 @@ namespace DMR11.Core
             set;
         }
 
-        public UriValidated Address
+        public Uri Address
         {
             get;
             protected set;
@@ -50,7 +50,7 @@ namespace DMR11.Core
 
         public Dictionary<string, string> HostVariables { get; set; }
 
-        public TitleBase(UriValidated address)
+        public TitleBase(Uri address)
         {
             Address = address;
             HostVariables = new Dictionary<string, string>();
@@ -104,12 +104,12 @@ namespace DMR11.Core
 
                     SeriesTitle = ParseSeriesTitle(html);
 
-                    List<UriValidated> addresses = ParseChapterAddresses(html);
+                    List<Uri> addresses = ParseChapterAddresses(html);
 
                     if (addresses != null)
                     {
-                        int count = 0;
-                        foreach (Uri item in addresses)
+                        int count = 0;                        
+                        foreach (var item in addresses)
                         {
                             string content = string.Empty;
 

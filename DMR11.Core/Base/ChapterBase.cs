@@ -30,9 +30,9 @@ namespace DMR11.Core
 
         private string _saveDestination = string.Empty;
 
-        abstract protected List<UriValidated> ParsePageAddresses(string html);
+        abstract protected List<Uri> ParsePageAddresses(string html);
 
-        abstract protected List<UriValidated> ParseImageAddresses(string html);
+        abstract protected List<Uri> ParseImageAddresses(string html);
 
         /// <summary>
         /// Gets or sets whether all the chapter's pages are in one webpage.
@@ -57,7 +57,7 @@ namespace DMR11.Core
         /// <summary>
         /// Gets or sets the chapter's URI.
         /// </summary>
-        public UriValidated Address
+        public Uri Address
         {
             get;
             protected set;

@@ -12,9 +12,9 @@ namespace DMR11.Core.Helper
 {
     public class Parsing
     {
-        public static List<UriValidated> ParseAddresses(string html, IParseDetails<UriValidated> details)
+        public static List<Uri> ParseAddresses(string html, IParseDetails<Uri> details)
         {
-            return ParseContent<UriValidated>(html, details);
+            return ParseContent<Uri>(html, details);
         }
 
         public static List<IChapter> ParseChapters(string html, IParseDetails<IChapter> details)
@@ -73,7 +73,7 @@ namespace DMR11.Core.Helper
             return list.Distinct().ToList();
         }
 
-        public static UriValidated CreateUriFromElementAttributeValue<T>(HtmlNode element, IParseDetails<T> details, UriValidated host) 
+        public static Uri CreateUriFromElementAttributeValue<T>(HtmlNode element, IParseDetails<T> details, Uri host) 
         {
             var value = element.GetAttributeValue(details.AttributeName, null);
             details.Logger.Debug("Creating validated URI from \"{0}\"", value);
@@ -83,7 +83,7 @@ namespace DMR11.Core.Helper
                 value = string.Concat(host.Scheme, "://", host.Host, value);
             }
 
-            return new UriValidated(value);
+            return new DMR11.Core.Net.ValidatedUri(value);
         }
 
         private static string GetElementValue(HtmlNode element, string innerSelector)

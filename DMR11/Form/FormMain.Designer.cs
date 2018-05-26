@@ -356,6 +356,8 @@
             this.cbTitleUrl.Size = new System.Drawing.Size(635, 25);
             this.cbTitleUrl.TabIndex = 1;
             this.cbTitleUrl.Text = global::DMR11.Properties.Settings.Default.Url;
+            this.cbTitleUrl.SelectedIndexChanged += new System.EventHandler(this.cbTitleUrl_SelectedIndexChanged);
+            this.cbTitleUrl.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cbTitleUrl_KeyUp);
             // 
             // btnPresetDialog
             // 

@@ -83,36 +83,25 @@ namespace DMR11
             bookmarks = new BookmarkManager("user/bookmarks.json");
             
         }
+
+        private void cbTitleUrl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GetChapters();
+        }
+
+        private void cbTitleUrl_KeyUp(object sender, KeyEventArgs e)
+        {
+            if ((e.KeyCode == Keys.Enter || e.KeyCode == Keys.Return) && !string.IsNullOrWhiteSpace(cbTitleUrl.Text))
+            {
+                GetChapters();
+
+                e.Handled = true;
+            }
+        }
         
         private void btnGetChapter_Click(object sender, EventArgs e)
         {
-            try
-            {
-                var seriesUri = new ValidatedUri(cbTitleUrl.Text);
-                ITitle title = TitleFactory.CreateTitle(seriesUri);
-                currentTitle = title;
-                title.Proxy = Option.GetProxy();
-                btnGetChapter.Enabled = false;
-
-                var task = title.PopulateChapterAsync(new DMR11.Core.Progress<int>(progress => txtPercent.Text = progress + "%"));
-                task.ContinueWith(t =>
-                {
-                    btnGetChapter.Enabled = true;
-                    dgvChapter.DataSource = title.Chapters;
-
-                    PrepareSeriesDirectory();
-
-                    if (t.Exception != null && t.Exception.InnerException != null)
-                    {
-                        txtMessage.Text = t.Exception.InnerException.Message;
-                    }
-
-                }, TaskScheduler.FromCurrentSynchronizationContext());
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, ex.Source, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            GetChapters();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -562,7 +551,7 @@ namespace DMR11
 
             if (clipboardCopied)
             {
-                btnGetChapter_Click(null, EventArgs.Empty);
+                GetChapters();
             }
 
         }
@@ -577,6 +566,41 @@ namespace DMR11
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
                 rdSeriesDestination.Checked = true;
+        }
+
+        private void GetChapters()
+        {
+            GetChapters(new ValidatedUri(cbTitleUrl.Text));
+        }
+
+        private void GetChapters(Uri seriesUri)
+        {
+            try
+            {
+                ITitle title = TitleFactory.CreateTitle(seriesUri);
+                currentTitle = title;
+                title.Proxy = Option.GetProxy();
+                btnGetChapter.Enabled = false;
+
+                var task = title.PopulateChapterAsync(new DMR11.Core.Progress<int>(progress => txtPercent.Text = progress + "%"));
+                task.ContinueWith(t =>
+                {
+                    btnGetChapter.Enabled = true;
+                    dgvChapter.DataSource = title.Chapters;
+
+                    PrepareSeriesDirectory();
+
+                    if (t.Exception != null && t.Exception.InnerException != null)
+                    {
+                        txtMessage.Text = t.Exception.InnerException.Message;
+                    }
+
+                }, TaskScheduler.FromCurrentSynchronizationContext());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, ex.Source, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void PrepareSeriesDirectory()
@@ -732,7 +756,6 @@ namespace DMR11
 
             return semanticVersion;
         }
-
 
 
     }

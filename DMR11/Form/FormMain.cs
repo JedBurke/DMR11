@@ -81,9 +81,9 @@ namespace DMR11
 #endif
 
             bookmarks = new BookmarkManager("user/bookmarks.json");
-
+            
         }
-
+        
         private void btnGetChapter_Click(object sender, EventArgs e)
         {
             try
@@ -369,7 +369,16 @@ namespace DMR11
                 Process.Start(SaveDestination);
         }
 
+        private void dgvChapter_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
+        {
+            CheckIfChapterVerticalScrollBarIsVisible();
+        }
 
+        private void dgvChapter_SizeChanged(object sender, EventArgs e)
+        {
+            CheckIfChapterVerticalScrollBarIsVisible();
+        }
+        
         private void LoadSettings()
         {
             WindowSettings = new MainFormSettingsManager("user/window.json");
@@ -385,7 +394,7 @@ namespace DMR11
             this.Size = WindowSettings.Subject.FormSize;
             this.Location = WindowSettings.Subject.FormLocation;
             this.WindowState = WindowSettings.Subject.State;
-
+            
             this.cbTitleUrl.Text = WindowSettings.Subject.Url;
             this.lbDefaultDestination.Text = WindowSettings.Subject.SaveTo;
         }
@@ -615,6 +624,26 @@ namespace DMR11
             }
 
         }
+        
+        /// <summary>
+        /// Changes the location of the auxiliary dock if its vertical scroll bar is visible.
+        /// </summary>
+        private void CheckIfChapterVerticalScrollBarIsVisible()
+        {
+            /// Todo: Refactor into multiple methods, allowing reuse.
+            /// 1. Check if the scroll bar is visible.
+            /// 2. Perform an action based on the result.
+
+            var scrollBar = dgvChapter.Controls.OfType<VScrollBar>().FirstOrDefault();
+            var scrollBarWidth = 0;
+
+            if (scrollBar != null && scrollBar.Visible)
+            {
+                scrollBarWidth = scrollBar.Width;
+            }
+
+            ChapterAuxiliaryDock.Left = dgvChapter.Right - ChapterAuxiliaryDock.Width - scrollBarWidth;
+        }
 
         private void SetButtonStyle()
         {
@@ -703,6 +732,8 @@ namespace DMR11
 
             return semanticVersion;
         }
+
+
 
     }
 

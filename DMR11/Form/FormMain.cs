@@ -20,17 +20,19 @@ namespace DMR11
 {
     public partial class FormMain : Form
     {
-        BindingList<IChapter> DownloadQueue;
+        protected BindingList<IChapter> DownloadQueue;
 
         protected const string FILENAME_ICHAPTER_COLLECTION = "IChapterCollection.bin";
 
-        private CancellationTokenSource _cts;
+        protected CancellationTokenSource _cts;
 
-        private BookmarkManager bookmarks = null;
+        protected BookmarkManager bookmarks = null;
 
-        private ITitle currentTitle = null;
+        protected ITitle currentTitle = null;
 
-        private FolderBrowser browserDialog = null;
+        protected FolderBrowser browserDialog = null;
+        
+        protected MainFormSettingsManager WindowSettings = null;
 
         private string SaveDestination
         {
@@ -63,9 +65,6 @@ namespace DMR11
             SetFormTitle();
             SetButtonStyle();
             SetDataGridColumnStyle();
-
-            ChapterAuxiliaryDock.Height = dgvChapter.ColumnHeadersHeight + dgvChapter.ColumnHeadersDefaultCellStyle.Padding.Vertical;
-            ChapterAuxiliaryDock.BackColor = dgvChapter.ColumnHeadersDefaultCellStyle.BackColor;
             
             /* While the implementation is being decided as well as safe-guards are being set,
              * disable access to chapter formatting in the 'Release' configuration. In addition
@@ -370,7 +369,6 @@ namespace DMR11
                 Process.Start(SaveDestination);
         }
 
-        MainFormSettingsManager WindowSettings = null;
 
         private void LoadSettings()
         {
@@ -392,6 +390,16 @@ namespace DMR11
             this.lbDefaultDestination.Text = WindowSettings.Subject.SaveTo;
         }
 
+        private void AlignChapterDockStyle()
+        {
+            ChapterAuxiliaryDock.Height = dgvChapter.ColumnHeadersHeight;
+            ChapterAuxiliaryDock.BackColor = dgvChapter.ColumnHeadersDefaultCellStyle.BackColor;
+
+            ((Button)ChapterAuxiliaryDock.Controls[0]).BackColor = Color.DarkGray;
+            ((Button)ChapterAuxiliaryDock.Controls[0]).FlatAppearance.MouseOverBackColor = Color.Silver;
+            ((Button)ChapterAuxiliaryDock.Controls[0]).FlatAppearance.MouseDownBackColor = Color.LightGray;
+        }
+
         private void FormMain_Load(object sender, EventArgs e)
         {
             LoadSettings();          
@@ -399,7 +407,9 @@ namespace DMR11
 
             dgvQueueChapter.AutoGenerateColumns = false;
             dgvChapter.AutoGenerateColumns = false;
-            
+
+            AlignChapterDockStyle();
+
             //foreach (string[] item in TitleFactory.GetSupportedSites())
             //{
             //    dgvSupportedSites.Rows.Add(item);

@@ -170,7 +170,10 @@ namespace DMR11.Core
 
         public IChapter ChapterParseActionUriSupplied(Uri chapterUri, HtmlNode element, IParseDetails<IChapter> parseDetails)
         {
-            var chapter = new ChapterDistill(element.InnerText, chapterUri, this.HostData);
+            // Todo: Allow the user to set the chapter title.
+            var chapterText = element.ChildNodes != null && element.ChildNodes.Count > 0 ? element.ChildNodes[0].InnerText : element.InnerText;
+                        
+            var chapter = new ChapterDistill(chapterText, chapterUri, this.HostData);
 
             ((Core.Helper.ChapterParseDetails)parseDetails).HostVariables.ToList().ForEach((pair) =>
             {

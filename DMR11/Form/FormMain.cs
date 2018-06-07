@@ -64,6 +64,20 @@ namespace DMR11
 
             SetFormTitle();
             SetButtonStyle();
+
+            // Todo: Refactor
+            foreach (var primaryButton in new[] { btnDownload, btnGetChapter })
+            {
+                primaryButton.BackColor = Color.SlateGray;
+                primaryButton.ForeColor = Color.White;
+                primaryButton.FlatAppearance.MouseOverBackColor = Color.SlateGray;
+                primaryButton.FlatAppearance.MouseDownBackColor = ControlPaint.Dark(Color.SlateGray, 0.05f);
+            }
+
+            StatusPanel.BackColor = ControlPaint.Dark(Color.SlateGray, 0.15f);
+            txtMessage.BackColor = StatusPanel.BackColor;
+            txtMessage.ForeColor = Color.White;
+            
             SetDataGridColumnStyle();
             
             /* While the implementation is being decided as well as safe-guards are being set,
@@ -680,7 +694,7 @@ namespace DMR11
 
             foreach (var container in controlContainers)
             {
-                container.OfType<Button>().ToList().ForEach((button) => StyleButton(button, buttonFont));                
+                container.OfType<Button>().ToList().ForEach((button) => StyleButton(button, buttonFont));
             }
 
         }
@@ -690,7 +704,7 @@ namespace DMR11
             if (button != null && buttonFont != null)
             {
                 button.FlatStyle = FlatStyle.Flat;
-
+                
                 button.FlatAppearance.BorderColor = Color.DarkGray;
                 button.FlatAppearance.BorderSize = 0;
                 button.FlatAppearance.MouseOverBackColor = Color.LightGray;
@@ -722,8 +736,8 @@ namespace DMR11
         {
             var defaultColumnStyle = new DataGridViewCellStyle();
             defaultColumnStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            defaultColumnStyle.BackColor = Color.FromArgb(215, 215, 215);
-            defaultColumnStyle.ForeColor = Color.FromArgb(64, 64, 64);
+            defaultColumnStyle.BackColor = Color.SlateGray;  //Color.FromArgb(215, 215, 215);
+            defaultColumnStyle.ForeColor = Color.White; //Color.FromArgb(64, 64, 64);
             defaultColumnStyle.Padding = new Padding(0, 2, 0, 3);
 
             if (columnHeaderFont != null)

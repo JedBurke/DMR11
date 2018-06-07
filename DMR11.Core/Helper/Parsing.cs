@@ -94,6 +94,13 @@ namespace DMR11.Core.Helper
             {
                 input = element.InnerText;
             }
+            else if (string.Compare(innerSelector, "$(__value)", true) == 0)
+            {
+                if (element.ChildNodes.Count > 0)
+                {
+                    input = element.ChildNodes[0].InnerText;
+                }
+            }
             else
             {
                 input = element.GetAttributeValue(innerSelector, string.Empty);

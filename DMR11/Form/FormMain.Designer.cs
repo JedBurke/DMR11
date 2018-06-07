@@ -590,7 +590,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.StatusPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.StatusPanel.Controls.Add(this.txtMessage);
-            this.StatusPanel.Location = new System.Drawing.Point(0, 599);
+            this.StatusPanel.Location = new System.Drawing.Point(0, 600);
             this.StatusPanel.Name = "StatusPanel";
             this.StatusPanel.Size = new System.Drawing.Size(1012, 27);
             this.StatusPanel.TabIndex = 33;

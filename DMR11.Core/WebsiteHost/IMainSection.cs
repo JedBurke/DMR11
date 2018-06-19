@@ -32,6 +32,16 @@ namespace DMR11.Core.WebsiteHost
         string RedirectUri { get; set; }
 
         /// <summary>
+        /// Gets or sets the uri to match if the chapter has been provided.
+        /// </summary>
+        string ChapterUriPattern { get; set; }
+
+        /// <summary>
+        /// Gets or set whether only chapters are supported.
+        /// </summary>
+        bool ChapterOnly { get; set; }
+
+        /// <summary>
         /// Gets or sets whether the host displays all pages on a single webpage.
         /// </summary>
         bool SinglePage { get; set; }

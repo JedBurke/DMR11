@@ -39,8 +39,10 @@ namespace DMR11.Core.WebsiteHost
             var websiteHost = new WebsiteHost();
 
             bool hostSinglePage = false;
-            
+            bool hostChapterOnly = false;
+                        
             bool.TryParse(websiteHostFile[SECTION_HOST]["single_page"], out hostSinglePage);
+            bool.TryParse(websiteHostFile[SECTION_HOST]["chapter_only"], out hostChapterOnly);
 
             websiteHost.Meta.HostType = HostType.Simple;
             websiteHost.Meta.ScriptPath = websiteHostFile[SECTION_META]["script"];
@@ -52,6 +54,9 @@ namespace DMR11.Core.WebsiteHost
             websiteHost.Host.HostUriPatternType = HostUriType.Simple;
             websiteHost.Host.RedirectUri = websiteHostFile[SECTION_HOST]["redirect_uri"];                        
             websiteHost.Host.SinglePage = hostSinglePage;
+
+            websiteHost.Host.ChapterUriPattern = websiteHostFile[SECTION_HOST]["chapter_uri"];
+            websiteHost.Host.ChapterOnly = hostChapterOnly;
 
             websiteHost.Title.Path = websiteHostFile[SECTION_TITLE]["path"];
             websiteHost.Title.Value = websiteHostFile[SECTION_TITLE]["value"];

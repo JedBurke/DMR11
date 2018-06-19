@@ -44,6 +44,12 @@ namespace DMR11.Core
             protected set;
         }
 
+        public bool IsChapter
+        {
+            get;
+            set;
+        }
+
         public IWebProxy Proxy { get; set; }
 
         public IWebsiteHost HostData { get; set; }
@@ -77,9 +83,9 @@ namespace DMR11.Core
 
                 client.DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
                 client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate");
-                client.DefaultRequestHeaders.Add("User-Agent", Service.UserAgent.CurrentUserAgent);     
-                
-                
+                client.DefaultRequestHeaders.Add("User-Agent", Service.UserAgent.CurrentUserAgent);
+
+                Console.WriteLine("User-Agent: {0}", Service.UserAgent.CurrentUserAgent);
                 try
                 {
                      html = client.GetStringAsync(Address.ToString()).Result;
@@ -106,7 +112,11 @@ namespace DMR11.Core
 
                     List<Uri> addresses = ParseChapterAddresses(html);
 
-                    if (addresses != null)
+                    if (IsChapter)
+                    {
+                        sb.AppendLine(html);
+                    }
+                    else if (addresses != null)
                     {
                         int count = 0;                        
                         foreach (var item in addresses)

@@ -53,21 +53,29 @@ namespace DMR11.Core
             (
                 HostData.Page.Path,
                 HostData.Page.Value,
-                (element, parseDetails) => {
-                    return GenericParseAction(
-                        element,
-                        parseDetails,
-                        HostData.Page,
-                        (x) => Parsing.CreateUriFromElementAttributeValue(
-                            element,
-                            parseDetails,
-                            new ValidatedUri(HostVariables["address_trimmed"]
-                        )
-                    )
-                  );
-                },
+                (element, parseDetails) => GenericParseAction(element, parseDetails, HostData.Page, (uri) => new ValidatedUri(uri)),
                 logger
             );
+
+            //var details = new ParseDetails<Uri>
+            //(
+            //    HostData.Page.Path,
+            //    HostData.Page.Value,
+            //    (element, parseDetails) => {
+            //        return GenericParseAction(
+            //            element,
+            //            parseDetails,
+            //            HostData.Page,
+            //            (x) => Parsing.CreateUriFromElementAttributeValue(
+            //                element,
+            //                parseDetails,
+            //                new ValidatedUri(HostVariables["address_trimmed"]
+            //            )
+            //        )
+            //      );
+            //    },
+            //    logger
+            //);
             
             // (element, parseDetails) => Parsing.CreateUriFromElementAttributeValue(element, parseDetails, new UriValidated(HostVariables["address_trimmed"])),
 

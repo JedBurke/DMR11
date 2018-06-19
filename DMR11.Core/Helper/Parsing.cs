@@ -121,9 +121,11 @@ namespace DMR11.Core.Helper
                 if (!string.IsNullOrWhiteSpace(section.ParseRegex) &&
                     !string.IsNullOrWhiteSpace(section.ParseReplace))
                 {
-                    var regex = new Regex(section.ParseRegex);
+                    var regex = new Regex(section.ParseRegex, RegexOptions.Singleline | RegexOptions.Compiled | RegexOptions.IgnoreCase);
                     var match = Match.Empty;
 
+                    //var matches = regex.Matches(input);
+                    
                     if ((match = regex.Match(input)).Success)
                     {
                         // Register group values.
@@ -148,6 +150,7 @@ namespace DMR11.Core.Helper
 
                         var replace = VariableLookup(section.ParseReplace, hostVariables);
                         return postParse(replace);
+
                     }
                 }
                 else

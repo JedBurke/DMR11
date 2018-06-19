@@ -38,5 +38,18 @@ namespace DMR11.Core.WebsiteHost
             set;
         }
 
+
+
+        public string ChapterUriPattern
+        {
+            get;
+            set;
+        }
+
+        public bool ChapterOnly
+        {
+            get;
+            set;
+        }
     }
 }

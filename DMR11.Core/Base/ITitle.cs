@@ -46,6 +46,12 @@ namespace DMR11.Core
             set;
         }
 
+        bool IsChapter
+        {
+            get;
+            set;
+        }
+        
         Task PopulateChapterAsync(Progress<int> progress);
     }
 }

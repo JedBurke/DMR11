@@ -648,7 +648,15 @@ namespace DMR11
             series = currentTitle.SeriesTitle;
 
             // Todo: Replace invalid characters.
-            path = DMR11.Core.Helper.FileSystem.GetSafePath(Path.Combine(defaultSeriesDestination, series));
+
+            path = defaultSeriesDestination;
+            
+            if (!path.EndsWith(Path.DirectorySeparatorChar.ToString()))
+            {
+                path = string.Concat(path, Path.DirectorySeparatorChar);
+            }
+            
+            path = DMR11.Core.Helper.FileSystem.GetSafePath(string.Concat(path, series));
 
             lbSeriesDestination.Text = path;
 

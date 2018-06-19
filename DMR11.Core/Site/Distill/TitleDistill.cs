@@ -36,7 +36,28 @@ namespace DMR11.Core
             
             /// Sets the series name.
             HostVariables.Add("series_name", this.SeriesTitle);
-   
+
+            if (IsAddressChapterUri())
+            {
+                IsChapter = true;
+            }
+        }
+
+        private bool IsAddressChapterUri()
+        {
+            return IsAddressChapterUri(Address.ToString());
+        }
+
+        private bool IsAddressChapterUri(string address)
+        {
+            var isChapter = false;
+
+            if (!string.IsNullOrWhiteSpace(HostData.Host.ChapterUriPattern))
+            {
+                isChapter = Regex.IsMatch(address, HostData.Host.ChapterUriPattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
+            }
+
+            return isChapter;
         }
 
         /// <summary>
@@ -50,8 +71,15 @@ namespace DMR11.Core
             
             if (data != null)
             {
+                /// Todo: Refactor, check if the chapter URI is not null and if chapter URI are the only supported URIs.
+                /// If so, then don't return true when matching the host name. e.g. Chapter URI > Host URI
+                
                 // Assume regex.
                 if (Regex.IsMatch(uri.Host, data.Host.HostUriPattern, RegexOptions.Compiled | RegexOptions.IgnoreCase))
+                {
+                    return true;
+                }
+                else if (data.Host.ChapterUriPattern != null && Regex.IsMatch(uri.ToString(), data.Host.ChapterUriPattern, RegexOptions.Compiled | RegexOptions.IgnoreCase))
                 {
                     return true;
                 }
@@ -65,7 +93,9 @@ namespace DMR11.Core
             var configPath = LookupConfigPath(uri);
 
             var serializer = new IniWebsiteHostSerializer();
-            return serializer.SeralizeFromPath(configPath);  
+            var host = serializer.SeralizeFromPath(configPath);
+
+            return host;
         }
 
         private static string LookupConfigPath(Uri uri)
@@ -143,6 +173,15 @@ namespace DMR11.Core
         {
             logger.Debug("Entering ParseChapterObjects");
             //logger.Trace("Html parameter: {0}", html);
+            
+            if (IsChapter)
+            {
+                logger.Debug("The supplied URI is for a chapter.");
+
+                var i = new List<IChapter>();
+                i.Add(new ChapterDistill(SeriesTitle, Address, HostData));
+                return i;
+            }
 
             string path = HostData.Chapters.Path;
             string pathValue = HostData.Chapters.Value;
@@ -171,7 +210,7 @@ namespace DMR11.Core
         public IChapter ChapterParseActionUriSupplied(Uri chapterUri, HtmlNode element, IParseDetails<IChapter> parseDetails)
         {
             // Todo: Allow the user to set the chapter title.
-            var chapterText = element.ChildNodes != null && element.ChildNodes.Count > 0 ? element.ChildNodes[0].InnerText : element.InnerText;
+            var chapterText = GetFirstNonEmptyNodeText(element);
                         
             var chapter = new ChapterDistill(chapterText, chapterUri, this.HostData);
 
@@ -188,6 +227,38 @@ namespace DMR11.Core
             });
 
             return chapter ?? null;
+        }
+
+        string GetFirstNonEmptyNodeText(HtmlNode element)
+        {
+            var text = string.Empty;
+
+            /// Check if the element has children. If so, ennumerate them until
+            /// one is found that has text.
+            if (element.HasChildNodes)
+            {
+                foreach (var child in element.ChildNodes)
+                {
+                    if (child != null && child.InnerText != null && !string.IsNullOrWhiteSpace(child.InnerText.Trim()))
+                    {
+                        text = child.InnerText;
+                        break;
+                    }
+                }
+            }
+
+            /// Use the element's text if the element has no children or the children text cannot be set.
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                text = element.InnerText;
+            }
+
+            if (!string.IsNullOrWhiteSpace(text))
+            {
+                text = text.Trim();
+            }
+
+            return text;
         }
 
         public IChapter ChapterParseAction(HtmlNode element, IParseDetails<IChapter> parseDetails)

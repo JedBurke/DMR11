@@ -113,7 +113,8 @@ namespace DMR11.Core.Helper
             // https://msdn.microsoft.com/en-us/library/windows/desktop/aa365247%28v=vs.85%29.aspx#naming_conventions
 
             // Remove root.
-            var root = Path.GetPathRoot(path);
+            path = path.Replace("\"", string.Empty);
+            var root = path.Substring(0, path.IndexOf(Path.VolumeSeparatorChar) + 2); //Path.GetPathRoot(path.Replace('"', '\0'));
 
             var rootRemoved = path.Remove(0, root.Length);
 
@@ -124,7 +125,7 @@ namespace DMR11.Core.Helper
             var fileName = Path.GetFileName(rootRemoved);
             rootRemoved = rootRemoved.Remove(rootRemoved.Length - fileName.Length, fileName.Length);
             fileName = GetSafeFileName(fileName);
-
+            
             return Path.Combine(root, string.Join("", Path.Combine(rootRemoved, fileName).Split(invalidChars.ToArray()))).Trim();
         }
     }

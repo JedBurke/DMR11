@@ -68,7 +68,7 @@
             this.StatusPanel = new System.Windows.Forms.Panel();
             this.btnFromatPreset = new System.Windows.Forms.Button();
             this.ChapterAuxiliaryDock = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.MiriSeriesLookupButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQueueChapter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChapter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudThread)).BeginInit();
@@ -608,7 +608,7 @@
             // 
             // ChapterAuxiliaryDock
             // 
-            this.ChapterAuxiliaryDock.Controls.Add(this.button1);
+            this.ChapterAuxiliaryDock.Controls.Add(this.MiriSeriesLookupButton);
             this.ChapterAuxiliaryDock.Location = new System.Drawing.Point(215, 47);
             this.ChapterAuxiliaryDock.Name = "ChapterAuxiliaryDock";
             this.ChapterAuxiliaryDock.Size = new System.Drawing.Size(222, 34);
@@ -616,15 +616,15 @@
             // 
             // button1
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.MiriSeriesLookupButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.BackgroundImage = global::DMR11.Properties.Resources.appbar_information;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.Location = new System.Drawing.Point(181, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(41, 34);
-            this.button1.TabIndex = 0;
-            this.button1.UseVisualStyleBackColor = true;
+            this.MiriSeriesLookupButton.BackgroundImage = global::DMR11.Properties.Resources.appbar_information;
+            this.MiriSeriesLookupButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.MiriSeriesLookupButton.Location = new System.Drawing.Point(181, 0);
+            this.MiriSeriesLookupButton.Name = "MiriSeriesLookupButton";
+            this.MiriSeriesLookupButton.Size = new System.Drawing.Size(41, 34);
+            this.MiriSeriesLookupButton.TabIndex = 0;
+            this.MiriSeriesLookupButton.UseVisualStyleBackColor = true;
             // 
             // FormMain
             // 
@@ -714,6 +714,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColChapterUrl;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColSaveTo;
         private System.Windows.Forms.Panel ChapterAuxiliaryDock;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button MiriSeriesLookupButton;
     }
 }

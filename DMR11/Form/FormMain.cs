@@ -31,7 +31,7 @@ namespace DMR11
         protected ITitle currentTitle = null;
 
         protected FolderBrowser browserDialog = null;
-        
+
         protected MainFormSettingsManager WindowSettings = null;
 
         private string SaveDestination
@@ -65,21 +65,12 @@ namespace DMR11
             SetFormTitle();
             SetButtonStyle();
 
-            // Todo: Refactor
-            foreach (var primaryButton in new[] { btnDownload, btnGetChapter })
-            {
-                primaryButton.BackColor = Color.SlateGray;
-                primaryButton.ForeColor = Color.White;
-                primaryButton.FlatAppearance.MouseOverBackColor = Color.SlateGray;
-                primaryButton.FlatAppearance.MouseDownBackColor = ControlPaint.Dark(Color.SlateGray, 0.05f);
-            }
+            ApplyButtonStyle();
+            ApplyStatusBarStyle();
 
-            StatusPanel.BackColor = ControlPaint.Dark(Color.SlateGray, 0.15f);
-            txtMessage.BackColor = StatusPanel.BackColor;
-            txtMessage.ForeColor = Color.White;
-            
+
             SetDataGridColumnStyle();
-            
+
             /* While the implementation is being decided as well as safe-guards are being set,
              * disable access to chapter formatting in the 'Release' configuration. In addition
              * to the formatting, remove the connection counter until it's implemented.
@@ -95,7 +86,7 @@ namespace DMR11
 #endif
 
             bookmarks = new BookmarkManager("user/bookmarks.json");
-            
+
         }
 
         private void cbTitleUrl_SelectedIndexChanged(object sender, EventArgs e)
@@ -112,7 +103,7 @@ namespace DMR11
                 e.Handled = true;
             }
         }
-        
+
         private void btnGetChapter_Click(object sender, EventArgs e)
         {
             GetChapters();
@@ -282,7 +273,7 @@ namespace DMR11
                 btnDownload.Text = "Start Download";
             }
 
-            
+
         }
 
         private void DownloadChapter(int millisecond)
@@ -354,16 +345,16 @@ namespace DMR11
                 _cts.Cancel();
             }
         }
-                
+
         private void btnChangeSaveTo_Click(object sender, EventArgs e)
-        {            
+        {
             browserDialog.SelectedPath = SaveDestination;
 
             if (browserDialog.ShowDialog() == DialogResult.OK)
             {
                 SaveDestination = browserDialog.SelectedPath;
             }
-            
+
         }
 
         private void btnOpenFolder_Click(object sender, EventArgs e)
@@ -381,7 +372,7 @@ namespace DMR11
         {
             CheckIfChapterVerticalScrollBarIsVisible();
         }
-        
+
         private void LoadSettings()
         {
             WindowSettings = new MainFormSettingsManager("user/window.json");
@@ -397,7 +388,7 @@ namespace DMR11
             this.Size = WindowSettings.Subject.FormSize;
             this.Location = WindowSettings.Subject.FormLocation;
             this.WindowState = WindowSettings.Subject.State;
-            
+
             this.cbTitleUrl.Text = WindowSettings.Subject.Url;
             this.lbDefaultDestination.Text = WindowSettings.Subject.SaveTo;
         }
@@ -406,15 +397,11 @@ namespace DMR11
         {
             ChapterAuxiliaryDock.Height = dgvChapter.ColumnHeadersHeight;
             ChapterAuxiliaryDock.BackColor = dgvChapter.ColumnHeadersDefaultCellStyle.BackColor;
-
-            ((Button)ChapterAuxiliaryDock.Controls[0]).BackColor = Color.DarkGray;
-            ((Button)ChapterAuxiliaryDock.Controls[0]).FlatAppearance.MouseOverBackColor = Color.Silver;
-            ((Button)ChapterAuxiliaryDock.Controls[0]).FlatAppearance.MouseDownBackColor = Color.LightGray;
         }
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            LoadSettings();          
+            LoadSettings();
             ParseSettings();
 
             dgvQueueChapter.AutoGenerateColumns = false;
@@ -454,7 +441,7 @@ namespace DMR11
 
             //Properties.Settings.Default.Save();
             Common.SaveIChapterCollection(DownloadQueue, FILENAME_ICHAPTER_COLLECTION);
-            
+
             WindowSettings.Save();
             bookmarks.Save();
             bookmarks.Dispose();
@@ -650,12 +637,12 @@ namespace DMR11
             // Todo: Replace invalid characters.
 
             path = defaultSeriesDestination;
-            
+
             if (!path.EndsWith(Path.DirectorySeparatorChar.ToString()))
             {
                 path = string.Concat(path, Path.DirectorySeparatorChar);
             }
-            
+
             path = DMR11.Core.Helper.FileSystem.GetSafePath(string.Concat(path, series));
 
             lbSeriesDestination.Text = path;
@@ -670,7 +657,7 @@ namespace DMR11
             }
 
         }
-        
+
         /// <summary>
         /// Changes the location of the auxiliary dock if its vertical scroll bar is visible.
         /// </summary>
@@ -694,6 +681,7 @@ namespace DMR11
         private void SetButtonStyle()
         {
             SetFormButtonStyle(new[] { this.Controls, this.headerPanel.Controls, this.ChapterAuxiliaryDock.Controls });
+
         }
 
         public static void SetFormButtonStyle(Control.ControlCollection[] controlContainers)
@@ -707,12 +695,43 @@ namespace DMR11
 
         }
 
+        private static void StyleButton(Button button, Font buttonFont, FlatButtonAppearance buttonAppearance)
+        {
+            if (button != null && buttonFont != null && buttonAppearance != null)
+            {
+                button.FlatStyle = FlatStyle.Flat;
+
+                button.FlatAppearance.BorderColor = buttonAppearance.BorderColor;
+                button.FlatAppearance.BorderSize = buttonAppearance.BorderSize;
+                button.FlatAppearance.MouseOverBackColor = buttonAppearance.MouseOverBackColor;
+                button.FlatAppearance.MouseDownBackColor = buttonAppearance.MouseDownBackColor;
+
+                if (button.BackgroundImage == null)
+                {
+                    button.BackColor = Color.FromArgb(215, 215, 215);
+                    button.ForeColor = Color.FromArgb(45, 45, 45);
+                    button.Font = buttonFont;
+                }
+                else
+                {
+                    button.BackColor = Color.FromArgb(230, 230, 230);
+                }
+            }
+        }
+
+        private static void SetImageButtonStyle(Button button, Color backColor)
+        {
+            button.BackColor = backColor;
+        }
+
+
+
         private static void StyleButton(Button button, Font buttonFont)
         {
             if (button != null && buttonFont != null)
             {
                 button.FlatStyle = FlatStyle.Flat;
-                
+
                 button.FlatAppearance.BorderColor = Color.DarkGray;
                 button.FlatAppearance.BorderSize = 0;
                 button.FlatAppearance.MouseOverBackColor = Color.LightGray;
@@ -763,7 +782,7 @@ namespace DMR11
         }
 
         private void SetFormTitle()
-        {            
+        {
             this.Text = string.Format("{0} - {1}", Application.ProductName, GetSemanticVersion());
         }
 
@@ -779,6 +798,66 @@ namespace DMR11
             return semanticVersion;
         }
 
+
+        protected List<Button> primaryButtons;
+        protected List<Button> _secondaryButtons;
+
+        protected bool RegisterPrimaryButton(Button button)
+        {
+            var result = RegisterButton<Button>(primaryButtons, button);
+
+            return result;
+        }
+
+        protected void RegisterPrimaryButtons(Button[] buttons)
+        {
+            var i = buttons.GetEnumerator();
+            while (i.MoveNext())
+            {
+                RegisterButton<Button>(primaryButtons, (Button)i.Current);
+            }
+        }
+
+        protected bool RegisterButton<T>(List<T> buttonList, T button)
+        {
+            if (!buttonList.Contains(button))
+            {
+                buttonList.Add(button);
+                return true;
+            }
+
+            return false;
+        }
+
+        protected void StylePrimaryButtons()
+        {
+            primaryButtons.ForEach((primaryButton) => StylePrimaryButton(primaryButton));
+        }
+
+        protected void StylePrimaryButton(Button primaryButton)
+        {
+            primaryButton.BackColor = Color.SlateGray;
+            primaryButton.ForeColor = Color.White;
+            primaryButton.FlatAppearance.MouseOverBackColor = Color.SlateGray;
+            primaryButton.FlatAppearance.MouseDownBackColor = ControlPaint.Dark(Color.SlateGray, 0.05f);
+        }
+
+        protected void ApplyButtonStyle()
+        {
+            primaryButtons = new List<Button>();
+
+            RegisterPrimaryButtons(new[] { btnDownload, btnGetChapter });
+            RegisterPrimaryButtons(ChapterAuxiliaryDock.Controls.OfType<Button>().ToArray());
+
+            StylePrimaryButtons();
+        }
+
+        protected void ApplyStatusBarStyle()
+        {
+            StatusPanel.BackColor = ControlPaint.Dark(Color.SlateGray, 0.15f);
+            txtMessage.BackColor = StatusPanel.BackColor;
+            txtMessage.ForeColor = Color.WhiteSmoke;
+        }
 
     }
 

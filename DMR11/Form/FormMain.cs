@@ -63,7 +63,6 @@ namespace DMR11
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
 
             SetFormTitle();
-            SetButtonStyle();
 
             ApplyButtonStyle();
             ApplyStatusBarStyle();
@@ -678,12 +677,22 @@ namespace DMR11
             ChapterAuxiliaryDock.Left = dgvChapter.Right - ChapterAuxiliaryDock.Width - scrollBarWidth;
         }
 
+        
+        /**
+         * The following code has been deprecated. Every window will inherit from this one and use
+         * its layout engine. Once everything is ready, these methods will be removed.
+         */
+        #region Deprecated Layout Methods
+
+
+        [Obsolete]
         private void SetButtonStyle()
         {
             SetFormButtonStyle(new[] { this.Controls, this.headerPanel.Controls, this.ChapterAuxiliaryDock.Controls });
 
         }
 
+        [Obsolete]
         public static void SetFormButtonStyle(Control.ControlCollection[] controlContainers)
         {
             var buttonFont = new Font("Segoe UI", 9, FontStyle.Regular, GraphicsUnit.Point);
@@ -695,6 +704,7 @@ namespace DMR11
 
         }
 
+        [Obsolete]
         private static void StyleButton(Button button, Font buttonFont, FlatButtonAppearance buttonAppearance)
         {
             if (button != null && buttonFont != null && buttonAppearance != null)
@@ -719,13 +729,13 @@ namespace DMR11
             }
         }
 
+        [Obsolete]
         private static void SetImageButtonStyle(Button button, Color backColor)
         {
             button.BackColor = backColor;
         }
 
-
-
+        [Obsolete]
         private static void StyleButton(Button button, Font buttonFont)
         {
             if (button != null && buttonFont != null)
@@ -749,6 +759,8 @@ namespace DMR11
                 }
             }
         }
+        
+        #endregion
 
         private void SetDataGridColumnStyle()
         {
@@ -800,22 +812,16 @@ namespace DMR11
 
 
         protected List<Button> primaryButtons;
-        protected List<Button> _secondaryButtons;
+        protected List<Button> secondaryButtons;
 
         protected bool RegisterPrimaryButton(Button button)
         {
-            var result = RegisterButton<Button>(primaryButtons, button);
-
-            return result;
+            return RegisterButton<Button>(primaryButtons, button);
         }
 
         protected void RegisterPrimaryButtons(Button[] buttons)
         {
-            var i = buttons.GetEnumerator();
-            while (i.MoveNext())
-            {
-                RegisterButton<Button>(primaryButtons, (Button)i.Current);
-            }
+            RegisterButtons<Button>(primaryButtons, buttons);
         }
 
         protected bool RegisterButton<T>(List<T> buttonList, T button)
@@ -829,27 +835,95 @@ namespace DMR11
             return false;
         }
 
+        protected bool RegisterButtons<T>(List<T> buttonList, params T[] buttons)
+        {
+            var i = buttons.GetEnumerator();
+
+            while (i.MoveNext())
+            {
+                if (!RegisterButton<T>(buttonList, (T)i.Current))
+                {
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+
+        protected void StyleGenericButtons()
+        {
+            var buttonFont = new Font("Segoe UI", 9, FontStyle.Regular, GraphicsUnit.Point);
+            
+            primaryButtons.ForEach((button) =>
+            {
+                button.FlatStyle = FlatStyle.Flat;
+                button.Font = buttonFont;
+            });
+
+            secondaryButtons.ForEach((button) =>
+            {
+                button.FlatStyle = FlatStyle.Flat;
+                button.Font = buttonFont;
+            });
+        }
+
         protected void StylePrimaryButtons()
         {
             primaryButtons.ForEach((primaryButton) => StylePrimaryButton(primaryButton));
+        }
+
+        protected void StyleSecondaryButtons()
+        {
+            secondaryButtons.ForEach((secondaryButton) => StyleSecondaryButton(secondaryButton));
         }
 
         protected void StylePrimaryButton(Button primaryButton)
         {
             primaryButton.BackColor = Color.SlateGray;
             primaryButton.ForeColor = Color.White;
+            primaryButton.FlatAppearance.BorderSize = 0;
             primaryButton.FlatAppearance.MouseOverBackColor = Color.SlateGray;
             primaryButton.FlatAppearance.MouseDownBackColor = ControlPaint.Dark(Color.SlateGray, 0.05f);
+        }
+
+        protected void StyleSecondaryButton(Button secondaryButton)
+        {
+            secondaryButton.FlatAppearance.BorderColor = Color.DarkGray;
+            secondaryButton.FlatAppearance.BorderSize = 0;
+            secondaryButton.FlatAppearance.MouseOverBackColor = Color.LightGray;
+            secondaryButton.FlatAppearance.MouseDownBackColor = Color.Silver;
+            
+            if (secondaryButton.BackgroundImage == null)
+            {
+                secondaryButton.BackColor = Color.FromArgb(215, 215, 215);
+                secondaryButton.ForeColor = Color.FromArgb(45, 45, 45);
+            }
+            else
+            {
+                secondaryButton.BackColor = Color.FromArgb(230, 230, 230);
+            }
         }
 
         protected void ApplyButtonStyle()
         {
             primaryButtons = new List<Button>();
+            secondaryButtons = new List<Button>();
+
+            //SetButtonStyle();
 
             RegisterPrimaryButtons(new[] { btnDownload, btnGetChapter });
             RegisterPrimaryButtons(ChapterAuxiliaryDock.Controls.OfType<Button>().ToArray());
 
+            RegisterButtons(secondaryButtons, this.Controls.OfType<Button>().ToArray());
+            RegisterButtons(secondaryButtons, headerPanel.Controls.OfType<Button>().ToArray());
+
+            secondaryButtons.Remove(btnDownload);
+            secondaryButtons.Remove(btnGetChapter);
+            
+
+            StyleGenericButtons();
             StylePrimaryButtons();
+            StyleSecondaryButtons();
         }
 
         protected void ApplyStatusBarStyle()

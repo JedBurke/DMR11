@@ -140,6 +140,7 @@
     <Compile Include="Bookmarks\Bookmark.cs" />
     <Compile Include="Bookmarks\BookmarkManager.cs" />
     <Compile Include="Bookmarks\IManager.cs" />
+    <Compile Include="Dmr11BaseView.cs" />
     <Compile Include="Form\FormFormat.cs">
       <SubType>Form</SubType>
     </Compile>

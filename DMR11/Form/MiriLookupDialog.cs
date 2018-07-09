@@ -26,6 +26,8 @@ namespace DMR11
         }
 
         private Label SeriesNameLabel;
+        private Label SeriesAuthorLabel;
+        private Label SeriesIllustratorLabel;
         private Label CompletedLabel;
         private Label ScanlatedLabel;
         private Button OpenInBrowserButton;
@@ -38,17 +40,45 @@ namespace DMR11
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.ClientSize = new Size(415, 215);
+            this.ClientSize = new Size(415, 165);
         }
 
         protected void InitializeControls()
         {
+            var secondaryDisplayFont = new Font("Segoe UI", 9.75f, FontStyle.Regular, GraphicsUnit.Point);
+
             SeriesNameLabel = new Label()
             {
+                AutoEllipsis = true,
                 Text = "Kono Subarashii Sekai ni Shukufuku o!",
                 Font = new Font("Segoe UI", 12, FontStyle.Regular, GraphicsUnit.Point)
             };
 
+            SeriesAuthorLabel = new Label() { 
+                Anchor = AnchorStyles.Left | AnchorStyles.Top,
+                AutoSize = true,
+                Font = secondaryDisplayFont
+            };
+
+            SeriesIllustratorLabel = new Label()
+            {
+                Anchor = AnchorStyles.Left | AnchorStyles.Top,
+                AutoSize = true,
+                Font = secondaryDisplayFont
+            };
+
+            CompletedLabel = new Label() {
+                Anchor = AnchorStyles.Left | AnchorStyles.Top,
+                AutoSize = true,
+                Font = secondaryDisplayFont
+            };
+
+            ScanlatedLabel = new Label() { 
+                Anchor = AnchorStyles.Left | AnchorStyles.Top,
+                AutoSize = true,
+                Font = secondaryDisplayFont
+            };
+            
             OpenInBrowserButton = new Button()
             {
                 AutoSize = true,
@@ -65,6 +95,18 @@ namespace DMR11
 
             SeriesNameLabel.Location = new Point(ExternalMargin, ExternalMargin);
             SeriesNameLabel.Width = this.ClientRectangle.Right - ExternalMarginDouble;
+
+            SeriesAuthorLabel.TextChanged += (_, __) => 
+            {
+                SeriesAuthorLabel.Location = new Point(ExternalMargin, SeriesNameLabel.Bottom + ExternalMargin);
+                SeriesIllustratorLabel.Location = new Point(SeriesAuthorLabel.Right + InternalMargin, SeriesAuthorLabel.Top);
+            };
+
+            CompletedLabel.TextChanged += (_, __) => { 
+                CompletedLabel.Location = new Point(ExternalMargin, SeriesAuthorLabel.Bottom + InternalMargin);
+                ScanlatedLabel.Location = new Point(CompletedLabel.Right + InternalMargin, CompletedLabel.Top);
+            };
+            
             CloseButton.Location = new Point(this.ClientRectangle.Right - CloseButton.Width - ExternalMargin, this.ClientRectangle.Bottom - CloseButton.Height - ExternalMargin);
             OpenInBrowserButton.Location = new Point(CloseButton.Left - OpenInBrowserButton.Width - InternalMargin, CloseButton.Top);
             
@@ -73,7 +115,12 @@ namespace DMR11
             this.CancelButton = CloseButton;
             this.Controls.AddRange(new Control[] {
                 SeriesNameLabel,
-                OpenInBrowserButton,
+                SeriesAuthorLabel,
+                SeriesIllustratorLabel,
+                CompletedLabel,
+                ScanlatedLabel,
+                // ToDo: Uncomment when ready.
+                //OpenInBrowserButton,
                 CloseButton
             });
 
@@ -88,23 +135,46 @@ namespace DMR11
 
         protected void InitializeDataBinding()
         {
-            SeriesNameLabel.DataBindings.Add("Text", this, "SeriesTitle", true, DataSourceUpdateMode.OnPropertyChanged);
+            var seriesAuthorBinding = new Binding("Text", this, "SeriesAuthor");
+            seriesAuthorBinding.Format += new ConvertEventHandler((sender, e) => e.Value = string.Format("Author: {0}", e.Value));
+
+            var seriesCompletedBinding = new Binding("Text", this, "SeriesIsCompleted");
+            seriesCompletedBinding.Format += new ConvertEventHandler(CompletedBinding_Format);
+
+            var seriesScanlatedBinding = new Binding("Text", this, "SeriesIsFullyScanlated");
+            seriesScanlatedBinding.Format += new ConvertEventHandler(SeriesScanlatedBinding_Format);
+                        
+            var seriesIllustratorBinding = new Binding("Text", this, "SeriesIllustrator");
+            seriesIllustratorBinding.Format += new ConvertEventHandler((sender, e) => e.Value = string.Format("Illustrator: {0}", e.Value));
+
+
+            SeriesNameLabel.DataBindings.Add("Text", this, "SeriesTitle", false, DataSourceUpdateMode.OnPropertyChanged);
+            SeriesAuthorLabel.DataBindings.Add(seriesAuthorBinding);
+            SeriesIllustratorLabel.DataBindings.Add(seriesIllustratorBinding);
+            CompletedLabel.DataBindings.Add(seriesCompletedBinding);
+            ScanlatedLabel.DataBindings.Add(seriesScanlatedBinding);
+        }
+
+        void CompletedBinding_Format(object sender, ConvertEventArgs e)
+        {
+            e.Value = string.Format( "Completed: {0}", MIRI.Helpers.Results.BoolToNaturalEnglish((bool)e.Value));
+        }
+
+        void SeriesScanlatedBinding_Format(object sender, ConvertEventArgs e)
+        {
+            e.Value = string.Format("Fully scanlated: {0}", MIRI.Helpers.Results.BoolToNaturalEnglish((bool)e.Value));
         }
 
         public async void OpenInBrowserButton_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
-                await Task.Run(new Action(() => System.Diagnostics.Process.Start("https://www.github.com/")));
+                // Todo: Open the MangaUpdates page.
+                //await Task.Run(new Action(() => System.Diagnostics.Process.Start("")));
             }
         }
-
-        public async void LookupSeries(string seriesName)
-        {
-
-        }
-
-        protected string SeriesTitle
+        
+        public string SeriesTitle
         {
             get;
             set;
@@ -112,8 +182,48 @@ namespace DMR11
 
         private bool _seriesIsCompleted;
 
+        private string _seriesAuthor;
+        private string _seriesIllustrator;
 
-        protected bool SeriesIsCompleted
+        public string SeriesIllustrator
+        {
+            get
+            {
+                return _seriesIllustrator;
+            }
+            set
+            {
+                if (_seriesIllustrator != value)
+                {
+                    _seriesIllustrator = value;
+                    OnPropertyChange();
+                }
+            }
+        }
+
+        public string SeriesAuthor
+        {
+            get
+            {
+                return _seriesAuthor;
+            }
+            set
+            {
+                if (_seriesAuthor != value)
+                {
+                    _seriesAuthor = value;
+                    OnPropertyChange();
+                }
+            }
+        }
+
+        public Uri SeriesUri
+        {
+            get;
+            set;
+        }
+
+        public bool SeriesIsCompleted
         {
             get
             {
@@ -129,7 +239,7 @@ namespace DMR11
             }
         }
 
-        protected bool SeriesIsFullyScanlated
+        public bool SeriesIsFullyScanlated
         {
             get;
             set;
@@ -138,9 +248,11 @@ namespace DMR11
         public DialogResult ShowDialog(MIRI.ISeriesData data)
         {
             SeriesTitle = data.Title;
+            SeriesAuthor = data.Author;
+            SeriesIllustrator = data.Illustrator;
             SeriesIsCompleted = data.IsCompleted;
             SeriesIsFullyScanlated = data.IsFullyScanlated;
-
+            
             return ShowDialog();
         }
 
@@ -151,4 +263,5 @@ namespace DMR11
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
     }
+
 }

@@ -941,21 +941,16 @@ namespace DMR11
                     var search = new MIRI.MangaUpdatesSearch();
                     var result = await search.SearchAsync(currentTitle.SeriesTitle);
                     
-                    miri.StartPosition = FormStartPosition.CenterParent;
-                    miri.ShowDialog(result);
+                    if (result != null)
+                    {
+                        miri.StartPosition = FormStartPosition.CenterParent;
+                        miri.ShowDialog(result);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Series \"{0}\" not found.", "MIRI Series Look-up", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-
-                //await Task.Run(new Action(() => {
-                //    using (var miri = new DMR11.MiriLookupDialog())
-                //    {
-                //        var search = new MIRI.MangaUpdatesSearch();
-
-                //        //miri.LookupSeries(currentTitle.SeriesTitle);
-
-                //        miri.StartPosition = FormStartPosition.CenterParent;
-                //        miri.ShowDialog();
-                //    }
-                //}));
             }
         }
 

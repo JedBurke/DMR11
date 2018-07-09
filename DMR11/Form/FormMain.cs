@@ -677,7 +677,7 @@ namespace DMR11
             ChapterAuxiliaryDock.Left = dgvChapter.Right - ChapterAuxiliaryDock.Width - scrollBarWidth;
         }
 
-        
+
         /**
          * The following code has been deprecated. Every window will inherit from this one and use
          * its layout engine. Once everything is ready, these methods will be removed.
@@ -759,7 +759,7 @@ namespace DMR11
                 }
             }
         }
-        
+
         #endregion
 
         private void SetDataGridColumnStyle()
@@ -846,14 +846,14 @@ namespace DMR11
                     return false;
                 }
             }
-            
+
             return true;
         }
 
         protected void StyleGenericButtons()
         {
             var buttonFont = new Font("Segoe UI", 9, FontStyle.Regular, GraphicsUnit.Point);
-            
+
             primaryButtons.ForEach((button) =>
             {
                 button.FlatStyle = FlatStyle.Flat;
@@ -882,6 +882,7 @@ namespace DMR11
             primaryButton.BackColor = Color.SlateGray;
             primaryButton.ForeColor = Color.White;
             primaryButton.FlatAppearance.BorderSize = 0;
+            primaryButton.FlatAppearance.BorderColor = primaryButton.BackColor;
             primaryButton.FlatAppearance.MouseOverBackColor = Color.SlateGray;
             primaryButton.FlatAppearance.MouseDownBackColor = ControlPaint.Dark(Color.SlateGray, 0.05f);
         }
@@ -892,7 +893,7 @@ namespace DMR11
             secondaryButton.FlatAppearance.BorderSize = 0;
             secondaryButton.FlatAppearance.MouseOverBackColor = Color.LightGray;
             secondaryButton.FlatAppearance.MouseDownBackColor = Color.Silver;
-            
+
             if (secondaryButton.BackgroundImage == null)
             {
                 secondaryButton.BackColor = Color.FromArgb(215, 215, 215);
@@ -909,8 +910,6 @@ namespace DMR11
             primaryButtons = new List<Button>();
             secondaryButtons = new List<Button>();
 
-            //SetButtonStyle();
-
             RegisterPrimaryButtons(new[] { btnDownload, btnGetChapter });
             RegisterPrimaryButtons(ChapterAuxiliaryDock.Controls.OfType<Button>().ToArray());
 
@@ -919,11 +918,11 @@ namespace DMR11
 
             secondaryButtons.Remove(btnDownload);
             secondaryButtons.Remove(btnGetChapter);
-            
 
             StyleGenericButtons();
             StylePrimaryButtons();
             StyleSecondaryButtons();
+
         }
 
         protected void ApplyStatusBarStyle()
@@ -931,6 +930,33 @@ namespace DMR11
             StatusPanel.BackColor = ControlPaint.Dark(Color.SlateGray, 0.15f);
             txtMessage.BackColor = StatusPanel.BackColor;
             txtMessage.ForeColor = Color.WhiteSmoke;
+        }
+
+        private async void MiriSeriesLookupButton_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            {
+                using (var miri = new DMR11.MiriLookupDialog())
+                {
+                    var search = new MIRI.MangaUpdatesSearch();
+                    var result = await search.SearchAsync(currentTitle.SeriesTitle);
+                    
+                    miri.StartPosition = FormStartPosition.CenterParent;
+                    miri.ShowDialog(result);
+                }
+
+                //await Task.Run(new Action(() => {
+                //    using (var miri = new DMR11.MiriLookupDialog())
+                //    {
+                //        var search = new MIRI.MangaUpdatesSearch();
+
+                //        //miri.LookupSeries(currentTitle.SeriesTitle);
+
+                //        miri.StartPosition = FormStartPosition.CenterParent;
+                //        miri.ShowDialog();
+                //    }
+                //}));
+            }
         }
 
     }

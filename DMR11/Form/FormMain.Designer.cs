@@ -614,7 +614,7 @@
             this.ChapterAuxiliaryDock.Size = new System.Drawing.Size(222, 34);
             this.ChapterAuxiliaryDock.TabIndex = 35;
             // 
-            // button1
+            // MiriSeriesLookupButton
             // 
             this.MiriSeriesLookupButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -625,6 +625,7 @@
             this.MiriSeriesLookupButton.Size = new System.Drawing.Size(41, 34);
             this.MiriSeriesLookupButton.TabIndex = 0;
             this.MiriSeriesLookupButton.UseVisualStyleBackColor = true;
+            this.MiriSeriesLookupButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MiriSeriesLookupButton_MouseClick);
             // 
             // FormMain
             // 

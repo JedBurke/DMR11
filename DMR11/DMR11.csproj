@@ -116,6 +116,9 @@
     <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MIRI">
+      <HintPath>..\compiled\MIRI.dll</HintPath>
+    </Reference>
     <Reference Include="ModernFolderBrowserDialog">
       <HintPath>3rd-party\ModernFolderBrowserDialog.dll</HintPath>
     </Reference>
@@ -140,12 +143,17 @@
     <Compile Include="Bookmarks\Bookmark.cs" />
     <Compile Include="Bookmarks\BookmarkManager.cs" />
     <Compile Include="Bookmarks\IManager.cs" />
-    <Compile Include="Dmr11BaseView.cs" />
+    <Compile Include="Dmr11BaseView.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\FormFormat.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\FormFormat.Designer.cs">
       <DependentUpon>FormFormat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\MiriLookupDialog.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Helper\AppInfo.cs" />
     <Compile Include="Helper\KeyState.cs" />

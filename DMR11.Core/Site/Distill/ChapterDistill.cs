@@ -14,7 +14,15 @@ namespace DMR11.Core
 {
     public class ChapterDistill : ChapterBase
     {
-        private static Logger logger = LogManager.GetCurrentClassLogger();
+        private static Logger _logger = null;
+
+        private static Logger Logger
+        {
+            get
+            {
+                return _logger ?? (_logger = LogManager.GetCurrentClassLogger());
+            }
+        }
 
         private IWebsiteHost HostData;
 
@@ -54,7 +62,7 @@ namespace DMR11.Core
                 HostData.Page.Path,
                 HostData.Page.Value,
                 (element, parseDetails) => GenericParseAction(element, parseDetails, HostData.Page, (uri) => new ValidatedUri(uri)),
-                logger
+                Logger
             );
 
             return Parsing.ParseAddresses(html, details);
@@ -72,7 +80,7 @@ namespace DMR11.Core
                     HostData.Pages.Path,
                     HostData.Pages.Value,
                     (element, parseDetails) => GenericParseAction(element, parseDetails, HostData.Pages, (uri) => new ValidatedUri(uri)),
-                    logger
+                    Logger
                 );
                 
                 return Parsing.ParseAddresses(html, details);

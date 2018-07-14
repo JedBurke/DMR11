@@ -18,11 +18,26 @@ namespace DMR11.Core
     {
         const string HOST_LOOKUP_PATH = "hosts";
         
-        //IWebsiteHost HostData = null;
+        protected static ILogger _log = null;
+
+        public static ILogger Log
+        {
+            get
+            {
+                return _log ?? (_log = LogManager.GetCurrentClassLogger());
+            }
+        }
 
         public TitleDistill(Uri address)
             : base(address)
         {
+            if (address == null)
+            {
+                throw new NullReferenceException("Address cannot be null");
+            }
+
+            Log.Trace("Creating title object for \"{0}\"", address.ToString());
+
             HostData = LoadConfigFile(address);
 
             /// Sets the host URI of the series.
@@ -133,11 +148,9 @@ namespace DMR11.Core
         }
 
 
-        static ILogger logger = LogManager.GetCurrentClassLogger();
-
         protected override string ParseSeriesTitle(string html)
         {
-            logger.Debug("Entering ParseSeriesTitle");
+            Log.Debug("Entering ParseSeriesTitle");
 
             string path = HostData.Title.Path;
             string pathvalue = HostData.Title.Value;
@@ -156,7 +169,7 @@ namespace DMR11.Core
                         HostVariables
                     );
                 },
-                logger
+                Log
             );
 
             var title = Parsing.ParseContent<string>(html, details);
@@ -171,40 +184,42 @@ namespace DMR11.Core
 
         protected override List<IChapter> ParseChapterObjects(string html)
         {
-            logger.Debug("Entering ParseChapterObjects");
-            //logger.Trace("Html parameter: {0}", html);
-            
+            Log.Debug("Entering ParseChapterObjects");
+
             if (IsChapter)
             {
-                logger.Debug("The supplied URI is for a chapter.");
+                Log.Debug("The supplied URI is for a chapter.");
 
-                var i = new List<IChapter>();
-                i.Add(new ChapterDistill(SeriesTitle, Address, HostData));
-                return i;
+                var chapter = new List<IChapter>();
+                chapter.Add(new ChapterDistill(SeriesTitle, Address, HostData));
+                
+                return chapter;
+            }
+            else
+            {
+                string path = HostData.Chapters.Path;
+                string pathValue = HostData.Chapters.Value;
+
+                var details = new ChapterParseDetails(
+                    path,
+                    pathValue,
+                    (element, parseDetails) =>
+                    {
+                        return GenericParseAction<IChapter>
+                        (
+                            element,
+                            parseDetails,
+                            HostData.Chapters,
+                            (chapterUri) => ChapterParseActionUriSupplied(new DMR11.Core.Net.ValidatedUri(chapterUri), element, parseDetails)
+                        );
+                    },
+                    Log,
+                    HostVariables
+                );
+
+                return Parsing.ParseChapters(html, details);
             }
 
-            string path = HostData.Chapters.Path;
-            string pathValue = HostData.Chapters.Value;
-            
-            //var details = new ChapterParseDetails(path, pathValue, ChapterParseAction, logger,  HostVariables);
-            var details = new ChapterParseDetails(
-                path,
-                pathValue,
-                (element, parseDetails) =>
-                {
-                    return GenericParseAction<IChapter>
-                    (
-                        element,
-                        parseDetails,
-                        HostData.Chapters,
-                        (chapterUri) => ChapterParseActionUriSupplied(new DMR11.Core.Net.ValidatedUri(chapterUri), element, parseDetails)
-                    );
-                },
-                logger,
-                HostVariables
-            );
-            
-            return Parsing.ParseChapters(html, details);
         }
 
         public IChapter ChapterParseActionUriSupplied(Uri chapterUri, HtmlNode element, IParseDetails<IChapter> parseDetails)

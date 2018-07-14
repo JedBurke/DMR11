@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.Text.RegularExpressions;
+using NLog;
 
 namespace DMR11.Core
 {
@@ -25,6 +26,15 @@ namespace DMR11.Core
 
         [NonSerialized]
         private Progress<ChapterProgress> _progress;
+
+        private ILogger _log;
+        protected ILogger Log
+        {
+            get
+            {
+                return _log ?? (_log = LogManager.GetCurrentClassLogger());
+            }
+        }
 
         private string _saveDestination = string.Empty;
 
@@ -154,8 +164,10 @@ namespace DMR11.Core
 
         public string Referrer { get; set; }
         
-        public ChapterBase(string name, Uri address)
+        public ChapterBase(string name, Uri address, ILogger log)
         {
+            this._log = log;
+
             Name = name;
             Address = address;
 
@@ -235,16 +247,19 @@ namespace DMR11.Core
 
         private void PopulateImageAddress(string html)
         {
-            // Single page. May not only apply to KissManga.
+            Log.Trace("Entering Populate");
+            //LogManager.
+
             if (SinglePage)
             {
+                Log.Debug("Single page");
                 ImageAddresses = ParseImageAddresses(html);
             }
 
             else
             {
                 List<Uri> pageAddresses = ParsePageAddresses(html);
-                Console.WriteLine("Pages in chapter: {0}", pageAddresses.Count);
+                Log.Trace("Pages in chapter: {pageAddress.Count}", pageAddresses.Count);
 
                 var sbHtml = new StringBuilder();
 
@@ -269,7 +284,7 @@ namespace DMR11.Core
                         catch (Exception)
                         {
                             // Todo: Log failure and retry count.
-                            Console.WriteLine("Download failed, retrying. Retry count: {0}", retryCount);
+                            Log.Debug("Download failed, retrying. Retry count: {retryCount}", retryCount);
 
                             if (retryCount == MAX_RETRIES)
                                 throw;
@@ -293,11 +308,15 @@ namespace DMR11.Core
 
         private void DownloadFile(Uri address, string fileName)
         {
+            Log.Debug("Downloading \"{0}\" as \"{1}\"", address.ToString(), fileName);
+
             Downloader.Instance.DownloadFile(address, fileName, _cancellationToken);
         }
 
         private string DownloadString(Uri address)
         {
+            Log.Debug("Downloading string {0}", address.ToString());
+
             return Downloader.Instance.DownloadString(address);
         }
 

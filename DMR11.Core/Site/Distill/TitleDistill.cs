@@ -183,7 +183,7 @@ namespace DMR11.Core
                 Log.Debug("The supplied URI is for a chapter.");
 
                 var chapter = new List<IChapter>();
-                chapter.Add(new ChapterDistill(SeriesTitle, Address, HostData));
+                chapter.Add(new ChapterDistill(SeriesTitle, Address, HostData, Log));
                 
                 return chapter;
             }
@@ -219,7 +219,7 @@ namespace DMR11.Core
             // Todo: Allow the user to set the chapter title.
             var chapterText = GetFirstNonEmptyNodeText(element);
                         
-            var chapter = new ChapterDistill(chapterText, chapterUri, this.HostData);
+            var chapter = new ChapterDistill(chapterText, chapterUri, this.HostData, Log);
 
             ((Core.Helper.ChapterParseDetails)parseDetails).HostVariables.ToList().ForEach((pair) =>
             {
@@ -271,7 +271,7 @@ namespace DMR11.Core
         public IChapter ChapterParseAction(HtmlNode element, IParseDetails<IChapter> parseDetails)
         {
             var uri = Parsing.CreateUriFromElementAttributeValue(element, parseDetails, Address);
-            var chapter = new ChapterDistill(element.InnerText, uri, this.HostData);
+            var chapter = new ChapterDistill(element.InnerText, uri, this.HostData, Log);
             
             ((Core.Helper.ChapterParseDetails)parseDetails).HostVariables.ToList().ForEach((pair) =>
             {

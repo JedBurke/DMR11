@@ -14,44 +14,35 @@ namespace DMR11.Core
 {
     public class ChapterDistill : ChapterBase
     {
-        private static Logger _logger = null;
-
-        private static Logger Logger
-        {
-            get
-            {
-                return _logger ?? (_logger = LogManager.GetCurrentClassLogger());
-            }
-        }
-
         private IWebsiteHost HostData;
 
-        public ChapterDistill(string name, Uri address, IWebsiteHost hostData)
-            : base(name, address)
+        public ChapterDistill(string name, Uri address, IWebsiteHost hostData, ILogger log)
+            : base(name, address, log)
         {
-
             if (hostData == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException("Variable 'hostData' cannot be null.");
             }
             else
             {
                 HostData = hostData;
 
-                //Referrer = HostData["host"]["referer"];
-
                 /// Sets the chapter's name according to the host.
                 HostVariables.Add("chapter", Name);
+                Log.Debug("Chapter 'name' variable: {0}", HostVariables["chapter"]);
 
                 /// Sets the chapter's address.
                 HostVariables.Add("address", address.ToString());
+                Log.Debug("Chapter 'address' value: {0}", HostVariables["address"]);
 
                 /// Sets a trimmed version of the chapter's address.
                 HostVariables.Add("address_trimmed", address.ToString().Substring(0, address.ToString().LastIndexOf('/')));
+                log.Debug("Chapter 'address_trimmed' value: {0}", HostVariables["address_trimmed"]);
                                 
                 // Short-circuit the page listing if all of the 'pages' (chapter images) are in a single HTML page.
                 SinglePage = HostData.Host.SinglePage;
-                
+                log.Debug("Is single page: {0}", SinglePage);
+
             }
         }
 
@@ -62,7 +53,7 @@ namespace DMR11.Core
                 HostData.Page.Path,
                 HostData.Page.Value,
                 (element, parseDetails) => GenericParseAction(element, parseDetails, HostData.Page, (uri) => new ValidatedUri(uri)),
-                Logger
+                Log
             );
 
             return Parsing.ParseAddresses(html, details);
@@ -80,7 +71,7 @@ namespace DMR11.Core
                     HostData.Pages.Path,
                     HostData.Pages.Value,
                     (element, parseDetails) => GenericParseAction(element, parseDetails, HostData.Pages, (uri) => new ValidatedUri(uri)),
-                    Logger
+                    Log
                 );
                 
                 return Parsing.ParseAddresses(html, details);

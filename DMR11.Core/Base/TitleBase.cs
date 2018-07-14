@@ -11,12 +11,22 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Net.Http;
 using DMR11.Core.WebsiteHost;
+using NLog;
 
 
 namespace DMR11.Core
 {
     public abstract class TitleBase : ITitle
     {
+        static ILogger _log;
+        protected static ILogger Log
+        {
+            get
+            {
+                return _log ?? (_log = LogManager.GetCurrentClassLogger());
+            }
+        }
+
         abstract protected string ParseSeriesTitle(string html);
 
         protected virtual List<Uri> ParseChapterAddresses(string html)
@@ -56,10 +66,14 @@ namespace DMR11.Core
 
         public Dictionary<string, string> HostVariables { get; set; }
 
-        public TitleBase(Uri address)
+        public TitleBase(Uri address, ILogger log)
         {
             Address = address;
             HostVariables = new Dictionary<string, string>();
+
+            _log = log;
+
+            Log.Trace("URI: {0}", address.ToString());
         }
         
         public Task PopulateChapterAsync(Progress<int> progress)
@@ -84,7 +98,14 @@ namespace DMR11.Core
                 client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate");
                 client.DefaultRequestHeaders.Add("User-Agent", Service.UserAgent.CurrentUserAgent);
 
-                Console.WriteLine("User-Agent: {0}", Service.UserAgent.CurrentUserAgent);
+                Log.Trace("Entering PopulateChapterAsync");
+                Log.Trace("URI: {0}", Address.ToString());
+
+                Log.Trace("Setting client default request headers");
+                Log.Trace("Accept: {0}", client.DefaultRequestHeaders.Accept);
+                Log.Trace("Accept-Encoding: {0}", client.DefaultRequestHeaders.AcceptEncoding);
+                Log.Trace("User-Agent: {0}", client.DefaultRequestHeaders.UserAgent);
+                
                 try
                 {
                      html = client.GetStringAsync(Address.ToString()).Result;
@@ -92,6 +113,7 @@ namespace DMR11.Core
                 }
                 catch (Exception ex)
                 {
+                    Log.Error(ex.ToString());
                     Console.WriteLine(ex.ToString());                    
                 }
                 
@@ -101,26 +123,35 @@ namespace DMR11.Core
                     sb.AppendLine(html);
 
                     SeriesTitle = ParseSeriesTitle(html);
+                    Log.Trace("Series title: {0}", SeriesTitle);
 
                     List<Uri> addresses = ParseChapterAddresses(html);
 
                     if (IsChapter)
                     {
+                        Log.Debug("Single chapter address");                        
                         sb.AppendLine(html);
                     }
                     else if (addresses != null)
                     {
-                        int count = 0;                        
-                        foreach (var item in addresses)
+                        Log.Debug("Multi-chapter series");
+
+                        int count = 0;
+
+                        foreach (var address in addresses)
                         {
                             string content = string.Empty;
 
-                            content = client.GetStringAsync(item.ToString()).Result;
+                            content = client.GetStringAsync(address.ToString()).Result;
 
                             sb.AppendLine(content);
                             count++;
                             progress.ReportProgress(count * 100 / addresses.Count);
                         }
+                    }
+                    else
+                    {
+                        Log.Debug("No addresses found");
                     }
 
                     Chapters = ParseChapterObjects(sb.ToString());

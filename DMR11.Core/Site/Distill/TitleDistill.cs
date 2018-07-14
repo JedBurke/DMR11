@@ -18,26 +18,18 @@ namespace DMR11.Core
     {
         const string HOST_LOOKUP_PATH = "hosts";
         
-        protected static ILogger _log = null;
-
-        public static ILogger Log
+        public TitleDistill(Uri address) : this(address, null)
         {
-            get
-            {
-                return _log ?? (_log = LogManager.GetCurrentClassLogger());
-            }
         }
 
-        public TitleDistill(Uri address)
-            : base(address)
+        public TitleDistill(Uri address, ILogger log) 
+            : base(address, log)
         {
             if (address == null)
             {
                 throw new NullReferenceException("Address cannot be null");
             }
-
-            Log.Trace("Creating title object for \"{0}\"", address.ToString());
-
+            
             HostData = LoadConfigFile(address);
 
             /// Sets the host URI of the series.
@@ -48,7 +40,7 @@ namespace DMR11.Core
 
             /// Set the the trimmed address for the main series page.
             HostVariables.Add("series_address_trimmed", address.ToString().Substring(0, address.ToString().LastIndexOf('/')));
-            
+
             /// Sets the series name.
             HostVariables.Add("series_name", this.SeriesTitle);
 

@@ -120,7 +120,7 @@
       <HintPath>..\compiled\MIRI.dll</HintPath>
     </Reference>
     <Reference Include="ModernFolderBrowserDialog">
-      <HintPath>3rd-party\ModernFolderBrowserDialog.dll</HintPath>
+      <HintPath>..\compiled\ModernFolderBrowserDialog.dll</HintPath>
     </Reference>
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.4.4.12\lib\net45\NLog.dll</HintPath>
@@ -246,9 +246,7 @@
   <ItemGroup>
     <None Include="Resources\appbar.page.corner.text.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="3rd-party\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\appbar.information.png" />
   </ItemGroup>

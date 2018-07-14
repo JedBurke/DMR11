@@ -70,7 +70,6 @@ namespace DMR11.Core
             {
                 progress.ReportProgress(0);
 
-#if MISSED_KISS
                 var handler = new CloudFlareUtilities.ClearanceHandler(new StatusRedirectionHandler(new HttpClientHandler()
                 {
                     AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip
@@ -93,16 +92,9 @@ namespace DMR11.Core
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.ToString());
+                    Console.WriteLine(ex.ToString());                    
                 }
-
-
-#else
-                var client = new WebClient();
-                client.Proxy = Proxy;
-                client.Encoding = Encoding.UTF8;
-                string html = client.DownloadString(Address);
-#endif
+                
                 if (!string.IsNullOrWhiteSpace(html))
                 {
                     var sb = new StringBuilder();
@@ -123,11 +115,7 @@ namespace DMR11.Core
                         {
                             string content = string.Empty;
 
-#if MISSED_KISS
                             content = client.GetStringAsync(item.ToString()).Result;
-#else
-                        content = client.DownloadString(item);
-#endif
 
                             sb.AppendLine(content);
                             count++;

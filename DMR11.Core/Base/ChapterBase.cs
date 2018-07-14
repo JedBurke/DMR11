@@ -1,6 +1,4 @@
-﻿#define MISSED_KISS
-
-using CloudFlareUtilities;
+﻿using CloudFlareUtilities;
 using DMR11.Core.Service;
 using System;
 using System.Collections.Generic;
@@ -155,7 +153,7 @@ namespace DMR11.Core
         public IWebProxy Proxy { get; set; }
 
         public string Referrer { get; set; }
-
+        
         public ChapterBase(string name, Uri address)
         {
             Name = name;

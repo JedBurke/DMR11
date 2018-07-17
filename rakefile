@@ -134,19 +134,27 @@ end
 # Gathers the host files.
 task :gather_hosts do
     log.info 'Entering "Gather Hosts" task'
+    log.info "Hosts directory is \"#{HOSTS_GEN_DIR}\""
         
     hosts = Rake::FileList.new(HOSTS_GEN_DIR + '/*/*.ini')
     hosts.each do |f|
-        # Todo: Check for NOT_PRODUCTION file to prevent adding to
+        # Todo: Check for NO_RELEASE file to prevent adding to
         # release build.
 
-        host_dir = File.dirname(f)
-        log.info "Copying \"#{host_dir}\"…"
+        host_dir = File.dirname f
+        host_name = File.basename host_dir
 
-        FileUtils.copy_entry(
-            host_dir,
-            File.join(HOSTS_OUTPUT_DIR, File.basename(host_dir))
-        )
+        if File.exist? File.join(host_dir, 'NO_RELEASE.txt')
+            log.info "Skipping \"#{host_name}\"…"
+            next
+        else
+            log.info "Copying \"#{host_name}\"…"
+
+            FileUtils.copy_entry(
+                host_dir,
+                File.join(HOSTS_OUTPUT_DIR, host_name)
+            )
+        end
 
     end
 end

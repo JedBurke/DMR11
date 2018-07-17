@@ -936,19 +936,29 @@ namespace DMR11
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
-                using (var miri = new DMR11.MiriLookupDialog())
+                if (currentTitle != null)
                 {
-                    var search = new MIRI.MangaUpdatesSearch();
-                    var result = await search.SearchAsync(currentTitle.SeriesTitle);
-                    
-                    if (result != null)
+                    using (var miri = new DMR11.MiriLookupDialog())
                     {
-                        miri.StartPosition = FormStartPosition.CenterParent;
-                        miri.ShowDialog(result);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Series \"{0}\" not found.", "MIRI Series Look-up", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        try
+                        {
+                            var search = new MIRI.MangaUpdatesSearch();
+                            var result = await search.SearchAsync(currentTitle.SeriesTitle);
+
+                            if (result != null)
+                            {
+                                miri.StartPosition = FormStartPosition.CenterParent;
+                                miri.ShowDialog(result);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Series \"{0}\" not found.", "MIRI Series Look-up", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("An error occurred while looking up the series.", "MIRI Series Look-up", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
             }

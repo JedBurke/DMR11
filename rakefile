@@ -121,7 +121,8 @@ task :gather_bin do
 
         mainFiles = Rake::FileList.new(
             "#{PROG_NAME}.exe",
-            "#{PROG_NAME}.exe.config"
+            "#{PROG_NAME}.exe.config",
+            'NLog.config'
         )
 
         mainFiles.each do |f|
@@ -177,11 +178,14 @@ end
 task :post_gather do
     log.info 'Entering "Post Gather" task.'
     config_path = File.join(OUTPUT_DIR, PROG_NAME + '.exe.config')
+    nlog_config_path = File.join(OUTPUT_DIR, 'NLog.config')
 
-    if File.exist? config_path
-        system "attrib +h \"#{config_path}\""
-    else
-        log.error "Can't find config file at \"#{config_path}\""
+    [config_path, nlog_config_path].each do |i|
+        if File.exist? i
+            system "attrib +h \"#{i}\""
+        else
+            log.error "Can't find config file at \"#{i}\""
+        end
     end
 end
 

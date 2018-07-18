@@ -124,8 +124,6 @@ namespace DMR11.Core.Helper
                     var regex = new Regex(section.ParseRegex, RegexOptions.Singleline | RegexOptions.Compiled | RegexOptions.IgnoreCase);
                     var match = Match.Empty;
 
-                    //var matches = regex.Matches(input);
-                    
                     if ((match = regex.Match(input)).Success)
                     {
                         // Register group values.
@@ -148,7 +146,7 @@ namespace DMR11.Core.Helper
                             }
                         }
 
-                        var replace = VariableLookup(section.ParseReplace, hostVariables);
+                        var replace = EvaluateVariable(section.ParseReplace, hostVariables);
                         return postParse(replace);
 
                     }
@@ -160,6 +158,10 @@ namespace DMR11.Core.Helper
             }
 
             return default(T);
+        }
+
+        public static void RegisterRegexVariable(string[] matches, IDictionary<string, string> collection)
+        {
         }
 
         /// <summary>
@@ -175,7 +177,13 @@ namespace DMR11.Core.Helper
             throw new NotImplementedException();
         }
 
-        public static string VariableLookup(string input, Dictionary<string, string> hostVariables)
+        /// <summary>
+        /// Replaces the variable names with repective values in the supplied string.
+        /// </summary>
+        /// <param name="input">The string which to have the evaluation applied.</param>
+        /// <param name="hostVariables">The collection of variables to be queried.</param>
+        /// <returns>String</returns>
+        public static string EvaluateVariable(string input, Dictionary<string, string> hostVariables)
         {
             if (hostVariables != null && !string.IsNullOrWhiteSpace(input))
             {

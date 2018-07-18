@@ -218,7 +218,9 @@ namespace DMR11.Core
         {
             // Todo: Allow the user to set the chapter title.
             var chapterText = GetFirstNonEmptyNodeText(element);
-                        
+
+
+
             var chapter = new ChapterDistill(chapterText, chapterUri, this.HostData, Log);
 
             ((Core.Helper.ChapterParseDetails)parseDetails).HostVariables.ToList().ForEach((pair) =>

@@ -14,7 +14,7 @@ namespace DMR11.Core.WebsiteHost
 
         IHostSection Title { get; }
 
-        IHostSection Chapters { get; }
+        IChapterSection Chapters { get; }
 
         IHostSection Pages { get; }
 

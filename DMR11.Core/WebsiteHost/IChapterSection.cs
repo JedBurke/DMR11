@@ -8,6 +8,22 @@ namespace DMR11.Core.WebsiteHost
 {
     public interface IChapterSection : IHostSection
     {
+        string Title
+        {
+            get;
+            set;
+        }
+
+        string TitleValue
+        {
+            get;
+            set;
+        }
+
+        string TitleParseRegex { get; set; }
+
+        string TitleParseReplace { get; set; }
+
         /// <summary>
         /// Gets or sets the path to the element which goes to the next page.
         /// </summary>

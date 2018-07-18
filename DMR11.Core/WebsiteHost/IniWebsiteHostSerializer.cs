@@ -67,6 +67,12 @@ namespace DMR11.Core.WebsiteHost
             websiteHost.Chapters.Value = websiteHostFile[SECTION_CHAPTERS]["value"];
             websiteHost.Chapters.ParseRegex = websiteHostFile[SECTION_CHAPTERS]["parse_regex"];
             websiteHost.Chapters.ParseReplace = websiteHostFile[SECTION_CHAPTERS]["parse_replace"];
+            websiteHost.Chapters.Title = websiteHostFile[SECTION_CHAPTERS]["title"];
+            websiteHost.Chapters.TitleValue = websiteHostFile[SECTION_CHAPTERS]["title_value"];
+            websiteHost.Chapters.TitleParseRegex = websiteHostFile[SECTION_CHAPTERS]["title_regex"];
+            websiteHost.Chapters.TitleParseReplace = websiteHostFile[SECTION_CHAPTERS]["title_parse_replace"];
+            websiteHost.Chapters.Pager = websiteHostFile[SECTION_CHAPTERS]["pager"];
+            websiteHost.Chapters.PagerValue = websiteHostFile[SECTION_CHAPTERS]["pager_value"];
             
             websiteHost.Pages.Path = websiteHostFile[SECTION_PAGES]["path"];
             websiteHost.Pages.Value = websiteHostFile[SECTION_PAGES]["value"];

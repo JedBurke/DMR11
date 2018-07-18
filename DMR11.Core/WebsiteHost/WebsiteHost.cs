@@ -14,16 +14,17 @@ namespace DMR11.Core.WebsiteHost
         private IMainSection _host;
         private IHostSection 
             _title,
-            _chapters,
             _pages,
             _page;
+
+        private IChapterSection _chapters;
 
         public WebsiteHost()
         {
             _meta = new MetaSection();
             _host = new MainSection();
             _title = new HostSection();
-            _chapters = new HostSection();
+            _chapters = new ChapterSection();
             _pages = new HostSection();
             _page = new HostSection();
         }
@@ -43,7 +44,7 @@ namespace DMR11.Core.WebsiteHost
             get { return _title; }
         }
 
-        public IHostSection Chapters
+        public IChapterSection Chapters
         {
             get { return _chapters; }
         }

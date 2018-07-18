@@ -91,6 +91,7 @@
     <Compile Include="Base\ICommand.cs" />
     <Compile Include="Base\IParseDetails.cs" />
     <Compile Include="Net\UriDecorator.cs" />
+    <Compile Include="WebsiteHost\ChapterSection.cs" />
     <Compile Include="WebsiteHost\HostSection.cs" />
     <Compile Include="WebsiteHost\HostUriType.cs" />
     <Compile Include="WebsiteHost\IChapterSection.cs" />

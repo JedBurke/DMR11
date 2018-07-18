@@ -177,7 +177,7 @@ namespace DMR11.Core
         protected override List<IChapter> ParseChapterObjects(string html)
         {
             Log.Debug("Entering ParseChapterObjects");
-
+            
             if (IsChapter)
             {
                 Log.Debug("The supplied URI is for a chapter.");

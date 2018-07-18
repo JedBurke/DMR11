@@ -31,7 +31,7 @@ namespace DMR11.Core.WebsiteHost
             get { return decoratedHost.Title; }
         }
 
-        public IHostSection Chapters
+        public IChapterSection Chapters
         {
             get { return decoratedHost.Chapters; }
         }

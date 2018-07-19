@@ -202,4 +202,34 @@ namespace DMR11.Core.Helper
 
     }
 
+
+    public class WebHostI : WebsiteHost.WebsiteHostDecorator
+    {
+        public WebHostI(WebsiteHost.IWebsiteHost host) 
+            : base(host)
+        {
+            Title = new ISectionValueRegexPair() { Path = "" };
+            
+        }
+
+
+        public IList<IChapter> ParseChapters()
+        {
+            return null;
+        }
+
+        ISectionValueRegexPair Title;
+        ISectionValueRegexPair General;
+    }
+
+    public struct ISectionValueRegexPair
+    {
+        public string Value { get; set; }
+        public string Path { get; set; }
+
+        public string ParseRegex { get; set; }
+        public string ParseReplace { get; set; }
+    }
+
+
 }

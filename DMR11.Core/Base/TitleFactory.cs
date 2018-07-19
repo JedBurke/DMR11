@@ -15,10 +15,11 @@ namespace DMR11.Core
         public static ITitle CreateTitle(Uri uri)
         {
             ITitle title = null;
+            WebsiteHost.IWebsiteHost hostData;
             
-            if (TitleDistill.IsDistilled(uri))
+            if (TitleDistill.TryGetDistilledHost(uri, out hostData))
             {
-                title = new TitleDistill(uri);
+                title = new TitleDistill(uri, hostData, null);
             }
             else
             {

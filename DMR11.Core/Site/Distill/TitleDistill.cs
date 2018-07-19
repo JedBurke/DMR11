@@ -22,7 +22,12 @@ namespace DMR11.Core
         {
         }
 
-        public TitleDistill(Uri address, ILogger log) 
+        public TitleDistill(Uri address, ILogger log)
+            : this(address, LoadConfigFile(address), log)
+        {
+        }
+
+        public TitleDistill(Uri address, IWebsiteHost hostData, ILogger log) 
             : base(address, log)
         {
             if (address == null)
@@ -30,7 +35,7 @@ namespace DMR11.Core
                 throw new NullReferenceException("Address cannot be null");
             }
             
-            HostData = LoadConfigFile(address);
+            HostData = hostData;
 
             /// Sets the host URI of the series.
             HostVariables.Add("host", address.Host);
@@ -74,25 +79,32 @@ namespace DMR11.Core
         /// <returns></returns>
         public static bool IsDistilled(Uri uri)
         {
-            IWebsiteHost data = LoadConfigFile(uri);
+            IWebsiteHost data = null;
+            return TryGetDistilledHost(uri, out data);
+        }
+
+        public static bool TryGetDistilledHost(Uri uri, out IWebsiteHost result)
+        {
+            var isDistilledHost = false;
             
-            if (data != null)
+            result = LoadConfigFile(uri);
+
+            if (result != null)
             {
                 /// Todo: Refactor, check if the chapter URI is not null and if chapter URI are the only supported URIs.
                 /// If so, then don't return true when matching the host name. e.g. Chapter URI > Host URI
-                
-                // Assume regex.
-                if (Regex.IsMatch(uri.Host, data.Host.HostUriPattern, RegexOptions.Compiled | RegexOptions.IgnoreCase))
+
+                var regexOption = RegexOptions.Compiled | RegexOptions.IgnoreCase;
+
+                // Assumes regex.
+                if (Regex.IsMatch(uri.Host, result.Host.HostUriPattern, regexOption) 
+                    || (result.Host.ChapterUriPattern != null && Regex.IsMatch(uri.ToString(), result.Host.ChapterUriPattern, regexOption)))
                 {
-                    return true;
-                }
-                else if (data.Host.ChapterUriPattern != null && Regex.IsMatch(uri.ToString(), data.Host.ChapterUriPattern, RegexOptions.Compiled | RegexOptions.IgnoreCase))
-                {
-                    return true;
-                }
+                    isDistilledHost = true;
+                }                
             }
-            
-            return false;
+
+            return isDistilledHost;
         }
 
         private static IWebsiteHost LoadConfigFile(Uri uri)

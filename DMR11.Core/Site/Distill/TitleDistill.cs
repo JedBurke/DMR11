@@ -40,6 +40,9 @@ namespace DMR11.Core
             /// Sets the host URI of the series.
             HostVariables.Add("host", address.Host);
 
+            /// Sets the host URI of the series including its scheme (ie. https://).
+            HostVariables.Add("host_and_scheme", string.Concat(address.Scheme, Uri.SchemeDelimiter, address.Host));
+
             /// Sets the series' main address.
             HostVariables.Add("series_address", address.ToString());
 

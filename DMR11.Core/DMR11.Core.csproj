@@ -117,7 +117,6 @@
     <Compile Include="SupportedHosts.cs" />
     <Compile Include="WebsiteHost\WebsiteHostDecorator.cs" />
     <Compile Include="WebsiteHost\HostType.cs" />
-    <Compile Include="StatusRedirectionHandler.cs" />
     <Compile Include="WebsiteHost\WebsiteHostSerializer.cs" />
   </ItemGroup>
   <ItemGroup />

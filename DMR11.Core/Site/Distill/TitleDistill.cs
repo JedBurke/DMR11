@@ -232,11 +232,9 @@ namespace DMR11.Core
         public IChapter ChapterParseActionUriSupplied(Uri chapterUri, HtmlNode element, IParseDetails<IChapter> parseDetails)
         {
             // Todo: Allow the user to set the chapter title.
-            var chapterText = GetFirstNonEmptyNodeText(element);
-
-
-
-            var chapter = new ChapterDistill(chapterText, chapterUri, this.HostData, Log);
+            var chapterTitle = ParseChapterTitle(element) ?? GetFirstNonEmptyNodeText(element);
+                        
+            var chapter = new ChapterDistill(chapterTitle, chapterUri, this.HostData, Log);
 
             ((Core.Helper.ChapterParseDetails)parseDetails).HostVariables.ToList().ForEach((pair) =>
             {
@@ -285,6 +283,30 @@ namespace DMR11.Core
             return text;
         }
 
+        string ParseChapterTitle(HtmlNode element)
+        {
+            var details = new ParseDetails<string>(
+                HostData.Chapters.Title,
+                HostData.Title.Value,
+                (_, parseDetails) => 
+                {
+                    return SectionGenericParseAction(
+                        _,
+                        parseDetails,
+                        HostData.Chapters.TitleParseRegex,
+                        HostData.Chapters.TitleParseReplace,
+                        (title) => title
+                    );
+                },
+                Log
+            );
+
+
+            var chapterTitle = SectionGenericParseAction(element, details, HostData.Chapters.TitleParseRegex, HostData.Chapters.TitleParseReplace, (title) => title);
+
+            return string.IsNullOrWhiteSpace(chapterTitle) ? null : chapterTitle;
+        }
+
         public IChapter ChapterParseAction(HtmlNode element, IParseDetails<IChapter> parseDetails)
         {
             var uri = Parsing.CreateUriFromElementAttributeValue(element, parseDetails, Address);
@@ -325,7 +347,13 @@ namespace DMR11.Core
 
         public T GenericParseAction<T>(HtmlNode element, IParseDetails<T> details, IHostSection section, Func<string, T> postParse)
         {
-            return Parsing.GenericParseAction<T>(element, details, section, postParse, HostVariables);
+            return Parsing.SectionGenericParseAction(element, details, section.ParseRegex, section.ParseReplace, postParse, HostVariables);
+        }
+
+        public T SectionGenericParseAction<T>(HtmlNode element, IParseDetails<T> details, string parseRegex, string parseReplace, Func<string, T> postParse)
+        {
+
+            return Parsing.SectionGenericParseAction<T>(element, details, parseRegex, parseReplace, postParse, HostVariables);
         }
         
     }

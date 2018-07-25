@@ -8,20 +8,6 @@ namespace DMR11_Tests
     public class Test_CloudFlare
     {
         [TestMethod]
-        public void Test_StatusRedirectHandler()
-        {
-            var handler = new DMR11.Core.StatusRedirectionHandler();
-            var client = new HttpClient(handler);
-
-            var address = "http://kissmanga.com/Manga/Gomen-ne-Money/";
-            var result = string.Empty;
-
-            result = client.GetAsync(address).Result.Content.ReadAsStringAsync().Result;
-
-            Console.WriteLine(result);
-        }
-
-        [TestMethod]
         public void Test_EnterKissManga()
         {
             string address = "http://kissmanga.com/Manga/Gomen-ne-Money/";
@@ -44,26 +30,6 @@ namespace DMR11_Tests
             }
 
             Console.WriteLine(html);
-        }
-
-        [TestMethod]
-        public void Test_EnterKissMangaCustom()
-        {
-            string address = "http://kissmanga.com/Manga/Gomen-ne-Money/";
-            string result = "";
-
-            var handler = new CloudFlareUtilities.ClearanceHandler(new DMR11.Core.StatusRedirectionHandler());
-
-
-            var client = new HttpClient(handler);
-
-            client.Timeout = TimeSpan.FromSeconds(25);
-
-            result = client.GetStringAsync(address).Result;
-            
-
-            Console.WriteLine(result);
-
         }
 
 

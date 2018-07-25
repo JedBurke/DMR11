@@ -109,7 +109,14 @@ namespace DMR11.Core.Helper
             return input;
         }
 
+        // TODO: Refactor into a more palatable method. Please...
+
         public static T GenericParseAction<T>(HtmlNode element, IParseDetails<T> details, IHostSection section, Func<string, T> postParse, Dictionary<string, string> hostVariables)
+        {
+            return SectionGenericParseAction(element, details, section.ParseRegex, section.ParseReplace, postParse, hostVariables);
+        }
+
+        public static T SectionGenericParseAction<T>(HtmlNode element, IParseDetails<T> details, string parseRegex, string parseReplace, Func<string, T> postParse, Dictionary<string, string> hostVariables)
         {
             var input = GetElementValue(element, details.AttributeName);
 
@@ -118,17 +125,17 @@ namespace DMR11.Core.Helper
                 // Remove any trailing whitespace or newlines from the value.
                 input = input.Trim();
 
-                if (!string.IsNullOrWhiteSpace(section.ParseRegex) &&
-                    !string.IsNullOrWhiteSpace(section.ParseReplace))
+                if (!string.IsNullOrWhiteSpace(parseRegex) &&
+                    !string.IsNullOrWhiteSpace(parseReplace))
                 {
-                    var regex = new Regex(section.ParseRegex, RegexOptions.Singleline | RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                    var regex = new Regex(parseRegex, RegexOptions.Singleline | RegexOptions.Compiled | RegexOptions.IgnoreCase);
                     var match = Match.Empty;
 
                     if ((match = regex.Match(input)).Success)
                     {
                         // Register group values.
                         foreach (var group in regex.GetGroupNames())
-                        {                            
+                        {
                             // Todo: Use section name as well before overwriting the original value.
                             // > regex__pages_conflicting_name
                             // > regex__page_conflicting_name
@@ -146,7 +153,7 @@ namespace DMR11.Core.Helper
                             }
                         }
 
-                        var replace = EvaluateVariable(section.ParseReplace, hostVariables);
+                        var replace = EvaluateVariable(parseReplace, hostVariables);
                         return postParse(replace);
 
                     }

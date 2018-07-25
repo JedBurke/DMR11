@@ -84,10 +84,10 @@ namespace DMR11.Core
             {
                 progress.ReportProgress(0);
 
-                var handler = new CloudFlareUtilities.ClearanceHandler(new StatusRedirectionHandler(new HttpClientHandler()
+                var handler = new CloudFlareUtilities.ClearanceHandler(new HttpClientHandler()
                 {
                     AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip
-                }));
+                });
 
                 HttpClient client = new HttpClient(handler);
                 //client.Timeout = TimeSpan.FromSeconds(25);

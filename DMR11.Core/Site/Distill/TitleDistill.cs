@@ -182,7 +182,7 @@ namespace DMR11.Core
 
             var title = Parsing.ParseContent<string>(html, details);
 
-            var seriesTitle = (title != null && !string.IsNullOrWhiteSpace(title[0])) ? title[0] : "Untitled";
+            var seriesTitle = (title.Count > 0 && !string.IsNullOrWhiteSpace(title[0])) ? title[0] : "Untitled";
 
             // Todo: Define constant.
             HostVariables["series_name"] = seriesTitle;

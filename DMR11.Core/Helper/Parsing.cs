@@ -90,6 +90,12 @@ namespace DMR11.Core.Helper
 
         }
 
+        public static List<T> ParseContentFromNode<T>(HtmlNode element, IParseDetails<T> details)
+        {
+            var elements = element.SelectNodes(details.XPath);
+            return ParseContent(elements, details);
+        }
+
         public static Uri CreateUriFromElementAttributeValue<T>(HtmlNode element, IParseDetails<T> details, Uri host)
         {
             var value = element.GetAttributeValue(details.AttributeName, null);

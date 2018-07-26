@@ -231,7 +231,6 @@ namespace DMR11.Core
 
         public IChapter ChapterParseActionUriSupplied(Uri chapterUri, HtmlNode element, IParseDetails<IChapter> parseDetails, string html = null)
         {
-            // Todo: Allow the user to set the chapter title.
             var chapterTitle = ParseChapterTitle(element, html) ?? GetFirstNonEmptyNodeText(element);
                         
             var chapter = new ChapterDistill(chapterTitle, chapterUri, this.HostData, Log);
@@ -301,17 +300,10 @@ namespace DMR11.Core
                 Log
             );
 
-            //var parsedContent = Parsing.ParseContent(element.OuterHtml, details);
-            //var chapterTitle = parsedContent.Count > 0 ? parsedContent[0] : string.Empty;
-            //var chapterTitle = details.ParseAction(element, details);
-
-            //var chapter = element.SelectSingleNode(HostData.Chapters.Title);
-            //var chapterTitle = chapter.InnerText;
-
-            var chapterTitle = Parsing.ParseSingleNodeContent(element, details);
+            var results = Parsing.ParseContentFromNode(element, details);
+            var chapterTitle = results.Count > 0 ? results[0] : null;
             
-
-            return !string.IsNullOrWhiteSpace(chapterTitle) ? chapterTitle : null;
+            return chapterTitle;
         }
 
         public IChapter ChapterParseAction(HtmlNode element, IParseDetails<IChapter> parseDetails)

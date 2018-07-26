@@ -952,14 +952,18 @@ namespace DMR11
                             }
                             else
                             {
-                                MessageBox.Show("Series \"{0}\" not found.", "MIRI Series Look-up", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show("Series \"{0}\" not found.", "MIRI Series Look Up", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                         }
                         catch (Exception)
                         {
-                            MessageBox.Show("An error occurred while looking up the series.", "MIRI Series Look-up", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("An error occurred while looking up the series.", "MIRI Series Look Up", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
+                }
+                else
+                {
+                    MessageBox.Show("Cannot look up a series until the chapters have been loaded.", "MIRI Series Look Up", MessageBoxButtons.OK, MessageBoxIcon.Error); 
                 }
             }
         }

@@ -22,58 +22,75 @@ namespace DMR11.Core.Helper
             return ParseContent<IChapter>(html, details);
         }
 
+        public static T ParseSingleNodeContent<T>(HtmlNode element, IParseDetails<T> details)
+        {
+            T obj = default(T);
+
+            if (details.ParseAction != null)
+            {
+                obj = details.ParseAction(element, details);
+
+                if (obj == null)
+                {
+                    throw new ArgumentNullException();
+                }
+            }
+            else
+            {
+                throw new ArgumentNullException();
+            }
+
+            return obj;
+        }
+
+        public static List<T> ParseContent<T>(HtmlNodeCollection elements, IParseDetails<T> details)
+        {
+            var results = new List<T>();
+
+            if (elements != null && elements.Count > 0)
+            {
+                details.Logger.Debug("Selected node count: {0}", elements.Count);
+
+                foreach (var element in elements)
+                {
+                    try
+                    {
+                        T obj = ParseSingleNodeContent(element, details);
+
+                        results.Add(obj);
+                    }
+                    catch (Exception ex)
+                    {
+                        details.Logger.Error(ex.ToString());
+                    }
+                }
+            }
+
+            /// Return a list of the results with the duplicates culled.
+            /// 
+            return results.Distinct().ToList();
+        }
+
         public static List<T> ParseContent<T>(string html, IParseDetails<T> details)
         {
-            var list = new List<T>();
             var doc = new HtmlDocument();
-
-            if (string.IsNullOrWhiteSpace(html))
-                return list;
 
             try
             {
                 doc.LoadHtml(html);
 
                 var elements = doc.DocumentNode.SelectNodes(details.XPath);
+                return ParseContent(elements, details);
 
-                if (elements != null && elements.Count > 0)
-                {
-                    details.Logger.Debug("Selected node count: {0}", elements.Count);
-
-                    foreach (var element in elements)
-                    {
-                        //Console.WriteLine("Node hit: {0}", element.InnerText);
-
-                        T obj = default(T);
-
-                        if (details.ParseAction != null)
-                        {
-                            obj = details.ParseAction(element, details);
-
-                            if (obj == null)
-                            {
-                                throw new ArgumentNullException();
-                            }
-                        }
-                        else
-                        {
-                            throw new ArgumentNullException();
-                        }
-
-                        list.Add(obj);
-
-                    }
-                }
             }
             finally
             {
                 doc = null;
             }
 
-            return list.Distinct().ToList();
         }
 
-        public static Uri CreateUriFromElementAttributeValue<T>(HtmlNode element, IParseDetails<T> details, Uri host) 
+        public static Uri CreateUriFromElementAttributeValue<T>(HtmlNode element, IParseDetails<T> details, Uri host)
         {
             var value = element.GetAttributeValue(details.AttributeName, null);
             details.Logger.Debug("Creating validated URI from \"{0}\"", value);
@@ -89,7 +106,7 @@ namespace DMR11.Core.Helper
         private static string GetElementValue(HtmlNode element, string innerSelector)
         {
             string input = string.Empty;
-            
+
             if (string.Compare(innerSelector, "$(__inner_text)", true) == 0)
             {
                 input = element.InnerText;
@@ -105,11 +122,11 @@ namespace DMR11.Core.Helper
             {
                 input = element.GetAttributeValue(innerSelector, string.Empty);
             }
-            
+
             return input;
         }
 
-        // TODO: Refactor into a more palatable method. Please...
+        // TODO: Refactor into a more palatable method, please...
 
         public static T GenericParseAction<T>(HtmlNode element, IParseDetails<T> details, IHostSection section, Func<string, T> postParse, Dictionary<string, string> hostVariables)
         {
@@ -220,5 +237,5 @@ namespace DMR11.Core.Helper
 
 
     }
-    
+
 }

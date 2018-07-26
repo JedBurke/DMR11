@@ -303,11 +303,13 @@ namespace DMR11.Core
 
             //var parsedContent = Parsing.ParseContent(element.OuterHtml, details);
             //var chapterTitle = parsedContent.Count > 0 ? parsedContent[0] : string.Empty;
-
-            var chapter = element.SelectSingleNode(HostData.Chapters.Title);
-            var chapterTitle = chapter.InnerText;
-
             //var chapterTitle = details.ParseAction(element, details);
+
+            //var chapter = element.SelectSingleNode(HostData.Chapters.Title);
+            //var chapterTitle = chapter.InnerText;
+
+            var chapterTitle = Parsing.ParseSingleNodeContent(element, details);
+            
 
             return !string.IsNullOrWhiteSpace(chapterTitle) ? chapterTitle : null;
         }

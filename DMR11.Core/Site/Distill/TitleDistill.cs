@@ -217,7 +217,7 @@ namespace DMR11.Core
                             element,
                             parseDetails,
                             HostData.Chapters,
-                            (chapterUri) => ChapterParseActionUriSupplied(new DMR11.Core.Net.ValidatedUri(chapterUri), element, parseDetails)
+                            (chapterUri) => ChapterParseActionUriSupplied(new DMR11.Core.Net.ValidatedUri(chapterUri), element, parseDetails, html)
                         );
                     },
                     Log,
@@ -229,10 +229,10 @@ namespace DMR11.Core
 
         }
 
-        public IChapter ChapterParseActionUriSupplied(Uri chapterUri, HtmlNode element, IParseDetails<IChapter> parseDetails)
+        public IChapter ChapterParseActionUriSupplied(Uri chapterUri, HtmlNode element, IParseDetails<IChapter> parseDetails, string html = null)
         {
             // Todo: Allow the user to set the chapter title.
-            var chapterTitle = ParseChapterTitle(element) ?? GetFirstNonEmptyNodeText(element);
+            var chapterTitle = ParseChapterTitle(element, html) ?? GetFirstNonEmptyNodeText(element);
                         
             var chapter = new ChapterDistill(chapterTitle, chapterUri, this.HostData, Log);
 
@@ -283,11 +283,11 @@ namespace DMR11.Core
             return text;
         }
 
-        string ParseChapterTitle(HtmlNode element)
+        string ParseChapterTitle(HtmlNode element, string html)
         {
             var details = new ParseDetails<string>(
                 HostData.Chapters.Title,
-                HostData.Title.Value,
+                HostData.Chapters.TitleValue,
                 (_, parseDetails) => 
                 {
                     return SectionGenericParseAction(
@@ -301,10 +301,15 @@ namespace DMR11.Core
                 Log
             );
 
+            //var parsedContent = Parsing.ParseContent(element.OuterHtml, details);
+            //var chapterTitle = parsedContent.Count > 0 ? parsedContent[0] : string.Empty;
 
-            var chapterTitle = SectionGenericParseAction(element, details, HostData.Chapters.TitleParseRegex, HostData.Chapters.TitleParseReplace, (title) => title);
+            var chapter = element.SelectSingleNode(HostData.Chapters.Title);
+            var chapterTitle = chapter.InnerText;
 
-            return string.IsNullOrWhiteSpace(chapterTitle) ? null : chapterTitle;
+            //var chapterTitle = details.ParseAction(element, details);
+
+            return !string.IsNullOrWhiteSpace(chapterTitle) ? chapterTitle : null;
         }
 
         public IChapter ChapterParseAction(HtmlNode element, IParseDetails<IChapter> parseDetails)

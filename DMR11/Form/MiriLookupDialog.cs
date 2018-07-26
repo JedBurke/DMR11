@@ -30,17 +30,35 @@ namespace DMR11
         private Label SeriesIllustratorLabel;
         private Label CompletedLabel;
         private Label ScanlatedLabel;
+        private Label WebsiteAttributionLabel;
         private Button OpenInBrowserButton;
         private Button CloseButton;
 
         protected void Initialize()
         {
             this.ShowIcon = false;
-            this.Text = "MIRI Series Look-up";
+            this.Text = "MIRI Series Look up";
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.ClientSize = new Size(415, 165);
+
+            this.Paint += MiriLookupDialog_Paint;
+        }
+
+        void MiriLookupDialog_Paint(object sender, PaintEventArgs e)
+        {
+            if (SeriesNameLabel != null)
+            {
+                var width = Convert.ToInt32(e.ClipRectangle.Width * 0.75);
+                var startWdith = Convert.ToInt32(e.ClipRectangle.Width * 0.25);
+
+                e.Graphics.DrawLine(
+                    Pens.DarkGray,
+                    new Point(startWdith, SeriesNameLabel.Bottom + 5),
+                    new Point(width, SeriesNameLabel.Bottom + 5)
+                );
+            }
         }
 
         protected void InitializeControls()
@@ -50,8 +68,8 @@ namespace DMR11
             SeriesNameLabel = new Label()
             {
                 AutoEllipsis = true,
-                Text = "Kono Subarashii Sekai ni Shukufuku o!",
-                Font = new Font("Segoe UI", 12, FontStyle.Regular, GraphicsUnit.Point)
+                Font = new Font("Segoe UI", 12, FontStyle.Regular, GraphicsUnit.Point),
+                TextAlign = ContentAlignment.MiddleCenter
             };
 
             SeriesAuthorLabel = new Label() { 
@@ -78,7 +96,15 @@ namespace DMR11
                 AutoSize = true,
                 Font = secondaryDisplayFont
             };
-            
+
+            WebsiteAttributionLabel = new Label()
+            {
+                Anchor = AnchorStyles.Left | AnchorStyles.Bottom,
+                AutoSize = true,
+                ForeColor = Color.DimGray,
+                Text = "Results by MangaUpdates"
+            };
+
             OpenInBrowserButton = new Button()
             {
                 AutoSize = true,
@@ -94,6 +120,9 @@ namespace DMR11
             };
 
             SeriesNameLabel.Location = new Point(ExternalMargin, ExternalMargin);
+
+            /// Sets the width of the series name label to the width of the Form minus the external margins on
+            /// each side.
             SeriesNameLabel.Width = this.ClientRectangle.Right - ExternalMarginDouble;
 
             SeriesAuthorLabel.TextChanged += (_, __) => 
@@ -109,6 +138,7 @@ namespace DMR11
             
             CloseButton.Location = new Point(this.ClientRectangle.Right - CloseButton.Width - ExternalMargin, this.ClientRectangle.Bottom - CloseButton.Height - ExternalMargin);
             OpenInBrowserButton.Location = new Point(CloseButton.Left - OpenInBrowserButton.Width - InternalMargin, CloseButton.Top);
+            WebsiteAttributionLabel.Location = new Point(ExternalMargin, CloseButton.Bottom - WebsiteAttributionLabel.Height);
             
             OpenInBrowserButton.MouseClick += OpenInBrowserButton_MouseClick;
 
@@ -121,7 +151,8 @@ namespace DMR11
                 ScanlatedLabel,
                 // ToDo: Uncomment when ready.
                 //OpenInBrowserButton,
-                CloseButton
+                CloseButton,
+                WebsiteAttributionLabel
             });
 
             RegisterButtons(secondaryButtons, this.Controls.OfType<Button>().ToArray());

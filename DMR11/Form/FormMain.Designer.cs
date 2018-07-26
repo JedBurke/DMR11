@@ -624,6 +624,7 @@
             this.MiriSeriesLookupButton.Name = "MiriSeriesLookupButton";
             this.MiriSeriesLookupButton.Size = new System.Drawing.Size(41, 34);
             this.MiriSeriesLookupButton.TabIndex = 0;
+            this.MainToolTip.SetToolTip(this.MiriSeriesLookupButton, "Look up series information");
             this.MiriSeriesLookupButton.UseVisualStyleBackColor = true;
             this.MiriSeriesLookupButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MiriSeriesLookupButton_MouseClick);
             // 

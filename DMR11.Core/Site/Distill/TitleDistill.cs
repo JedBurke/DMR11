@@ -17,8 +17,9 @@ namespace DMR11.Core
     public class TitleDistill : TitleBase
     {
         const string HOST_LOOKUP_PATH = "hosts";
-        
-        public TitleDistill(Uri address) : this(address, null)
+
+        public TitleDistill(Uri address)
+            : this(address, null)
         {
         }
 
@@ -27,14 +28,14 @@ namespace DMR11.Core
         {
         }
 
-        public TitleDistill(Uri address, IWebsiteHost hostData, ILogger log) 
+        public TitleDistill(Uri address, IWebsiteHost hostData, ILogger log)
             : base(address, log)
         {
             if (address == null)
             {
                 throw new NullReferenceException("Address cannot be null");
             }
-            
+
             HostData = hostData;
 
             /// Sets the host URI of the series.
@@ -89,7 +90,7 @@ namespace DMR11.Core
         public static bool TryGetDistilledHost(Uri uri, out IWebsiteHost result)
         {
             var isDistilledHost = false;
-            
+
             result = LoadConfigFile(uri);
 
             if (result != null)
@@ -100,11 +101,11 @@ namespace DMR11.Core
                 var regexOption = RegexOptions.Compiled | RegexOptions.IgnoreCase;
 
                 // Assumes regex.
-                if (Regex.IsMatch(uri.Host, result.Host.HostUriPattern, regexOption) 
+                if (Regex.IsMatch(uri.Host, result.Host.HostUriPattern, regexOption)
                     || (result.Host.ChapterUriPattern != null && Regex.IsMatch(uri.ToString(), result.Host.ChapterUriPattern, regexOption)))
                 {
                     isDistilledHost = true;
-                }                
+                }
             }
 
             return isDistilledHost;
@@ -151,7 +152,7 @@ namespace DMR11.Core
         private static IWebsiteHost SerializeIniConfigFile(string path)
         {
             var serializer = new IniWebsiteHostSerializer();
-            return serializer.SeralizeFromPath(path);            
+            return serializer.SeralizeFromPath(path);
         }
 
 
@@ -185,21 +186,21 @@ namespace DMR11.Core
 
             // Todo: Define constant.
             HostVariables["series_name"] = seriesTitle;
-            
+
             return seriesTitle;
         }
 
         protected override List<IChapter> ParseChapterObjects(string html)
         {
             Log.Debug("Entering ParseChapterObjects");
-            
+
             if (IsChapter)
             {
                 Log.Debug("The supplied URI is for a chapter.");
 
                 var chapter = new List<IChapter>();
                 chapter.Add(new ChapterDistill(SeriesTitle, Address, HostData, Log));
-                
+
                 return chapter;
             }
             else
@@ -232,7 +233,7 @@ namespace DMR11.Core
         public IChapter ChapterParseActionUriSupplied(Uri chapterUri, HtmlNode element, IParseDetails<IChapter> parseDetails, string html = null)
         {
             var chapterTitle = ParseChapterTitle(element, html) ?? GetFirstNonEmptyNodeText(element);
-                        
+
             var chapter = new ChapterDistill(chapterTitle, chapterUri, this.HostData, Log);
 
             ((Core.Helper.ChapterParseDetails)parseDetails).HostVariables.ToList().ForEach((pair) =>
@@ -284,33 +285,40 @@ namespace DMR11.Core
 
         string ParseChapterTitle(HtmlNode element, string html)
         {
-            var details = new ParseDetails<string>(
-                HostData.Chapters.Title,
-                HostData.Chapters.TitleValue,
-                (_, parseDetails) => 
-                {
-                    return SectionGenericParseAction(
-                        _,
-                        parseDetails,
-                        HostData.Chapters.TitleParseRegex,
-                        HostData.Chapters.TitleParseReplace,
-                        (title) => title
-                    );
-                },
-                Log
-            );
+            if (string.IsNullOrWhiteSpace(HostData.Chapters.Title) || string.IsNullOrWhiteSpace(HostData.Chapters.TitleValue))
+            {
+                return null;
+            }
+            else
+            {
+                var details = new ParseDetails<string>(
+                    HostData.Chapters.Title,
+                    HostData.Chapters.TitleValue,
+                    (_, parseDetails) =>
+                    {
+                        return SectionGenericParseAction(
+                            _,
+                            parseDetails,
+                            HostData.Chapters.TitleParseRegex,
+                            HostData.Chapters.TitleParseReplace,
+                            (title) => title
+                        );
+                    },
+                    Log
+                );
 
-            var results = Parsing.ParseContentFromNode(element, details);
-            var chapterTitle = results.Count > 0 ? results[0] : null;
-            
-            return chapterTitle;
+                var results = Parsing.ParseContentFromNode(element, details);
+                var chapterTitle = results.Count > 0 ? results[0] : null;
+
+                return chapterTitle;
+            }
         }
 
         public IChapter ChapterParseAction(HtmlNode element, IParseDetails<IChapter> parseDetails)
         {
             var uri = Parsing.CreateUriFromElementAttributeValue(element, parseDetails, Address);
             var chapter = new ChapterDistill(element.InnerText, uri, this.HostData, Log);
-            
+
             ((Core.Helper.ChapterParseDetails)parseDetails).HostVariables.ToList().ForEach((pair) =>
             {
                 if (chapter.HostVariables.ContainsKey(pair.Key))
@@ -354,6 +362,6 @@ namespace DMR11.Core
 
             return Parsing.SectionGenericParseAction<T>(element, details, parseRegex, parseReplace, postParse, HostVariables);
         }
-        
+
     }
 }

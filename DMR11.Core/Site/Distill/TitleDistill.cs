@@ -232,7 +232,7 @@ namespace DMR11.Core
 
         public IChapter ChapterParseActionUriSupplied(Uri chapterUri, HtmlNode element, IParseDetails<IChapter> parseDetails, string html = null)
         {
-            var chapterTitle = ParseChapterTitle(element, html) ?? GetFirstNonEmptyNodeText(element);
+            var chapterTitle = ParseChapterTitle(element, html);
 
             var chapter = new ChapterDistill(chapterTitle, chapterUri, this.HostData, Log);
 
@@ -287,28 +287,38 @@ namespace DMR11.Core
         {
             if (string.IsNullOrWhiteSpace(HostData.Chapters.Title) || string.IsNullOrWhiteSpace(HostData.Chapters.TitleValue))
             {
-                return null;
+                return GetFirstNonEmptyNodeText(element);
             }
             else
             {
-                var details = new ParseDetails<string>(
-                    HostData.Chapters.Title,
-                    HostData.Chapters.TitleValue,
-                    (_, parseDetails) =>
-                    {
-                        return SectionGenericParseAction(
-                            _,
-                            parseDetails,
-                            HostData.Chapters.TitleParseRegex,
-                            HostData.Chapters.TitleParseReplace,
-                            (title) => title
-                        );
-                    },
-                    Log
-                );
+                string chapterTitle = null;
 
-                var results = Parsing.ParseContentFromNode(element, details);
-                var chapterTitle = results.Count > 0 ? results[0] : null;
+                if (string.Compare(HostData.Chapters.Title, "$(__literal)", true) == 0)
+                {
+                    Parsing.RegisterVariable("chapter", GetFirstNonEmptyNodeText(element), HostVariables);
+                    chapterTitle = Parsing.EvaluateVariable(HostData.Chapters.TitleValue, HostVariables);
+                }
+                else
+                {
+                    var details = new ParseDetails<string>(
+                        HostData.Chapters.Title,
+                        HostData.Chapters.TitleValue,
+                        (_, parseDetails) =>
+                        {
+                            return SectionGenericParseAction(
+                                _,
+                                parseDetails,
+                                HostData.Chapters.TitleParseRegex,
+                                HostData.Chapters.TitleParseReplace,
+                                (title) => title
+                            );
+                        },
+                        Log
+                    );
+
+                    var results = Parsing.ParseContentFromNode(element, details);
+                    chapterTitle = results.Count > 0 ? results[0] : null;
+                }
 
                 return chapterTitle;
             }

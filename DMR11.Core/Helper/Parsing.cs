@@ -192,6 +192,26 @@ namespace DMR11.Core.Helper
 
         public static void RegisterRegexVariable(string[] matches, IDictionary<string, string> collection)
         {
+
+        }
+
+        public static void RegisterVariable(string key, string value, IDictionary<string, string> collection)
+        {
+            if (collection == null || string.IsNullOrWhiteSpace(key))
+            {
+                throw new NullReferenceException();
+            }
+            else
+            {
+                if (collection.ContainsKey(key))
+                {
+                    collection[key] = value;
+                }
+                else
+                {
+                    collection.Add(key, value);
+                }
+            }
         }
 
         /// <summary>
@@ -216,30 +236,29 @@ namespace DMR11.Core.Helper
         public static string EvaluateVariable(string input, Dictionary<string, string> hostVariables)
         {
             if (hostVariables != null && !string.IsNullOrWhiteSpace(input))
-            {
-                var lookup = Regex.Replace(
-                    input,
-                    @"\$\((.[^\)]*)\)",
-                    new MatchEvaluator((Match e) =>
+            {   
+                var match = VariableRegex.Match(input);
+
+                if (match.Success)
+                {
+                    do
                     {
-                        if (e.Success)
+                        var key = match.Groups[1].Value;
+
+                        if (hostVariables.ContainsKey(key))
                         {
-                            var key = e.Groups[1].Value;
-                            if (hostVariables.ContainsKey(key))
-                            {
-                                return hostVariables[key];
-                            }
+                            input = input.Replace(match.Value, hostVariables[key]);
                         }
 
-                        return input;
-                    })
-               );
-
-                return lookup;
+                    } while ((match = match.NextMatch()).Success);
+                }
             }
 
             return input;
         }
+
+        protected static readonly string VARIABLE_PATTERN = @"\$\((.[^\)]*)\)";
+        protected static readonly Regex VariableRegex = new Regex(VARIABLE_PATTERN, RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
 
     }

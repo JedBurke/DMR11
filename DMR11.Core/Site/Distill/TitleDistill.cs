@@ -232,7 +232,7 @@ namespace DMR11.Core
 
         public IChapter ChapterParseActionUriSupplied(Uri chapterUri, HtmlNode element, IParseDetails<IChapter> parseDetails, string html = null)
         {
-            var chapterTitle = ParseChapterTitle(element, html) ?? GetFirstNonEmptyNodeText(element);
+            var chapterTitle = ParseChapterTitle(element, html);
 
             var chapter = new ChapterDistill(chapterTitle, chapterUri, this.HostData, Log);
 
@@ -287,28 +287,46 @@ namespace DMR11.Core
         {
             if (string.IsNullOrWhiteSpace(HostData.Chapters.Title) || string.IsNullOrWhiteSpace(HostData.Chapters.TitleValue))
             {
-                return null;
+                return GetFirstNonEmptyNodeText(element);
             }
             else
             {
-                var details = new ParseDetails<string>(
-                    HostData.Chapters.Title,
-                    HostData.Chapters.TitleValue,
-                    (_, parseDetails) =>
-                    {
-                        return SectionGenericParseAction(
-                            _,
-                            parseDetails,
-                            HostData.Chapters.TitleParseRegex,
-                            HostData.Chapters.TitleParseReplace,
-                            (title) => title
-                        );
-                    },
-                    Log
-                );
+                string chapterTitle = null;
 
-                var results = Parsing.ParseContentFromNode(element, details);
-                var chapterTitle = results.Count > 0 ? results[0] : null;
+                /// Check if the path has the meta variable '__literal' for literal values. If not,
+                /// assume it points to an XPATH.
+                if (Parsing.IsMetaVariableLiteral(HostData.Chapters.Title))
+                {
+                    /// Since the 'chapter' variable will become available after this method executes with the
+                    /// creation of a new 'Chapter' instance, we'll have to register the variable now in order
+                    /// to gain access to it. It should be noted that setting the chapter's name in this manner
+                    /// does not take the default chapter format's place. It effectively overwrites the
+                    /// chapter's name.
+
+                    Parsing.RegisterChapterVariable(GetFirstNonEmptyNodeText(element), HostVariables);
+                    chapterTitle = Parsing.EvaluateVariable(HostData.Chapters.TitleValue, HostVariables);
+                }
+                else
+                {
+                    var details = new ParseDetails<string>(
+                        HostData.Chapters.Title,
+                        HostData.Chapters.TitleValue,
+                        (_, parseDetails) =>
+                        {
+                            return SectionGenericParseAction(
+                                _,
+                                parseDetails,
+                                HostData.Chapters.TitleParseRegex,
+                                HostData.Chapters.TitleParseReplace,
+                                (title) => title
+                            );
+                        },
+                        Log
+                    );
+
+                    var results = Parsing.ParseContentFromNode(element, details);
+                    chapterTitle = results.Count > 0 ? results[0] : null;
+                }
 
                 return chapterTitle;
             }

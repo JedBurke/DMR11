@@ -192,6 +192,31 @@ namespace DMR11.Core.Helper
 
         public static void RegisterRegexVariable(string[] matches, IDictionary<string, string> collection)
         {
+
+        }
+
+        public static void RegisterVariable(string key, string value, IDictionary<string, string> collection)
+        {
+            if (collection == null || string.IsNullOrWhiteSpace(key))
+            {
+                throw new NullReferenceException();
+            }
+            else
+            {
+                if (collection.ContainsKey(key))
+                {
+                    collection[key] = value;
+                }
+                else
+                {
+                    collection.Add(key, value);
+                }
+            }
+        }
+
+        public static void RegisterChapterVariable(string value, IDictionary<string, string> collection)
+        {
+            RegisterVariable(CHAPTER_VARIABLE, value, collection);
         }
 
         /// <summary>
@@ -216,31 +241,57 @@ namespace DMR11.Core.Helper
         public static string EvaluateVariable(string input, Dictionary<string, string> hostVariables)
         {
             if (hostVariables != null && !string.IsNullOrWhiteSpace(input))
-            {
-                var lookup = Regex.Replace(
-                    input,
-                    @"\$\((.[^\)]*)\)",
-                    new MatchEvaluator((Match e) =>
+            {   
+                var match = VariableRegex.Match(input);
+
+                if (match.Success)
+                {
+                    do
                     {
-                        if (e.Success)
+                        var key = match.Groups[1].Value;
+
+                        if (hostVariables.ContainsKey(key))
                         {
-                            var key = e.Groups[1].Value;
-                            if (hostVariables.ContainsKey(key))
-                            {
-                                return hostVariables[key];
-                            }
+                            input = input.Replace(match.Value, hostVariables[key]);
                         }
 
-                        return input;
-                    })
-               );
-
-                return lookup;
+                    } while ((match = match.NextMatch()).Success);
+                }
             }
 
             return input;
         }
 
+        protected static readonly string VARIABLE_FORMAT = "$({0})";
+        protected static readonly string VARIABLE_PATTERN = @"\$\((.[^\)]*)\)";
+        protected static readonly Regex VariableRegex = new Regex(VARIABLE_PATTERN, RegexOptions.IgnoreCase | RegexOptions.Compiled);
+
+        protected static readonly string LITERAL_META_VARIABLE = "__literal";
+
+        public static readonly string SERIES_NAME_VARIABLE = "series_name";
+        public static readonly string CHAPTER_VARIABLE = "chapter";
+
+
+        protected static string FormatVariable(string variable)
+        {
+            return string.Format(VARIABLE_FORMAT, variable);
+        }
+
+        public static bool IsVariable(string variable, string input)
+        {
+            return string.Compare(FormatVariable(variable), input) == 0;
+        }
+
+        /// <summary>
+        /// Returns whether the input string is a match for <see cref="LITERAL_META_VARIABLE"/>.
+        /// </summary>
+        /// <param name="input">The string which to test.</param>
+        /// <returns></returns>
+        public static bool IsMetaVariableLiteral(string input)
+        {
+            return IsVariable(LITERAL_META_VARIABLE, input);
+        }
+                
 
     }
 

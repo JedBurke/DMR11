@@ -293,8 +293,16 @@ namespace DMR11.Core
             {
                 string chapterTitle = null;
 
+                /// Check if the path has the meta variable '__literal' for literal values. If not,
+                /// assume it points to an XPATH.
                 if (string.Compare(HostData.Chapters.Title, "$(__literal)", true) == 0)
                 {
+                    /// Since the 'chapter' variable will become available after this method executes with the
+                    /// creation of a new 'Chapter' instance, we'll have to register the variable now in order
+                    /// to gain access to it. It should be noted that setting the chapter's name in this manner
+                    /// does not take the default chapter format's place. It effectively overwrites the
+                    /// chapter's name.
+
                     Parsing.RegisterVariable("chapter", GetFirstNonEmptyNodeText(element), HostVariables);
                     chapterTitle = Parsing.EvaluateVariable(HostData.Chapters.TitleValue, HostVariables);
                 }

@@ -214,6 +214,11 @@ namespace DMR11.Core.Helper
             }
         }
 
+        public static void RegisterChapterVariable(string value, IDictionary<string, string> collection)
+        {
+            RegisterVariable(CHAPTER_VARIABLE, value, collection);
+        }
+
         /// <summary>
         /// Determines whether the input contains a registered variable or meta-variable.
         /// </summary>
@@ -257,11 +262,15 @@ namespace DMR11.Core.Helper
             return input;
         }
 
+        protected static readonly string VARIABLE_FORMAT = "$({0})";
         protected static readonly string VARIABLE_PATTERN = @"\$\((.[^\)]*)\)";
         protected static readonly Regex VariableRegex = new Regex(VARIABLE_PATTERN, RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
         protected static readonly string LITERAL_META_VARIABLE = "__literal";
-        protected static readonly string VARIABLE_FORMAT = "$({0})";
+
+        public static readonly string SERIES_NAME_VARIABLE = "series_name";
+        public static readonly string CHAPTER_VARIABLE = "chapter";
+
 
         protected static string FormatVariable(string variable)
         {
@@ -282,6 +291,8 @@ namespace DMR11.Core.Helper
         {
             return IsVariable(LITERAL_META_VARIABLE, input);
         }
+                
+
     }
 
 }

@@ -303,7 +303,7 @@ namespace DMR11.Core
                     /// does not take the default chapter format's place. It effectively overwrites the
                     /// chapter's name.
 
-                    Parsing.RegisterVariable("chapter", GetFirstNonEmptyNodeText(element), HostVariables);
+                    Parsing.RegisterChapterVariable(GetFirstNonEmptyNodeText(element), HostVariables);
                     chapterTitle = Parsing.EvaluateVariable(HostData.Chapters.TitleValue, HostVariables);
                 }
                 else

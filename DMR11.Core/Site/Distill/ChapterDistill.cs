@@ -28,8 +28,8 @@ namespace DMR11.Core
                 HostData = hostData;
 
                 /// Sets the chapter's name according to the host.
-                Parsing.RegisterVariable("chapter", Name, HostVariables);
-                Log.Debug("Chapter 'name' variable: {0}", HostVariables["chapter"]);
+                Parsing.RegisterChapterVariable(Name, HostVariables);
+                Log.Debug("Chapter 'name' variable: {0}", HostVariables[Parsing.CHAPTER_VARIABLE]);
 
                 /// Sets the chapter's address.
                 HostVariables.Add("address", address.ToString());

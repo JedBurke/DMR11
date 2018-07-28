@@ -295,7 +295,7 @@ namespace DMR11.Core
 
                 /// Check if the path has the meta variable '__literal' for literal values. If not,
                 /// assume it points to an XPATH.
-                if (string.Compare(HostData.Chapters.Title, "$(__literal)", true) == 0)
+                if (Parsing.IsMetaVariableLiteral(HostData.Chapters.Title))
                 {
                     /// Since the 'chapter' variable will become available after this method executes with the
                     /// creation of a new 'Chapter' instance, we'll have to register the variable now in order

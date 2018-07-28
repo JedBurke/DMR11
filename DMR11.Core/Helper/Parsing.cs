@@ -260,7 +260,28 @@ namespace DMR11.Core.Helper
         protected static readonly string VARIABLE_PATTERN = @"\$\((.[^\)]*)\)";
         protected static readonly Regex VariableRegex = new Regex(VARIABLE_PATTERN, RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
+        protected static readonly string LITERAL_META_VARIABLE = "__literal";
+        protected static readonly string VARIABLE_FORMAT = "$({0})";
 
+        protected static string FormatVariable(string variable)
+        {
+            return string.Format(VARIABLE_FORMAT, variable);
+        }
+
+        public static bool IsVariable(string variable, string input)
+        {
+            return string.Compare(FormatVariable(variable), input) == 0;
+        }
+
+        /// <summary>
+        /// Returns whether the input string is a match for <see cref="LITERAL_META_VARIABLE"/>.
+        /// </summary>
+        /// <param name="input">The string which to test.</param>
+        /// <returns></returns>
+        public static bool IsMetaVariableLiteral(string input)
+        {
+            return IsVariable(LITERAL_META_VARIABLE, input);
+        }
     }
 
 }

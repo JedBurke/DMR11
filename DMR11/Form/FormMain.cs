@@ -582,11 +582,21 @@ namespace DMR11
                 title.Proxy = Option.GetProxy();
                 btnGetChapter.Enabled = false;
 
+                /// Remove focus from the title combo to avoid accidentally loading more
+                /// series when scrolling.
+                if (ActiveControl == cbTitleUrl)
+                {
+                    ActiveControl = null;
+                }
+
                 var task = title.PopulateChapterAsync(new DMR11.Core.Progress<int>(progress => txtPercent.Text = progress + "%"));
+
                 task.ContinueWith(t =>
                 {
                     btnGetChapter.Enabled = true;
+                                        
                     dgvChapter.DataSource = title.Chapters;
+                    dgvChapter.Focus();
 
                     PrepareSeriesDirectory();
 
@@ -963,7 +973,7 @@ namespace DMR11
                 }
                 else
                 {
-                    MessageBox.Show("Cannot look up a series until the chapters have been loaded.", "MIRI Series Look Up", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                    MessageBox.Show("Cannot look up a series until the chapters have been loaded.", "MIRI Series Look Up", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

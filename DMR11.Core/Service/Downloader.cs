@@ -65,6 +65,12 @@ namespace DMR11.Core.Service
                             UseCookies = true
                         };
 
+                        if (Net.ProxyServer.Instance.UseProxyServer)
+                        {
+                            handler.UseProxy = true;
+                            handler.Proxy = Net.ProxyServer.Instance.Proxy;
+                        }
+                        
                         client = new HttpClient(handler)
                         {
                             Timeout = TimeSpan.FromSeconds(15)
@@ -124,6 +130,11 @@ namespace DMR11.Core.Service
             request.UserAgent = UserAgent;
 
             request.CookieContainer = cookieContainer;
+
+            var proxy = new WebProxy("35.184.23.203", 80);
+            proxy.BypassProxyOnLocal = false;
+            
+            request.Proxy = proxy;
 
             Console.WriteLine(string.Concat(DateTime.Now.ToLongDateString(), " ", DateTime.Now.ToLongTimeString()));
 

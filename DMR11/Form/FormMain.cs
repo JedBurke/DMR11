@@ -452,8 +452,6 @@ namespace DMR11
             {
                 optionsDialog.ShowDialog(this);
             }
-
-            Console.WriteLine(WindowSettings.Subject.DefaultSaveDestination);
         }
 
         private void LoadBookmark()

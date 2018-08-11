@@ -29,22 +29,21 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.ProxyGroup = new System.Windows.Forms.GroupBox();
+            this.ProxyPort = new System.Windows.Forms.NumericUpDown();
+            this.EnableProxyCheckBox = new System.Windows.Forms.CheckBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.ProxyAddress = new System.Windows.Forms.TextBox();
             this.grpSaveDestination = new System.Windows.Forms.GroupBox();
             this.btnSaveBrowse = new System.Windows.Forms.Button();
             this.txtSaveDestination = new System.Windows.Forms.TextBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.ProxyGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ProxyPort)).BeginInit();
             this.grpSaveDestination.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,19 +56,10 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Host";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 73);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(28, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Port";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(18, 101);
+            this.label3.Location = new System.Drawing.Point(18, 81);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(59, 13);
             this.label3.TabIndex = 5;
@@ -78,71 +68,65 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(18, 129);
+            this.label4.Location = new System.Drawing.Point(18, 109);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(56, 13);
             this.label4.TabIndex = 7;
             this.label4.Text = "Password";
             // 
-            // groupBox1
+            // ProxyGroup
             // 
-            this.groupBox1.Controls.Add(this.numericUpDown1);
-            this.groupBox1.Controls.Add(this.checkBox1);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.textBox4);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Enabled = false;
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(283, 170);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Proxy";
+            this.ProxyGroup.Controls.Add(this.ProxyPort);
+            this.ProxyGroup.Controls.Add(this.EnableProxyCheckBox);
+            this.ProxyGroup.Controls.Add(this.label1);
+            this.ProxyGroup.Controls.Add(this.textBox4);
+            this.ProxyGroup.Controls.Add(this.textBox3);
+            this.ProxyGroup.Controls.Add(this.label3);
+            this.ProxyGroup.Controls.Add(this.label4);
+            this.ProxyGroup.Controls.Add(this.ProxyAddress);
+            this.ProxyGroup.Location = new System.Drawing.Point(12, 12);
+            this.ProxyGroup.Name = "ProxyGroup";
+            this.ProxyGroup.Size = new System.Drawing.Size(283, 170);
+            this.ProxyGroup.TabIndex = 0;
+            this.ProxyGroup.TabStop = false;
+            this.ProxyGroup.Text = "Proxy";
             // 
-            // numericUpDown1
+            // ProxyPort
             // 
-            this.numericUpDown1.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::DMR11.Properties.Settings.Default, "ProxyPort", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.numericUpDown1.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::DMR11.Properties.Settings.Default, "ProxyEnable", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.numericUpDown1.Enabled = global::DMR11.Properties.Settings.Default.ProxyEnable;
-            this.numericUpDown1.Location = new System.Drawing.Point(92, 70);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.ProxyPort.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::DMR11.Properties.Settings.Default, "ProxyPort", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.ProxyPort.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::DMR11.Properties.Settings.Default, "ProxyEnable", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.ProxyPort.Enabled = global::DMR11.Properties.Settings.Default.ProxyEnable;
+            this.ProxyPort.Location = new System.Drawing.Point(223, 43);
+            this.ProxyPort.Maximum = new decimal(new int[] {
             65535,
             0,
             0,
             0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(185, 22);
-            this.numericUpDown1.TabIndex = 4;
-            this.numericUpDown1.Value = global::DMR11.Properties.Settings.Default.ProxyPort;
+            this.ProxyPort.Name = "ProxyPort";
+            this.ProxyPort.Size = new System.Drawing.Size(54, 22);
+            this.ProxyPort.TabIndex = 4;
+            this.ProxyPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ProxyPort.Value = global::DMR11.Properties.Settings.Default.ProxyPort;
             // 
-            // checkBox1
+            // EnableProxyCheckBox
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = global::DMR11.Properties.Settings.Default.ProxyEnable;
-            this.checkBox1.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::DMR11.Properties.Settings.Default, "ProxyEnable", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.checkBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox1.Location = new System.Drawing.Point(6, 0);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(93, 19);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "Enable Proxy";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.EnableProxyCheckBox.AutoSize = true;
+            this.EnableProxyCheckBox.Checked = global::DMR11.Properties.Settings.Default.ProxyEnable;
+            this.EnableProxyCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::DMR11.Properties.Settings.Default, "ProxyEnable", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.EnableProxyCheckBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EnableProxyCheckBox.Location = new System.Drawing.Point(6, 0);
+            this.EnableProxyCheckBox.Name = "EnableProxyCheckBox";
+            this.EnableProxyCheckBox.Size = new System.Drawing.Size(93, 19);
+            this.EnableProxyCheckBox.TabIndex = 0;
+            this.EnableProxyCheckBox.Text = "Enable Proxy";
+            this.EnableProxyCheckBox.UseVisualStyleBackColor = true;
             // 
             // textBox4
             // 
             this.textBox4.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DMR11.Properties.Settings.Default, "ProxyPassword", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox4.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::DMR11.Properties.Settings.Default, "ProxyEnable", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox4.Enabled = global::DMR11.Properties.Settings.Default.ProxyEnable;
-            this.textBox4.Location = new System.Drawing.Point(92, 126);
+            this.textBox4.Location = new System.Drawing.Point(92, 106);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(185, 22);
             this.textBox4.TabIndex = 8;
@@ -154,22 +138,22 @@
             this.textBox3.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DMR11.Properties.Settings.Default, "ProxyUserName", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox3.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::DMR11.Properties.Settings.Default, "ProxyEnable", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox3.Enabled = global::DMR11.Properties.Settings.Default.ProxyEnable;
-            this.textBox3.Location = new System.Drawing.Point(92, 98);
+            this.textBox3.Location = new System.Drawing.Point(92, 78);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(185, 22);
             this.textBox3.TabIndex = 6;
             this.textBox3.Text = global::DMR11.Properties.Settings.Default.ProxyUserName;
             // 
-            // textBox1
+            // ProxyAddress
             // 
-            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DMR11.Properties.Settings.Default, "ProxyHost", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::DMR11.Properties.Settings.Default, "ProxyEnable", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox1.Enabled = global::DMR11.Properties.Settings.Default.ProxyEnable;
-            this.textBox1.Location = new System.Drawing.Point(92, 42);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(185, 22);
-            this.textBox1.TabIndex = 2;
-            this.textBox1.Text = global::DMR11.Properties.Settings.Default.ProxyHost;
+            this.ProxyAddress.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DMR11.Properties.Settings.Default, "ProxyHost", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.ProxyAddress.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::DMR11.Properties.Settings.Default, "ProxyEnable", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.ProxyAddress.Enabled = global::DMR11.Properties.Settings.Default.ProxyEnable;
+            this.ProxyAddress.Location = new System.Drawing.Point(92, 42);
+            this.ProxyAddress.Name = "ProxyAddress";
+            this.ProxyAddress.Size = new System.Drawing.Size(125, 22);
+            this.ProxyAddress.TabIndex = 2;
+            this.ProxyAddress.Text = global::DMR11.Properties.Settings.Default.ProxyHost;
             // 
             // grpSaveDestination
             // 
@@ -231,16 +215,16 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.grpSaveDestination);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.ProxyGroup);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "FormOption";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Options";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.ProxyGroup.ResumeLayout(false);
+            this.ProxyGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ProxyPort)).EndInit();
             this.grpSaveDestination.ResumeLayout(false);
             this.grpSaveDestination.PerformLayout();
             this.ResumeLayout(false);
@@ -250,15 +234,14 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox ProxyAddress;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.CheckBox EnableProxyCheckBox;
+        private System.Windows.Forms.GroupBox ProxyGroup;
+        private System.Windows.Forms.NumericUpDown ProxyPort;
         private System.Windows.Forms.GroupBox grpSaveDestination;
         private System.Windows.Forms.Button btnSaveBrowse;
         private System.Windows.Forms.TextBox txtSaveDestination;

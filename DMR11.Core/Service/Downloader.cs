@@ -65,6 +65,12 @@ namespace DMR11.Core.Service
                             UseCookies = true
                         };
 
+                        if (Net.ProxyServer.Instance.UseProxyServer)
+                        {
+                            handler.UseProxy = true;
+                            handler.Proxy = Net.ProxyServer.Instance.Proxy;
+                        }
+                        
                         client = new HttpClient(handler)
                         {
                             Timeout = TimeSpan.FromSeconds(15)
@@ -114,16 +120,20 @@ namespace DMR11.Core.Service
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(address);
             request.Host = address.Host;
-            //request.Proxy = Proxy;
             request.Credentials = CredentialCache.DefaultNetworkCredentials;
-            //request.Accept = "gzip, deflate";
+            request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
             request.Accept = "*/*";
-            //request.Referer = Referrer ?? Address.AbsoluteUri;
             request.Referer = address.AbsoluteUri;
+            request.Headers[HttpRequestHeader.AcceptEncoding] = "gzip, deflate";
 
             request.UserAgent = UserAgent;
 
             request.CookieContainer = cookieContainer;
+
+            if (Net.ProxyServer.Instance.UseProxyServer)
+            {
+                request.Proxy = Net.ProxyServer.Instance.Proxy;
+            }
 
             Console.WriteLine(string.Concat(DateTime.Now.ToLongDateString(), " ", DateTime.Now.ToLongTimeString()));
 

@@ -27,13 +27,35 @@ namespace DMR11
 
         public void LoadSettings()
         {
+            EnableProxyCheckBox.Checked = settings.ProxyEnable;
+            ProxyAddress.Text = settings.ProxyHost;
+            ProxyPort.Value = settings.ProxyPort;
+
             txtSaveDestination.Text = settings.DefaultSaveDestination;
         }
 
         public void ApplySettings()
-        {           
+        {
+            var proxyChanged = (settings.ProxyEnable != EnableProxyCheckBox.Checked);
+
+            settings.ProxyEnable = EnableProxyCheckBox.Checked;
+            settings.ProxyHost = ProxyAddress.Text;
+            settings.ProxyPort = ProxyPort.Value;
 
             settings.DefaultSaveDestination = txtSaveDestination.Text;
+
+            if (proxyChanged)
+            {
+                DMR11.Core.Net.ProxyServer.Instance.UseProxyServer = settings.ProxyEnable;
+                DMR11.Core.Net.ProxyServer.Instance.SetProxyServer(settings.ProxyHost, Convert.ToInt32(settings.ProxyPort), settings.ProxyUserName, settings.ProxyPassword);
+
+                System.Threading.Thread th = new System.Threading.Thread((() =>
+                {
+                    Console.WriteLine(DMR11.Core.Net.ProxyServer.Instance.GetProxyIpAddress());
+                }));
+
+                th.Start();
+            }
         }
 
         void FormOption_Load(object sender, EventArgs e)

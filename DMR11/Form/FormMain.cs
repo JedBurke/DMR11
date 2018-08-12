@@ -375,10 +375,26 @@ namespace DMR11
         private void LoadSettings()
         {
             WindowSettings = new MainFormSettingsManager("user/window.json");
+            WindowSettings.SettingsLoaded += WindowSettings_SettingsLoaded;
 
             if (File.Exists("user/window.json"))
             {
                 WindowSettings.Load();
+            }
+        }
+
+        void WindowSettings_SettingsLoaded(object sender, EventArgs e)
+        {
+            if (WindowSettings.Subject.ProxyEnable)
+            {
+                DMR11.Core.Net.ProxyServer.Instance.SetProxyServer(
+                    WindowSettings.Subject.ProxyHost,
+                    Convert.ToInt32(WindowSettings.Subject.ProxyPort),
+                    WindowSettings.Subject.ProxyUserName,
+                    WindowSettings.Subject.ProxyPassword
+                );
+
+                // Todo: Log IP
             }
         }
 
@@ -452,8 +468,6 @@ namespace DMR11
             {
                 optionsDialog.ShowDialog(this);
             }
-
-            Console.WriteLine(WindowSettings.Subject.DefaultSaveDestination);
         }
 
         private void LoadBookmark()

@@ -246,7 +246,9 @@
   <ItemGroup>
     <None Include="Resources\appbar.page.corner.text.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\appbar.redo.point.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\appbar.information.png" />
   </ItemGroup>

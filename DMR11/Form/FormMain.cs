@@ -15,10 +15,11 @@ using System.Deployment.Application;
 using System.Collections.Specialized;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 namespace DMR11
 {
-    public partial class FormMain : Form
+    public partial class FormMain : Form, INotifyPropertyChanged
     {
         protected BindingList<IChapter> DownloadQueue;
 
@@ -33,6 +34,12 @@ namespace DMR11
         protected FolderBrowser browserDialog = null;
 
         protected MainFormSettingsManager WindowSettings = null;
+
+        public string CurrentSeriesUrl
+        {
+            get;
+            set;
+        }
 
         private string SaveDestination
         {
@@ -439,12 +446,14 @@ namespace DMR11
             DownloadQueue = Common.LoadIChapterCollection(FILENAME_ICHAPTER_COLLECTION);
             dgvQueueChapter.DataSource = DownloadQueue;
 
+            cbTitleUrl.DataBindings.Add(new Binding("Text", this, "CurrentSeriesUrl"));
+
             LoadBookmark();
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            WindowSettings.Subject.Url = cbTitleUrl.Text;
+            WindowSettings.Subject.Url = CurrentSeriesUrl;
             WindowSettings.Subject.State = this.WindowState;
 
             if (this.WindowState == FormWindowState.Normal)
@@ -595,6 +604,7 @@ namespace DMR11
                 currentTitle = title;
                 title.Proxy = Option.GetProxy();
                 btnGetChapter.Enabled = false;
+                cbTitleUrl.Enabled = false;
 
                 /// Remove focus from the title combo to avoid accidentally loading more
                 /// series when scrolling.
@@ -607,6 +617,7 @@ namespace DMR11
 
                 task.ContinueWith(t =>
                 {
+                    cbTitleUrl.Enabled = true;
                     btnGetChapter.Enabled = true;
                                         
                     dgvChapter.DataSource = title.Chapters;
@@ -992,6 +1003,38 @@ namespace DMR11
             }
         }
 
+        private async void OpenInBrowser_Click(object sender, EventArgs e)
+        {
+            await OpenInBrowserAsync();
+        }
+
+        async Task OpenInBrowserAsync()
+        {
+            await Task.Run(new Action(() => OpenInBrowser()));
+        }
+
+        void OpenInBrowser()
+        {
+            if (!string.IsNullOrWhiteSpace(CurrentSeriesUrl))
+            {
+                var uri = new ValidatedUri(CurrentSeriesUrl);
+
+                Process.Start(uri.ToString());
+            }
+        }
+
+        private void cbTitleUrl_TextUpdate(object sender, EventArgs e)
+        {
+            //CurrentSeriesUrl = cbTitleUrl.Text;
+        }
+
+
+        protected void OnPropertyChange([CallerMemberName] string property = null)
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(property));
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
     }
 
 }

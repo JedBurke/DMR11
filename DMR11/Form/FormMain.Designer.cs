@@ -55,6 +55,8 @@
             this.btnAddNew = new System.Windows.Forms.Button();
             this.lbSeriesDestination = new System.Windows.Forms.Label();
             this.lbDefaultDestination = new System.Windows.Forms.Label();
+            this.MiriSeriesLookupButton = new System.Windows.Forms.Button();
+            this.OpenInBrowserButton = new System.Windows.Forms.Button();
             this.btnAddBookmark = new System.Windows.Forms.Button();
             this.btnRemoveBookmark = new System.Windows.Forms.Button();
             this.btnPasteUrl = new System.Windows.Forms.Button();
@@ -68,7 +70,6 @@
             this.StatusPanel = new System.Windows.Forms.Panel();
             this.btnFromatPreset = new System.Windows.Forms.Button();
             this.ChapterAuxiliaryDock = new System.Windows.Forms.Panel();
-            this.MiriSeriesLookupButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQueueChapter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChapter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudThread)).BeginInit();
@@ -349,14 +350,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cbTitleUrl.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cbTitleUrl.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbTitleUrl.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DMR11.Properties.Settings.Default, "Url", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cbTitleUrl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbTitleUrl.Location = new System.Drawing.Point(101, 11);
             this.cbTitleUrl.Name = "cbTitleUrl";
-            this.cbTitleUrl.Size = new System.Drawing.Size(635, 25);
+            this.cbTitleUrl.Size = new System.Drawing.Size(601, 25);
             this.cbTitleUrl.TabIndex = 1;
             this.cbTitleUrl.Text = global::DMR11.Properties.Settings.Default.Url;
             this.cbTitleUrl.SelectedIndexChanged += new System.EventHandler(this.cbTitleUrl_SelectedIndexChanged);
+            this.cbTitleUrl.TextUpdate += new System.EventHandler(this.cbTitleUrl_TextUpdate);
             this.cbTitleUrl.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cbTitleUrl_KeyUp);
             // 
             // btnPresetDialog
@@ -449,6 +450,38 @@
             this.MainToolTip.SetToolTip(this.lbDefaultDestination, "Saves the chapter to the default manga folder");
             this.lbDefaultDestination.UseMnemonic = false;
             this.lbDefaultDestination.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lbDefaultDestination_MouseClick);
+            // 
+            // MiriSeriesLookupButton
+            // 
+            this.MiriSeriesLookupButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.MiriSeriesLookupButton.BackgroundImage = global::DMR11.Properties.Resources.appbar_information;
+            this.MiriSeriesLookupButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.MiriSeriesLookupButton.Location = new System.Drawing.Point(181, 0);
+            this.MiriSeriesLookupButton.Name = "MiriSeriesLookupButton";
+            this.MiriSeriesLookupButton.Size = new System.Drawing.Size(41, 34);
+            this.MiriSeriesLookupButton.TabIndex = 0;
+            this.MainToolTip.SetToolTip(this.MiriSeriesLookupButton, "Look up series information");
+            this.MiriSeriesLookupButton.UseVisualStyleBackColor = true;
+            this.MiriSeriesLookupButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MiriSeriesLookupButton_MouseClick);
+            // 
+            // OpenInBrowserButton
+            // 
+            this.OpenInBrowserButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.OpenInBrowserButton.BackgroundImage = global::DMR11.Properties.Resources.appbar_redo_point;
+            this.OpenInBrowserButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.OpenInBrowserButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
+            this.OpenInBrowserButton.FlatAppearance.BorderSize = 0;
+            this.OpenInBrowserButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.OpenInBrowserButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
+            this.OpenInBrowserButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.OpenInBrowserButton.Location = new System.Drawing.Point(708, 10);
+            this.OpenInBrowserButton.Name = "OpenInBrowserButton";
+            this.OpenInBrowserButton.Size = new System.Drawing.Size(28, 25);
+            this.OpenInBrowserButton.TabIndex = 32;
+            this.MainToolTip.SetToolTip(this.OpenInBrowserButton, "Open the current URL in your default browser");
+            this.OpenInBrowserButton.UseVisualStyleBackColor = true;
+            this.OpenInBrowserButton.Click += new System.EventHandler(this.OpenInBrowser_Click);
             // 
             // btnAddBookmark
             // 
@@ -572,6 +605,7 @@
             // 
             this.headerPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.headerPanel.Controls.Add(this.OpenInBrowserButton);
             this.headerPanel.Controls.Add(this.lblUrl);
             this.headerPanel.Controls.Add(this.txtPercent);
             this.headerPanel.Controls.Add(this.btnGetChapter);
@@ -613,20 +647,6 @@
             this.ChapterAuxiliaryDock.Name = "ChapterAuxiliaryDock";
             this.ChapterAuxiliaryDock.Size = new System.Drawing.Size(222, 34);
             this.ChapterAuxiliaryDock.TabIndex = 35;
-            // 
-            // MiriSeriesLookupButton
-            // 
-            this.MiriSeriesLookupButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.MiriSeriesLookupButton.BackgroundImage = global::DMR11.Properties.Resources.appbar_information;
-            this.MiriSeriesLookupButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.MiriSeriesLookupButton.Location = new System.Drawing.Point(181, 0);
-            this.MiriSeriesLookupButton.Name = "MiriSeriesLookupButton";
-            this.MiriSeriesLookupButton.Size = new System.Drawing.Size(41, 34);
-            this.MiriSeriesLookupButton.TabIndex = 0;
-            this.MainToolTip.SetToolTip(this.MiriSeriesLookupButton, "Look up series information");
-            this.MiriSeriesLookupButton.UseVisualStyleBackColor = true;
-            this.MiriSeriesLookupButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MiriSeriesLookupButton_MouseClick);
             // 
             // FormMain
             // 
@@ -717,5 +737,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColSaveTo;
         private System.Windows.Forms.Panel ChapterAuxiliaryDock;
         private System.Windows.Forms.Button MiriSeriesLookupButton;
+        private System.Windows.Forms.Button OpenInBrowserButton;
     }
 }

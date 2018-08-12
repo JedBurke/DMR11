@@ -8,6 +8,8 @@ namespace DMR11.Core.WebsiteHost
 {
     public class ChapterSection : IChapterSection
     {
+        // Todo: Fix inheritence.
+
         public string Title
         {
             get;
@@ -63,6 +65,12 @@ namespace DMR11.Core.WebsiteHost
         }
 
         public string ParseReplace
+        {
+            get;
+            set;
+        }
+
+        public bool NoChapterDirectory
         {
             get;
             set;

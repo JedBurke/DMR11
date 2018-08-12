@@ -40,9 +40,11 @@ namespace DMR11.Core.WebsiteHost
 
             bool hostSinglePage = false;
             bool hostChapterOnly = false;
+            bool chapterNoChapterDirectory = false;
                         
             bool.TryParse(websiteHostFile[SECTION_HOST]["single_page"], out hostSinglePage);
             bool.TryParse(websiteHostFile[SECTION_HOST]["chapter_only"], out hostChapterOnly);
+            bool.TryParse(websiteHostFile[SECTION_CHAPTERS]["no_chapter_directory"], out chapterNoChapterDirectory);
 
             websiteHost.Meta.HostType = HostType.Simple;
             websiteHost.Meta.ScriptPath = websiteHostFile[SECTION_META]["script"];
@@ -73,6 +75,7 @@ namespace DMR11.Core.WebsiteHost
             websiteHost.Chapters.TitleParseReplace = websiteHostFile[SECTION_CHAPTERS]["title_parse_replace"];
             websiteHost.Chapters.Pager = websiteHostFile[SECTION_CHAPTERS]["pager"];
             websiteHost.Chapters.PagerValue = websiteHostFile[SECTION_CHAPTERS]["pager_value"];
+            websiteHost.Chapters.NoChapterDirectory = chapterNoChapterDirectory;
             
             websiteHost.Pages.Path = websiteHostFile[SECTION_PAGES]["path"];
             websiteHost.Pages.Value = websiteHostFile[SECTION_PAGES]["value"];

@@ -37,6 +37,7 @@ namespace DMR11.Core
         }
 
         private string _saveDestination = string.Empty;
+        private string _formattedChapterName = string.Empty;
 
         abstract protected List<Uri> ParsePageAddresses(string html);
 
@@ -97,19 +98,28 @@ namespace DMR11.Core
             {
                 //ChapterNameFormat = "{0} - Ch. {1}";
 
-                string name = Helper.FileSystem.GetSafeFileName(Name.Trim());
-                if (string.IsNullOrEmpty(ChapterNameFormat))
+                if (_formattedChapterName == null)
                 {
-                    return name;
-                }
-                else
-                {
-                    string formattedName = name;
+                    string name = Helper.FileSystem.GetSafeFileName(Name.Trim());
+                    if (string.IsNullOrEmpty(ChapterNameFormat))
+                    {
+                        _formattedChapterName = name;
+                    }
+                    else
+                    {
+                        string formattedName = name;
 
-                    //formattedName = string.Format(ChapterNameFormat, name, HostVariables["chapter"]);
+                        //formattedName = string.Format(ChapterNameFormat, name, HostVariables["chapter"]);
 
-                    return formattedName;
+                        _formattedChapterName = formattedName;
+                    }
                 }
+
+                return _formattedChapterName;
+            }
+            set
+            {
+                _formattedChapterName = value;
             }
         }
 
@@ -126,6 +136,18 @@ namespace DMR11.Core
         /// Gets or sets a list of URIs representing the pages in the chapter.
         /// </summary>
         private List<Uri> ImageAddresses
+        {
+            get;
+            set;
+        }
+
+        public string ChapterPath
+        {
+            get;
+            set;
+        }
+
+        private bool NoChapterDirectory
         {
             get;
             set;
@@ -163,7 +185,7 @@ namespace DMR11.Core
         public IWebProxy Proxy { get; set; }
 
         public string Referrer { get; set; }
-        
+
         public ChapterBase(string name, Uri address, ILogger log)
         {
             this._log = log;
@@ -192,11 +214,14 @@ namespace DMR11.Core
                     PopulateImageAddress(html);
                 }
 
-                // Todo: Refactor.
+                // Todo: Refactor.        
 
-                string saveToFolder = Path.Combine(SaveDestination, FormattedChapterName);
-                
-                Directory.CreateDirectory(saveToFolder);
+                ChapterPath = Path.Combine(SaveDestination, FormattedChapterName);
+                if (!Directory.Exists(ChapterPath))
+                {
+                    Log.Info("Creating '{0}' directory", ChapterPath);
+                    Directory.CreateDirectory(ChapterPath);
+                }
 
                 int countImage = 0;
                 bool useAutoNumbering = false;
@@ -232,7 +257,7 @@ namespace DMR11.Core
                         pageFileName = string.Concat(countImage.ToString().PadLeft(3, '0'), ext);
                     }
 
-                    string filePath = saveToFolder + "\\" + pageFileName;
+                    string filePath = Path.Combine(ChapterPath, pageFileName); // saveToFolder + "\\" + pageFileName;
 
                     DownloadFile(imageAddress, filePath);
 

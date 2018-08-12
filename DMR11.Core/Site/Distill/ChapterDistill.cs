@@ -43,9 +43,16 @@ namespace DMR11.Core
                 SinglePage = HostData.Host.SinglePage;
                 log.Debug("Is single page: {0}", SinglePage);
 
+                log.Debug("No chapter directory: {0}", hostData.Chapters.NoChapterDirectory);
+                if (hostData.Chapters.NoChapterDirectory)
+                {
+                    FormattedChapterName = string.Empty;
+                    //log.Debug("Setting chapter path to '{0}'", ChapterPath);
+                }
+
             }
         }
-
+                
         protected override List<Uri> ParseImageAddresses(string html)
         {
             var details = new ParseDetails<Uri>

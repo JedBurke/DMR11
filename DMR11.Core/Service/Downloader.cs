@@ -120,21 +120,20 @@ namespace DMR11.Core.Service
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(address);
             request.Host = address.Host;
-            //request.Proxy = Proxy;
             request.Credentials = CredentialCache.DefaultNetworkCredentials;
-            //request.Accept = "gzip, deflate";
+            request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
             request.Accept = "*/*";
-            //request.Referer = Referrer ?? Address.AbsoluteUri;
             request.Referer = address.AbsoluteUri;
+            request.Headers[HttpRequestHeader.AcceptEncoding] = "gzip, deflate";
 
             request.UserAgent = UserAgent;
 
             request.CookieContainer = cookieContainer;
 
-            var proxy = new WebProxy("35.184.23.203", 80);
-            proxy.BypassProxyOnLocal = false;
-            
-            request.Proxy = proxy;
+            if (Net.ProxyServer.Instance.UseProxyServer)
+            {
+                request.Proxy = Net.ProxyServer.Instance.Proxy;
+            }
 
             Console.WriteLine(string.Concat(DateTime.Now.ToLongDateString(), " ", DateTime.Now.ToLongTimeString()));
 

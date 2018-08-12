@@ -12,7 +12,7 @@ namespace DMR11
     {
         T _subject;
         string _path;
-                
+
         public SerializationManager(T subject, string path)
         {
             this._subject = subject;
@@ -79,6 +79,7 @@ namespace DMR11
 
                     serializedObject = (T)serializer.ReadObject(stream);
                 }
+
             }
             else
             {
@@ -91,6 +92,8 @@ namespace DMR11
             }
 
             _subject = serializedObject;
+
+            SettingsLoaded(this, EventArgs.Empty);
         }
 
         public void Dispose()
@@ -99,6 +102,7 @@ namespace DMR11
             _path = null;
         }
 
+        public event EventHandler SettingsLoaded = delegate { };
     }
 
     public class MainFormSettingsManager : SerializationManager<MainFormSettings>
@@ -112,6 +116,6 @@ namespace DMR11
             : base(settings, path)
         {
         }
-        
+
     }
 }

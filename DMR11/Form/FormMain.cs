@@ -448,6 +448,19 @@ namespace DMR11
 
             cbTitleUrl.DataBindings.Add(new Binding("Text", this, "CurrentSeriesUrl"));
 
+            var fl = new FlatProgressBar();
+            fl.Dock = DockStyle.Top;
+            fl.Height = 3;
+            fl.ProgressValue = 0.75f;
+            fl.ProgressColor = Color.DimGray;
+
+            //fl.Location = new Point(cbTitleUrl.Left, cbTitleUrl.Top - fl.Height);
+            //fl.Width = cbTitleUrl.Width;
+            //fl.Anchor = (AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right);
+
+            headerPanel.Controls.Add(fl);
+
+
             LoadBookmark();
         }
 
@@ -1033,6 +1046,79 @@ namespace DMR11
         {
             PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
+
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+    }
+
+    public class FlatProgressBar : Control, INotifyPropertyChanged
+    {
+        private float _progressValue = 1.0f;
+
+        public float ProgressValue
+        {
+            get
+            {
+                return _progressValue;
+            }
+            set
+            {
+                if (_progressValue != value)
+                {
+                    _progressValue = value;
+                    Invalidate();
+                }
+            }
+        }
+
+        public Color ProgressColor { get; set; }
+
+        public FlatProgressBar()
+        {
+            ProgressBrush = new SolidBrush(Color.SlateGray);
+
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.SupportsTransparentBackColor | ControlStyles.UserPaint | ControlStyles.ResizeRedraw, true);
+
+            this.Paint += FlatProgressBar_Paint;
+        }
+
+        protected SolidBrush ProgressBrush { get; set; }
+
+        void FlatProgressBar_Paint(object sender, PaintEventArgs e)
+        {
+            var fillArea = CalculateFillArea(ProgressValue);
+
+            if (fillArea.Width < ClientRectangle.Width)
+            {
+                e.Graphics.FillRectangle(Brushes.Silver, e.ClipRectangle);
+            }
+
+            e.Graphics.FillRectangle(ProgressBrush, fillArea);
+
+        }
+
+        Rectangle CalculateFillArea(float value)
+        {
+            var fillAreaRect = ClientRectangle;
+
+            var area = (this.ClientRectangle.Right * value);
+            fillAreaRect.Width = Convert.ToInt32(area);
+
+            return fillAreaRect;
+        }
+
+        Rectangle CalculateRemainingArea(float value)
+        {
+            var remainingArea = CalculateFillArea(value);
+
+            remainingArea.X = remainingArea.Right;
+            remainingArea.Width = Convert.ToInt32(ClientRectangle.Width - remainingArea.Width);
+
+            return remainingArea;
+        }
+
+        public event EventHandler Completed;
+        public event EventHandler ProgressChanged;
+        public event EventHandler Started;
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
     }

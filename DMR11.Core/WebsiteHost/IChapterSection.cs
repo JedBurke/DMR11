@@ -41,5 +41,11 @@ namespace DMR11.Core.WebsiteHost
             get;
             set;
         }
+        
+        /// <summary>
+        /// Gets or sets whether the chapter pages should be saved in the
+        /// top-level series directory.
+        /// </summary>
+        bool NoChapterDirectory { get; set; }
     }
 }

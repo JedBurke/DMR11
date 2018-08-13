@@ -411,7 +411,7 @@ namespace DMR11
             this.Location = WindowSettings.Subject.FormLocation;
             this.WindowState = WindowSettings.Subject.State;
 
-            this.cbTitleUrl.Text = WindowSettings.Subject.Url;
+            CurrentSeriesUrl = WindowSettings.Subject.Url;
             this.lbDefaultDestination.Text = WindowSettings.Subject.SaveTo;
         }
 

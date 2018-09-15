@@ -65,7 +65,6 @@
             this.lbDestination = new System.Windows.Forms.Label();
             this.rdDefaultDestination = new System.Windows.Forms.RadioButton();
             this.rdSeriesDestination = new System.Windows.Forms.RadioButton();
-            this.txtPercent = new System.Windows.Forms.Label();
             this.headerPanel = new System.Windows.Forms.Panel();
             this.StatusPanel = new System.Windows.Forms.Panel();
             this.btnFromatPreset = new System.Windows.Forms.Button();
@@ -590,24 +589,12 @@
             this.rdSeriesDestination.TabIndex = 28;
             this.rdSeriesDestination.UseVisualStyleBackColor = true;
             // 
-            // txtPercent
-            // 
-            this.txtPercent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPercent.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPercent.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtPercent.Location = new System.Drawing.Point(848, 11);
-            this.txtPercent.Name = "txtPercent";
-            this.txtPercent.Size = new System.Drawing.Size(48, 25);
-            this.txtPercent.TabIndex = 31;
-            this.txtPercent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // headerPanel
             // 
             this.headerPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.headerPanel.Controls.Add(this.OpenInBrowserButton);
             this.headerPanel.Controls.Add(this.lblUrl);
-            this.headerPanel.Controls.Add(this.txtPercent);
             this.headerPanel.Controls.Add(this.btnGetChapter);
             this.headerPanel.Controls.Add(this.cbTitleUrl);
             this.headerPanel.Controls.Add(this.btnAddBookmark);
@@ -727,7 +714,6 @@
         private System.Windows.Forms.RadioButton rdSeriesDestination;
         private System.Windows.Forms.Label lbSeriesDestination;
         private System.Windows.Forms.Label lbDefaultDestination;
-        private System.Windows.Forms.Label txtPercent;
         private System.Windows.Forms.Panel headerPanel;
         private System.Windows.Forms.Panel StatusPanel;
         private System.Windows.Forms.Button btnFromatPreset;

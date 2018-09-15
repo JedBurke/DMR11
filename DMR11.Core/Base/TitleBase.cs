@@ -76,7 +76,7 @@ namespace DMR11.Core
             Log.Trace("URI: {0}", address.ToString());
         }
         
-        public Task PopulateChapterAsync(Progress<int> progress)
+        public Task PopulateChapterAsync(Progress<double> progress)
         {
             // Todo: Too long, refactor.
 
@@ -146,7 +146,9 @@ namespace DMR11.Core
 
                             sb.AppendLine(content);
                             count++;
-                            progress.ReportProgress(count * 100 / addresses.Count);
+
+                            // TODO: Re-implement
+                            // progress.ReportProgress(count / addresses.Count);
                         }
                     }
                     else
@@ -157,7 +159,7 @@ namespace DMR11.Core
                     Chapters = ParseChapterObjects(sb.ToString());
                 }
 
-                progress.ReportProgress(100);
+                progress.ReportProgress(1.0);
             });
         }
     }

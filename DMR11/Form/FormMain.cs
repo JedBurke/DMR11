@@ -682,7 +682,7 @@ namespace DMR11
                     ActiveControl = null;
                 }
 
-                var task = title.PopulateChapterAsync(new DMR11.Core.Progress<int>(progress => txtPercent.Text = progress + "%"));
+                var task = title.PopulateChapterAsync(new DMR11.Core.Progress<double>(progress => Animate(NetworkProgressBar, "ProgressValue", progress, 0, 1500)));
 
                 task.ContinueWith(t =>
                 {

@@ -52,6 +52,6 @@ namespace DMR11.Core
             set;
         }
         
-        Task PopulateChapterAsync(Progress<int> progress);
+        Task PopulateChapterAsync(Progress<double> progress);
     }
 }

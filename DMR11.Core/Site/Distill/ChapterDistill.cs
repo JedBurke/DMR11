@@ -19,8 +19,11 @@ namespace DMR11.Core
         public ChapterDistill(string name, Uri address, IWebsiteHost hostData, ILogger log)
             : base(name, address, log)
         {
+            log.Trace("Entering ChapterDistill() constructor");
+
             if (hostData == null)
             {
+                log.Error("Variable 'hostData' cannot be null.");
                 throw new ArgumentNullException("Variable 'hostData' cannot be null.");
             }
             else
@@ -29,25 +32,30 @@ namespace DMR11.Core
 
                 /// Sets the chapter's name according to the host.
                 Parsing.RegisterChapterVariable(Name, HostVariables);
-                Log.Debug("Chapter 'name' variable: {0}", HostVariables[Parsing.CHAPTER_VARIABLE]);
+                log.Info("Chapter 'name' variable: {0}", HostVariables[Parsing.CHAPTER_VARIABLE]);
 
                 /// Sets the chapter's address.
                 HostVariables.Add("address", address.ToString());
-                Log.Debug("Chapter 'address' value: {0}", HostVariables["address"]);
+                log.Info("Chapter 'address' value: {0}", HostVariables["address"]);
 
                 /// Sets a trimmed version of the chapter's address.
                 HostVariables.Add("address_trimmed", address.ToString().Substring(0, address.ToString().LastIndexOf('/')));
-                log.Debug("Chapter 'address_trimmed' value: {0}", HostVariables["address_trimmed"]);
+                log.Info("Chapter 'address_trimmed' value: {0}", HostVariables["address_trimmed"]);
                                 
                 // Short-circuit the page listing if all of the 'pages' (chapter images) are in a single HTML page.
                 SinglePage = HostData.Host.SinglePage;
-                log.Debug("Is single page: {0}", SinglePage);
+                log.Info("Is single page: {0}", SinglePage);
 
-                log.Debug("No chapter directory: {0}", hostData.Chapters.NoChapterDirectory);
+                log.Info("No chapter directory: {0}", hostData.Chapters.NoChapterDirectory);
+
                 if (hostData.Chapters.NoChapterDirectory)
                 {
                     FormattedChapterName = string.Empty;
                     //log.Debug("Setting chapter path to '{0}'", ChapterPath);
+                }
+                else
+                {
+                    FormattedChapterName = Name;
                 }
 
             }

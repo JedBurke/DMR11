@@ -98,10 +98,11 @@ namespace DMR11.Core
             {
                 //ChapterNameFormat = "{0} - Ch. {1}";
 
-                if (_formattedChapterName == null)
+                if (string.IsNullOrWhiteSpace(_formattedChapterName))
                 {
                     string name = Helper.FileSystem.GetSafeFileName(Name.Trim());
-                    if (string.IsNullOrEmpty(ChapterNameFormat))
+
+                    if (string.IsNullOrWhiteSpace(ChapterNameFormat))
                     {
                         _formattedChapterName = name;
                     }

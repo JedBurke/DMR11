@@ -31,8 +31,11 @@ namespace DMR11.Core
         public TitleDistill(Uri address, IWebsiteHost hostData, ILogger log)
             : base(address, log)
         {
+            //log.Trace("Entering TitleDistill constructor");
+
             if (address == null)
             {
+                log.Error("Address cannot be null");
                 throw new NullReferenceException("Address cannot be null");
             }
 
@@ -158,7 +161,7 @@ namespace DMR11.Core
 
         protected override string ParseSeriesTitle(string html)
         {
-            Log.Debug("Entering ParseSeriesTitle");
+            Log.Trace("Entering ParseSeriesTitle");
 
             string path = HostData.Title.Path;
             string pathvalue = HostData.Title.Value;
@@ -192,7 +195,7 @@ namespace DMR11.Core
 
         protected override List<IChapter> ParseChapterObjects(string html)
         {
-            Log.Debug("Entering ParseChapterObjects");
+            Log.Trace("Entering ParseChapterObjects");
 
             if (IsChapter)
             {

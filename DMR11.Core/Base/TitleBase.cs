@@ -148,7 +148,7 @@ namespace DMR11.Core
                             count++;
 
                             // TODO: Re-implement
-                            // progress.ReportProgress(count / addresses.Count);
+                            //progress.ReportProgress(count / addresses.Count);
                         }
                     }
                     else

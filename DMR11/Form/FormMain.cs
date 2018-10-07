@@ -121,24 +121,7 @@ namespace DMR11
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            var items = new List<IChapter>();
-            foreach (DataGridViewRow row in dgvChapter.Rows)
-            {
-                if (row.Selected == true)
-                {
-                    items.Add((IChapter)row.DataBoundItem);
-                }
-            }
-
-            items.Reverse();
-            foreach (IChapter item in items)
-            {
-                if (DownloadQueue.IndexOf(item) < 0)
-                {
-                    item.SaveDestination = SaveDestination;
-                    DownloadQueue.Add(item);
-                }
-            }
+            AddItemToDownloadQueue();
         }
 
         private void btnAddAll_Click(object sender, EventArgs e)
@@ -1080,6 +1063,29 @@ namespace DMR11
         async Task OpenInBrowserAsync()
         {
             await Task.Run(new Action(() => OpenInBrowser()));
+        }
+
+        void AddItemToDownloadQueue()
+        {
+            AddItemToDownloadQueue(dgvChapter.Rows);
+        }
+
+        void AddItemToDownloadQueue(DataGridViewRowCollection rows)
+        {            
+            var items = rows.Cast<DataGridViewRow>()
+                        .Where(row => row.Selected)
+                        .Select(item => (IChapter)item.DataBoundItem)
+                        .Reverse();
+
+            foreach (var item in items)
+            {
+                if (!DownloadQueue.Contains(item))
+                {
+                    item.SaveDestination = SaveDestination;
+                    DownloadQueue.Add(item);
+                }
+            }
+
         }
 
         void OpenInBrowser()

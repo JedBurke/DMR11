@@ -1,5 +1,4 @@
-﻿using CloudFlareUtilities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -33,59 +32,38 @@ namespace DMR11.Core.Service
         public string DownloadString(Uri address)
         {
             StringBuilder result = new StringBuilder();
-            
+
             try
             {
                 try
-                {
-                    HttpClientHandler handler = null;
-                    ClearanceHandler handlerKiss = null;
-                    HttpClient client = null;
-                    
-                    if (string.Compare(address.Host, "kissmanga.com") == 0)
+                {                    
+                    var handler = new HttpClientHandler()
                     {
-                        Console.WriteLine("Host is KissManga.");
+                        AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
+                        Credentials = CredentialCache.DefaultNetworkCredentials,
+                        CookieContainer = cookieContainer ?? (cookieContainer = new CookieContainer()),
+                        UseCookies = true
+                    };
 
-                        handlerKiss = new ClearanceHandler();
-
-                        // Create a HttpClient that uses the handler to bypass CloudFlare's JavaScript challange.
-                        client = new HttpClient(handlerKiss)
-                        {
-                            Timeout = TimeSpan.FromSeconds(15)
-                        };                        
-
-                    }
-                    else
+                    if (Net.ProxyServer.Instance.UseProxyServer)
                     {
-                        handler = new HttpClientHandler()
-                        {
-                            AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
-                            Credentials = CredentialCache.DefaultNetworkCredentials,
-                            CookieContainer = cookieContainer ?? (cookieContainer = new CookieContainer()),
-                            UseCookies = true
-                        };
-
-                        if (Net.ProxyServer.Instance.UseProxyServer)
-                        {
-                            handler.UseProxy = true;
-                            handler.Proxy = Net.ProxyServer.Instance.Proxy;
-                        }
-                        
-                        client = new HttpClient(handler)
-                        {
-                            Timeout = TimeSpan.FromSeconds(15)
-                        };
-
-                        client.DefaultRequestHeaders.Add("User-Agent", UserAgent);
-                        client.DefaultRequestHeaders.Add("Host", address.Host);
-                        client.DefaultRequestHeaders.Add("Referer", address.Host);
-                        
+                        handler.UseProxy = true;
+                        handler.Proxy = Net.ProxyServer.Instance.Proxy;
                     }
+
+                    var client = new HttpClient(handler)
+                    {
+                        Timeout = TimeSpan.FromSeconds(15)
+                    };
+
+                    client.DefaultRequestHeaders.Add("User-Agent", UserAgent);
+                    client.DefaultRequestHeaders.Add("Host", address.Host);
+                    client.DefaultRequestHeaders.Add("Referer", address.Host);
 
                     var content = client.GetStringAsync(address.ToString()).Result;
 
                     result.Append(content);
-                    
+
                 }
                 catch (WebException webEx)
                 {
@@ -146,7 +124,7 @@ namespace DMR11.Core.Service
             {
                 if (File.Exists(fileName) == false)
                 {
-                   HttpWebRequest request = MakeRequest(address);
+                    HttpWebRequest request = MakeRequest(address);
 
                     using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                     {

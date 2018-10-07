@@ -42,9 +42,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CloudFlareUtilities">
-      <HintPath>..\packages\CloudFlareUtilities.0.4.0-alpha\lib\portable45-net45+win8+wpa81\CloudFlareUtilities.dll</HintPath>
-    </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.5.1.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a">
       <HintPath>..\packages\HtmlAgilityPack.1.5.1\lib\Net45\HtmlAgilityPack.dll</HintPath>
       <Private>True</Private>

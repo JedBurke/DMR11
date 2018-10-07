@@ -415,6 +415,7 @@ namespace DMR11
 
             dgvQueueChapter.AutoGenerateColumns = false;
             dgvChapter.AutoGenerateColumns = false;
+            dgvChapter.DoubleClick += dgvChapter_DoubleClick;
 
             AlignChapterDockStyle();
 
@@ -440,6 +441,11 @@ namespace DMR11
 
 
             LoadBookmark();
+        }
+
+        void dgvChapter_DoubleClick(object sender, EventArgs e)
+        {
+            AddItemToDownloadQueue();
         }
 
         void InitializeNetworkProgressBar()

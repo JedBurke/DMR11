@@ -31,8 +31,6 @@ namespace DMR11.Core
         public TitleDistill(Uri address, IWebsiteHost hostData, ILogger log)
             : base(address, log)
         {
-            //log.Trace("Entering TitleDistill constructor");
-
             if (address == null)
             {
                 log.Error("Address cannot be null");

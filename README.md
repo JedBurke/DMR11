@@ -3,8 +3,8 @@ An application to download manga and other stuff. Despite being based on [MangaR
 
 DMR11 doesn't exactly use plugins to download things, it follows directives to do so. Without said directives, it doesn't nor is it able to do anything. Check out [Releases](https://github.com/JedBurke/DMR11/releases) for the latest pre-releases.
 
-[[readme/main.png|alt=Image of the main window]]
-[[readme/options.png|alt=Image of the options window]]
+![Image of the main window](readme/main.png)
+![Image of the options window](readme/options.png)
 
 ## Supported Websites
 
